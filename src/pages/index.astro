@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import { getSupporters } from '../lib/supporters';
+import CostCalculator from '../components/CostCalculator.astro';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
 import dorfplatzImg from '../assets/visualizations/dorfplatz-primarschule.jpg';
@@ -19,16 +21,56 @@ const allArguments = (await getCollection('arguments', ({ data }) => data.publis
 );
 const topArguments = allArguments.slice(0, 4);
 
-const supporters = (await getCollection('supporters', ({ data }) => data.published)).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-const featuredSupporters = supporters.filter((s) => s.data.image).slice(0, 3);
-const supporterCount = supporters.length;
+const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-const latestPost = posts[0];
+// Placeholder: facts and claims about the school building project.
+// Text and images are placeholders and still need to be replaced with
+// the details from the municipal council's official message (Botschaft).
+const claims: { claim: string; body: string; image?: typeof situationsplanImg }[] = [
+	{
+		claim: 'Behauptung 1: «Die neue Schulanlage ist für Wangen viel zu teuer.»',
+		body: 'Platzhalter: Hier folgt eine sachliche Einordnung der Kostenfrage mit Bezug zur Botschaft des Gemeinderates – Investitionssumme, Kostendach und die jährliche Belastung des Gemeindehaushalts.',
+		image: situationsplanImg,
+	},
+	{
+		claim: 'Behauptung 2: «Der bestehende Schulraum würde noch für Jahre ausreichen.»',
+		body: 'Platzhalter: Kurzer Text zur heutigen Raumsituation, zu Provisorien und zur Auslastung der bestehenden Schulhäuser.',
+	},
+	{
+		claim: 'Behauptung 3: «Eine Sanierung des alten Schulhauses wäre deutlich günstiger.»',
+		body: 'Platzhalter: Text zum Vergleich Sanierung gegenüber Neubau, zu Bausubstanz und zu den langfristigen Betriebskosten.',
+	},
+	{
+		claim: 'Behauptung 4: «Die Dreifachturnhalle ist überdimensioniert.»',
+		body: 'Platzhalter: Text zum Bedarf von Schule und Vereinen, zu Belegungszeiten und zu kantonalen Vorgaben für Sportanlagen.',
+		image: turnhalleImg,
+	},
+	{
+		claim: 'Behauptung 5: «Der Standort «Am Buechberg» ist schlecht gewählt.»',
+		body: 'Platzhalter: Text zur Lage, zur Erschliessung, zu den Schulwegen und zur Verfügbarkeit des Grundstücks.',
+	},
+	{
+		claim: 'Behauptung 6: «Die Schülerzahlen steigen gar nicht so stark.»',
+		body: 'Platzhalter: Text zur Bevölkerungs- und Schülerprognose für Wangen und zu den zugrunde liegenden Annahmen.',
+		image: klassenzimmerImg,
+	},
+	{
+		claim: 'Behauptung 7: «Das Projekt belastet die Gemeindefinanzen auf Jahre hinaus.»',
+		body: 'Platzhalter: Text zu Finanzierung, Steuerfuss, Verschuldung und zum Investitionsplan der Gemeinde.',
+	},
+	{
+		claim: 'Behauptung 8: «Ein Neubau ist ökologisch nicht vertretbar.»',
+		body: 'Platzhalter: Text zu Energiestandard, Holzbau, Photovoltaik, grauer Energie und Aussenraumgestaltung.',
+	},
+	{
+		claim: 'Behauptung 9: «Die Bauzeit führt zu jahrelangen Provisorien.»',
+		body: 'Platzhalter: Text zum Bauablauf, zur voraussichtlichen Bauzeit und zum Schulbetrieb während der Bauphase.',
+	},
+	{
+		claim: 'Behauptung 10: «Über das Projekt wurde zu wenig informiert.»',
+		body: 'Platzhalter: Text zum bisherigen Mitwirkungsprozess, zu Informationsveranstaltungen und zu den öffentlich verfügbaren Unterlagen.',
+	},
+];
 ---
 
 <Layout>
@@ -41,6 +83,14 @@ const latestPost = posts[0];
 				<a class="button primary" href="/argumente/">Argumente ansehen</a>
 				<a class="button secondary" href="/mitmachen/">Unterstützer:in werden</a>
 			</div>
+			{
+				supporterCount > 0 && (
+					<p class="hero-meta">
+						Bereits <a href="/unterstuetzer/">{supporterCount} Unterstützer:innen</a> aus Wangen
+						stehen öffentlich hinter dem Projekt.
+					</p>
+				)
+			}
 		</div>
 	</section>
 
@@ -94,6 +144,42 @@ const latestPost = posts[0];
 	</section>
 
 	<section class="block">
+		<div class="wrap narrow">
+			<div class="claims">
+				<div class="section-head">
+					<h2>Fakten und Behauptungen zum Schulraumprojekt</h2>
+				</div>
+				<p class="tagline">
+					Rund um das Projekt kursieren verschiedene Behauptungen. Hier ordnen wir die
+					zehn häufigsten sachlich ein. (Platzhalter – Inhalte folgen.)
+				</p>
+				<div class="claims-list">
+					{
+						claims.map((c) => (
+							<details>
+								<summary>{c.claim}</summary>
+								<div class="claim-body">
+									<p>{c.body}</p>
+									{c.image && (
+										<Image
+											src={c.image}
+											alt="Platzhalter-Visualisierung zum Schulraumprojekt"
+											width={800}
+											height={533}
+										/>
+									)}
+								</div>
+							</details>
+						))
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<CostCalculator />
+
+	<section class="block">
 		<div class="wrap">
 			<div class="section-head">
 				<h2>Unterstützer:innen aus Wangen</h2>
@@ -102,11 +188,20 @@ const latestPost = posts[0];
 				</a>
 			</div>
 			{
-				featuredSupporters.length > 0 ? (
-					<div class="grid cols-3">
-						{featuredSupporters.map((s) => (
+				photoSupporters.length > 0 ? (
+					<div class="grid cols-5">
+						{photoSupporters.map((s) => (
 							<div class="supporter-card">
-								{s.data.image && <Image src={s.data.image} alt={s.data.name} width={400} height={300} />}
+								{s.data.image && (
+									<Image
+										src={s.data.image}
+										alt={s.data.name}
+										width={300}
+										height={300}
+										fit="cover"
+										position="center"
+									/>
+								)}
 								<div class="body">
 									<div class="name">{s.data.name}</div>
 									{s.data.role && <div class="role">{s.data.role}</div>}
@@ -117,37 +212,9 @@ const latestPost = posts[0];
 					</div>
 				) : (
 					<p class="empty-note">
-						Noch keine Unterstützer:innen mit Foto eingetragen. Sei die/der Erste –
-						<a href="/mitmachen/">melde dich hier</a>.
+						Noch keine Unterstützer:innen mit Foto eingetragen. Seien Sie die erste Person –{' '}
+						<a href="/mitmachen/">melden Sie sich hier</a>.
 					</p>
-				)
-			}
-		</div>
-	</section>
-
-	<section class="block">
-		<div class="wrap">
-			<div class="section-head">
-				<h2>Neu im Blog</h2>
-				<a class="more" href="/blog/">Alle Beiträge →</a>
-			</div>
-			{
-				latestPost ? (
-					<div class="card">
-						<h3>
-							<a href={`/blog/${latestPost.id}/`}>{latestPost.data.title}</a>
-						</h3>
-						<p class="post-meta">
-							{latestPost.data.date.toLocaleDateString('de-CH', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-							})}
-						</p>
-						{latestPost.data.excerpt && <p>{latestPost.data.excerpt}</p>}
-					</div>
-				) : (
-					<p class="empty-note">Noch keine Blogbeiträge.</p>
 				)
 			}
 		</div>

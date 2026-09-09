@@ -7,7 +7,6 @@ import {
 	OFFICIAL_SITE_URL,
 	OFFICIAL_SITE_LABEL,
 	VOTE_DATE_LABEL,
-	CONTACT_EMAIL,
 } from '../consts';
 
 interface Props {
@@ -40,7 +39,16 @@ const currentPath = new URL(Astro.request.url).pathname;
 					<span class="dot" aria-hidden="true"></span>
 					{SITE_TITLE}
 				</a>
-				<nav class="main-nav" aria-label="Hauptnavigation">
+				<button
+					type="button"
+					class="nav-toggle"
+					aria-expanded="false"
+					aria-controls="main-nav"
+					aria-label="Menü"
+				>
+					<span class="nav-toggle-bar" aria-hidden="true"></span>
+				</button>
+				<nav class="main-nav" id="main-nav" aria-label="Hauptnavigation">
 					{
 						NAV_LINKS.map((link) => (
 							<a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>
@@ -51,6 +59,27 @@ const currentPath = new URL(Astro.request.url).pathname;
 				</nav>
 			</div>
 		</header>
+		<script is:inline>
+			(function () {
+				var btn = document.querySelector('.nav-toggle');
+				var nav = document.getElementById('main-nav');
+				if (!btn || !nav) return;
+				document.documentElement.classList.add('has-js-nav');
+				var setOpen = function (open) {
+					nav.classList.toggle('is-open', open);
+					btn.setAttribute('aria-expanded', String(open));
+				};
+				btn.addEventListener('click', function () {
+					setOpen(btn.getAttribute('aria-expanded') !== 'true');
+				});
+				nav.addEventListener('click', function (e) {
+					if (e.target.closest('a')) setOpen(false);
+				});
+				document.addEventListener('keydown', function (e) {
+					if (e.key === 'Escape') setOpen(false);
+				});
+			})();
+		</script>
 
 		<main>
 			<slot />
@@ -63,11 +92,11 @@ const currentPath = new URL(Astro.request.url).pathname;
 					Einwohnern von Wangen SZ. Wir sind nicht Teil der Gemeindeverwaltung.
 				</p>
 				<p>
-					Offizielle Informationen der Gemeinde zum Projekt findest du auf der
+					Offizielle Informationen der Gemeinde zum Projekt finden Sie auf der{' '}
 					<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">{OFFICIAL_SITE_LABEL}</a>.
 				</p>
 				<p>
-					Kontakt: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> ·
+					<a href="/datenschutz/">Datenschutz</a> ·{' '}
 					<a href="https://github.com/Pro-Schulraum-Wangen/Website" target="_blank" rel="noopener">
 						Quellcode auf GitHub
 					</a>

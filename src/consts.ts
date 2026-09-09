@@ -7,10 +7,28 @@ export const SITE_DESCRIPTION =
 export const OFFICIAL_SITE_URL = 'https://schulanlage-wangensz.ch/';
 export const OFFICIAL_SITE_LABEL = 'Offizielle Website der Gemeinde';
 
-// To customize: contact email and/or link to an external form
-// (e.g. Google Forms) through which new supporters can sign up.
-export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
+// Address for enquiries about the website and about supporter entries.
+export const CONTACT_EMAIL = 'info@philippbruhin.ch';
 export const SUPPORT_FORM_URL = ''; // optional, e.g. a Google Form link
+
+// People responsible for this website (shown in the privacy notice).
+export const RESPONSIBLE_PEOPLE = [
+	{
+		name: 'Raphael Seunig',
+		role: 'Präsident Die Mitte Wangen SZ',
+		email: 'raphaelseunig@saveurs-vivre.ch',
+	},
+	{
+		name: 'Jonas Küttel',
+		role: 'Präsident STV Wangen SZ',
+		email: 'jonas.kuettel@stv-wangensz.ch',
+	},
+	{
+		name: 'Philipp Bruhin',
+		role: 'Webmaster',
+		email: 'info@philippbruhin.ch',
+	},
+] as const;
 
 export const VOTE_DATE_LABEL = 'Urnenabstimmung: Sonntag, 29. November 2026';
 
@@ -19,6 +37,5 @@ export const NAV_LINKS = [
 	{ href: '/argumente/', label: 'Argumente' },
 	{ href: '/unterstuetzer/', label: 'Unterstützer:innen' },
 	{ href: '/videos/', label: 'Videos' },
-	{ href: '/blog/', label: 'Blog' },
 	{ href: '/mitmachen/', label: 'Mitmachen' },
 ] as const;

@@ -9,14 +9,14 @@ const videos = (await getCollection('videos', ({ data }) => data.published)).sor
 
 <Layout title="Videos" description="Videos rund um das Projekt Schulanlage «Am Buechberg» in Wangen SZ.">
 	<section class="hero">
-		<div class="wrap">
+		<div class="wrap narrow">
 			<h1>Videos</h1>
 			<p class="tagline">Kurze Videos zum Projekt und zur Kampagne.</p>
 		</div>
 	</section>
 
 	<section class="block">
-		<div class="wrap">
+		<div class="wrap narrow">
 			{
 				videos.length > 0 ? (
 					<div class="grid cols-2">
@@ -37,7 +37,7 @@ const videos = (await getCollection('videos', ({ data }) => data.published)).sor
 						))}
 					</div>
 				) : (
-					<p class="empty-note">Noch keine Videos veröffentlicht – schau bald wieder vorbei.</p>
+					<p class="empty-note">Noch keine Videos veröffentlicht – schauen Sie bald wieder vorbei.</p>
 				)
 			}
 		</div>

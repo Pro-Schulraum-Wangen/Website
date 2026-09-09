@@ -12,18 +12,18 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 
 <Layout title="Argumente" description="Unsere Argumente für ein Ja zum Neubau der Schulanlage «Am Buechberg» in Wangen SZ.">
 	<section class="hero">
-		<div class="wrap">
+		<div class="wrap narrow">
 			<h1>Unsere Argumente</h1>
 			<p class="tagline">
 				Sachlich, mit Bezug zur öffentlichen Botschaft des Gemeinderates vom 11. Juni 2026.
-				Für die vollständigen Details empfehlen wir zusätzlich die
+				Für die vollständigen Details empfehlen wir zusätzlich die{' '}
 				<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">offizielle Botschaft der Gemeinde</a>.
 			</p>
 		</div>
 	</section>
 
 	<section class="block">
-		<div class="wrap">
+		<div class="wrap narrow">
 			<article class="prose">
 				{
 					allArguments.map((entry, i) => {
@@ -37,8 +37,7 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 										src={entry.data.image}
 										alt={entry.data.imageAlt ?? entry.data.title}
 										width={800}
-										height={533}
-										style="border-radius: 0.6rem; margin-bottom: 1.2rem;"
+										style="display: block; border-radius: 0.6rem; margin: 0 auto 1.2rem;"
 									/>
 								)}
 								<Content />

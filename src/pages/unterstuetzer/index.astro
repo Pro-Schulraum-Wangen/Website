@@ -1,13 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import { getSupporters } from '../../lib/supporters';
 
-const supporters = (await getCollection('supporters', ({ data }) => data.published)).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-const withImage = supporters.filter((s) => s.data.image);
-const withoutImage = supporters.filter((s) => !s.data.image);
+const { photo: withImage, names: withoutImage, count } = await getSupporters();
 ---
 
 <Layout
@@ -18,7 +14,7 @@ const withoutImage = supporters.filter((s) => !s.data.image);
 		<div class="wrap">
 			<h1>Unterstützer:innen</h1>
 			<p class="tagline">
-				{supporters.length} Personen aus Wangen unterstützen das Projekt bereits öffentlich.
+				{count} Personen aus Wangen unterstützen das Projekt bereits öffentlich.
 			</p>
 			<div class="button-row">
 				<a class="button primary" href="/mitmachen/">Auch dabei sein</a>
@@ -30,10 +26,17 @@ const withoutImage = supporters.filter((s) => !s.data.image);
 		withImage.length > 0 && (
 			<section class="block">
 				<div class="wrap">
-					<div class="grid cols-3">
+					<div class="grid cols-5">
 						{withImage.map((s) => (
 							<div class="supporter-card">
-								<Image src={s.data.image!} alt={s.data.name} width={400} height={300} />
+								<Image
+									src={s.data.image!}
+									alt={s.data.name}
+									width={300}
+									height={300}
+									fit="cover"
+									position="center"
+								/>
 								<div class="body">
 									<div class="name">{s.data.name}</div>
 									{s.data.role && <div class="role">{s.data.role}</div>}
@@ -54,7 +57,10 @@ const withoutImage = supporters.filter((s) => !s.data.image);
 					<h2>Weitere Unterstützer:innen</h2>
 					<ul class="supporter-list">
 						{withoutImage.map((s) => (
-							<li>{s.data.name}</li>
+							<li>
+								{s.name}
+								{s.location && <span class="ort"> · {s.location}</span>}
+							</li>
 						))}
 					</ul>
 				</div>
@@ -63,11 +69,12 @@ const withoutImage = supporters.filter((s) => !s.data.image);
 	}
 
 	{
-		supporters.length === 0 && (
+		count === 0 && (
 			<section class="block">
 				<div class="wrap">
 					<p class="empty-note">
-						Noch keine Unterstützer:innen eingetragen. <a href="/mitmachen/">Melde dich hier</a>.
+						Noch keine Unterstützer:innen eingetragen.{' '}
+						<a href="/mitmachen/">Melden Sie sich hier</a>.
 					</p>
 				</div>
 			</section>

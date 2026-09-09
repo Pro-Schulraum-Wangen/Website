@@ -20,6 +20,17 @@ const supporters = defineCollection({
 		}),
 });
 
+// Supporters who only want to appear with their name and place of
+// residence – maintained as one short YAML list, no Markdown needed.
+const supporterNames = defineCollection({
+	loader: file('./src/content/supporter-names.yaml'),
+	schema: z.object({
+		name: z.string(),
+		location: z.string(),
+		published: z.boolean().default(true),
+	}),
+});
+
 // Arguments for the project – public, factual, referencing the
 // municipality's official message (Botschaft).
 const arguments_ = defineCollection({
@@ -38,18 +49,6 @@ const arguments_ = defineCollection({
 		}),
 });
 
-// Simple blog: news, statements, reports.
-const blog = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
-	schema: z.object({
-		title: z.string(),
-		date: z.coerce.date(),
-		author: z.string().default('Pro Schulraum Wangen'),
-		excerpt: z.string().optional(),
-		draft: z.boolean().default(false),
-	}),
-});
-
 // Videos – maintained as a short YAML list, no Markdown needed.
 const videos = defineCollection({
 	loader: file('./src/content/videos.yaml'),
@@ -64,7 +63,7 @@ const videos = defineCollection({
 
 export const collections = {
 	supporters,
+	supporterNames,
 	arguments: arguments_,
-	blog,
 	videos,
 };

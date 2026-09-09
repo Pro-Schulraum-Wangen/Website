@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE_TITLE, RESPONSIBLE_PEOPLE } from '../../consts';
+
+const lastUpdated = '9. September 2026';
+---
+
+<Layout
+	title="Datenschutzerklärung"
+	description={`Wie ${SITE_TITLE} mit Personendaten auf dieser Website umgeht.`}
+>
+	<section class="hero">
+		<div class="wrap narrow">
+			<h1>Datenschutzerklärung</h1>
+			<p class="tagline">
+				Diese Website ist eine reine Informationsseite. Wir bearbeiten so wenige
+				Personendaten wie möglich und setzen keine Tracking-Cookies ein.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap narrow">
+			<article class="prose">
+				<h2>Verantwortliche Personen</h2>
+				<p>
+					Diese Website wird von einer unabhängigen Unterstützer:innengruppe für die
+					Schul- und Sportanlage «Am Buechberg» betrieben. Sie ist nicht Teil der
+					Gemeindeverwaltung Wangen SZ. Verantwortlich für die Website sind:
+				</p>
+				<ul>
+					{
+						RESPONSIBLE_PEOPLE.map((p) => (
+							<li>
+								<strong>{p.name}</strong> – {p.role},{' '}
+								<a href={`mailto:${p.email}`}>{p.email}</a>
+							</li>
+						))
+					}
+				</ul>
+				<p>
+					Für Fragen zum Datenschutz oder zu Ihrem Eintrag als Unterstützer:in
+					können Sie sich an eine dieser Personen wenden.
+				</p>
+
+				<h2>Hosting</h2>
+				<p>
+					Die Website wird bei Cloudflare (Cloudflare, Inc. sowie Cloudflare
+					Germany GmbH) auf der Plattform Cloudflare Pages gehostet. Beim Aufruf
+					der Seite werden technisch notwendige Verbindungsdaten – insbesondere die
+					IP-Adresse, Datum und Uhrzeit des Zugriffs, die aufgerufene Seite sowie
+					Angaben zu Browser und Betriebssystem – durch Cloudflare bearbeitet, um
+					die Auslieferung der Seite sowie den Schutz vor Angriffen und
+					Überlastung sicherzustellen. Diese Daten werden nur kurz aufbewahrt.
+					Weitere Angaben finden Sie in der{' '}
+					<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">
+						Datenschutzerklärung von Cloudflare</a>.
+				</p>
+
+				<h2>Cookies und Reichweitenmessung</h2>
+				<p>
+					Diese Website setzt <strong>keine eigenen Cookies</strong> und verwendet
+					<strong>keine Analyse- oder Tracking-Dienste</strong> (zum Beispiel Google
+					Analytics). Ein Cookie-Banner ist deshalb nicht nötig. Die verwendeten
+					Schriftarten sind lokal auf dem Server eingebunden; es werden keine
+					Schriften von Drittanbietern nachgeladen.
+				</p>
+
+				<h2>Videos von YouTube</h2>
+				<p>
+					Auf der Videoseite binden wir Videos im datenschutzfreundlichen Modus von
+					YouTube ein. Solange Sie kein Video starten, werden keine Daten an YouTube
+					übertragen. Erst wenn Sie ein Video abspielen, wird eine Verbindung zu den
+					Servern von Google (Google Ireland Limited bzw. Google LLC) hergestellt
+					und es können Daten wie Ihre IP-Adresse an Google übermittelt werden.
+					Weitere Informationen finden Sie in der{' '}
+					<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
+						Datenschutzerklärung von Google</a>.
+				</p>
+
+				<h2>Kontaktaufnahme per E-Mail</h2>
+				<p>
+					Wenn Sie uns eine E-Mail schreiben, bearbeiten wir Ihre Angaben zur
+					Beantwortung der Anfrage. Wir geben diese Daten nicht an Dritte weiter und
+					löschen sie, sobald die Bearbeitung abgeschlossen ist und keine
+					gesetzlichen Aufbewahrungspflichten entgegenstehen.
+				</p>
+
+				<h2>Einträge als Unterstützer:in</h2>
+				<p>
+					Wer sich als Unterstützer:in melden möchte, übermittelt uns freiwillig
+					Namen und Wohnort, auf Wunsch zusätzlich ein Foto und ein kurzes
+					Statement. Mit der Meldung erklären Sie sich damit einverstanden, dass
+					diese Angaben auf dieser Website öffentlich veröffentlicht werden. Sie
+					können Ihre Einwilligung jederzeit widerrufen; wir entfernen Ihren
+					Eintrag dann so rasch wie möglich.
+				</p>
+
+				<h2>Ihre Rechte</h2>
+				<p>
+					Im Rahmen des schweizerischen Datenschutzgesetzes haben Sie das Recht auf
+					Auskunft über die von uns bearbeiteten Personendaten sowie auf deren
+					Berichtigung oder Löschung. Wenden Sie sich dafür an eine der oben
+					genannten Personen.
+				</p>
+
+				<h2>Änderungen</h2>
+				<p>
+					Wir passen diese Datenschutzerklärung an, wenn sich die Website oder die
+					rechtlichen Vorgaben ändern. Es gilt jeweils die hier veröffentlichte
+					Fassung.
+				</p>
+
+				<p><em>Stand: {lastUpdated}</em></p>
+			</article>
+		</div>
+	</section>
+</Layout>

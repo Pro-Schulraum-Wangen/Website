@@ -1,0 +1,200 @@
+---
+// Interactive cost calculator for the homepage.
+//
+// Figures are taken from the municipal council's official message
+// ("Botschaft Neubau Schulanlage Wangen «Am Buechberg»", 11 June 2026):
+// - chapter 3 / 9.1 / 9.4: gross cost, cantonal contributions, net cost
+// - chapter 9.8 to 9.10: planned tax-rate rise from 135 % to 150 % and the
+//   resulting additional municipal tax per year by taxable income.
+
+const GROSS_COST = 55_600_000;
+const CANTON_CONTRIBUTION = 5_600_000;
+const NET_COST = GROSS_COST - CANTON_CONTRIBUTION;
+
+const fmt = (n: number) => n.toLocaleString('de-CH');
+---
+
+<section class="block alt">
+	<div class="wrap narrow">
+		<div class="section-head">
+			<h2>Was kostet mich das Projekt?</h2>
+		</div>
+
+		<ul class="cost-summary">
+			<li>
+				<span class="cost-summary-label">Gesamtkosten (brutto, exkl. Teuerung)</span>
+				<span class="cost-summary-value">CHF {fmt(GROSS_COST)}</span>
+			</li>
+			<li>
+				<span class="cost-summary-label">− erwartete Beiträge des Kantons Schwyz</span>
+				<span class="cost-summary-value">CHF {fmt(CANTON_CONTRIBUTION)}</span>
+			</li>
+			<li class="cost-summary-total">
+				<span class="cost-summary-label">= Nettobelastung der Gemeinde Wangen</span>
+				<span class="cost-summary-value">CHF {fmt(NET_COST)}</span>
+			</li>
+		</ul>
+
+		<h3 class="cost-calc-title">Ihr persönlicher Anteil</h3>
+		<p>
+			Zur Finanzierung der Schulanlage und weiterer bereits geplanter Investitionen
+			plant der Gemeinderat, den Steuerfuss ab 2028 von 135 % auf 150 % zu erhöhen.
+			Das ist der Wert, der bis 2025 bereits galt. Rechnen Sie aus, was diese
+			Erhöhung Sie ungefähr kostet.
+		</p>
+
+		<form class="cost-calc" id="cost-calc" novalidate>
+			<div class="cost-calc-field">
+				<label for="calc-salary">Monatslohn (brutto), CHF</label>
+				<input
+					type="number"
+					id="calc-salary"
+					name="salary"
+					inputmode="numeric"
+					min="0"
+					step="100"
+					placeholder="z. B. 6500"
+					required
+				/>
+			</div>
+
+			<div class="cost-calc-field">
+				<span class="cost-calc-legend">Auszahlungen pro Jahr</span>
+				<div class="cost-calc-choice">
+					<label><input type="radio" name="months" value="12" checked /> 12 ×</label>
+					<label><input type="radio" name="months" value="13" /> 13 ×</label>
+				</div>
+			</div>
+
+			<div class="cost-calc-field">
+				<span class="cost-calc-legend">Zivilstand</span>
+				<div class="cost-calc-choice">
+					<label><input type="radio" name="status" value="single" checked /> Alleinstehend</label>
+					<label><input type="radio" name="status" value="couple" /> Verheiratet</label>
+				</div>
+			</div>
+
+			<button type="submit" class="button primary">Berechnen</button>
+		</form>
+
+		<div class="cost-calc-result" id="cost-calc-result" aria-live="polite" hidden>
+			<p class="cost-calc-headline">Geschätzte zusätzliche Gemeindesteuer pro Jahr</p>
+			<p class="cost-calc-big">
+				<span id="calc-out-added">…</span>
+				<span class="cost-calc-big-label">
+					das sind rund <span id="calc-out-month">…</span> pro Monat
+				</span>
+			</p>
+			<p class="cost-calc-note">
+				Heute, bei einem Steuerfuss von 135 %, zahlen Sie rund{' '}
+				<span id="calc-out-current">…</span> Gemeindesteuer pro Jahr; bei 150 %
+				wären es rund <span id="calc-out-new">…</span>. Bis 2025 lag der Steuerfuss
+				bereits bei 150 %, die Erhöhung bringt ihn also dorthin zurück.
+			</p>
+			<p class="cost-calc-note" id="calc-out-basis"></p>
+
+			<div class="cost-calc-context">
+				<h3>Sie bekommen dafür einen Gegenwert</h3>
+				<p>
+					Dieser Betrag ist kein verlorenes Geld. Ihm steht eine Aufwertung des Ortes
+					gegenüber, in dem Sie leben. Was einem wichtig ist, dazu trägt man Sorge und
+					investiert. Ob die Sportausrüstung für den Lieblingssport, die Wohnung oder
+					der Garten: Mit der eigenen Gemeinde ist es nicht anders.
+				</p>
+				<p>
+					Von einer modernen Schul- und Sportanlage, einem neu gestalteten Dorfplatz
+					und besseren Räumen für die Vereine profitieren alle im Dorf, auch wer keine
+					schulpflichtigen Kinder hat.
+				</p>
+				<p>
+					Und «einfach nichts tun» gibt es nicht: Gewisse Investitionen sind so oder so
+					nötig. Ein Nein kostet die Gemeinde laut Botschaft des Gemeinderates über
+					CHF 23 Mio. für Sanierungen der alten Gebäude, für Provisorien und durch den
+					Verlust der zugesicherten Kantonsbeiträge. Ein einziges Raumproblem löst es
+					trotzdem nicht.
+				</p>
+			</div>
+		</div>
+
+		<p class="cost-calc-disclaimer">
+			Grobe Schätzung auf Basis des Bruttolohns; das steuerbare Einkommen nach
+			Abzügen (und damit der effektive Betrag) liegt in der Regel tiefer. Ohne
+			Kirchensteuer. Die Steuerfuss-Erhöhung auf 150 % finanziert die Schulanlage
+			sowie weitere bereits geplante Investitionen. Quelle: Botschaft des
+			Gemeinderates Wangen vom 11. Juni 2026, Kapitel 9.
+		</p>
+		<noscript>
+			<p class="cost-calc-disclaimer">Für den Rechner muss JavaScript aktiviert sein.</p>
+		</noscript>
+	</div>
+</section>
+
+<script>
+	type Status = 'single' | 'couple';
+
+	// Additional municipal tax per year caused by the 135 % to 150 % rise (a
+	// 15-point step), by taxable income, for singles and couples
+	// (Botschaft, chapter 9.10).
+	const BRACKETS: { max: number; single: number; couple: number }[] = [
+		{ max: 60_000, single: 255, couple: 203 },
+		{ max: 80_000, single: 371, couple: 301 },
+		{ max: 100_000, single: 488, couple: 407 },
+		{ max: 120_000, single: 605, couple: 517 },
+		{ max: 150_000, single: 780, couple: 693 },
+		{ max: 250_000, single: 1365, couple: 1278 },
+		{ max: Infinity, single: 1365, couple: 1278 },
+	];
+
+	// The municipal tax scales linearly with the tax rate ("Steuerfuss"), so the
+	// 15-point step is 1/9 of today's 135 % level and 1/10 of the 150 % level.
+	const CURRENT_FACTOR = 135 / 15;
+	const NEW_FACTOR = 150 / 15;
+
+	// Rough conversion from gross salary to taxable income (social-security
+	// contributions, occupational and insurance deductions, standard allowances).
+	const TAXABLE_RATIO = 0.8;
+
+	const form = document.getElementById('cost-calc') as HTMLFormElement | null;
+	const result = document.getElementById('cost-calc-result');
+	const salaryInput = document.getElementById('calc-salary') as HTMLInputElement | null;
+	const outAdded = document.getElementById('calc-out-added');
+	const outMonth = document.getElementById('calc-out-month');
+	const outCurrent = document.getElementById('calc-out-current');
+	const outNew = document.getElementById('calc-out-new');
+	const outBasis = document.getElementById('calc-out-basis');
+
+	if (form && result && salaryInput && outAdded && outMonth && outCurrent && outNew && outBasis) {
+		const fmt = (n: number) => 'CHF ' + Math.round(n).toLocaleString('de-CH');
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const data = new FormData(form);
+			const salary = Number(data.get('salary'));
+			const months = Number(data.get('months'));
+			const status: Status = data.get('status') === 'couple' ? 'couple' : 'single';
+
+			if (!Number.isFinite(salary) || salary <= 0) {
+				result.hidden = true;
+				salaryInput.focus();
+				return;
+			}
+
+			const grossYear = salary * months;
+			const taxable = grossYear * TAXABLE_RATIO;
+			const bracket = BRACKETS.find((b) => taxable <= b.max) ?? BRACKETS[BRACKETS.length - 1];
+			const added = bracket[status];
+
+			outAdded.textContent = fmt(added);
+			outMonth.textContent = fmt(added / 12);
+			outCurrent.textContent = fmt(added * CURRENT_FACTOR);
+			outNew.textContent = fmt(added * NEW_FACTOR);
+			outBasis.textContent =
+				'Geschätzt aus einem Bruttolohn von ' +
+				fmt(grossYear) +
+				' pro Jahr, steuerbares Einkommen rund ' +
+				fmt(taxable) +
+				'.';
+			result.hidden = false;
+		});
+	}
+</script>

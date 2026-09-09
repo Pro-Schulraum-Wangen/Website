@@ -1,0 +1,38 @@
+# Supporters who only want to appear with their name and place of residence.
+#
+# To add a person: append one entry. "id" is any unique short slug
+# (lowercase, hyphenated). "published: false" hides an entry without
+# deleting it.
+#
+# The entries below are PLACEHOLDERS – replace them with real names.
+
+- id: platzhalter-01
+  name: 'Anna Meier'
+  location: 'Wangen'
+- id: platzhalter-02
+  name: 'Thomas Kälin'
+  location: 'Nuolen'
+- id: platzhalter-03
+  name: 'Sandra Marty'
+  location: 'Wangen'
+- id: platzhalter-04
+  name: 'Markus Schuler'
+  location: 'Wangen'
+- id: platzhalter-05
+  name: 'Franziska Bruhin'
+  location: 'Nuolen'
+- id: platzhalter-06
+  name: 'Peter Diethelm'
+  location: 'Wangen'
+- id: platzhalter-07
+  name: 'Nicole Steiner'
+  location: 'Wangen'
+- id: platzhalter-08
+  name: 'Daniel Föhn'
+  location: 'Nuolen'
+- id: platzhalter-09
+  name: 'Claudia Züger'
+  location: 'Wangen'
+- id: platzhalter-10
+  name: 'Reto Ehrler'
+  location: 'Wangen'
