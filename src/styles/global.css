@@ -1,0 +1,500 @@
+/* Self-hosted webfonts (via Fontsource) – no external requests. */
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/400-italic.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+:root {
+	--color-bg: #faf8f5;
+	--color-bg-alt: #f1ece4;
+	--color-text: #212121;
+	--color-text-muted: #5c554d;
+	/* Palette derived from the official visualizations of the school building */
+	--color-brand: #6d8763; /* gymnasium green */
+	--color-brand-dark: #4c5f45; /* darker green, for text/hover */
+	--color-accent: #774f42; /* schoolhouse red-brown */
+	--color-tan: #a47f66; /* warm tan, base/concrete */
+	--color-border: #e3dbcd;
+	--max-width: 78rem;
+	--radius: 0.6rem; /* buttons – unchanged */
+	--radius-lg: 1.1rem; /* cards, images, figures */
+	--font-heading: 'Fraunces', Georgia, serif;
+	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	color-scheme: light;
+}
+
+body {
+	margin: 0;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-body);
+	font-size: 1.05rem;
+	line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	line-height: 1.15;
+	letter-spacing: -0.01em;
+	margin: 0 0 0.6em;
+	color: var(--color-brand-dark);
+}
+
+h1 {
+	font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+	font-weight: 600;
+}
+
+h2 {
+	font-size: clamp(1.6rem, 3vw, 2.15rem);
+}
+
+p {
+	margin: 0 0 1em;
+}
+
+a {
+	color: var(--color-brand-dark);
+}
+
+a:hover {
+	color: var(--color-accent);
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.wrap {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.25rem;
+}
+
+/* Header */
+.site-header {
+	border-bottom: 1px solid var(--color-border);
+	background: var(--color-bg);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.site-header .wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-top: 0.9rem;
+	padding-bottom: 0.9rem;
+	flex-wrap: wrap;
+}
+
+.brand {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 1.3rem;
+	color: var(--color-brand-dark);
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.brand:hover {
+	color: var(--color-brand-dark);
+}
+
+.brand .dot {
+	width: 0.6rem;
+	height: 0.6rem;
+	border-radius: 50%;
+	background: var(--color-accent);
+	display: inline-block;
+}
+
+nav.main-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.1rem;
+}
+
+nav.main-nav a {
+	text-decoration: none;
+	color: var(--color-text);
+	font-size: 0.95rem;
+	padding: 0.25rem 0;
+	border-bottom: 2px solid transparent;
+}
+
+nav.main-nav a:hover,
+nav.main-nav a[aria-current='page'] {
+	color: var(--color-brand-dark);
+	border-bottom-color: var(--color-accent);
+}
+
+/* Vote date banner */
+.vote-banner {
+	background: var(--color-brand);
+	color: #fff;
+	text-align: center;
+	font-size: 0.85rem;
+	padding: 0.4rem 1rem;
+}
+
+.vote-banner a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+/* Hero */
+.hero {
+	padding: 3.5rem 0 2.5rem;
+	background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+}
+
+.hero p.tagline {
+	font-size: 1.15rem;
+	color: var(--color-text-muted);
+	max-width: 42rem;
+}
+
+/* Hero variant with a photo background (used on the homepage).
+   No dark scrim over the photo – legibility comes from text-shadow on the
+   text and a solid (non-transparent) secondary button instead. */
+.hero.photo {
+	padding: 4.5rem 0 3rem;
+	min-height: min(60rem, 94vh);
+	display: flex;
+	align-items: flex-start;
+	background-size: cover;
+	background-position: center 78%;
+	background-repeat: no-repeat;
+}
+
+.hero.photo .wrap {
+	width: 100%;
+}
+
+.hero.photo h1,
+.hero.photo p.tagline {
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.hero.photo .button.secondary {
+	background: #fff;
+	color: var(--color-brand-dark);
+	border-color: #fff;
+}
+
+.hero.photo .button.secondary:hover {
+	background: var(--color-bg-alt);
+	color: var(--color-brand-dark);
+}
+
+.button-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.9rem;
+	margin-top: 1.5rem;
+}
+
+.button {
+	display: inline-block;
+	padding: 0.7rem 1.3rem;
+	border-radius: var(--radius);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95rem;
+	border: 2px solid var(--color-brand);
+}
+
+.button.primary {
+	background: var(--color-brand);
+	color: #fff;
+}
+
+.button.primary:hover {
+	background: var(--color-brand-dark);
+	border-color: var(--color-brand-dark);
+	color: #fff;
+}
+
+.button.secondary {
+	background: transparent;
+	color: var(--color-brand-dark);
+}
+
+.button.secondary:hover {
+	background: var(--color-bg-alt);
+	color: var(--color-brand-dark);
+}
+
+/* Image gallery grid – always 3 equal columns (33% each) on desktop,
+   stepping down on smaller screens so images never sit at odd widths. */
+.gallery-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 56rem) {
+	.gallery-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 34rem) {
+	.gallery-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.gallery-grid figure {
+	margin: 0;
+	background: #fff;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.07);
+}
+
+.gallery-grid img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+.gallery-grid figcaption {
+	padding: 0.8rem 1rem;
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+}
+
+/* Full-width image below the gallery grid (e.g. a site plan) */
+.gallery-full {
+	margin: 1.5rem 0 0;
+	background: #fff;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.07);
+}
+
+.gallery-full img {
+	width: 100%;
+	height: auto;
+}
+
+.gallery-full figcaption {
+	padding: 0.8rem 1rem;
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+}
+
+.image-credit {
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+	margin-top: 1rem;
+}
+
+/* Sections – separated by generous whitespace, not rules */
+section.block {
+	padding: 4.5rem 0;
+}
+
+section.block.alt {
+	background: var(--color-bg-alt);
+}
+
+section.block .section-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 1.75rem;
+}
+
+section.block .section-head a.more {
+	font-size: 0.9rem;
+	white-space: nowrap;
+}
+
+/* Cards / grids */
+.grid {
+	display: grid;
+	gap: 1.75rem;
+}
+
+.grid.cols-3 {
+	grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.grid.cols-2 {
+	grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+/* Fixed 4-equal-column grid (e.g. the 4-argument teaser on the homepage) –
+   avoids the auto-fill gap issue when the item count is fixed and known. */
+.grid.cols-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 64rem) {
+	.grid.cols-4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 34rem) {
+	.grid.cols-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+.card {
+	background: #fff;
+	border-radius: var(--radius-lg);
+	padding: 1.6rem 1.75rem;
+	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
+}
+
+.card h3 {
+	margin-top: 0;
+	font-size: 1.2rem;
+}
+
+/* Supporter cards */
+.supporter-card {
+	background: #fff;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
+}
+
+.supporter-card img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: var(--color-bg-alt);
+}
+
+.supporter-card .body {
+	padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.supporter-card .name {
+	font-weight: 700;
+	color: var(--color-brand-dark);
+}
+
+.supporter-card .role {
+	font-size: 0.85rem;
+	color: var(--color-tan);
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.supporter-card blockquote {
+	margin: 0.6rem 0 0;
+	font-style: italic;
+	color: var(--color-text);
+	border-left: 3px solid var(--color-accent);
+	padding-left: 0.8rem;
+}
+
+/* Plain supporter list */
+.supporter-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.supporter-list li {
+	background: #f0e6d9;
+	color: var(--color-accent);
+	border-radius: 999px;
+	padding: 0.35rem 0.9rem;
+	font-size: 0.92rem;
+}
+
+/* Videos */
+.video-embed {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	background: #000;
+}
+
+.video-embed iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* Blog */
+.post-meta {
+	font-size: 0.85rem;
+	color: var(--color-text-muted);
+	margin-bottom: 1.5rem;
+}
+
+article.prose {
+	max-width: 46rem;
+	margin-inline: auto;
+	font-size: 1.08rem;
+}
+
+article.prose h2 {
+	margin-top: 1.8em;
+}
+
+/* Footer */
+.site-footer {
+	border-top: 1px solid var(--color-border);
+	background: var(--color-bg-alt);
+	margin-top: 3rem;
+	padding: 2.5rem 0;
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+}
+
+.site-footer a {
+	color: var(--color-text-muted);
+}
+
+.disclaimer {
+	margin-top: 1.2rem;
+	font-size: 0.82rem;
+	max-width: 40rem;
+}
+
+.empty-note {
+	color: var(--color-text-muted);
+	font-style: italic;
+}

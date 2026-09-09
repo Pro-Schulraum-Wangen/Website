@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Platzhalter-Portrait">
+	<rect width="400" height="300" fill="#f3f1ea" />
+	<circle cx="200" cy="115" r="60" fill="#d8d3c2" />
+	<path d="M80 300c0-72 54-130 120-130s120 58 120 130z" fill="#d8d3c2" />
+</svg>

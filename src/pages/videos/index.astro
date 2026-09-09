@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const videos = (await getCollection('videos', ({ data }) => data.published)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout title="Videos" description="Videos rund um das Projekt Schulanlage «Am Buechberg» in Wangen SZ.">
+	<section class="hero">
+		<div class="wrap">
+			<h1>Videos</h1>
+			<p class="tagline">Kurze Videos zum Projekt und zur Kampagne.</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			{
+				videos.length > 0 ? (
+					<div class="grid cols-2">
+						{videos.map((v) => (
+							<div>
+								<div class="video-embed">
+									<iframe
+										src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`}
+										title={v.data.title}
+										loading="lazy"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+										allowfullscreen
+									/>
+								</div>
+								<h3>{v.data.title}</h3>
+								{v.data.description && <p>{v.data.description}</p>}
+							</div>
+						))}
+					</div>
+				) : (
+					<p class="empty-note">Noch keine Videos veröffentlicht – schau bald wieder vorbei.</p>
+				)
+			}
+		</div>
+	</section>
+</Layout>

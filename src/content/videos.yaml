@@ -1,0 +1,17 @@
+# Videos for the campaign / the project.
+# youtubeId is the part of the YouTube URL after "v=", or for youtu.be links
+# the part after the last "/", e.g. https://youtu.be/dQw4w9WgXcQ -> dQw4w9WgXcQ
+#
+# As long as no real videos are listed here, the videos page stays empty
+# (with a note) – that's intentional, there is no placeholder entry.
+#
+# Example to copy (set "published: true" to publish it):
+#
+# - id: example
+#   title: 'Example title'
+#   youtubeId: 'dQw4w9WgXcQ'
+#   description: 'Short description of the video.'
+#   date: 2026-09-09
+#   published: false
+
+[]

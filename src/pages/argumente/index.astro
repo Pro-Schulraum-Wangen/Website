@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { OFFICIAL_SITE_URL } from '../../consts';
+
+const allArguments = (await getCollection('arguments', ({ data }) => data.published)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
+---
+
+<Layout title="Argumente" description="Unsere Argumente für ein Ja zum Neubau der Schulanlage «Am Buechberg» in Wangen SZ.">
+	<section class="hero">
+		<div class="wrap">
+			<h1>Unsere Argumente</h1>
+			<p class="tagline">
+				Sachlich, mit Bezug zur öffentlichen Botschaft des Gemeinderates vom 11. Juni 2026.
+				Für die vollständigen Details empfehlen wir zusätzlich die
+				<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">offizielle Botschaft der Gemeinde</a>.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<article class="prose">
+				{
+					allArguments.map((entry, i) => {
+						const { Content } = rendered[i];
+						return (
+							<div style="margin-bottom: 2.5rem;">
+								<h2>{entry.data.title}</h2>
+								<p><strong>{entry.data.summary}</strong></p>
+								{entry.data.image && (
+									<Image
+										src={entry.data.image}
+										alt={entry.data.imageAlt ?? entry.data.title}
+										width={800}
+										height={533}
+										style="border-radius: 0.6rem; margin-bottom: 1.2rem;"
+									/>
+								)}
+								<Content />
+							</div>
+						);
+					})
+				}
+				{allArguments.length === 0 && <p class="empty-note">Noch keine Argumente eingetragen.</p>}
+				<p class="image-credit">
+					Visualisierungen aus der Botschaft des Gemeinderates Wangen vom 11. Juni 2026. Quelle
+					der Bilder: Halter AG, Max Dudler.
+				</p>
+			</article>
+		</div>
+	</section>
+</Layout>

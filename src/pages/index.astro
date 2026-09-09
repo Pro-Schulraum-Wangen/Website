@@ -1,0 +1,155 @@
+---
+import { getCollection } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
+
+import dorfplatzImg from '../assets/visualizations/dorfplatz-primarschule.jpg';
+import sportanlageImg from '../assets/visualizations/sportanlage-turnhalle.jpg';
+import klassenzimmerImg from '../assets/visualizations/klassenzimmer-interior.jpg';
+import turnhalleImg from '../assets/visualizations/turnhalle-interior.jpg';
+import situationsplanImg from '../assets/visualizations/situationsplan.jpg';
+
+// Used as a CSS background-image on the hero section (needs a plain URL,
+// not an <img> element, so we go through getImage() instead of <Image>).
+const heroBg = await getImage({ src: dorfplatzImg, width: 1920, height: 960, position: 'attention' });
+
+const allArguments = (await getCollection('arguments', ({ data }) => data.published)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+const topArguments = allArguments.slice(0, 4);
+
+const supporters = (await getCollection('supporters', ({ data }) => data.published)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const featuredSupporters = supporters.filter((s) => s.data.image).slice(0, 3);
+const supporterCount = supporters.length;
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const latestPost = posts[0];
+---
+
+<Layout>
+	<section class="hero photo" style={`background-image: url(${heroBg.src});`}>
+		<div class="wrap">
+			<h1>Ja zur neuen Schulanlage «Am Buechberg»</h1>
+			<p class="tagline">{SITE_TAGLINE}</p>
+			<p class="tagline">{VOTE_DATE_LABEL}</p>
+			<div class="button-row">
+				<a class="button primary" href="/argumente/">Argumente ansehen</a>
+				<a class="button secondary" href="/mitmachen/">Unterstützer:in werden</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<div class="section-head">
+				<h2>Weshalb Ja?</h2>
+				<a class="more" href="/argumente/">Alle Argumente →</a>
+			</div>
+			<div class="grid cols-4">
+				{
+					topArguments.map((arg) => (
+						<div class="card">
+							<h3>{arg.data.title}</h3>
+							<p>{arg.data.summary}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="block alt">
+		<div class="wrap">
+			<div class="section-head">
+				<h2>So soll es aussehen</h2>
+			</div>
+			<div class="gallery-grid">
+				<figure>
+					<Image src={sportanlageImg} alt="Visualisierung: Sportanlage mit neuer Dreifachturnhalle" width={640} height={480} />
+					<figcaption>Sportanlage mit der neuen Dreifachturnhalle</figcaption>
+				</figure>
+				<figure>
+					<Image src={klassenzimmerImg} alt="Visualisierung: Klassenzimmer im Neubau" width={640} height={480} />
+					<figcaption>Ein Klassenzimmer im neuen Schulhaus</figcaption>
+				</figure>
+				<figure>
+					<Image src={turnhalleImg} alt="Visualisierung: Innenansicht der Dreifachturnhalle" width={640} height={480} />
+					<figcaption>Innenansicht der Dreifachturnhalle</figcaption>
+				</figure>
+			</div>
+			<figure class="gallery-full">
+				<Image src={situationsplanImg} alt="Situationsplan der Schulanlage «Am Buechberg»" width={1500} />
+				<figcaption>Situationsplan: Schulhaus, Kindergarten, Turnhalle und Sportplätze</figcaption>
+			</figure>
+			<p class="image-credit">
+				Visualisierungen aus der Botschaft des Gemeinderates Wangen vom 11. Juni 2026. Quelle der
+				Bilder: Halter AG, Max Dudler.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<div class="section-head">
+				<h2>Unterstützer:innen aus Wangen</h2>
+				<a class="more" href="/unterstuetzer/">
+					Alle {supporterCount > 0 ? `${supporterCount} ` : ''}Unterstützer:innen →
+				</a>
+			</div>
+			{
+				featuredSupporters.length > 0 ? (
+					<div class="grid cols-3">
+						{featuredSupporters.map((s) => (
+							<div class="supporter-card">
+								{s.data.image && <Image src={s.data.image} alt={s.data.name} width={400} height={300} />}
+								<div class="body">
+									<div class="name">{s.data.name}</div>
+									{s.data.role && <div class="role">{s.data.role}</div>}
+									{s.data.quote && <blockquote>«{s.data.quote}»</blockquote>}
+								</div>
+							</div>
+						))}
+					</div>
+				) : (
+					<p class="empty-note">
+						Noch keine Unterstützer:innen mit Foto eingetragen. Sei die/der Erste –
+						<a href="/mitmachen/">melde dich hier</a>.
+					</p>
+				)
+			}
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<div class="section-head">
+				<h2>Neu im Blog</h2>
+				<a class="more" href="/blog/">Alle Beiträge →</a>
+			</div>
+			{
+				latestPost ? (
+					<div class="card">
+						<h3>
+							<a href={`/blog/${latestPost.id}/`}>{latestPost.data.title}</a>
+						</h3>
+						<p class="post-meta">
+							{latestPost.data.date.toLocaleDateString('de-CH', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric',
+							})}
+						</p>
+						{latestPost.data.excerpt && <p>{latestPost.data.excerpt}</p>}
+					</div>
+				) : (
+					<p class="empty-note">Noch keine Blogbeiträge.</p>
+				)
+			}
+		</div>
+	</section>
+</Layout>

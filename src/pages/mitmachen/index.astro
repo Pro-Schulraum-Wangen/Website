@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CONTACT_EMAIL, SUPPORT_FORM_URL } from '../../consts';
+---
+
+<Layout
+	title="Mitmachen"
+	description="So wirst du als Unterstützer:in der Schulanlage «Am Buechberg» auf dieser Seite sichtbar."
+>
+	<section class="hero">
+		<div class="wrap">
+			<h1>Mitmachen</h1>
+			<p class="tagline">
+				Diese Seite lebt von Einwohnerinnen und Einwohnern, die sichtbar hinter dem Projekt
+				stehen. Mach mit – es dauert nur zwei Minuten.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<div class="grid cols-2">
+				<div class="card">
+					<h3>1. Als Unterstützer:in eintragen lassen</h3>
+					<p>
+						Schick uns deinen Namen – mit oder ohne Foto, mit oder ohne kurzem Statement, warum du
+						für das Projekt bist. Wir tragen dich dann auf der
+						<a href="/unterstuetzer/">Unterstützer:innen-Seite</a> ein.
+					</p>
+					{
+						SUPPORT_FORM_URL ? (
+							<a class="button primary" href={SUPPORT_FORM_URL} target="_blank" rel="noopener">
+								Formular ausfüllen
+							</a>
+						) : (
+							<a class="button primary" href={`mailto:${CONTACT_EMAIL}?subject=Ich unterst%C3%BCtze%20Schulanlage%20Wangen`}>
+								Per E-Mail melden
+							</a>
+						)
+					}
+				</div>
+
+				<div class="card">
+					<h3>2. Ein längeres Statement schreiben</h3>
+					<p>
+						Du willst ausführlicher erklären, warum du für das Projekt bist – zum Beispiel als
+						Elternteil, Vereinsmitglied oder Nachbar:in der Schulanlage? Schick uns deinen Text,
+						wir veröffentlichen ihn im <a href="/blog/">Blog</a>.
+					</p>
+					<a class="button secondary" href={`mailto:${CONTACT_EMAIL}?subject=Mein%20Statement`}>
+						Statement einsenden
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap">
+			<h2>Du bist technisch versiert?</h2>
+			<p>
+				Der Quellcode dieser Seite ist öffentlich auf
+				<a href="https://github.com/Pro-Schulraum-Wangen/Website" target="_blank" rel="noopener">GitHub</a>.
+				Wer möchte, kann uns direkt per Pull Request einen neuen Eintrag im Ordner
+				<code>src/content/supporters/</code> vorschlagen.
+			</p>
+		</div>
+	</section>
+</Layout>

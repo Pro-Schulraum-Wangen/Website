@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import {
+	SITE_TITLE,
+	SITE_DESCRIPTION,
+	NAV_LINKS,
+	OFFICIAL_SITE_URL,
+	OFFICIAL_SITE_LABEL,
+	VOTE_DATE_LABEL,
+	CONTACT_EMAIL,
+} from '../consts';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = SITE_DESCRIPTION } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE_TITLE}` : `${SITE_TITLE} – Ja zur neuen Schulanlage «Am Buechberg»`;
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<!doctype html>
+<html lang="de-CH">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+	</head>
+	<body>
+		<div class="vote-banner">
+			{VOTE_DATE_LABEL} — <a href="/argumente/">Weshalb Ja?</a>
+		</div>
+		<header class="site-header">
+			<div class="wrap">
+				<a class="brand" href="/">
+					<span class="dot" aria-hidden="true"></span>
+					{SITE_TITLE}
+				</a>
+				<nav class="main-nav" aria-label="Hauptnavigation">
+					{
+						NAV_LINKS.map((link) => (
+							<a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>
+								{link.label}
+							</a>
+						))
+					}
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				<p>
+					<strong>{SITE_TITLE}</strong> ist eine unabhängige Gruppe von Einwohnerinnen und
+					Einwohnern von Wangen SZ. Wir sind nicht Teil der Gemeindeverwaltung.
+				</p>
+				<p>
+					Offizielle Informationen der Gemeinde zum Projekt findest du auf der
+					<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">{OFFICIAL_SITE_LABEL}</a>.
+				</p>
+				<p>
+					Kontakt: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> ·
+					<a href="https://github.com/Pro-Schulraum-Wangen/Website" target="_blank" rel="noopener">
+						Quellcode auf GitHub
+					</a>
+				</p>
+				<p class="disclaimer">
+					Alle Angaben zum Projekt basieren auf der öffentlichen Botschaft des Gemeinderates
+					Wangen vom 11. Juni 2026. Für verbindliche Informationen gilt die Botschaft bzw. die
+					offizielle Gemeinde-Website.
+				</p>
+			</div>
+		</footer>
+	</body>
+</html>
