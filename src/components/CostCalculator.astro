@@ -7,6 +7,8 @@
 // - chapter 9.8 to 9.10: planned tax-rate rise from 135 % to 150 % and the
 //   resulting additional municipal tax per year by taxable income.
 
+import { DOCUMENTS, ESTV_CALCULATOR_URL, GITHUB_CALCULATOR_URL } from '../consts';
+
 const GROSS_COST = 55_600_000;
 const CANTON_CONTRIBUTION = 5_600_000;
 const NET_COST = GROSS_COST - CANTON_CONTRIBUTION;
@@ -39,9 +41,79 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 		<p>
 			Zur Finanzierung der Schulanlage und weiterer bereits geplanter Investitionen
 			plant der Gemeinderat, den Steuerfuss ab 2028 von 135 % auf 150 % zu erhöhen.
-			Das ist der Wert, der bis 2025 bereits galt. Rechnen Sie aus, was diese
-			Erhöhung Sie ungefähr kostet.
+			Rechnen Sie aus, was diese Erhöhung Sie ungefähr kostet.
 		</p>
+
+		<details class="cost-calc-explainer">
+			<summary>Was heisst «Steuerfuss 150 %»?</summary>
+			<div class="cost-calc-explainer-body">
+				<p>
+					Ihre Einkommenssteuer wird auf zwei Ebenen berechnet. Die{' '}
+					<strong>direkte Bundessteuer</strong> geht an den Bund und hat mit dieser
+					Vorlage nichts zu tun.
+				</p>
+				<p>
+					Für die Steuern im Kanton wird zuerst die sogenannte{' '}
+					<strong>einfache Steuer</strong> berechnet. Sie dient als gemeinsame Referenz.{' '}
+					<strong>
+						Kanton, Bezirk, Gemeinde und Kirche beziehen davon jeweils einen bestimmten
+						Prozentsatz. Dieser Prozentsatz heisst Steuerfuss.
+					</strong>
+				</p>
+				<p>
+					Ein Beispiel: Wer rund CHF 55'000 im Jahr verdient, versteuert nach den
+					Abzügen noch etwa CHF 40'000. Daraus errechnet der kantonale Tarif die
+					einfache Steuer, in diesem Beispiel CHF 1'000. Je höher das Einkommen, desto
+					höher auch diese Referenz. So sieht die Rechnung für Wangen heute aus:
+				</p>
+				<div class="cost-calc-table-wrap">
+					<table>
+						<thead>
+							<tr>
+								<th>Geht an</th>
+								<th>Steuerfuss</th>
+								<th>Steuer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Kanton Schwyz</td><td>110 %</td><td>CHF 1'100</td></tr>
+							<tr><td>Bezirk March</td><td>30 %</td><td>CHF 300</td></tr>
+							<tr><td>Gemeinde Wangen</td><td>135 %</td><td>CHF 1'350</td></tr>
+							<tr><td>röm.-kath. Kirche</td><td>30 %</td><td>CHF 300</td></tr>
+							<tr><td>evang.-ref. Kirche</td><td>14 %</td><td>CHF 140</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<p>
+					Die einfache Steuer von CHF 1'000 zahlen Sie nirgends direkt, sie ist{' '}
+					<strong>nur die Referenz für die Berechnung</strong>. Bei einem Steuerfuss von
+					135 % erhält die Gemeinde CHF 1'350, bei 150 % wären es CHF 1'500.
+				</p>
+				<p>
+					Mit der Schulraumvorlage steigt{' '}
+					<strong>nur der Steuerfuss der Gemeinde Wangen von 135 % auf 150 %</strong>. Bei
+					CHF 1'000 einfacher Steuer sind das CHF 150 mehr pro Jahr. Kanton, Bezirk und
+					Kirche bleiben unverändert.
+				</p>
+				<p>
+					Bezahlt wird die Schulanlage von der Gemeinde Wangen; der Kanton steuert
+					zusätzlich rund 5,6 Mio. Franken bei.
+				</p>
+				<p>
+					Im Kanton Schwyz liegt Wangen mit 150 % am oberen Ende; nur wenige der rund
+					30 Gemeinden verlangen mehr (siehe{' '}
+					<a href={DOCUMENTS.steuerfusstabelle} target="_blank" rel="noopener">
+						Steuerfusstabelle des Kantons Schwyz
+					</a>, Seite 2, Spalte «Gemeinde»). Schweizweit fahren wir trotzdem gut: Der
+					Kanton Schwyz besteuert Einkommen und Vermögen seit Jahren so tief wie kaum
+					ein anderer Kanton. Was die Erhöhung für Ihren Haushalt bedeutet, zeigt der
+					Rechner unten; für den gesamtschweizerischen Vergleich dient der{' '}
+					<a href={ESTV_CALCULATOR_URL} target="_blank" rel="noopener">
+						Steuerrechner der Eidgenössischen Steuerverwaltung
+					</a>.
+				</p>
+			</div>
+		</details>
 
 		<form class="cost-calc" id="cost-calc" novalidate>
 			<div class="cost-calc-field">
@@ -72,6 +144,11 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 					<label><input type="radio" name="status" value="single" checked /> Alleinstehend</label>
 					<label><input type="radio" name="status" value="couple" /> Verheiratet</label>
 				</div>
+				<p class="cost-calc-hint">
+					Der Kanton Schwyz kennt für Alleinstehende und Verheiratete
+					unterschiedliche Steuertarife. Bei gleichem Einkommen fällt die
+					zusätzliche Steuer für Verheiratete deshalb etwas tiefer aus.
+				</p>
 			</div>
 
 			<button type="submit" class="button primary">Berechnen</button>
@@ -96,32 +173,42 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 			<div class="cost-calc-context">
 				<h3>Sie bekommen dafür einen Gegenwert</h3>
 				<p>
-					Dieser Betrag ist kein verlorenes Geld. Ihm steht eine Aufwertung des Ortes
-					gegenüber, in dem Sie leben. Was einem wichtig ist, dazu trägt man Sorge und
-					investiert. Ob die Sportausrüstung für den Lieblingssport, die Wohnung oder
-					der Garten: Mit der eigenen Gemeinde ist es nicht anders.
+					Dieser Betrag ist kein verlorenes Geld. Investitionen in die Gemeinde
+					schaffen einen konkreten Gegenwert: gute Schulen, zeitgemässe Infrastruktur,
+					attraktive öffentliche Räume und gute Bedingungen für Vereine und das
+					Dorfleben. All das trägt dazu bei, dass Wangen auch langfristig ein
+					attraktiver Wohn- und Lebensort bleibt.
 				</p>
 				<p>
 					Von einer modernen Schul- und Sportanlage, einem neu gestalteten Dorfplatz
-					und besseren Räumen für die Vereine profitieren alle im Dorf, auch wer keine
+					und besseren Räumen für die Vereine profitiert das ganze Dorf, auch wer keine
 					schulpflichtigen Kinder hat.
 				</p>
 				<p>
 					Und «einfach nichts tun» gibt es nicht: Gewisse Investitionen sind so oder so
 					nötig. Ein Nein kostet die Gemeinde laut Botschaft des Gemeinderates über
 					CHF 23 Mio. für Sanierungen der alten Gebäude, für Provisorien und durch den
-					Verlust der zugesicherten Kantonsbeiträge. Ein einziges Raumproblem löst es
-					trotzdem nicht.
+					Verlust der zugesicherten Kantonsbeiträge. Die bestehenden Raumprobleme wären
+					damit trotzdem nicht gelöst.
 				</p>
 			</div>
 		</div>
 
 		<p class="cost-calc-disclaimer">
 			Grobe Schätzung auf Basis des Bruttolohns; das steuerbare Einkommen nach
-			Abzügen (und damit der effektive Betrag) liegt in der Regel tiefer. Ohne
-			Kirchensteuer. Die Steuerfuss-Erhöhung auf 150 % finanziert die Schulanlage
-			sowie weitere bereits geplante Investitionen. Quelle: Botschaft des
-			Gemeinderates Wangen vom 11. Juni 2026, Kapitel 9.
+			Abzügen (und damit der effektive Betrag) liegt in der Regel tiefer. Kinderabzüge
+			und weitere persönliche Abzüge sind nicht abgebildet; für Familien mit Kindern
+			fällt der Betrag entsprechend tiefer aus. Ohne Kirchensteuer. Die
+			Steuerfuss-Erhöhung auf 150 % finanziert die Schulanlage sowie weitere bereits
+			geplante Investitionen. Quelle:{' '}
+			<a href={DOCUMENTS.botschaft} target="_blank" rel="noopener">
+				Botschaft des Gemeinderates Wangen
+			</a>{' '}
+			vom 11. Juni 2026, Kapitel 9. Die vollständige Berechnung lässt sich jederzeit im{' '}
+			<a href={GITHUB_CALCULATOR_URL} target="_blank" rel="noopener">
+				öffentlichen Quellcode auf GitHub
+			</a>{' '}
+			nachvollziehen.
 		</p>
 		<noscript>
 			<p class="cost-calc-disclaimer">Für den Rechner muss JavaScript aktiviert sein.</p>

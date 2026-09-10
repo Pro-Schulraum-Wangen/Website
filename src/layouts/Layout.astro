@@ -7,6 +7,7 @@ import {
 	OFFICIAL_SITE_URL,
 	OFFICIAL_SITE_LABEL,
 	VOTE_DATE_LABEL,
+	DOCUMENTS,
 } from '../consts';
 
 interface Props {
@@ -102,8 +103,11 @@ const currentPath = new URL(Astro.request.url).pathname;
 					</a>
 				</p>
 				<p class="disclaimer">
-					Alle Angaben zum Projekt basieren auf der öffentlichen Botschaft des Gemeinderates
-					Wangen vom 11. Juni 2026. Für verbindliche Informationen gilt die Botschaft bzw. die
+					Alle Angaben zum Projekt basieren auf der öffentlichen{' '}
+					<a href={DOCUMENTS.botschaft} target="_blank" rel="noopener">
+						Botschaft des Gemeinderates Wangen
+					</a>{' '}
+					vom 11. Juni 2026. Für verbindliche Informationen gilt die Botschaft bzw. die
 					offizielle Gemeinde-Website.
 				</p>
 			</div>

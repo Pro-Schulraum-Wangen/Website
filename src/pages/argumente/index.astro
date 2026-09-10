@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import { OFFICIAL_SITE_URL } from '../../consts';
+import { DOCUMENTS } from '../../consts';
 
 const allArguments = (await getCollection('arguments', ({ data }) => data.published)).sort(
 	(a, b) => a.data.order - b.data.order,
@@ -17,7 +17,13 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 			<p class="tagline">
 				Sachlich, mit Bezug zur öffentlichen Botschaft des Gemeinderates vom 11. Juni 2026.
 				Für die vollständigen Details empfehlen wir zusätzlich die{' '}
-				<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">offizielle Botschaft der Gemeinde</a>.
+				<a href={DOCUMENTS.botschaft} target="_blank" rel="noopener">
+					vollständige Botschaft des Gemeinderates
+				</a>{' '}
+				und die{' '}
+				<a href={DOCUMENTS.infoanlass} target="_blank" rel="noopener">
+					Präsentation der Informationsveranstaltung vom 20. April 2026
+				</a>.
 			</p>
 		</div>
 	</section>

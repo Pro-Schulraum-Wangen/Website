@@ -7,6 +7,23 @@ export const SITE_DESCRIPTION =
 export const OFFICIAL_SITE_URL = 'https://schulanlage-wangensz.ch/';
 export const OFFICIAL_SITE_LABEL = 'Offizielle Website der Gemeinde';
 
+// Locally hosted PDFs. The files live in public/dokumente/ and are served
+// from the site root under the same names.
+export const DOCUMENTS = {
+	botschaft: '/dokumente/gemeinde_wangen-botschaft_schulanglage-A4_web.pdf',
+	infoanlass: '/dokumente/Infoanlass_v20-04-2026_web.pdf',
+	// Official cantonal tax-rate table (Steuerverwaltung Kanton Schwyz).
+	steuerfusstabelle: '/dokumente/Steuerfusstabelle_2026.pdf',
+} as const;
+
+// External tax calculator run by the Swiss federal tax administration.
+export const ESTV_CALCULATOR_URL =
+	'https://swisstaxcalculator.estv.admin.ch/#/calculator/income-wealth-tax';
+
+// The file on the main branch that holds the tax-calculator logic.
+export const GITHUB_CALCULATOR_URL =
+	'https://github.com/Pro-Schulraum-Wangen/Website/blob/main/src/components/CostCalculator.astro';
+
 // Address for enquiries about the website and about supporter entries.
 export const CONTACT_EMAIL = 'info@philippbruhin.ch';
 export const SUPPORT_FORM_URL = ''; // optional, e.g. a Google Form link
@@ -17,6 +34,11 @@ export const RESPONSIBLE_PEOPLE = [
 		name: 'Raphael Seunig',
 		role: 'Präsident Die Mitte Wangen SZ',
 		email: 'raphaelseunig@saveurs-vivre.ch',
+	},
+	{
+		name: 'Julia Cotti',
+		role: 'Kantonsrätin FTP',
+		email: 'julia@cottis.ch',
 	},
 	{
 		name: 'Jonas Küttel',
