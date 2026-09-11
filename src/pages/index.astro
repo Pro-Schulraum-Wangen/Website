@@ -4,7 +4,7 @@ import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { getSupporters } from '../lib/supporters';
 import CostCalculator from '../components/CostCalculator.astro';
-import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
+import { SITE_TAGLINE, VOTE_DATE_LABEL, DOCUMENTS, LUSTAT_KNUTWIL_URL } from '../consts';
 
 import dorfplatzImg from '../assets/visualizations/dorfplatz-primarschule.jpg';
 import sportanlageImg from '../assets/visualizations/sportanlage-turnhalle.jpg';
@@ -14,7 +14,13 @@ import situationsplanImg from '../assets/visualizations/situationsplan.jpg';
 
 // Used as a CSS background-image on the hero section (needs a plain URL,
 // not an <img> element, so we go through getImage() instead of <Image>).
-const heroBg = await getImage({ src: dorfplatzImg, width: 1920, height: 960, position: 'attention' });
+const heroBg = await getImage({
+	src: dorfplatzImg,
+	width: 1920,
+	height: 960,
+	position: 'attention',
+	quality: 65,
+});
 
 const allArguments = (await getCollection('arguments', ({ data }) => data.published)).sort(
 	(a, b) => a.data.order - b.data.order,
@@ -28,47 +34,66 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 // the details from the municipal council's official message (Botschaft).
 const claims: { claim: string; body: string; image?: typeof situationsplanImg }[] = [
 	{
-		claim: 'Behauptung 1: «Die neue Schulanlage ist für Wangen viel zu teuer.»',
-		body: 'Platzhalter: Hier folgt eine sachliche Einordnung der Kostenfrage mit Bezug zur Botschaft des Gemeinderates – Investitionssumme, Kostendach und die jährliche Belastung des Gemeindehaushalts.',
-		image: situationsplanImg,
+		claim: '«Wangen wäre eine der am höchsten verschuldeten Gemeinden der ganzen Schweiz.»',
+		body: `
+			<p>
+				Die SVP Wangen schreibt im <a href="${DOCUMENTS.marchanzeigerSvpNein}" target="_blank" rel="noopener">March-Anzeiger vom 4. September 2026</a>, dass Wangen nach den geplanten Investitionen gemessen an der
+				Verschuldung pro Einwohner «eine der am höchsten verschuldeten
+				Gemeinden in der ganzen Schweiz» wäre.
+			</p>
+			<p>
+				<strong>Der Hinweis auf die steigende Verschuldung ist berechtigt.</strong>
+				Die Investitionen sind gross und Wangen wird dafür Schulden aufnehmen
+				müssen. Eine hohe Verschuldung bedeutet aber nicht automatisch, dass
+				eine Gemeinde ein strukturelles Finanzproblem hat.
+			</p>
+			<p>
+				Ein Blick in den <strong>Kanton Luzern</strong> zeigt das gut. Dort
+				gelten Nettoschulden von mehr als <strong>CHF 2'500 pro Einwohner</strong>
+				bereits als hoch. Trotzdem lagen 2024 zwölf Gemeinden darüber. <a href="${LUSTAT_KNUTWIL_URL}" target="_blank" rel="noopener">Knutwil wies mit <strong>CHF 7'259 pro Einwohner</strong> den höchsten Wert auf</a>.
+				Dort ist die hohe Verschuldung ebenfalls wesentlich auf grosse
+				Investitionen in die Infrastruktur zurückzuführen und soll nach Abschluss
+				dieser Bautätigkeit wieder sinken.
+			</p>
+			<p>
+				Auch im <strong>Kanton Schwyz</strong> verändern sich solche Werte
+				stark. In der <a href="${DOCUMENTS.gemeindefinanzstatistik}" target="_blank" rel="noopener">Gemeindefinanzstatistik 2020</a> hatte Wangen eine
+				Nettoschuld von <strong>CHF 1'122 pro Einwohner</strong>, Lachen dagegen
+				<strong>CHF 5'644</strong>. Solche Werte sind Momentaufnahmen und können
+				sich nach Phasen mit hohen Investitionen wieder deutlich verändern.
+			</p>
+			<p>
+				<strong>
+					Wangen hat kein strukturelles Finanzproblem. Die höhere Verschuldung
+					entsteht durch Investitionen, denen mit der neuen Schul- und
+					Sportanlage ein langfristiger Gegenwert gegenübersteht.
+				</strong>
+			</p>
+		`,
 	},
 	{
-		claim: 'Behauptung 2: «Der bestehende Schulraum würde noch für Jahre ausreichen.»',
-		body: 'Platzhalter: Kurzer Text zur heutigen Raumsituation, zu Provisorien und zur Auslastung der bestehenden Schulhäuser.',
+		claim: '«Das Schulhaus 1 wird nach dem Neubau nicht mehr gebraucht und steht leer.»',
+		body: 'Muss relativiert werden'
 	},
 	{
-		claim: 'Behauptung 3: «Eine Sanierung des alten Schulhauses wäre deutlich günstiger.»',
-		body: 'Platzhalter: Text zum Vergleich Sanierung gegenüber Neubau, zu Bausubstanz und zu den langfristigen Betriebskosten.',
+		claim: '«Die neue Turnhalle könnte genauso gut auf der Rickenbacherwiese gebaut werden.»',
+		body: 'Hier im Idealfall beispiel aus WebGIS und Erklärung mit Fruchtfolgefläche'
 	},
 	{
-		claim: 'Behauptung 4: «Die Dreifachturnhalle ist überdimensioniert.»',
-		body: 'Platzhalter: Text zum Bedarf von Schule und Vereinen, zu Belegungszeiten und zu kantonalen Vorgaben für Sportanlagen.',
-		image: turnhalleImg,
+		claim: '«Die Bevölkerung konnte bei der Planung des Projekts nicht mitreden.»',
+		body: 'Auflisten wo man mitreden konnte und wer das alles gemacht hat.'
 	},
 	{
-		claim: 'Behauptung 5: «Der Standort «Am Buechberg» ist schlecht gewählt.»',
-		body: 'Platzhalter: Text zur Lage, zur Erschliessung, zu den Schulwegen und zur Verfügbarkeit des Grundstücks.',
+		claim: '«Es gibt bereits konkrete Alternativprojekte für die neue Schulanlage.»',
+		body: 'https://www.primarschule-siebnen-wangen.ch/ und https://www.schule-wangen.ch/ sind keine Projekte, auch wenn sie den Anschein machen.'
 	},
 	{
-		claim: 'Behauptung 6: «Die Schülerzahlen steigen gar nicht so stark.»',
-		body: 'Platzhalter: Text zur Bevölkerungs- und Schülerprognose für Wangen und zu den zugrunde liegenden Annahmen.',
-		image: klassenzimmerImg,
+		claim: '«Die grosse Turnhalle wird nur für den Turnverein Wangen gebaut.»',
+		body: 'Hallenbelegung und auch Red Devils, welche hier nicht trainieren können sowie Jugi, die jetzt schon in MPS traniert.'
 	},
 	{
-		claim: 'Behauptung 7: «Das Projekt belastet die Gemeindefinanzen auf Jahre hinaus.»',
-		body: 'Platzhalter: Text zu Finanzierung, Steuerfuss, Verschuldung und zum Investitionsplan der Gemeinde.',
-	},
-	{
-		claim: 'Behauptung 8: «Ein Neubau ist ökologisch nicht vertretbar.»',
-		body: 'Platzhalter: Text zu Energiestandard, Holzbau, Photovoltaik, grauer Energie und Aussenraumgestaltung.',
-	},
-	{
-		claim: 'Behauptung 9: «Die Bauzeit führt zu jahrelangen Provisorien.»',
-		body: 'Platzhalter: Text zum Bauablauf, zur voraussichtlichen Bauzeit und zum Schulbetrieb während der Bauphase.',
-	},
-	{
-		claim: 'Behauptung 10: «Über das Projekt wurde zu wenig informiert.»',
-		body: 'Platzhalter: Text zum bisherigen Mitwirkungsprozess, zu Informationsveranstaltungen und zu den öffentlich verfügbaren Unterlagen.',
+		claim: '«Die Schülerzahlen werden stark zurückgehen und es braucht künftig deutlich weniger Schulraum.»',
+		body: 'Auch wenn es immer weniger Kinder gibt pro Frau, steigt die Bevölkerung in Wangen. Belegen.'
 	},
 ];
 ---
@@ -120,25 +145,25 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 			</div>
 			<div class="gallery-grid">
 				<figure>
-					<Image src={sportanlageImg} alt="Visualisierung: Sportanlage mit neuer Dreifachturnhalle" width={640} height={480} />
+					<Image src={sportanlageImg} alt="Visualisierung: Sportanlage mit neuer Dreifachturnhalle" width={640} height={480} quality={65} />
 					<figcaption>Sportanlage mit der neuen Dreifachturnhalle</figcaption>
 				</figure>
 				<figure>
-					<Image src={klassenzimmerImg} alt="Visualisierung: Klassenzimmer im Neubau" width={640} height={480} />
+					<Image src={klassenzimmerImg} alt="Visualisierung: Klassenzimmer im Neubau" width={640} height={480} quality={65} />
 					<figcaption>Ein Klassenzimmer im neuen Schulhaus</figcaption>
 				</figure>
 				<figure>
-					<Image src={turnhalleImg} alt="Visualisierung: Innenansicht der Dreifachturnhalle" width={640} height={480} />
+					<Image src={turnhalleImg} alt="Visualisierung: Innenansicht der Dreifachturnhalle" width={640} height={480} quality={65} />
 					<figcaption>Innenansicht der Dreifachturnhalle</figcaption>
 				</figure>
 			</div>
 			<figure class="gallery-full">
-				<Image src={situationsplanImg} alt="Situationsplan der Schulanlage «Am Buechberg»" width={1500} />
+				<Image src={situationsplanImg} alt="Situationsplan der Schulanlage «Am Buechberg»" width={1500} quality={65} />
 				<figcaption>Situationsplan: Schulhaus, Kindergarten, Turnhalle und Sportplätze</figcaption>
 			</figure>
 			<p class="image-credit">
-				Visualisierungen aus der Botschaft des Gemeinderates Wangen vom 11. Juni 2026. Quelle der
-				Bilder: Halter AG, Max Dudler.
+				Visualisierungen aus der Präsentation der Informationsveranstaltung vom 20. April 2026.
+				Quelle der Bilder: Halter AG, Max Dudler.
 			</p>
 		</div>
 	</section>
@@ -150,8 +175,9 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 					<h2>Fakten und Behauptungen zum Schulraumprojekt</h2>
 				</div>
 				<p class="tagline">
-					Rund um das Projekt kursieren verschiedene Behauptungen. Hier ordnen wir die
-					zehn häufigsten sachlich ein. (Platzhalter – Inhalte folgen.)
+					Kritische Fragen und Bedenken gehören zum politischen Diskurs. Einige
+					Aussagen rund um das Schulraumprojekt benötigen jedoch zusätzlichen Kontext.
+					Hier ordnen wir sie sachlich ein.
 				</p>
 				<div class="claims-list">
 					{
@@ -159,13 +185,14 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 							<details>
 								<summary>{c.claim}</summary>
 								<div class="claim-body">
-									<p>{c.body}</p>
+									<div set:html={c.body} />
 									{c.image && (
 										<Image
 											src={c.image}
 											alt="Platzhalter-Visualisierung zum Schulraumprojekt"
 											width={800}
 											height={533}
+											quality={65}
 										/>
 									)}
 								</div>

@@ -43,6 +43,7 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 										src={entry.data.image}
 										alt={entry.data.imageAlt ?? entry.data.title}
 										width={800}
+										quality={65}
 										style="display: block; border-radius: 0.6rem; margin: 0 auto 1.2rem;"
 									/>
 								)}
@@ -53,8 +54,8 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 				}
 				{allArguments.length === 0 && <p class="empty-note">Noch keine Argumente eingetragen.</p>}
 				<p class="image-credit">
-					Visualisierungen aus der Botschaft des Gemeinderates Wangen vom 11. Juni 2026. Quelle
-					der Bilder: Halter AG, Max Dudler.
+					Visualisierungen aus der Präsentation der Informationsveranstaltung vom 20. April 2026.
+					Quelle der Bilder: Halter AG, Max Dudler.
 				</p>
 			</article>
 		</div>
