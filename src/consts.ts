@@ -20,6 +20,10 @@ export const DOCUMENTS = {
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
 	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
 	zustandsbericht: '/dokumente/2022.11.30_Zustandsbericht_mit_groben_Sanierungskonzept.pdf',
+	// Rechnung 2023 der Gemeinde Wangen SZ.
+	rechnung2023: '/dokumente/Rechnung_2023.pdf',
+	// Zonenplan der Gemeinde Wangen SZ (Entwurf 2013).
+	zonenplan: '/dokumente/wang_zp_entwurf_20131016.pdf',
 } as const;
 
 // External tax calculator run by the Swiss federal tax administration.
