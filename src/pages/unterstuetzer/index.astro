@@ -40,7 +40,6 @@ const { photo: withImage, names: withoutImage, count } = await getSupporters();
 								<div class="body">
 									<div class="name">{s.data.name}</div>
 									{s.data.role && <div class="role">{s.data.role}</div>}
-									{s.data.quote && <blockquote>«{s.data.quote}»</blockquote>}
 								</div>
 							</div>
 						))}

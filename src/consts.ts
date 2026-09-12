@@ -18,6 +18,8 @@ export const DOCUMENTS = {
 	gemeindefinanzstatistik: '/dokumente/Gemeindefinanzstatistik_2020.pdf',
 	// Scan des March-Anzeiger-Artikels der SVP Wangen vom 4. September 2026.
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
+	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
+	zustandsbericht: '/dokumente/2022.11.30_Zustandsbericht_mit_groben_Sanierungskonzept.pdf',
 } as const;
 
 // External tax calculator run by the Swiss federal tax administration.
@@ -35,7 +37,8 @@ export const GITHUB_CALCULATOR_URL =
 
 // Address for enquiries about the website and about supporter entries.
 export const CONTACT_EMAIL = 'info@philippbruhin.ch';
-export const SUPPORT_FORM_URL = ''; // optional, e.g. a Google Form link
+export const SUPPORT_FORM_URL =
+	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 
 // People responsible for this website (shown in the privacy notice).
 export const RESPONSIBLE_PEOPLE = [

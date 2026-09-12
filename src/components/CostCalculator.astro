@@ -24,15 +24,18 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 
 		<ul class="cost-summary">
 			<li>
+				<span class="cost-summary-sign" aria-hidden="true"></span>
 				<span class="cost-summary-label">Gesamtkosten (brutto, exkl. Teuerung)</span>
 				<span class="cost-summary-value">CHF {fmt(GROSS_COST)}</span>
 			</li>
 			<li>
-				<span class="cost-summary-label">− erwartete Beiträge des Kantons Schwyz</span>
+				<span class="cost-summary-sign" aria-hidden="true">−</span>
+				<span class="cost-summary-label">erwartete Beiträge des Kantons Schwyz</span>
 				<span class="cost-summary-value">CHF {fmt(CANTON_CONTRIBUTION)}</span>
 			</li>
 			<li class="cost-summary-total">
-				<span class="cost-summary-label">= Nettobelastung der Gemeinde Wangen</span>
+				<span class="cost-summary-sign" aria-hidden="true">=</span>
+				<span class="cost-summary-label">Nettobelastung der Gemeinde Wangen</span>
 				<span class="cost-summary-value">CHF {fmt(NET_COST)}</span>
 			</li>
 		</ul>
@@ -187,8 +190,8 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 			</p>
 			<p class="cost-calc-note" id="calc-out-basis"></p>
 			<p class="cost-calc-note">
-				Der Steuerfuss wird jährlich neu festgelegt; 150 % gilt voraussichtlich
-				für rund 5–10 Jahre.
+				Der Steuerfuss wird jährlich neu festgelegt. 150 % gilt voraussichtlich
+				für rund 5 bis 10 Jahre.
 			</p>
 
 			<div class="cost-calc-context">
@@ -216,7 +219,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 		</div>
 
 		<p class="cost-calc-disclaimer">
-			Grobe Schätzung auf Basis des Bruttolohns; das steuerbare Einkommen nach
+			Grobe Schätzung auf Basis des Bruttolohns. Das steuerbare Einkommen nach
 			Abzügen (und damit der effektive Betrag) liegt in der Regel tiefer. Kinderabzüge
 			und weitere persönliche Abzüge sind nicht abgebildet; für Familien mit Kindern
 			fällt der Betrag entsprechend tiefer aus. Ohne Kirchensteuer. Die

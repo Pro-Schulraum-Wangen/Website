@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { CONTACT_EMAIL, SUPPORT_FORM_URL } from '../../consts';
+import { SUPPORT_FORM_URL } from '../../consts';
 ---
 
 <Layout
@@ -19,39 +19,16 @@ import { CONTACT_EMAIL, SUPPORT_FORM_URL } from '../../consts';
 
 	<section class="block">
 		<div class="wrap narrow">
-			<div class="grid cols-2">
-				<div class="card">
-					<h3>1. Als Unterstützer:in eintragen lassen</h3>
-					<p>
-						Schicken Sie uns Ihren Namen – mit oder ohne Foto, mit oder ohne kurzem
-						Statement, warum Sie für das Projekt sind. Wir tragen Sie dann auf der{' '}
-						<a href="/unterstuetzer/">Unterstützer:innen-Seite</a> ein.
-					</p>
-					{
-						SUPPORT_FORM_URL ? (
-							<a class="button primary" href={SUPPORT_FORM_URL} target="_blank" rel="noopener">
-								Formular ausfüllen
-							</a>
-						) : (
-							<a class="button primary" href={`mailto:${CONTACT_EMAIL}?subject=Ich unterst%C3%BCtze%20Schulanlage%20Wangen`}>
-								Per E-Mail melden
-							</a>
-						)
-					}
-				</div>
-
-				<div class="card">
-					<h3>2. Ein kurzes Statement mitschicken</h3>
-					<p>
-						Sie möchten in einem Satz sagen, warum Sie für das Projekt sind – zum
-						Beispiel als Elternteil, Vereinsmitglied oder Nachbar:in der Schulanlage?
-						Schicken Sie uns Ihr Zitat, wir zeigen es bei Ihrem Eintrag auf der{' '}
-						<a href="/unterstuetzer/">Unterstützer:innen-Seite</a>.
-					</p>
-					<a class="button secondary" href={`mailto:${CONTACT_EMAIL}?subject=Mein%20Statement`}>
-						Statement einsenden
-					</a>
-				</div>
+			<div class="card">
+				<h3>Als Unterstützer:in eintragen lassen</h3>
+				<p>
+					Füllen Sie das kurze Formular aus – mit Ihrem Namen, wahlweise mit Foto. Wir
+					tragen Sie anschliessend auf der{' '}
+					<a href="/unterstuetzer/">Unterstützer:innen-Seite</a> ein.
+				</p>
+				<a class="button primary" href={SUPPORT_FORM_URL} target="_blank" rel="noopener">
+					Formular ausfüllen
+				</a>
 			</div>
 		</div>
 	</section>

@@ -2,8 +2,8 @@ import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 
 // Supporters – people from Wangen who back the project.
-// `image` is optional: only those with a photo appear as a card with
-// photo/quote. Everyone else automatically appears in the plain name list.
+// `image` is optional: only those with a photo appear as a card.
+// Everyone else automatically appears in the plain name list.
 const supporters = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/supporters' }),
 	schema: ({ image }) =>
@@ -12,7 +12,6 @@ const supporters = defineCollection({
 			// e.g. neighborhood, function/role – informational only, optional
 			role: z.string().optional(),
 			image: image().optional(),
-			quote: z.string().optional(),
 			// order/date added, used for sorting
 			date: z.coerce.date().default(() => new Date()),
 			// set to false to temporarily hide an entry without deleting the file

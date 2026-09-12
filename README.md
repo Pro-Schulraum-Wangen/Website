@@ -28,15 +28,13 @@ directly, commit, push.
 
 ### Supporters with a photo card (`src/content/supporters/`)
 
-One `.md` file per person, for supporters shown as a card with photo (and,
-optionally, a quote). Example:
+One `.md` file per person, for supporters shown as a card with photo. Example:
 
 ```md
 ---
 name: 'Maria Muster'
 role: 'Wangen' # optional – e.g. place of residence or function
 image: '../../assets/supporters/maria-muster.jpg' # optional
-quote: 'Short quote on why she supports the project.' # optional
 date: 2026-09-15
 published: true
 ---
