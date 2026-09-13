@@ -183,8 +183,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 						inputmode="numeric"
 						min="0"
 						step="100"
-						placeholder="z. B. 6500"
-						required
+						placeholder="z. B. 6500 oder 0"
 					/>
 				</div>
 
@@ -197,7 +196,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 				</div>
 			</div>
 
-			<button type="submit" class="button primary">Berechnen</button>
+			<button type="submit" class="button primary" id="calc-submit" aria-disabled="true">Berechnen</button>
 		</form>
 
 		<div class="cost-calc-result" id="cost-calc-result" aria-live="polite" hidden>
@@ -292,6 +291,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 	const TAXABLE_RATIO = 0.8;
 
 	const form = document.getElementById('cost-calc') as HTMLFormElement | null;
+	const submitButton = document.getElementById('calc-submit') as HTMLButtonElement | null;
 	const result = document.getElementById('cost-calc-result');
 	const salaryLabel = document.getElementById('calc-salary-label');
 	const salaryInput = document.getElementById('calc-salary') as HTMLInputElement | null;
@@ -307,6 +307,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 
 	if (
 		form &&
+		submitButton &&
 		result &&
 		salaryLabel &&
 		salaryInput &&
@@ -321,6 +322,25 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 	) {
 		const fmt = (n: number) => 'CHF ' + Math.round(n).toLocaleString('de-CH');
 
+		const getStatus = (): Status =>
+			Array.from(statusInputs).find((input) => input.checked)?.value === 'couple' ? 'couple' : 'single';
+
+		const isReady = () => {
+			if (salaryInput.value.trim() === '') return false;
+			return getStatus() !== 'couple' || salaryPartnerInput.value.trim() !== '';
+		};
+
+		const updateSubmitState = () => {
+			const ready = isReady();
+			submitButton.classList.toggle('is-disabled', !ready);
+			submitButton.setAttribute('aria-disabled', String(!ready));
+			submitButton.title = ready
+				? ''
+				: getStatus() === 'couple'
+					? 'Bitte geben Sie beide Monatslöhne ein, 0 ist möglich.'
+					: 'Bitte geben Sie Ihren Monatslohn ein.';
+		};
+
 		const updateForStatus = (status: Status) => {
 			const isCouple = status === 'couple';
 			partnerGroup.hidden = !isCouple;
@@ -328,31 +348,39 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 			monthsLegend.textContent = isCouple ? 'Ihre Auszahlungen pro Jahr' : 'Auszahlungen pro Jahr';
 		};
 
+		salaryInput.addEventListener('input', updateSubmitState);
+		salaryPartnerInput.addEventListener('input', updateSubmitState);
+
 		statusInputs.forEach((input) => {
 			input.addEventListener('change', () => {
 				if (input.checked) updateForStatus(input.value === 'couple' ? 'couple' : 'single');
+				updateSubmitState();
 			});
 		});
 
+		updateSubmitState();
+
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
+
+			if (!isReady()) {
+				updateSubmitState();
+				(getStatus() === 'couple' && salaryInput.value.trim() !== '' ? salaryPartnerInput : salaryInput).focus();
+				return;
+			}
+
 			const data = new FormData(form);
 			const salary = Number(data.get('salary'));
 			const months = Number(data.get('months'));
 			const status: Status = data.get('status') === 'couple' ? 'couple' : 'single';
-			const partnerSalary = status === 'couple' ? Number(data.get('salaryPartner')) : 0;
+			const partnerSalaryRaw = Number(data.get('salaryPartner'));
+			const partnerSalary =
+				status === 'couple' && Number.isFinite(partnerSalaryRaw) ? Math.max(0, partnerSalaryRaw) : 0;
 			const partnerMonths = status === 'couple' ? Number(data.get('monthsPartner')) : 0;
 
-			if (
-				!Number.isFinite(salary) ||
-				salary <= 0 ||
-				(status === 'couple' && (!Number.isFinite(partnerSalary) || partnerSalary <= 0))
-			) {
+			if (!Number.isFinite(salary) || salary <= 0) {
 				result.hidden = true;
-				(status === 'couple' && !(Number.isFinite(partnerSalary) && partnerSalary > 0)
-					? salaryPartnerInput
-					: salaryInput
-				).focus();
+				salaryInput.focus();
 				return;
 			}
 

@@ -340,6 +340,7 @@ nav.main-nav a[aria-current='page'] {
 	font-weight: 600;
 	font-size: 1.05rem;
 	border: 2px solid var(--color-brand);
+	cursor: pointer;
 }
 
 .button.primary {
@@ -361,6 +362,14 @@ nav.main-nav a[aria-current='page'] {
 .button.secondary:hover {
 	background: var(--color-bg-alt);
 	color: var(--color-brand-dark);
+}
+
+.button.is-disabled,
+.button.is-disabled:hover {
+	background: var(--color-bg-alt);
+	border-color: var(--color-bg-alt);
+	color: var(--color-text-muted);
+	cursor: not-allowed;
 }
 
 /* Image gallery grid – always 3 equal columns (33% each) on desktop,
