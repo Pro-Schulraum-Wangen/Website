@@ -137,28 +137,6 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 
 		<form class="cost-calc" id="cost-calc" novalidate>
 			<div class="cost-calc-field">
-				<label for="calc-salary">Monatslohn (brutto), CHF</label>
-				<input
-					type="number"
-					id="calc-salary"
-					name="salary"
-					inputmode="numeric"
-					min="0"
-					step="100"
-					placeholder="z. B. 6500"
-					required
-				/>
-			</div>
-
-			<div class="cost-calc-field">
-				<span class="cost-calc-legend">Auszahlungen pro Jahr</span>
-				<div class="cost-calc-choice">
-					<label><input type="radio" name="months" value="12" checked /> 12 ×</label>
-					<label><input type="radio" name="months" value="13" /> 13 ×</label>
-				</div>
-			</div>
-
-			<div class="cost-calc-field">
 				<span class="cost-calc-legend">Zivilstand</span>
 				<div class="cost-calc-choice">
 					<label><input type="radio" name="status" value="single" checked /> Alleinstehend</label>
@@ -169,6 +147,54 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 					unterschiedliche Steuertarife. Bei gleichem Einkommen fällt die
 					zusätzliche Steuer für Verheiratete deshalb etwas tiefer aus.
 				</p>
+			</div>
+
+			<div class="cost-calc-row">
+				<div class="cost-calc-field cost-calc-field-salary">
+					<label for="calc-salary" id="calc-salary-label">Monatslohn (brutto), CHF</label>
+					<input
+						type="number"
+						id="calc-salary"
+						name="salary"
+						inputmode="numeric"
+						min="0"
+						step="100"
+						placeholder="z. B. 6500"
+						required
+					/>
+				</div>
+
+				<div class="cost-calc-field">
+					<span class="cost-calc-legend" id="calc-months-legend">Auszahlungen pro Jahr</span>
+					<div class="cost-calc-choice">
+						<label><input type="radio" name="months" value="12" checked /> 12 ×</label>
+						<label><input type="radio" name="months" value="13" /> 13 ×</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="cost-calc-row" id="calc-partner-group" hidden>
+				<div class="cost-calc-field cost-calc-field-salary">
+					<label for="calc-salary-partner">Monatslohn Ehepartner:in (brutto), CHF</label>
+					<input
+						type="number"
+						id="calc-salary-partner"
+						name="salaryPartner"
+						inputmode="numeric"
+						min="0"
+						step="100"
+						placeholder="z. B. 6500"
+						required
+					/>
+				</div>
+
+				<div class="cost-calc-field">
+					<span class="cost-calc-legend">Auszahlungen pro Jahr (Ehepartner:in)</span>
+					<div class="cost-calc-choice">
+						<label><input type="radio" name="monthsPartner" value="12" checked /> 12 ×</label>
+						<label><input type="radio" name="monthsPartner" value="13" /> 13 ×</label>
+					</div>
+				</div>
 			</div>
 
 			<button type="submit" class="button primary">Berechnen</button>
@@ -267,15 +293,46 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 
 	const form = document.getElementById('cost-calc') as HTMLFormElement | null;
 	const result = document.getElementById('cost-calc-result');
+	const salaryLabel = document.getElementById('calc-salary-label');
 	const salaryInput = document.getElementById('calc-salary') as HTMLInputElement | null;
+	const monthsLegend = document.getElementById('calc-months-legend');
+	const partnerGroup = document.getElementById('calc-partner-group');
+	const salaryPartnerInput = document.getElementById('calc-salary-partner') as HTMLInputElement | null;
+	const statusInputs = document.querySelectorAll<HTMLInputElement>('input[name="status"]');
 	const outAdded = document.getElementById('calc-out-added');
 	const outMonth = document.getElementById('calc-out-month');
 	const outCurrent = document.getElementById('calc-out-current');
 	const outNew = document.getElementById('calc-out-new');
 	const outBasis = document.getElementById('calc-out-basis');
 
-	if (form && result && salaryInput && outAdded && outMonth && outCurrent && outNew && outBasis) {
+	if (
+		form &&
+		result &&
+		salaryLabel &&
+		salaryInput &&
+		monthsLegend &&
+		partnerGroup &&
+		salaryPartnerInput &&
+		outAdded &&
+		outMonth &&
+		outCurrent &&
+		outNew &&
+		outBasis
+	) {
 		const fmt = (n: number) => 'CHF ' + Math.round(n).toLocaleString('de-CH');
+
+		const updateForStatus = (status: Status) => {
+			const isCouple = status === 'couple';
+			partnerGroup.hidden = !isCouple;
+			salaryLabel.textContent = isCouple ? 'Ihr Monatslohn (brutto), CHF' : 'Monatslohn (brutto), CHF';
+			monthsLegend.textContent = isCouple ? 'Ihre Auszahlungen pro Jahr' : 'Auszahlungen pro Jahr';
+		};
+
+		statusInputs.forEach((input) => {
+			input.addEventListener('change', () => {
+				if (input.checked) updateForStatus(input.value === 'couple' ? 'couple' : 'single');
+			});
+		});
 
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
@@ -283,14 +340,23 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 			const salary = Number(data.get('salary'));
 			const months = Number(data.get('months'));
 			const status: Status = data.get('status') === 'couple' ? 'couple' : 'single';
+			const partnerSalary = status === 'couple' ? Number(data.get('salaryPartner')) : 0;
+			const partnerMonths = status === 'couple' ? Number(data.get('monthsPartner')) : 0;
 
-			if (!Number.isFinite(salary) || salary <= 0) {
+			if (
+				!Number.isFinite(salary) ||
+				salary <= 0 ||
+				(status === 'couple' && (!Number.isFinite(partnerSalary) || partnerSalary <= 0))
+			) {
 				result.hidden = true;
-				salaryInput.focus();
+				(status === 'couple' && !(Number.isFinite(partnerSalary) && partnerSalary > 0)
+					? salaryPartnerInput
+					: salaryInput
+				).focus();
 				return;
 			}
 
-			const grossYear = salary * months;
+			const grossYear = salary * months + partnerSalary * partnerMonths;
 			const taxable = grossYear * TAXABLE_RATIO;
 			const bracket = BRACKETS.find((b) => taxable <= b.max) ?? BRACKETS[BRACKETS.length - 1];
 			const added = bracket[status];
@@ -300,7 +366,9 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 			outCurrent.textContent = fmt(added * CURRENT_FACTOR);
 			outNew.textContent = fmt(added * NEW_FACTOR);
 			outBasis.textContent =
-				'Geschätzt aus einem Bruttolohn von ' +
+				'Geschätzt aus einem ' +
+				(status === 'couple' ? 'gemeinsamen Bruttolohn' : 'Bruttolohn') +
+				' von ' +
 				fmt(grossYear) +
 				' pro Jahr, steuerbares Einkommen rund ' +
 				fmt(taxable) +

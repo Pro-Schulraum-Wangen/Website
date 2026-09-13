@@ -268,7 +268,7 @@ nav.main-nav a[aria-current='page'] {
 
 /* Supporter count + link, shown on the homepage hero */
 .hero-meta {
-	margin-top: 1.25rem;
+	margin-top: 2.25rem;
 	font-size: 1.1rem;
 }
 
@@ -276,13 +276,18 @@ nav.main-nav a[aria-current='page'] {
 	font-weight: 700;
 }
 
-.hero.photo .hero-meta {
-	color: var(--color-brand-dark);
-	text-shadow: 0 1px 2px rgba(250, 248, 245, 0.9), 0 2px 20px rgba(250, 248, 245, 0.8);
+.hero.photo .hero-meta-highlight {
+	background: var(--color-brand);
+	color: #fff;
+	padding: 0.15em 0.35em;
+	border-radius: 0.2em;
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
 }
 
-.hero.photo .hero-meta a {
-	color: var(--color-accent);
+.hero.photo .hero-meta-highlight a {
+	color: #fff;
+	text-decoration: underline;
 }
 
 /* Hero variant with a photo background (used on the homepage).
@@ -753,8 +758,7 @@ article.prose > :first-child > h2:first-child {
 
 .cost-calc {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-end;
+	flex-direction: column;
 	gap: 1.25rem;
 	margin-top: 1.5rem;
 	padding: 1.5rem;
@@ -763,10 +767,30 @@ article.prose > :first-child > h2:first-child {
 	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
 }
 
+.cost-calc-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 1.25rem 3rem;
+}
+
+.cost-calc-row[hidden] {
+	display: none;
+}
+
 .cost-calc-field {
 	display: flex;
 	flex-direction: column;
 	gap: 0.4rem;
+}
+
+.cost-calc-field[hidden] {
+	display: none;
+}
+
+.cost-calc-field-salary {
+	width: 20rem;
+	max-width: 100%;
 }
 
 .cost-calc label,
@@ -784,6 +808,10 @@ article.prose > :first-child > h2:first-child {
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius);
 	background: var(--color-bg);
+}
+
+.cost-calc-field-salary input[type='number'] {
+	width: 100%;
 }
 
 .cost-calc input[type='number']:focus-visible {
