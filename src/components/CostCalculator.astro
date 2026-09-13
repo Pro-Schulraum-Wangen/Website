@@ -50,15 +50,17 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 		<details class="cost-calc-explainer">
 			<summary>Was heisst «Steuerfuss 150 %»?</summary>
 			<div class="cost-calc-explainer-body">
+				<p>Ihre Einkommenssteuer besteht vereinfacht gesagt aus zwei Teilen.</p>
 				<p>
-					Ihre Einkommenssteuer besteht vereinfacht gesagt aus zwei Teilen. Die{' '}
-					<strong>direkte Bundessteuer</strong> geht an den Bund und hat mit dieser
-					Vorlage nichts zu tun.
+					<strong>Zum einen gibt es die direkte Bundessteuer.</strong> Sie geht an den
+					Bund und hat mit dieser Vorlage nichts zu tun.
 				</p>
 				<p>
-					Für Kanton, Bezirk, Gemeinde und Kirche funktioniert die Berechnung anders:
-					Zuerst wird aus Ihrem steuerbaren Einkommen ein gemeinsamer Referenzwert
-					berechnet, die sogenannte <strong>einfache Steuer</strong>.
+					<strong>
+						Zum anderen gibt es die Steuern für Kanton, Bezirk, Gemeinde und Kirche.
+					</strong>{' '}
+					Dafür wird zuerst aus Ihrem steuerbaren Einkommen ein Betrag berechnet, der
+					als gemeinsame Referenz dient: die sogenannte <strong>einfache Steuer</strong>.
 				</p>
 				<p><strong>1. Die einfache Steuer ist der Referenzwert</strong></p>
 				<p>
@@ -77,7 +79,7 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 				<p><strong>2. Der Steuerfuss bestimmt, wie viel davon bezahlt wird</strong></p>
 				<p>
 					An der einfachen Steuer orientieren sich Kanton, Bezirk, Gemeinde und
-					Kirche. 100 % würde bedeuten: Man bezahlt genau den Referenzwert. Bei einer
+					Kirche. 100 % bedeutet: Man bezahlt genau den Referenzwert. Bei einer
 					einfachen Steuer von CHF 1'000 sieht die Rechnung in Wangen heute so aus:
 				</p>
 				<div class="cost-calc-table-wrap">
@@ -99,8 +101,9 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 					</table>
 				</div>
 				<p>
-					Die CHF 1'000 einfache Steuer werden also nicht zusätzlich bezahlt,
-					sondern sind lediglich die gemeinsame Berechnungsgrundlage.
+					Die CHF 1'000 einfache Steuer werden also{' '}
+					<strong>nicht zusätzlich bezahlt</strong>. Sie dienen lediglich als
+					gemeinsame Berechnungsgrundlage.
 				</p>
 				<p>
 					Mit der Schulraumvorlage steigt{' '}
@@ -126,11 +129,11 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 					<a href={DOCUMENTS.steuerfusstabelle} target="_blank" rel="noopener">
 						Steuerfusstabelle des Kantons Schwyz
 					</a>, Seite 2, Spalte «Gemeinde»). Schweizweit bleibt die Steuerbelastung
-					jedoch vergleichsweise tief; einen Vergleich liefert der{' '}
+					jedoch vergleichsweise tief. Einen Vergleich liefert der{' '}
 					<a href={ESTV_CALCULATOR_URL} target="_blank" rel="noopener">
 						Steuerrechner der Eidgenössischen Steuerverwaltung
-					</a>. Was die Erhöhung konkret für Ihren Haushalt bedeutet, zeigt der
-					Rechner unten.
+					</a>. Welche Mehrkosten die Erhöhung für Ihren Haushalt ungefähr bedeutet,
+					zeigt der Rechner unten.
 				</p>
 			</div>
 		</details>
