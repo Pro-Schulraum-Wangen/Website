@@ -20,6 +20,7 @@ const heroBg = await getImage({
 	height: 960,
 	position: 'attention',
 	quality: 65,
+	format: 'webp',
 });
 
 const allArguments = (await getCollection('arguments', ({ data }) => data.published)).sort(
@@ -534,6 +535,8 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 ---
 
 <Layout>
+	<link rel="preload" as="image" href={heroBg.src} fetchpriority="high" slot="head" />
+
 	<section class="hero photo" style={`background-image: url(${heroBg.src});`}>
 		<div class="wrap">
 			<h1>Ja zur neuen Schulanlage «Am Buechberg»</h1>
@@ -590,6 +593,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 						width={640}
 						height={480}
 						quality={65}
+						format="webp"
 					/>
 					<figcaption>Ein Klassenzimmer im neuen Schulhaus</figcaption>
 				</figure>
@@ -600,6 +604,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 						width={640}
 						height={480}
 						quality={65}
+						format="webp"
 					/>
 					<figcaption>Sportanlage mit der neuen Dreifachturnhalle</figcaption>
 				</figure>
@@ -610,6 +615,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 						width={640}
 						height={480}
 						quality={65}
+						format="webp"
 					/>
 					<figcaption>Innenansicht der Dreifachturnhalle</figcaption>
 				</figure>
@@ -620,6 +626,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 					alt="Situationsplan der Schulanlage «Am Buechberg»"
 					width={1500}
 					quality={65}
+					format="webp"
 				/>
 				<figcaption>Situationsplan: Schulhaus, Kindergarten, Turnhalle und Sportplätze</figcaption>
 			</figure>
@@ -656,6 +663,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 										width={800}
 										height={533}
 										quality={65}
+										format="webp"
 									/>
 								)}
 							</div>
@@ -688,6 +696,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 									height={300}
 									fit="cover"
 									position="center"
+									format="webp"
 								/>
 							)}
 							<div class="body">

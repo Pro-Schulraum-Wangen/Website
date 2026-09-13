@@ -65,6 +65,8 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 		<meta name="twitter:image" content={ogImageURL} />
 
 		<meta name="generator" content={Astro.generator} />
+
+		<slot name="head" />
 	</head>
 	<body>
 		<div class="vote-banner">

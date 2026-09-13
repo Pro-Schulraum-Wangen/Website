@@ -44,6 +44,7 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 										alt={entry.data.imageAlt ?? entry.data.title}
 										width={800}
 										quality={65}
+										format="webp"
 										style="display: block; border-radius: 0.6rem; margin: 0 auto 1.2rem;"
 									/>
 								)}
