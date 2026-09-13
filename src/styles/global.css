@@ -322,6 +322,7 @@ nav.main-nav a[aria-current='page'] {
 .hero.photo .button.secondary:hover {
 	background: var(--color-bg-alt);
 	color: var(--color-brand-dark);
+	border-color: var(--color-bg-alt);
 }
 
 .button-row {

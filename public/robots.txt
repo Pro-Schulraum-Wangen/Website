@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pro-schulraum-wangen.ch/sitemap-index.xml
