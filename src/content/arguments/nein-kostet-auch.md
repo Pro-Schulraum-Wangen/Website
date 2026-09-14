@@ -19,4 +19,4 @@ Die Gemeinde müsste danach von vorne planen: mehrere Jahre Verzögerung, in den
 die Raumsituation weiter verschärft und die Baukosten durch die Teuerung weiter
 steigen.
 
-**Die Frage ist nicht, ob investiert wird – sondern wann und in welche Lösung.**
+**Die Frage ist nicht, ob investiert wird, sondern wann und in welche Lösung.**

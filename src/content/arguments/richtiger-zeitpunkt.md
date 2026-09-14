@@ -14,5 +14,5 @@ Wird das Projekt abgelehnt, verfällt diese Zusage. Ein späterer Neustart der P
 würde nicht nur mehrere Jahre dauern, sondern auch ohne die Sicherheit stattfinden,
 dass der Kanton sich erneut in ähnlichem Umfang beteiligt.
 
-**Der Zeitpunkt ist kein Detail – er entscheidet mit über die Höhe der Kosten für die
+**Der Zeitpunkt ist kein Detail. Er entscheidet mit über die Höhe der Kosten für die
 Gemeinde.**

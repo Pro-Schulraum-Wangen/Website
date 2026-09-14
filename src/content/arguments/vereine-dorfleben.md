@@ -15,7 +15,7 @@ Halle verlegen, bevor die alte Halle zurückgebaut wird.
 
 Dazu kommen flexible Lagerräume für Vereine, eine öffentliche Tiefgarage mit 75
 Parkplätzen und 220 gedeckten Veloabstellplätzen sowie ein neu gestalteter, belebter
-**Dorfplatz** mit Sitzgelegenheiten, Bäumen und Wasserspiel – ein neuer Treffpunkt für
+**Dorfplatz** mit Sitzgelegenheiten, Bäumen und Wasserspiel. Ein neuer Treffpunkt für
 die ganze Bevölkerung, nicht nur für Schulkinder.
 
-**Diese Investition kommt dem ganzen Dorf zugute – über Generationen hinweg.**
+**Diese Investition kommt dem ganzen Dorf zugute, über Generationen hinweg.**

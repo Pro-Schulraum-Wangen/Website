@@ -21,5 +21,5 @@ Investitionsrahmen: **CHF 55.6 Mio. brutto**, nach Abzug der erwarteten
 Kantonsbeiträge von rund CHF 5.6 Mio. verbleiben **CHF 50 Mio. netto** zulasten der
 Gemeinde.
 
-**Das Projekt ist auf das Notwendige beschränkt – geprüft, seriös gerechnet, mit
+**Das Projekt ist auf das Notwendige beschränkt, geprüft, seriös gerechnet, mit
 Kostengarantie.**
