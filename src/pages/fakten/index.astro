@@ -1,0 +1,558 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import CostCalculator from '../../components/CostCalculator.astro';
+import { DOCUMENTS, LUSTAT_KNUTWIL_URL } from '../../consts';
+
+import situationsplanImg from '../../assets/visualizations/situationsplan.jpg';
+
+// Placeholder: facts and claims about the school building project.
+// Text and images are placeholders and still need to be replaced with
+// the details from the municipal council's official message (Botschaft).
+const claims: { claim: string; body: string; image?: typeof situationsplanImg }[] = [
+	{
+		claim: '«Wangen wäre eine der am höchsten verschuldeten Gemeinden der ganzen Schweiz.»',
+		body: `
+				<p>
+					<strong>Der Hinweis auf die steigende Verschuldung ist berechtigt.</strong>
+					Die Investitionen sind gross und Wangen wird dafür Schulden aufnehmen
+					müssen. Eine hohe Verschuldung bedeutet aber nicht automatisch, dass
+					eine Gemeinde ein strukturelles Finanzproblem hat. Gerade bei grossen
+					Bau- und Infrastrukturprojekten ist es auch in anderen Schweizer
+					Gemeinden nicht ungewöhnlich, dass die Verschuldung vorübergehend
+					deutlich ansteigt.
+				</p>
+
+				<p>
+					Gemäss der <a href="${DOCUMENTS.botschaft}" target="_blank" rel="noopener">Finanzplanung in der Abstimmungsbotschaft (siehe Seite 48)</a>
+					wird für Wangen mit einer maximalen Nettoschuld von
+					<strong>CHF 6'300 pro Einwohner</strong> gerechnet. Gleichzeitig wird
+					die Finanzierung bei einem Steuerfuss von 150 % als langfristig
+					tragbar beurteilt.
+				</p>
+
+				<p>
+					Ein Blick in den <strong>Kanton Luzern</strong> hilft bei der Einordnung.
+					Dort gelten Nettoschulden von mehr als
+					<strong>CHF 2'500 pro Einwohner</strong> als hoch. Trotzdem lagen 2024
+					zwölf Gemeinden darüber. <a href="${LUSTAT_KNUTWIL_URL}" target="_blank" rel="noopener">Knutwil wies mit <strong>CHF 7'259 pro Einwohner</strong> den höchsten Wert auf</a>.
+					Die hohe Verschuldung ist dort wesentlich durch grosse Investitionen
+					in die Infrastruktur entstanden.
+				</p>
+
+				<p>
+					Auch im <strong>Kanton Schwyz</strong> zeigt sich, wie stark solche Werte
+					schwanken können. In der <a href="${DOCUMENTS.gemeindefinanzstatistik}" target="_blank" rel="noopener">Gemeindefinanzstatistik 2020 (siehe Seite 10)</a>
+					hatte Wangen eine Nettoschuld von
+					<strong>CHF 1'122 pro Einwohner</strong>, das benachbarte Tuggen dagegen
+					<strong>CHF 3'958</strong>. Die Steuerkraft der beiden Gemeinden war dabei
+					vergleichbar. Auch Tuggen hatte in den Jahren zuvor grössere Investitionen
+					getätigt (unter anderem Feuerwehrgebäude, Doppelkindergarten und
+					Strassenbau).
+				</p>
+
+				<p>
+					<strong>
+						Wangen wird mit maximal CHF 6'300 pro Einwohner hoch verschuldet sein.
+						Die Finanzplanung berücksichtigt diese Verschuldung jedoch ausdrücklich
+						und beurteilt die Finanzierung bei einem Steuerfuss von 150 % als
+						langfristig tragbar. Die Schulden entstehen wesentlich durch grosse
+						Investitionen, denen mit der neuen Schul- und Sportanlage ein
+						langfristiger Gegenwert gegenübersteht.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Es gibt konkrete Alternativprojekte für die neue Schulanlage.»',
+		body: `
+				<p>
+					<strong>Es gibt alternative Ideen, aber keine abgeklärten Alternativprojekte.</strong>
+					Derzeit werden insbesondere zwei unterschiedliche Vorschläge diskutiert.
+				</p>
+
+				<p>
+					<strong>Vorschlag der Petitionäre:</strong>
+					Die Initianten hinter <a href="https://www.schule-wangen.ch/" target="_blank" rel="noopener">schule-wangen.ch</a>
+					sind bekannt und haben viel Zeit und Eigenleistung in ihre Alternative
+					investiert. Dieses politische Engagement und die damit angestossene Diskussion
+					verdienen Anerkennung. Ihr Vorschlag ist bereits relativ detailliert beschrieben,
+					aber noch kein abgeklärtes Bauprojekt. Insbesondere die Machbarkeit der
+					Rickenbacherwiese, die Kosten und zahlreiche weitere planerische Fragen
+					müssten erst verbindlich geklärt werden.
+				</p>
+
+				<p>
+					<strong>IG Pro Primarschule Siebnen-Wangen:</strong>
+					Auf <a href="https://www.primarschule-siebnen-wangen.ch/" target="_blank" rel="noopener">primarschule-siebnen-wangen.ch</a>
+					wird eine weitere Alternative mit einer Primarschule in Siebnen vorgeschlagen.
+					Wer der IG angehört oder wer die Initiative verantwortet, wird auf der Website
+					nicht offengelegt. Wir stehen einem solchen anonymen
+					Vorgehen kritisch gegenüber. Wer sich mit einem eigenen Vorschlag in die
+					politische Diskussion einbringt, sollte aus unserer Sicht auch transparent
+					machen, wer dahintersteht. Der Vorschlag befindet sich zudem noch in einem
+					sehr frühen Stadium und müsste umfassend geprüft und geplant werden.
+				</p>
+
+				<p>
+					<strong>
+						Die beiden unterschiedlichen Vorschläge zeigen gleichzeitig, dass bei einem
+						Nein nicht einfach eine fertige Alternative bereitsteht. Zuerst müsste wieder
+						geklärt werden, welcher Weg überhaupt eine politische Mehrheit findet.
+						Anschliessend müssten wesentliche Abklärungen und Planungsarbeiten neu
+						durchgeführt werden. Gemäss Abstimmungsbotschaft würde dies mehrere Jahre
+						dauern. Der bisherige Planungskredit von CHF 740'000 wäre verloren und auch
+						die provisorisch zugesicherten Kantonsbeiträge von rund CHF 5,6 Mio. würden
+						entfallen.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Die Bevölkerung konnte bei der Planung des Projekts nicht mitreden.»',
+		body: `
+				<p>
+					Die Bevölkerung wurde mehrfach in
+					den Prozess einbezogen. An der Gemeindeversammlung vom April 2024 wurde
+					über die Schulraumplanung und verschiedene Varianten diskutiert. Im Juni
+					2024 stimmten die Stimmberechtigten dem Projektierungskredit von
+					CHF 740'000 mit 65 % Ja-Stimmen zu.
+				</p>
+
+				<p>
+					Vor der Ausschreibung des heutigen Projekts führte die Gemeinde zudem
+					ein <strong>öffentliches Mitwirkungsverfahren</strong> durch. 284
+					Personen beteiligten sich und konnten ihre Anliegen und Kritik
+					einbringen, unter anderem zu Kosten, Standortwahl und alternativen
+					Konzepten. Die Ergebnisse flossen anschliessend in die weitere Planung
+					und den Gesamtleistungswettbewerb ein.
+				</p>
+
+				<p>
+					<strong>
+						Mitwirkung bedeutet allerdings nicht, dass jeder einzelne Wunsch
+						übernommen wird. Die Bevölkerung hatte die Möglichkeit, sich
+						einzubringen. Über das daraus entstandene konkrete Bauprojekt
+						entscheidet sie nun wiederum selbst an der Urne.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim:
+			'«Die Schülerzahlen werden stark zurückgehen und es braucht künftig deutlich weniger Schulraum.»',
+		body: `
+				<p>
+					«Ab 2035 braucht Wangen nur noch zwölf Primarschulklassen». Diese Prognose stammt aus einem <a href="${DOCUMENTS.marchanzeigerSvpNein}" target="_blank" rel="noopener">March-Anzeiger-Artikel der SVP Wangen vom 4. September 2026</a>.
+					Sie argumentiert, dass die Geburtenzahlen der jüngeren Jahrgänge
+					zurückgegangen seien, und leitet daraus ab, dass Wangen ab etwa 2035
+					statt heute 18 nur noch zwölf Primarschulklassen benötige. Die
+					Petitionäre gehen ebenfalls von künftig sinkenden Schülerzahlen aus,
+					nennen in ihrem Flyer jedoch keine entsprechende Schülerprognose.
+				</p>
+
+				<p>
+					Dass einzelne Geburtsjahrgänge kleiner sind, ist ein berechtigter
+					Hinweis. Daraus lässt sich die Zahl der Schulklassen im Jahr 2035
+					aber nicht direkt ableiten. Kinder, die bis dahin nach Wangen
+					zuziehen, erscheinen naturgemäss nicht in den heutigen Wangner
+					Geburtenzahlen. Gerade bei einer wachsenden Gemeinde kann das einen
+					erheblichen Unterschied machen.
+				</p>
+
+				<p>
+					Die offizielle Schulraumplanung geht deshalb anders vor. Sie
+					berücksichtigt nicht nur Geburten, sondern eine Bau- und
+					Schülerprognose über die nächsten 15 Jahre. Auf dieser Grundlage
+					kommt sie zum gegenteiligen Ergebnis: Die aktuellen Bevölkerungs- und
+					Schülerprognosen weisen laut <a href="${DOCUMENTS.botschaft}" target="_blank" rel="noopener">Abstimmungsbotschaft (Seite 10, Kapitel 5.2)</a> auf einen
+					kontinuierlichen Anstieg der Einwohner- und Kinderzahlen hin.
+				</p>
+
+				<p>
+					Hinzu kommt, dass der Raumbedarf nicht allein von der Zahl der
+					Klassen abhängt. Bereits heute fehlen laut <a href="${DOCUMENTS.botschaft}" target="_blank" rel="noopener">Botschaft 24 Räume (Seite 11, Kapitel 5.3)</a>,
+					darunter Gruppenräume, ausreichend grosse Schulzimmer, Räume für
+					sonderpädagogische Unterstützung und schulergänzende Betreuung.
+				</p>
+
+				<p>
+					<strong>
+						Die Rechnung «weniger Geburten = künftig nur noch zwölf Klassen =
+						deutlich weniger Schulraum» greift deshalb zu kurz. Entscheidend
+						ist die langfristige Schülerprognose inklusive Bevölkerungs- und
+						Bautätigkeit sowie der tatsächliche Raumbedarf pro Klasse.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Die grosse Turnhalle wird nur für den Turnverein Wangen gebaut.»',
+		body: `
+				<p>
+					Die neue Dreifachturnhalle steht der Schule, den Vereinen und der
+					Bevölkerung zur Verfügung. Schon der heutige
+					<a href="${DOCUMENTS.infoanlass}" target="_blank" rel="noopener">Hallenbelegungsplan (Seite 12)</a>
+					zeigt, dass die Wangner Hallen neben dem Turnverein von zahlreichen
+					weiteren Gruppen genutzt werden.
+				</p>
+
+				<p>
+					Gleichzeitig müssen Wangner Vereine heute wegen fehlender
+					Hallenkapazitäten ausweichen. Die Jugendriege des Turnvereins
+					trainiert teilweise im MPS Siebnen. Veranstaltungen wie den UBS
+					Kids Cup Team organisiert der Turnverein Wangen ebenfalls
+					ausserhalb der eigenen Gemeinde, im MPS Buttikon, weil in Wangen
+					eine genügend grosse Halle fehlt.
+				</p>
+
+				<p>
+					Auch andere Sportarten würden profitieren. Viele Kinder und
+					Jugendliche aus Wangen spielen beispielsweise Unihockey bei den
+					Red Devils March-Höfe. In Wangen können sie heute nicht trainieren.
+					Für Grossfeld-Unihockey stehen in der Region nur wenige geeignete
+					Hallen zur Verfügung. Eine vollwertige Dreifachturnhalle in Wangen
+					würde auch solche Trainings und Spiele ermöglichen.
+				</p>
+
+				<p>
+					<strong>
+						Die Halle wird also nicht für einen einzelnen Verein gebaut. Sie
+						deckt den Bedarf von Schule, Vereinen sowie Kinder-, Jugend- und
+						Breitensport und ermöglicht zudem grössere Sportveranstaltungen
+						in der eigenen Gemeinde.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Eine Sanierung der bestehenden Schulhäuser wurde nie geprüft.»',
+		body: `
+				<p>
+					Die Sanierung der bestehenden Anlagen wurde bereits vor dem
+					Architekturwettbewerb geprüft. Die
+					<a href="https://www.wangensz.ch/politik/aktuelle-geschaefte/schulraumplanung.html/848" target="_blank" rel="noopener">Schulraumplanung</a>
+					umfasste einen Zustandsbericht mit Sanierungskonzept sowie eine
+					Machbarkeitsstudie mit verschiedenen Varianten. Untersucht wurden
+					unter anderem die Sanierung der bestehenden Anlagen, Neubauten beim
+					Zügerdörfli sowie verschiedene Kombinationen aus Neubau und
+					bestehenden Gebäuden.
+				</p>
+
+				<p>
+					Gemäss dem
+					<a href="${DOCUMENTS.zustandsbericht}" target="_blank" rel="noopener">Zustandsbericht und Sanierungskonzept der Landis AG</a>
+					wären allein für den Erhalt der bestehenden Bausubstanz der
+					Schulhäuser 2 und 3 sowie der alten Turnhalle über 20 Jahre rund
+					CHF 13 Mio. nötig (Seite 4 im Bericht), und zwar als reine
+					Sanierungskosten, ohne jegliche Anpassung an das heutige
+					Raumprogramm (z. B. fehlende Gruppenräume). Der zusätzliche
+					Raumbedarf der Schule wäre damit nicht gelöst. Zudem wäre eine
+					Sanierung im laufenden Schulbetrieb zwar grundsätzlich möglich,
+					aber mit erheblichen Lärmimmissionen verbunden. Kosten für
+					allfällige Schulprovisorien sind im Sanierungskonzept zudem
+					explizit nicht eingerechnet.
+				</p>
+
+				<p>
+					Erst nach dieser Variantenprüfung entschied sich die Gemeinde für
+					die Neubauvariante. Anschliessend folgte ein zweistufiger
+					<a href="https://konkurado.ch/de/neubau-schulanlage-wangen-sz#description" target="_blank" rel="noopener">Gesamtleistungswettbewerb</a>.
+					Sieben qualifizierte Planungsteams wurden zugelassen. In der ersten
+					Stufe reichten sie anonym ihre Projekte ein, woraus die besten
+					Projekte für die zweite Stufe ausgewählt wurden. Die
+					<a href="https://konkurado.ch/de/neubau-schulanlage-wangen-sz" target="_blank" rel="noopener">offizielle Ausschreibung</a>
+					und weitere Angaben zum Wettbewerb sind öffentlich einsehbar.
+				</p>
+
+				<p>
+					<strong>
+						Die Sanierung bestehender Gebäude wurde somit nicht übergangen,
+						sondern bereits vor dem Wettbewerb sorgfältig untersucht. Der
+						Wettbewerb selbst diente anschliessend dazu, für die gewählte
+						Neubauvariante die beste Lösung zu finden.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Das Schulhaus 1 wird nach dem Neubau nicht mehr gebraucht und steht leer.»',
+		body: `
+				<p>
+					Das Schulhaus 1 bleibt bestehen und soll
+					weiterhin schulisch genutzt werden. Die Gemeinde hielt am
+					<a href="${DOCUMENTS.infoanlass}" target="_blank" rel="noopener">Informationsanlass 2026 (Seite 11)</a>
+					ausdrücklich fest, dass das über 100-jährige Gebäude auch künftig
+					für schulische Zwecke zur Verfügung stehen soll.
+				</p>
+
+				<p>
+					Gleichzeitig ist seit Jahren dokumentiert, dass der Schule
+					zusätzliche Räume fehlen. In der
+					<a href="${DOCUMENTS.rechnung2023}" target="_blank" rel="noopener">Rechnung 2023 (Seite 77)</a>
+					werden unter anderem Gruppenräume sowie Räume für Deutsch als
+					Zweitsprache (DaZ), Integrative Förderung (IF), Religionsunterricht
+					und weitere Nebenräume genannt. Zudem fehlen Räume für die schul-
+					und familienergänzende Betreuung.
+				</p>
+
+				<p>
+					Auch die bestehenden Ressourcen von Schulhaus 1 und
+					Mehrzweckhalle/Gemeindeverwaltung sollen ausdrücklich in die
+					weitere Planung einbezogen werden
+					(<a href="${DOCUMENTS.rechnung2023}" target="_blank" rel="noopener">Rechnung 2023, Seite 79</a>).
+				</p>
+
+				<p>
+					Das passt auch zur heutigen Art des Unterrichts. Schule besteht
+					längst nicht mehr nur daraus, dass eine ganze Klasse gleichzeitig
+					im gleichen Raum dasselbe macht. Gruppenunterricht, individuelle
+					Förderung, DaZ und integrative Förderung benötigen zusätzliche und
+					flexibel nutzbare Räume. Nicht jeder bestehende Raum muss deshalb
+					weiterhin als reguläres Klassenzimmer dienen, um für die Schule
+					wertvoll zu sein.
+				</p>
+
+				<p>
+					Auch das Argument, früher habe es schliesslich ebenfalls
+					funktioniert, greift zu kurz. Viele kennen die Erzählungen aus der
+					Schulzeit ihrer Eltern oder Grosseltern: grosse Klassen, viel
+					Frontalunterricht und kaum Möglichkeiten für Gruppen- oder
+					individuelle Förderung. Das war für seine Zeit normal. Heute würde
+					aber wohl kaum jemand ernsthaft verlangen, Unterricht und
+					Pädagogik wieder auf den Stand von damals zurückzusetzen. Auch die
+					Schulräume müssen diese Entwicklung mitmachen.
+				</p>
+
+				<p>
+					<strong>
+						Die entscheidende Frage ist deshalb nicht, ob man im
+						Schulhaus 1 noch irgendwie unterrichten könnte, sondern wie man
+						das bestehende Gebäude dort einsetzt, wo es weiterhin sinnvoll
+						ist, und gleichzeitig für den regulären Unterricht die Räume
+						schafft, die eine heutige Schule benötigt.
+					</strong>
+				</p>
+		`,
+	},
+	{
+		claim: '«Die neue Turnhalle könnte auf der Rickenbacherwiese gebaut werden.»',
+		body: `
+				<p>
+					Dieser Punkt braucht etwas mehr Einordnung. Die Rickenbacherwiese
+					ist grundsätzlich eine interessante Fläche. Falls die Gemeinde die
+					Möglichkeit erhält, dieses strategisch gelegene Grundstück zu
+					einem vernünftigen Preis zu kaufen, sollte sie einen Erwerb aus
+					unserer Sicht ernsthaft prüfen. Das bedeutet aber noch nicht, dass
+					dort kurzfristig eine Turnhalle gebaut werden kann.
+				</p>
+
+				<p>
+					Die vorgeschlagene Fläche liegt auf Parzelle 422. Im
+					<a href="${DOCUMENTS.zonenplan}" target="_blank" rel="noopener">Zonenplan der Gemeinde Wangen</a>
+					ist dieser Bereich als Reservegebiet (RG) ausgewiesen. Er gehört
+					damit heute nicht zu einer Bauzone für öffentliche Bauten und
+					Anlagen. Für eine Turnhalle wäre zuerst eine entsprechende
+					Änderung der Nutzungsplanung notwendig.
+				</p>
+
+				<p>
+					Dass ein Standort ausserhalb des heutigen Schulareals möglich
+					wäre, wurde von der Gemeinde bereits geprüft. In der
+					<a href="${DOCUMENTS.rechnung2023}" target="_blank" rel="noopener">Machbarkeitsstudie (Rechnung 2023, Seite 79)</a>
+					wurden auch Bauten auf nicht gemeindeeigenen Grundstücken
+					untersucht. Diese Varianten wurden unter anderem wegen des nicht
+					abschätzbaren Zeitbedarfs für notwendige Umzonungen nicht
+					weiterverfolgt.
+				</p>
+
+				<p>
+					Hinzu kommt, dass die betroffene Wiese als Fruchtfolgefläche (FFF)
+					ausgewiesen ist, einsehbar im
+					<a href="https://map.geo.sz.ch/?lang=de&baselayer_ref=Landeskarte%20(grau)&map_x=2710706&map_y=1227841&map_zoom=5&tree_group_layers_grp_Landw_Fruchtfolgeflaechen=ch.sz.a093.fruchtfolgeflaechen&tree_groups=grp_Landw_Fruchtfolgeflaechen" target="_blank" rel="noopener">kantonalen WebGIS</a>.
+					Fruchtfolgeflächen sind besonders wertvolle, für den Ackerbau
+					geeignete Böden. Sie werden geschützt, damit der Schweiz
+					langfristig genügend produktiver Landwirtschaftsboden erhalten
+					bleibt.
+				</p>
+
+				<p>
+					Gemäss den von der Gemeinde dargestellten kantonalen Vorgaben muss
+					bei einer Beanspruchung von Fruchtfolgeflächen für öffentliche
+					Nutzungen unter anderem nachgewiesen werden, dass keine
+					Alternative ohne Beanspruchung von Fruchtfolgeflächen vorhanden
+					ist
+					(<a href="${DOCUMENTS.infoanlass}" target="_blank" rel="noopener">Infoanlass vom 20. April 2026, Seite 9</a>).
+				</p>
+
+				<p>
+					Genau dieser Nachweis dürfte schwierig sein, weil das
+					vorliegende Gemeindeprojekt zeigt, dass die benötigte Schul- und
+					Sportanlage auf dem bestehenden gemeindeeigenen Areal realisiert
+					werden kann. Das bedeutet nicht, dass eine Einzonung der
+					Rickenbacherwiese unmöglich wäre. Sie müsste aber zuerst in einem
+					ordentlichen Verfahren geprüft und genehmigt werden.
+				</p>
+
+				<p>
+					Wird Fruchtfolgefläche beansprucht, stellt sich zudem die Frage
+					nach einer Ersatzfläche beziehungsweise Kompensation. Wo eine
+					solche Ersatzfläche konkret liegen soll, ist öffentlich nicht
+					bekannt. Eine Ersatzfläche allein löst aber die Frage der
+					Einzonung nicht. Auch dann muss begründet werden, weshalb die
+					Fruchtfolgefläche überhaupt beansprucht werden soll
+					(<a href="https://www.sz.ch/behoerden/verwaltung/volkswirtschaftsdepartement/amt-fuer-raumentwicklung/fruchtfolgeflaechen-fff.html/8756-8758-8802-10373-11039-13787" target="_blank" rel="noopener">Informationen des Kantons Schwyz zu Fruchtfolgeflächen</a>).
+				</p>
+
+				<p>
+					<strong>Auch das Grundstück selbst ist noch nicht gesichert.</strong>
+					Die Initianten von
+					<a href="https://www.schule-wangen.ch/" target="_blank" rel="noopener">schule-wangen.ch</a>
+					möchten, dass die Turnhalle auf der Rickenbacherwiese gebaut
+					wird. Ob die Gemeinde die benötigte Fläche auf Parzelle 422
+					tatsächlich kaufen könnte und zu welchem Preis, ist öffentlich
+					nicht bekannt.
+				</p>
+
+				<p>
+					Als Alternative zu einem Kauf steht auch ein Baurecht zur
+					Diskussion. Vereinfacht gesagt ist das so etwas wie die Miete des
+					Landes über viele Jahrzehnte, anstatt das Grundstück zu kaufen.
+					Die Gemeinde dürfte darauf bauen und das Land während einer
+					vereinbarten Zeit nutzen, müsste dafür aber in der Regel einen
+					Baurechtszins bezahlen. Wenn bereits heute klar ist, dass eine
+					Schul- und Sportanlage 50 Jahre oder länger benötigt wird, sollte
+					aus unserer Sicht ein Kauf bevorzugt oder zumindest sorgfältig
+					mit einem Baurecht verglichen werden. Beim Kauf gehört das Land
+					danach der Gemeinde, beim Baurecht nicht.
+				</p>
+
+				<p>
+					<strong>Wie konkret ist die vorgeschlagene Alternative?</strong>
+					Auf
+					<a href="https://www.schule-wangen.ch/" target="_blank" rel="noopener">schule-wangen.ch</a>
+					wird vorgeschlagen, die Turnhalle auf der Rickenbacherwiese zu
+					erstellen. Dabei handelt es sich jedoch noch nicht um ein
+					ausgearbeitetes Bauprojekt, das sich bezüglich Raumprogramm,
+					Bewilligungsfähigkeit und Kosten direkt mit dem Gemeindeprojekt
+					vergleichen lässt.
+				</p>
+
+				<p>
+					Ein wesentlicher Unterschied ist bereits die Grösse der Halle.
+					Vorgeschlagen wird eine Halle des Typs 2B mit 44 × 23,5 Metern.
+					Diese lässt sich zwar mit Trennwänden in drei Hallenteile
+					unterteilen, ist aber keine vollwertige Dreifachturnhalle des
+					Typs 3 mit 49 × 28 Metern, wie sie beim Gemeindeprojekt
+					vorgesehen ist.
+				</p>
+
+				<p>
+					Für die Vereine ist dieser Unterschied durchaus relevant. Bei
+					grösseren Hallenanlässen wie dem UBS Kids Cup Team, bei dem
+					verschiedene Disziplinen parallel durchgeführt werden, bietet eine
+					vollwertige Dreifachhalle wesentlich bessere Voraussetzungen. Auch
+					beim Unihockey-Grossfeld mit einem regulären Spielfeld von
+					40 × 20 Metern sind die zusätzlichen Sicherheits- und
+					Auslaufbereiche wichtig. Bei einer kleineren Typ-2B-Halle können
+					deshalb je nach Liga, Spielbetrieb oder Veranstaltung
+					Einschränkungen oder zusätzliche Abklärungen notwendig werden.
+				</p>
+
+				<p>
+					Schon ein Blick in den vorgeschlagenen Plan zeigt weitere offene
+					Punkte. Für die drei Hallenteile sind lediglich vier Garderoben
+					eingezeichnet. Sollen alle drei Hallen gleichzeitig und
+					unabhängig voneinander genutzt werden, braucht es in der Praxis
+					zwei Garderoben pro Halle, also sechs. Mit vier Garderoben ist
+					ein uneingeschränkter Parallelbetrieb entsprechend schwierig.
+				</p>
+
+				<p>
+					Auch die eingezeichneten Schrägparkplätze werfen Fragen auf. Beim
+					Schrägparkieren wird normalerweise so angeordnet, dass man
+					vorwärts wieder wegfahren kann. In der gezeigten Anordnung
+					müssten die Fahrzeuge jedoch rückwärts aus den Parkplätzen
+					fahren. Gerade bei einer Sportanlage mit vielen Kindern,
+					Fussgängern und Velofahrenden ist das keine ideale Lösung.
+				</p>
+
+				<p>
+					Weitere Punkte sind noch offen: ausreichende Geräteräume, Küche und
+					Verpflegung für Veranstaltungen, ein Kraftraum sowie Lager- und
+					Nebenräume. Hinzu kommt der unmittelbar angrenzende Mühlebach.
+					Die erforderlichen
+					<a href="https://www.sz.ch/behoerden/verwaltung/umweltdepartement/amt-fuer-gewaesser/gewaesserraum.html/8756-8758-8802-9447-9450-10725" target="_blank" rel="noopener">Gewässerabstände</a>
+					müssten in einer konkreten Planung berücksichtigt werden.
+				</p>
+
+				<p>
+					Das heisst nicht, dass sich diese Fragen nicht lösen lassen. Aber
+					jede dieser Lösungen benötigt Platz und kostet Geld. Deshalb
+					lässt sich eine Konzeptidee finanziell nicht direkt mit einem
+					vollständig projektierten Angebot vergleichen.
+				</p>
+
+				<p>
+					<strong>
+						Die Rickenbacherwiese ist somit durchaus eine interessante
+						Landreserve, deren Kauf die Gemeinde bei einer guten
+						Gelegenheit prüfen sollte. Sie ist aber noch kein kurzfristig
+						verfügbares Baugrundstück und der Vorschlag der Petitionäre
+						noch kein mit dem Gemeindeprojekt vergleichbares
+						Alternativprojekt. Das Gemeindeprojekt zeigt bereits, dass die
+						benötigte Anlage auf bestehendem gemeindeeigenem Boden
+						realisiert werden kann.
+					</strong>
+				</p>
+		`,
+	},
+];
+---
+
+<Layout
+	title="Fakten"
+	description="Fakten und Behauptungen zum Schulraumprojekt Wangen SZ eingeordnet, sowie ein Kostenrechner zum Projekt."
+>
+	<section class="hero">
+		<div class="wrap narrow">
+			<h1>Fakten und Behauptungen zum Schulraumprojekt</h1>
+			<p class="tagline">
+				Kritische Fragen und unterschiedliche Meinungen gehören zum politischen
+				Diskurs. Vielleicht haben Sie die eine oder andere Aussage zum
+				Schulraumprojekt bereits gehört oder gelesen. Hier greifen wir häufige
+				Punkte auf, ordnen sie ein und verweisen auf die entsprechenden
+				Grundlagen.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap narrow">
+			<div class="claims">
+				<div class="claims-list">
+					{claims.map((c) => (
+						<details>
+							<summary>{c.claim}</summary>
+							<div class="claim-body">
+								<div set:html={c.body} />
+								{c.image && (
+									<Image
+										src={c.image}
+										alt="Platzhalter-Visualisierung zum Schulraumprojekt"
+										width={800}
+										height={533}
+										quality={65}
+										format="webp"
+									/>
+								)}
+							</div>
+						</details>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<CostCalculator />
+</Layout>
