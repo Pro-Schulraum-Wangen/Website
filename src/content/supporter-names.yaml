@@ -3,36 +3,540 @@
 # To add a person: append one entry. "id" is any unique short slug
 # (lowercase, hyphenated). "published: false" hides an entry without
 # deleting it.
-#
-# The entries below are PLACEHOLDERS – replace them with real names.
 
-- id: platzhalter-01
-  name: 'Anna Meier'
+- id: katja-aldi
+  name: 'Katja Aldi'
+  lastName: 'Aldi'
   location: 'Wangen'
-- id: platzhalter-02
-  name: 'Thomas Kälin'
+- id: stefan-andres
+  name: 'Stefan Andres'
+  lastName: 'Andres'
+  location: 'Uznach'
+- id: andrea-bajrami
+  name: 'Andrea Bajrami'
+  lastName: 'Bajrami'
+  location: 'Wangen'
+- id: marina-baumann
+  name: 'Marina Baumann'
+  lastName: 'Baumann'
+  location: 'Wolfhausen'
+- id: erich-bellmont
+  name: 'Erich Bellmont'
+  lastName: 'Bellmont'
+  location: 'Wangen'
+- id: franziska-bellmont
+  name: 'Franziska Bellmont'
+  lastName: 'Bellmont'
+  location: 'Wangen'
+- id: andreas-bruhin
+  name: 'Andreas Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: christian-bruhin
+  name: 'Christian Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: daniel-bruhin
+  name: 'Daniel Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: irene-bruhin
+  name: 'Irene Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: joerg-bruhin
+  name: 'Jörg Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: romana-bruhin
+  name: 'Romana Bruhin'
+  lastName: 'Bruhin'
+  location: 'Siebnen'
+- id: sarah-bruhin
+  name: 'Sarah Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: stefan-bruhin
+  name: 'Stefan Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: urs-bruhin
+  name: 'Urs Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
+- id: ivo-baechtiger
+  name: 'Ivo Bächtiger'
+  lastName: 'Bächtiger'
+  location: 'Wangen'
+- id: maria-baechtiger
+  name: 'Maria Bächtiger'
+  lastName: 'Bächtiger'
+  location: 'Wangen'
+- id: michael-boesch
+  name: 'Michael Bösch'
+  lastName: 'Bösch'
+  location: 'Tuggen'
+- id: michael-caprani
+  name: 'Michael Caprani'
+  lastName: 'Caprani'
+  location: 'Wangen'
+- id: dario-donner
+  name: 'Dario Donner'
+  lastName: 'Donner'
+  location: 'Wangen'
+- id: regula-donner
+  name: 'Regula Donner'
+  lastName: 'Donner'
+  location: 'Wangen'
+- id: caecilia-dueggelin
+  name: 'Cäcilia Düggelin'
+  lastName: 'Düggelin'
+  location: 'Siebnen'
+- id: marius-dueggelin
+  name: 'Marius Düggelin'
+  lastName: 'Düggelin'
+  location: 'Siebnen'
+- id: toni-dueggelin
+  name: 'Toni Düggelin'
+  lastName: 'Düggelin'
+  location: 'Siebnen'
+- id: karl-ebnoether
+  name: 'Karl Ebnöther'
+  lastName: 'Ebnöther'
   location: 'Nuolen'
-- id: platzhalter-03
-  name: 'Sandra Marty'
+- id: peter-elmer
+  name: 'Peter Elmer'
+  lastName: 'Elmer'
+  location: 'Siebnen'
+- id: iria-fernandez
+  name: 'Iria Fernandez'
+  lastName: 'Fernandez'
   location: 'Wangen'
-- id: platzhalter-04
-  name: 'Markus Schuler'
+- id: roland-fontana
+  name: 'Roland Fontana'
+  lastName: 'Fontana'
   location: 'Wangen'
-- id: platzhalter-05
-  name: 'Franziska Bruhin'
+- id: sarah-faessler
+  name: 'Sarah Fässler'
+  lastName: 'Fässler'
+  location: 'Lachen'
+- id: flavia-geu
+  name: 'Flavia Geu'
+  lastName: 'Geu'
+  location: 'Wangen'
+- id: ruedy-gresch
+  name: 'Ruedy Gresch'
+  lastName: 'Gresch'
+  location: 'Wangen'
+- id: annette-halef
+  name: 'Annette Halef'
+  lastName: 'Halef'
+  location: 'Siebnen'
+- id: lukas-halef
+  name: 'Lukas Halef'
+  lastName: 'Halef'
+  location: 'Siebnen'
+- id: martin-halef
+  name: 'Martin Halef'
+  lastName: 'Halef'
+  location: 'Siebnen'
+- id: petra-hegner
+  name: 'Petra Hegner'
+  lastName: 'Hegner'
+  location: 'Lachen'
+- id: sandra-heiz
+  name: 'Sandra Heiz'
+  lastName: 'Heiz'
+  location: 'Siebnen'
+- id: toni-adrian-heiz
+  name: 'Toni Adrian Heiz'
+  lastName: 'Heiz'
+  location: 'Kaltbrunn'
+- id: angelika-holenstein
+  name: 'Angelika Holenstein'
+  lastName: 'Holenstein'
+  location: 'Wangen'
+- id: martina-holenstein
+  name: 'Martina Holenstein'
+  lastName: 'Holenstein'
+  location: 'Lachen'
+- id: melanie-huang-eichhorn
+  name: 'Melanie Huang-Eichhorn'
+  lastName: 'Huang-Eichhorn'
+  location: 'Lachen'
+- id: lars-hubli
+  name: 'Lars Hubli'
+  lastName: 'Hubli'
+  location: 'Wangen'
+- id: marcel-hubli
+  name: 'Marcel Hubli'
+  lastName: 'Hubli'
+  location: 'Wangen'
+- id: anna-hunziker
+  name: 'Anna Hunziker'
+  lastName: 'Hunziker'
+  location: 'Wangen'
+- id: heinz-hunziker
+  name: 'Heinz Hunziker'
+  lastName: 'Hunziker'
+  location: 'Wangen'
+- id: andrea-hueppin
+  name: 'Andrea Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: debbie-hueppin
+  name: 'Debbie Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: dominik-hueppin
+  name: 'Dominik Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: doelf-hueppin
+  name: 'Dölf Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: erich-hueppin
+  name: 'Erich Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: fredy-hueppin
+  name: 'Fredy Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: markus-hueppin
+  name: 'Markus Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: miriam-hueppin
+  name: 'Miriam Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: pascal-hueppin
+  name: 'Pascal Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: patrizia-hueppin
+  name: 'Patrizia Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: ramon-hueppin
+  name: 'Ramon Hüppin'
+  lastName: 'Hüppin'
+  location: 'Schübelbach'
+- id: remo-hueppin
+  name: 'Remo Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: sandro-hueppin
+  name: 'Sandro Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: yvonne-hueppin
+  name: 'Yvonne Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
+- id: christa-hueppin-coray
+  name: 'Christa Hüppin Coray'
+  lastName: 'Hüppin Coray'
+  location: 'Wangen'
+- id: erika-kalt
+  name: 'Erika Kalt'
+  lastName: 'Kalt'
+  location: 'Wangen'
+- id: margrit-kaufmann
+  name: 'Margrit Kaufmann'
+  lastName: 'Kaufmann'
+  location: 'Wangen'
+- id: roger-koller
+  name: 'Roger Koller'
+  lastName: 'Koller'
+  location: 'Tuggen'
+- id: anastasia-kotur
+  name: 'Anastasia Kotur'
+  lastName: 'Kotur'
+  location: 'Wangen'
+- id: daniela-krieg
+  name: 'Daniela Krieg'
+  lastName: 'Krieg'
+  location: 'Wangen'
+- id: olivia-kuster
+  name: 'Olivia Kuster'
+  lastName: 'Kuster'
+  location: 'Wangen'
+- id: gertrud-kuettel
+  name: 'Gertrud Küttel'
+  lastName: 'Küttel'
+  location: 'Wangen'
+- id: sara-kuettel
+  name: 'Sara Küttel'
+  lastName: 'Küttel'
+  location: 'Wangen'
+- id: sereina-kuettel
+  name: 'Sereina Küttel'
+  lastName: 'Küttel'
+  location: 'Wangen'
+- id: claudia-laib
+  name: 'Claudia Laib'
+  lastName: 'Laib'
+  location: 'Wangen'
+- id: daniel-josef-laib
+  name: 'Daniel Josef Laib'
+  lastName: 'Laib'
+  location: 'Wangen'
+- id: martin-landolt
+  name: 'Martin Landolt'
+  lastName: 'Landolt'
+  location: 'Wangen'
+- id: neva-landolt
+  name: 'Neva Landolt'
+  lastName: 'Landolt'
+  location: 'Wangen'
+- id: noe-landolt
+  name: 'Noe Landolt'
+  lastName: 'Landolt'
+  location: 'Wangen'
+- id: jeannette-lueoend
+  name: 'Jeannette Lüönd'
+  lastName: 'Lüönd'
+  location: 'Wangen'
+- id: seraina-mathieu
+  name: 'Seraina Mathieu'
+  lastName: 'Mathieu'
+  location: 'Schübelbach'
+- id: claudia-meier
+  name: 'Claudia Meier'
+  lastName: 'Meier'
+  location: 'Wangen'
+- id: sabrina-meier
+  name: 'Sabrina Meier'
+  lastName: 'Meier'
+  location: 'Wangen'
+- id: marylene-messina
+  name: 'Marylène Messina'
+  lastName: 'Messina'
+  location: 'Siebnen'
+- id: jonas-maechler
+  name: 'Jonas Mächler'
+  lastName: 'Mächler'
+  location: 'Wangen'
+- id: rahel-maechler
+  name: 'Rahel Mächler'
+  lastName: 'Mächler'
+  location: 'Wangen'
+- id: irene-odermatt
+  name: 'Irène Odermatt'
+  lastName: 'Odermatt'
+  location: 'Wangen'
+- id: gina-paglia
+  name: 'Gina Paglia'
+  lastName: 'Paglia'
   location: 'Nuolen'
-- id: platzhalter-06
-  name: 'Peter Diethelm'
-  location: 'Wangen'
-- id: platzhalter-07
-  name: 'Nicole Steiner'
-  location: 'Wangen'
-- id: platzhalter-08
-  name: 'Daniel Föhn'
+- id: lia-paglia
+  name: 'Lia Paglia'
+  lastName: 'Paglia'
   location: 'Nuolen'
-- id: platzhalter-09
-  name: 'Claudia Züger'
+- id: bettina-rechsteiner
+  name: 'Bettina Rechsteiner'
+  lastName: 'Rechsteiner'
   location: 'Wangen'
-- id: platzhalter-10
-  name: 'Reto Ehrler'
+- id: moreno-reumer
+  name: 'Moreno Reumer'
+  lastName: 'Reumer'
   location: 'Wangen'
+- id: mia-rhyner
+  name: 'Mia Rhyner'
+  lastName: 'Rhyner'
+  location: 'Wangen'
+- id: dominik-richle
+  name: 'Dominik Richle'
+  lastName: 'Richle'
+  location: 'Wangen'
+- id: ramona-roth
+  name: 'Ramona Roth'
+  lastName: 'Roth'
+  location: 'Wangen'
+- id: andrea-rusch
+  name: 'Andrea Rusch'
+  lastName: 'Rusch'
+  location: 'Wangen'
+- id: hans-rusch
+  name: 'Hans Rusch'
+  lastName: 'Rusch'
+  location: 'Wangen'
+- id: pascal-rueegg
+  name: 'Pascal Rüegg'
+  lastName: 'Rüegg'
+  location: 'Siebnen'
+- id: tanja-rueegg
+  name: 'Tanja Rüegg'
+  lastName: 'Rüegg'
+  location: 'Altendorf'
+- id: anja-schmid
+  name: 'Anja Schmid'
+  lastName: 'Schmid'
+  location: 'Zürich'
+- id: benjamin-schmid
+  name: 'Benjamin Schmid'
+  lastName: 'Schmid'
+  location: 'Siebnen'
+- id: karin-schmid
+  name: 'Karin Schmid'
+  lastName: 'Schmid'
+  location: 'Siebnen'
+- id: petra-schmid
+  name: 'Petra Schmid'
+  lastName: 'Schmid'
+  location: 'Siebnen'
+- id: claudia-schmuckli
+  name: 'Claudia Schmuckli'
+  lastName: 'Schmuckli'
+  location: 'Siebnen'
+- id: sinja-schmuckli
+  name: 'Sinja Schmuckli'
+  lastName: 'Schmuckli'
+  location: 'Wangen'
+- id: barbara-schnellmann
+  name: 'Barbara Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Nuolen'
+- id: daniela-schnellmann
+  name: 'Daniela Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: janis-schnellmann
+  name: 'Janis Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: manuela-schnellmann
+  name: 'Manuela Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: monika-schnellmann
+  name: 'Monika Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: remo-schnellmann
+  name: 'Remo Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: timo-schnellmann
+  name: 'Timo Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Zürich'
+- id: elias-schnidrig
+  name: 'Elias Schnidrig'
+  lastName: 'Schnidrig'
+  location: 'Wangen'
+- id: luca-schnyder
+  name: 'Luca Schnyder'
+  lastName: 'Schnyder'
+  location: 'Wangen'
+- id: melinda-schnyder
+  name: 'Melinda Schnyder'
+  lastName: 'Schnyder'
+  location: 'Vorderthal'
+- id: marcel-schwendeler
+  name: 'Marcel Schwendeler'
+  lastName: 'Schwendeler'
+  location: 'Wangen'
+- id: patrik-schaettin
+  name: 'Patrik Schättin'
+  lastName: 'Schättin'
+  location: 'Wangen'
+- id: erich-seunig
+  name: 'Erich Seunig'
+  lastName: 'Seunig'
+  location: 'Wangen'
+- id: nadja-seunig
+  name: 'Nadja Seunig'
+  lastName: 'Seunig'
+  location: 'Wangen'
+- id: robin-seunig
+  name: 'Robin Seunig'
+  lastName: 'Seunig'
+  location: 'Wangen'
+- id: silvan-seunig
+  name: 'Silvan Seunig'
+  lastName: 'Seunig'
+  location: 'Wangen'
+- id: corinne-stocker
+  name: 'Corinne Stocker'
+  lastName: 'Stocker'
+  location: 'Wangen'
+- id: janna-strieder
+  name: 'Janna Strieder'
+  lastName: 'Strieder'
+  location: 'Wangen'
+- id: chantal-saeuberli
+  name: 'Chantal Säuberli'
+  lastName: 'Säuberli'
+  location: 'Tuggen'
+- id: noemi-thum
+  name: 'Noëmi Thum'
+  lastName: 'Thum'
+  location: 'Siebnen'
+- id: robin-tiefenthaler
+  name: 'Robin Tiefenthaler'
+  lastName: 'Tiefenthaler'
+  location: 'Wangen'
+- id: roland-ulrich
+  name: 'Roland Ulrich'
+  lastName: 'Ulrich'
+  location: 'Wangen'
+- id: karin-vogel
+  name: 'Karin Vogel'
+  lastName: 'Vogel'
+  location: 'Wangen'
+- id: jasmine-vogt
+  name: 'Jasmine Vogt'
+  lastName: 'Vogt'
+  location: 'Nuolen'
+- id: martin-vogt
+  name: 'Martin Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
+- id: martina-vogt
+  name: 'Martina Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
+- id: alessia-waser
+  name: 'Alessia Waser'
+  lastName: 'Waser'
+  location: 'Wangen'
+- id: dominik-waser
+  name: 'Dominik Waser'
+  lastName: 'Waser'
+  location: 'Siebnen'
+- id: gabriela-waser
+  name: 'Gabriela Waser'
+  lastName: 'Waser'
+  location: 'Wangen'
+- id: livia-waser
+  name: 'Livia Waser'
+  lastName: 'Waser'
+  location: 'Wangen'
+- id: selina-waser
+  name: 'Selina Waser'
+  lastName: 'Waser'
+  location: 'Wangen'
+- id: pascal-weber
+  name: 'Pascal Weber'
+  lastName: 'Weber'
+  location: 'Pfäffikon'
+- id: carlo-weiss
+  name: 'Carlo Weiss'
+  lastName: 'Weiss'
+  location: 'Wangen'
+- id: brigitta-zimmermann
+  name: 'Brigitta Zimmermann'
+  lastName: 'Zimmermann'
+  location: 'Siebnen'
+- id: renato-zimmermann
+  name: 'Renato Zimmermann'
+  lastName: 'Zimmermann'
+  location: 'Siebnen'
+- id: aurel-zueger
+  name: 'Aurel Züger'
+  lastName: 'Züger'
+  location: 'Altendorf'

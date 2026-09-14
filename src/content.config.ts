@@ -9,10 +9,12 @@ const supporters = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			name: z.string(),
+			// surname, used to sort the list A–Z
+			lastName: z.string(),
 			// e.g. neighborhood, function/role – informational only, optional
 			role: z.string().optional(),
 			image: image().optional(),
-			// order/date added, used for sorting
+			// order/date added – no longer used for sorting, kept for reference
 			date: z.coerce.date().default(() => new Date()),
 			// set to false to temporarily hide an entry without deleting the file
 			published: z.boolean().default(true),
@@ -25,6 +27,8 @@ const supporterNames = defineCollection({
 	loader: file('./src/content/supporter-names.yaml'),
 	schema: z.object({
 		name: z.string(),
+		// surname, used to sort the list A–Z
+		lastName: z.string(),
 		location: z.string(),
 		published: z.boolean().default(true),
 	}),
