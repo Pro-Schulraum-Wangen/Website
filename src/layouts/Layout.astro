@@ -9,8 +9,10 @@ import {
 	OFFICIAL_SITE_LABEL,
 	VOTE_DATE_LABEL,
 	DOCUMENTS,
+	WHATSAPP_CHANNEL_URL,
 } from '../consts';
 import ogSourceImg from '../assets/visualizations/dorfplatz-primarschule_02.jpg';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
 
 interface Props {
 	title?: string;
@@ -156,6 +158,20 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 		<main>
 			<slot />
 		</main>
+
+		<section class="whatsapp-cta">
+			<div class="wrap">
+				<div class="whatsapp-cta-card">
+					<p class="whatsapp-cta-text">
+						<strong>Auf dem Laufenden bleiben.</strong> In unserem WhatsApp-Kanal teilen wir in
+						loser Folge News zur Abstimmung und Einblicke rund um die neue Schulanlage.
+					</p>
+					<a class="button primary whatsapp-button" href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noopener">
+						<WhatsAppIcon /> WhatsApp-Kanal beitreten
+					</a>
+				</div>
+			</div>
+		</section>
 
 		<footer class="site-footer">
 			<div class="wrap">

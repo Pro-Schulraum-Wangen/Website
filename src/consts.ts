@@ -43,6 +43,9 @@ export const CONTACT_EMAIL = 'info@philippbruhin.ch';
 export const SUPPORT_FORM_URL =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 
+// WhatsApp channel with occasional news about the vote and the project.
+export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMSNt29754hT9Aqr1V';
+
 // People responsible for this website (shown in the privacy notice).
 export const RESPONSIBLE_PEOPLE = [
 	{

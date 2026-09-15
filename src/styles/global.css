@@ -412,7 +412,9 @@ nav.main-nav a[aria-current='page'] {
 }
 
 .button {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
 	padding: 0.8rem 1.5rem;
 	border-radius: var(--radius);
 	text-decoration: none;
@@ -421,6 +423,12 @@ nav.main-nav a[aria-current='page'] {
 	border: 2px solid var(--color-brand);
 	cursor: pointer;
 	transition: box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.button svg {
+	width: 1.2em;
+	height: 1.2em;
+	flex-shrink: 0;
 }
 
 .button.primary {
@@ -813,6 +821,48 @@ article.prose > :first-child > h2:first-child {
 
 .site-footer a {
 	color: var(--color-text-muted);
+}
+
+/* Full-width WhatsApp channel banner between the page content and the
+   footer - brand-green like the vote banner up top, so it bookends the
+   page instead of competing with the muted footer text. */
+.whatsapp-cta {
+	padding: 2.5rem 0;
+}
+
+.whatsapp-cta-card {
+	background: var(--color-bg-alt);
+	color: var(--color-text);
+	border-radius: var(--radius-lg);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.25rem;
+	padding: 1.5rem 1.75rem;
+	text-align: left;
+}
+
+@media (max-width: 40rem) {
+	.whatsapp-cta-card {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+}
+
+.whatsapp-cta-text {
+	margin: 0;
+	max-width: 34rem;
+	font-size: 0.95rem;
+}
+
+.whatsapp-cta-text strong {
+	color: var(--color-brand-dark);
+}
+
+.whatsapp-button {
+	flex-shrink: 0;
 }
 
 .disclaimer {
