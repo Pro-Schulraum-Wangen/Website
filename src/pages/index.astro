@@ -27,7 +27,7 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 <Layout>
 	<link rel="preload" as="image" href={heroBg.src} fetchpriority="high" slot="head" />
 
-	<section class="hero photo" style={`background-image: url(${heroBg.src});`}>
+	<section class="hero photo" style={`--hero-bg: url(${heroBg.src});`}>
 		<div class="wrap">
 			<h1>Ja zur neuen Schulanlage «Am Buechberg»</h1>
 			<h2>{SITE_TAGLINE}</h2>
@@ -251,7 +251,7 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 				Quellen. Ohne Schlagworte. Einfach zum Nachlesen und Nachrechnen.
 			</p>
 			<div class="button-row">
-				<a class="button primary" href="/fakten/">Fakten &amp; persönliche Kosten berechnen</a>
+				<a class="button primary" href="/fakten/">Fakten &amp; persönliche Kosten</a>
 			</div>
 		</div>
 	</section>
