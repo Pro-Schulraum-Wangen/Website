@@ -136,15 +136,17 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 					{photoSupporters.map((s) => (
 						<div class="supporter-card">
 							{s.data.image && (
-								<Image
-									src={s.data.image}
-									alt={s.data.name}
-									width={300}
-									height={300}
-									fit="cover"
-									position="center"
-									format="webp"
-								/>
+								<div class="supporter-media">
+									<Image
+										src={s.data.image}
+										alt={s.data.name}
+										width={300}
+										height={300}
+										fit="cover"
+										position="center"
+										format="webp"
+									/>
+								</div>
 							)}
 							<div class="body">
 								<div class="name">{s.data.name}</div>

@@ -31,15 +31,17 @@ const { photo: withImage, names: withoutImage, count } = await getSupporters();
 					<div class="grid cols-5">
 						{withImage.map((s) => (
 							<div class="supporter-card">
-								<Image
-									src={s.data.image!}
-									alt={s.data.name}
-									width={300}
-									height={300}
-									fit="cover"
-									position="center"
-									format="webp"
-								/>
+								<div class="supporter-media">
+									<Image
+										src={s.data.image!}
+										alt={s.data.name}
+										width={300}
+										height={300}
+										fit="cover"
+										position="center"
+										format="webp"
+									/>
+								</div>
 								<div class="body">
 									<div class="name">{s.data.name}</div>
 									{s.data.role && <div class="role">{s.data.role}</div>}

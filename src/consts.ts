@@ -46,6 +46,11 @@ export const SUPPORT_FORM_URL =
 // WhatsApp channel with occasional news about the vote and the project.
 export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMSNt29754hT9Aqr1V';
 
+// Social links shown in the footer. No dedicated Instagram account yet, so
+// this points at the Instagram homepage until one exists.
+export const INSTAGRAM_URL = 'https://www.instagram.com/';
+export const YOUTUBE_URL = 'https://www.youtube.com/@ProSchulraumWangen';
+
 // People responsible for this website (shown in the privacy notice).
 export const RESPONSIBLE_PEOPLE = [
 	{

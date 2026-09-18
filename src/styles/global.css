@@ -33,6 +33,7 @@
 html {
 	color-scheme: light;
 	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -126,7 +127,7 @@ img {
 /* Shadow only appears once scrolled, so the header doesn't cast a shadow
    over the page while still sitting flush at the top. */
 .site-header.is-scrolled {
-	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.16);
+	box-shadow: 0 3px 10px rgba(26, 24, 3, 0.3);
 }
 
 .site-header .wrap {
@@ -811,11 +812,17 @@ section.block .section-head a.more:hover {
 /* Supporter cards */
 .supporter-card {
 	background: var(--color-bg);
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
 	transition: opacity 0.6s ease;
+}
+
+/* Clips the hover zoom to just the photo, the same technique as the
+   "Ein neues Stück Wangen" gallery - overflow:hidden on the whole card
+   would also clip its own box-shadow, so it's scoped to a wrapper instead. */
+.supporter-media {
+	overflow: hidden;
 }
 
 .supporter-card img {
@@ -823,39 +830,29 @@ section.block .section-head a.more:hover {
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
 	background: var(--color-bg);
+	transition: transform 0.4s ease;
+}
+
+.supporter-card:hover img {
+	transform: scale(1.04);
+	transition-duration: 0.2s;
 }
 
 .supporter-card .body {
 	padding: 0.8rem 0.9rem 1rem;
-	background: var(--color-bg);
-	transition: background-color 0.25s ease;
-}
-
-.supporter-card:hover .body {
-	background: var(--color-text);
 }
 
 .supporter-card .name {
 	font-weight: 700;
 	font-size: 0.95rem;
 	color: var(--color-text);
-	transition: color 0.25s ease;
-}
-
-.supporter-card:hover .name {
-	color: #fff;
 }
 
 .supporter-card .role {
 	font-size: 0.8rem;
 	color: var(--color-text);
 	font-weight: 600;
-	transition: color 0.25s ease;
 	margin-bottom: 0.5rem;
-}
-
-.supporter-card:hover .role {
-	color: #fff;
 }
 
 /* Plain supporter list */
@@ -904,6 +901,66 @@ article.prose > :first-child > h2:first-child {
 
 .site-footer a {
 	color: #fff;
+}
+
+.site-footer a:hover {
+	color: var(--color-brand);
+}
+
+.footer-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 2rem;
+	margin-bottom: 1.5rem;
+}
+
+.footer-about {
+	flex: 1 1 26rem;
+	min-width: 0;
+}
+
+.footer-about p:last-child {
+	margin-bottom: 0;
+}
+
+.footer-social {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.7rem;
+	flex: 0 0 auto;
+}
+
+.footer-social a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+@media (max-width: 40rem) {
+	.footer-top {
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	/* flex-basis is measured along the main axis, which switches from
+	   width to height once the container stacks into a column - without
+	   resetting it here, the 26rem basis becomes a 26rem-tall box instead
+	   of a 26rem-wide one, leaving a huge empty gap below the text. */
+	.footer-about {
+		flex: none;
+	}
+
+	.footer-social {
+		align-items: flex-start;
+	}
+}
+
+.footer-social svg {
+	width: 1.3rem;
+	height: 1.3rem;
+	flex-shrink: 0;
 }
 
 /* Full-width WhatsApp channel banner between the page content and the

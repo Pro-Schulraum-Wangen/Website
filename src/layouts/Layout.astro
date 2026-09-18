@@ -10,9 +10,13 @@ import {
 	VOTE_DATE_LABEL,
 	DOCUMENTS,
 	WHATSAPP_CHANNEL_URL,
+	INSTAGRAM_URL,
+	YOUTUBE_URL,
 } from '../consts';
 import ogSourceImg from '../assets/visualizations/dorfplatz-primarschule_02.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import InstagramIcon from '../components/InstagramIcon.astro';
+import YouTubeIcon from '../components/YouTubeIcon.astro';
 
 interface Props {
 	title?: string;
@@ -185,14 +189,26 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 
 		<footer class="site-footer">
 			<div class="wrap">
-				<p>
-					<strong>{SITE_TITLE}</strong> ist eine unabhängige Gruppe von Einwohnerinnen und
-					Einwohnern von Wangen SZ. Wir sind nicht Teil der Gemeindeverwaltung.
-				</p>
-				<p>
-					Offizielle Informationen der Gemeinde zum Projekt finden Sie auf der{' '}
-					<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">{OFFICIAL_SITE_LABEL}</a>.
-				</p>
+				<div class="footer-top">
+					<div class="footer-about">
+						<p>
+							<strong>{SITE_TITLE}</strong> ist eine unabhängige Gruppe von Einwohnerinnen und
+							Einwohnern von Wangen SZ. Wir sind nicht Teil der Gemeindeverwaltung.
+						</p>
+						<p>
+							Offizielle Informationen der Gemeinde zum Projekt finden Sie auf der{' '}
+							<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">{OFFICIAL_SITE_LABEL}</a>.
+						</p>
+					</div>
+					<div class="footer-social">
+						<a href={INSTAGRAM_URL} target="_blank" rel="noopener">
+							<InstagramIcon /> Instagram
+						</a>
+						<a href={YOUTUBE_URL} target="_blank" rel="noopener">
+							<YouTubeIcon /> YouTube
+						</a>
+					</div>
+				</div>
 				<p>
 					<a href="/datenschutz/">Datenschutz</a> ·{' '}
 					<a href="https://github.com/Pro-Schulraum-Wangen/Website" target="_blank" rel="noopener">
