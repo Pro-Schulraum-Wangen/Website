@@ -1,6 +1,6 @@
 ---
 title: 'Der Schulraum fehlt bereits heute'
-summary: '24 Räume fehlen schon jetzt für einen geordneten Schulbetrieb – mit weiterem Wachstum wird die Lage jedes Jahr enger.'
+summary: '24 Räume fehlen schon jetzt für einen geordneten Schulbetrieb, mit weiterem Wachstum wird die Lage jedes Jahr enger.'
 order: 10
 image: '../../assets/visualizations/klassenzimmer-interior.jpg'
 imageAlt: 'Visualisierung: ein Klassenzimmer im neuen Schulhaus'

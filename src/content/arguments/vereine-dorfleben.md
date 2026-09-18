@@ -1,5 +1,5 @@
 ---
-title: 'Ein Gewinn für Vereine und Dorfleben – nicht nur für die Schule'
+title: 'Ein Gewinn für Vereine und Dorfleben, nicht nur für die Schule'
 summary: 'Dreifachturnhalle mit Tribüne, neuer Dorfplatz und flexible Lagerräume stärken das Vereins- und Gemeinschaftsleben in Wangen.'
 order: 50
 image: '../../assets/visualizations/turnhalle-interior.jpg'
@@ -8,7 +8,7 @@ imageAlt: 'Visualisierung: Innenansicht der neuen Dreifachturnhalle mit Turnbetr
 
 Die neue **Dreifachturnhalle** mit umlaufender Sitz- und Stehtribüne (265 Sitz- und
 335 Stehplätze, max. 1'200 Personen) ist mehr als eine Sporthalle: Sie ist als
-öffentlicher Ort für Schule, Vereine und Veranstaltungen konzipiert – mit
+öffentlicher Ort für Schule, Vereine und Veranstaltungen konzipiert, mit
 Aussenterrasse, Kraftraum und Verpflegungszone. Dank der Etappierung wird sie **zuerst**
 gebaut: Vereine können ihren Trainings- und Wettkampfbetrieb frühzeitig in die neue
 Halle verlegen, bevor die alte Halle zurückgebaut wird.

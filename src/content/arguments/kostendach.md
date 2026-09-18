@@ -13,8 +13,8 @@ Gesamtleistungswettbewerb hervorgegangen, an dem ursprünglich 7 Teams teilnahme
 
 Weil Planung und Umsetzung in einer Hand liegen, sind die Verantwortlichkeiten klar
 geregelt und das Risiko von Nachträgen reduziert. Das unabhängige Begleitgremium
-(Jury) – mit Vertretungen von Gemeinderat, Schulrat, Bauverwaltung und unabhängigen
-Fachpreisrichtern – hat das Siegerprojekt **«AGORA»** einstimmig zur Realisierung
+(Jury), mit Vertretungen von Gemeinderat, Schulrat, Bauverwaltung und unabhängigen
+Fachpreisrichtern, hat das Siegerprojekt **«AGORA»** einstimmig zur Realisierung
 empfohlen.
 
 Investitionsrahmen: **CHF 55.6 Mio. brutto**, nach Abzug der erwarteten

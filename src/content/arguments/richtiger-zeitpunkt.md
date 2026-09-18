@@ -5,7 +5,7 @@ order: 60
 ---
 
 Um überhaupt einen Kantonsbeitrag zu erhalten, musste bis Ende Oktober 2024 ein
-Richtprojekt beim Kanton Schwyz eingereicht werden – das ist bereits geschehen, die
+Richtprojekt beim Kanton Schwyz eingereicht werden. Das ist bereits geschehen, die
 provisorische Zusage liegt seit Dezember 2024 vor. Die **definitive Beitragszusage**
 von rund CHF 5.6 Mio. erfolgt aber erst nach der Zustimmung der Stimmberechtigten und
 der Erteilung der Baubewilligung.
