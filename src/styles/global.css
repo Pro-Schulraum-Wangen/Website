@@ -778,24 +778,6 @@ section.block .section-head a.more:hover {
 	opacity: 0.7;
 }
 
-/* Videos */
-.video-embed {
-	position: relative;
-	width: 100%;
-	aspect-ratio: 16 / 9;
-	border-radius: var(--radius-lg);
-	overflow: hidden;
-	background: #000;
-}
-
-.video-embed iframe {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-
 article.prose {
 	font-size: 1.15rem;
 }

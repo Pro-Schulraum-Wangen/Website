@@ -1,7 +1,7 @@
 export const SITE_TITLE = 'Pro Schulraum Wangen';
 export const SITE_TAGLINE = 'Weil uns Wangen am Herzen liegt';
 export const SITE_DESCRIPTION =
-	'Wir sind Einwohnerinnen und Einwohner von Wangen SZ, die sich für ein Ja zum Neubau der Schulanlage «Am Buechberg» einsetzen. Argumente, Videos und Unterstützer:innen zur Abstimmung vom 29. November 2026.';
+	'Wir sind Einwohnerinnen und Einwohner von Wangen SZ, die sich für ein Ja zum Neubau der Schulanlage «Am Buechberg» einsetzen. Argumente und Unterstützer:innen zur Abstimmung vom 29. November 2026.';
 
 export const OFFICIAL_SITE_URL = 'https://schulanlage-wangensz.ch/';
 export const OFFICIAL_SITE_LABEL = 'Offizielle Website der Gemeinde';
@@ -77,6 +77,5 @@ export const NAV_LINKS = [
 	{ href: '/argumente/', label: 'Argumente' },
 	{ href: '/fakten/', label: 'Fakten' },
 	{ href: '/unterstuetzer/', label: 'Unterstützer:innen' },
-	{ href: '/videos/', label: 'Videos' },
 	{ href: '/mitmachen/', label: 'Mitmachen' },
 ] as const;

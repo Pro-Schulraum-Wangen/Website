@@ -52,21 +52,8 @@ const arguments_ = defineCollection({
 		}),
 });
 
-// Videos – maintained as a short YAML list, no Markdown needed.
-const videos = defineCollection({
-	loader: file('./src/content/videos.yaml'),
-	schema: z.object({
-		title: z.string(),
-		youtubeId: z.string(),
-		description: z.string().optional(),
-		date: z.coerce.date().default(() => new Date()),
-		published: z.boolean().default(true),
-	}),
-});
-
 export const collections = {
 	supporters,
 	supporterNames,
 	arguments: arguments_,
-	videos,
 };
