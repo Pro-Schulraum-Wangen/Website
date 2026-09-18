@@ -77,7 +77,6 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 		<header class="site-header">
 			<div class="wrap">
 				<a class="brand" href="/">
-					<span class="dot" aria-hidden="true"></span>
 					{SITE_TITLE}
 				</a>
 				<button
@@ -119,6 +118,17 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 				document.addEventListener('keydown', function (e) {
 					if (e.key === 'Escape') setOpen(false);
 				});
+			})();
+		</script>
+		<script is:inline>
+			(function () {
+				var header = document.querySelector('.site-header');
+				if (!header) return;
+				var setScrolled = function () {
+					header.classList.toggle('is-scrolled', window.scrollY > 0);
+				};
+				setScrolled();
+				window.addEventListener('scroll', setScrolled, { passive: true });
 			})();
 		</script>
 		<script is:inline>

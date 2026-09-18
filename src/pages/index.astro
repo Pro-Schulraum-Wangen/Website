@@ -174,47 +174,55 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 			</p>
 			<div class="gallery-grid">
 				<figure>
-					<Image
-						src={klassenzimmerImg}
-						alt="Visualisierung: Klassenzimmer im Neubau"
-						width={640}
-						height={480}
-						quality={65}
-						format="webp"
-					/>
+					<div class="gallery-media">
+						<Image
+							src={klassenzimmerImg}
+							alt="Visualisierung: Klassenzimmer im Neubau"
+							width={640}
+							height={480}
+							quality={65}
+							format="webp"
+						/>
+					</div>
 					<figcaption>Ein Klassenzimmer im neuen Schulhaus</figcaption>
 				</figure>
 				<figure>
-					<Image
-						src={sportanlageImg}
-						alt="Visualisierung: Sportanlage mit neuer Dreifachturnhalle"
-						width={640}
-						height={480}
-						quality={65}
-						format="webp"
-					/>
+					<div class="gallery-media">
+						<Image
+							src={sportanlageImg}
+							alt="Visualisierung: Sportanlage mit neuer Dreifachturnhalle"
+							width={640}
+							height={480}
+							quality={65}
+							format="webp"
+						/>
+					</div>
 					<figcaption>Sportanlage mit der neuen Dreifachturnhalle</figcaption>
 				</figure>
 				<figure>
-					<Image
-						src={turnhalleImg}
-						alt="Visualisierung: Innenansicht der Dreifachturnhalle"
-						width={640}
-						height={480}
-						quality={65}
-						format="webp"
-					/>
+					<div class="gallery-media">
+						<Image
+							src={turnhalleImg}
+							alt="Visualisierung: Innenansicht der Dreifachturnhalle"
+							width={640}
+							height={480}
+							quality={65}
+							format="webp"
+						/>
+					</div>
 					<figcaption>Innenansicht der Dreifachturnhalle</figcaption>
 				</figure>
 			</div>
 			<figure class="gallery-full">
-				<Image
-					src={situationsplanImg}
-					alt="Situationsplan der Schulanlage «Am Buechberg»"
-					width={1500}
-					quality={65}
-					format="webp"
-				/>
+				<div class="gallery-media">
+					<Image
+						src={situationsplanImg}
+						alt="Situationsplan der Schulanlage «Am Buechberg»"
+						width={1500}
+						quality={65}
+						format="webp"
+					/>
+				</div>
 				<figcaption>Situationsplan: Schulhaus, Kindergarten, Turnhalle und Sportplätze</figcaption>
 			</figure>
 			<p class="image-credit">

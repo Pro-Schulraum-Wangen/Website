@@ -6,22 +6,22 @@
 @import '@fontsource/inter/700.css';
 
 :root {
-	--color-bg: #faf8f5;
-	--color-bg-alt: #f1ece4;
-	--color-text: #212121;
+	--color-bg: #ffffff;
+	--color-bg-alt: #ececea; /* light grey for boxed content (cost calculator etc.) */
+	--color-control: #d3d2d2; /* darker grey for form controls sitting on top of --color-bg-alt (inputs, unchecked radios) */
+	--color-text: #1a1803;
 	--color-text-muted: #5c554d;
-	/* Palette derived from the official visualizations of the school building */
-	--color-brand: #6d8763; /* gymnasium green */
-	--color-brand-dark: #4c5f45; /* darker green, for text/hover */
-	--color-accent: #774f42; /* schoolhouse red-brown */
-	--color-tan: #a47f66; /* warm tan, base/concrete */
-	--color-border: #e3dbcd;
+	/* Campaign palette, matching the printed flyer */
+	--color-brand: #e4da22; /* campaign yellow */
+	--color-brand-deep: #8a7a00; /* dark yellow (not brown) for small accents like the +/- icons */
+	--color-brand-dark: #1a1803; /* same ink as --color-text, used for hero text and brand-colored hover backgrounds */
+	--color-border: #1a1803; /* lines are black, like the flyer's rules */
 	/* Two container widths to play with (à la Bootstrap): the default wide
 	   one and a narrower one for text-heavy pages. Use `.wrap` or `.wrap.narrow`. */
 	--max-width: 84rem; /* wide – galleries, supporter grids, homepage sections */
 	--max-width-narrow: 64rem; /* narrow – running text, accordions, forms */
-	--radius: 0.6rem; /* buttons – unchanged */
-	--radius-lg: 1.1rem; /* cards, images, figures */
+	--radius: 0; /* sharp corners everywhere, like the flyer */
+	--radius-lg: 0;
 	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	--font-heading: var(--font-body); /* sans-serif everywhere */
 }
@@ -69,7 +69,7 @@ h4 {
 	line-height: 1.12;
 	letter-spacing: -0.02em;
 	margin: 0 0 0.6em;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 	/* Long German compounds (e.g. "Schulanlage") must not push past the
 	   viewport on narrow phones – hyphenate, and break as a last resort. */
 	hyphens: auto;
@@ -89,11 +89,12 @@ p {
 }
 
 a {
-	color: var(--color-brand-dark);
+	color: var(--color-text);
+	transition: color 0.25s ease;
 }
 
 a:hover {
-	color: var(--color-accent);
+	color: var(--color-brand-deep);
 }
 
 img {
@@ -118,6 +119,14 @@ img {
 	position: sticky;
 	top: 0;
 	z-index: 10;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0);
+	transition: box-shadow 0.25s ease;
+}
+
+/* Shadow only appears once scrolled, so the header doesn't cast a shadow
+   over the page while still sitting flush at the top. */
+.site-header.is-scrolled {
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.16);
 }
 
 .site-header .wrap {
@@ -135,23 +144,16 @@ img {
 	font-weight: 700;
 	font-size: 1.4rem;
 	letter-spacing: -0.02em;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 	text-decoration: none;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	transition: color 0.25s ease;
 }
 
 .brand:hover {
-	color: var(--color-brand-dark);
-}
-
-.brand .dot {
-	width: 0.6rem;
-	height: 0.6rem;
-	border-radius: 50%;
-	background: var(--color-accent);
-	display: inline-block;
+	color: var(--color-text);
 }
 
 nav.main-nav {
@@ -166,14 +168,15 @@ nav.main-nav a {
 	font-size: 1.05rem;
 	font-weight: 500;
 	padding: 0.15rem 0;
+	transition: color 0.25s ease;
 }
 
 nav.main-nav a:hover {
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 nav.main-nav a[aria-current='page'] {
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 	font-weight: 700;
 }
 
@@ -187,7 +190,7 @@ nav.main-nav a[aria-current='page'] {
 	margin-right: -0.5rem;
 	background: none;
 	border: 0;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 	cursor: pointer;
 }
 
@@ -261,21 +264,21 @@ nav.main-nav a[aria-current='page'] {
 /* Vote date banner */
 .vote-banner {
 	background: var(--color-brand);
-	color: #fff;
+	color: var(--color-text);
 	text-align: center;
 	font-size: 0.9rem;
 	padding: 0.5rem 1rem;
 }
 
 .vote-banner a {
-	color: #fff;
+	color: var(--color-text);
 	text-decoration: underline;
 }
 
 /* Hero */
 .hero {
 	padding: 4rem 0 3rem;
-	background: linear-gradient(180deg, var(--color-bg-alt), var(--color-bg));
+	background: var(--color-bg);
 }
 
 .hero p.tagline {
@@ -295,16 +298,26 @@ nav.main-nav a[aria-current='page'] {
 }
 
 .hero.photo .hero-meta-highlight {
+	position: relative;
+	z-index: 0;
+	color: var(--color-text);
+	padding: 0.3em 0.6em;
+	display: inline-block;
+}
+
+/* Same skewed-background-behind-upright-text technique as the buttons/cards,
+   and the same -12deg angle, so the text itself never slants. */
+.hero.photo .hero-meta-highlight::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
 	background: var(--color-brand);
-	color: #fff;
-	padding: 0.15em 0.35em;
-	border-radius: 0.2em;
-	box-decoration-break: clone;
-	-webkit-box-decoration-break: clone;
+	transform: skewX(-12deg);
 }
 
 .hero.photo .hero-meta-highlight a {
-	color: #fff;
+	color: var(--color-text);
 	text-decoration: underline;
 }
 
@@ -393,36 +406,60 @@ nav.main-nav a[aria-current='page'] {
 }
 
 .hero.photo .button.secondary {
-	background: #fff;
 	color: var(--color-brand-dark);
-	border-color: #fff;
+}
+
+.hero.photo .button.secondary::before {
+	background: #fff;
 }
 
 .hero.photo .button.secondary:hover {
-	background: var(--color-bg-alt);
 	color: var(--color-brand-dark);
-	border-color: var(--color-bg-alt);
+}
+
+.hero.photo .button.secondary:hover::before {
+	background: var(--color-bg-alt);
 }
 
 .button-row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.9rem;
+	gap: 1.4rem;
 	margin-top: 1.5rem;
 }
 
+/* Buttons are a parallelogram: the skew lives on a borderless ::before behind
+   the content, so the label and any icon stay upright and legible instead of
+   slanting with the shape. Primary and secondary are a bold black/yellow
+   swap of each other, and invert on hover. */
 .button {
+	position: relative;
+	z-index: 0;
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5rem;
-	padding: 0.8rem 1.5rem;
-	border-radius: var(--radius);
+	padding: 0.8rem 1.6rem;
 	text-decoration: none;
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 1.05rem;
-	border: 2px solid var(--color-brand);
+	background: none;
+	border: none;
 	cursor: pointer;
-	transition: box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+	transition: color 0.25s ease;
+}
+
+.button::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	transform: skewX(-12deg);
+	box-shadow: 0 2px 6px rgba(26, 24, 3, 0.2);
+	transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.button:hover::before {
+	box-shadow: 0 4px 12px rgba(26, 24, 3, 0.28);
 }
 
 .button svg {
@@ -432,33 +469,47 @@ nav.main-nav a[aria-current='page'] {
 }
 
 .button.primary {
+	color: var(--color-text);
+}
+
+.button.primary::before {
 	background: var(--color-brand);
-	color: #fff;
 }
 
 .button.primary:hover {
-	background: var(--color-brand-dark);
-	border-color: var(--color-brand-dark);
-	color: #fff;
-	box-shadow: 0 6px 16px rgba(33, 33, 33, 0.15);
+	color: var(--color-brand);
+}
+
+.button.primary:hover::before {
+	background: var(--color-text);
 }
 
 .button.secondary {
-	background: transparent;
-	color: var(--color-brand-dark);
+	color: var(--color-brand);
+}
+
+.button.secondary::before {
+	background: var(--color-text);
 }
 
 .button.secondary:hover {
-	background: var(--color-bg-alt);
-	color: var(--color-brand-dark);
+	color: var(--color-text);
+}
+
+.button.secondary:hover::before {
+	background: var(--color-brand);
 }
 
 .button.is-disabled,
 .button.is-disabled:hover {
-	background: var(--color-bg-alt);
-	border-color: var(--color-bg-alt);
 	color: var(--color-text-muted);
 	cursor: not-allowed;
+}
+
+.button.is-disabled::before,
+.button.is-disabled:hover::before {
+	background: var(--color-control);
+	box-shadow: 0 2px 6px rgba(26, 24, 3, 0.2);
 }
 
 /* Image gallery grid – always 3 equal columns (33% each) on desktop,
@@ -484,10 +535,15 @@ nav.main-nav a[aria-current='page'] {
 .gallery-grid figure {
 	margin: 0;
 	background: #fff;
-	border-radius: var(--radius-lg);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	transition: opacity 0.6s ease;
+}
+
+/* Clips the hover zoom to just the image, so it can't bleed down into the
+   figcaption below (overflow:hidden on the outer figure would also clip its
+   own box-shadow, so the wrapper is scoped to the image only). */
+.gallery-media {
 	overflow: hidden;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.07);
-	transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
 }
 
 .gallery-grid img {
@@ -512,10 +568,8 @@ nav.main-nav a[aria-current='page'] {
 .gallery-full {
 	margin: 1.5rem 0 0;
 	background: #fff;
-	border-radius: var(--radius-lg);
-	overflow: hidden;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.07);
-	transition: opacity 0.6s ease, transform 0.6s ease;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	transition: opacity 0.6s ease;
 }
 
 .gallery-full img {
@@ -553,7 +607,7 @@ section.block {
 }
 
 section.block.alt {
-	background: var(--color-bg-alt);
+	background: var(--color-brand);
 }
 
 section.block .section-head {
@@ -570,7 +624,7 @@ section.block .section-head a.more {
 	font-weight: 600;
 	white-space: nowrap;
 	display: inline-block;
-	transition: transform 0.15s ease, color 0.15s ease;
+	transition: transform 0.25s ease, color 0.25s ease;
 }
 
 section.block .section-head a.more:hover {
@@ -634,25 +688,40 @@ section.block .section-head a.more:hover {
 	}
 }
 
+/* Cards are a parallelogram too: the skew sits on a ::before behind the
+   content so text stays upright, same technique as the buttons. */
 .card {
+	position: relative;
+	z-index: 0;
+	padding: 1.8rem 2.1rem;
+	transition: opacity 0.6s ease;
+}
+
+.card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: var(--color-brand);
+	box-shadow: 0 4px 14px rgba(26, 24, 3, 0.18);
+}
+
+/* A primary button inside a yellow card would vanish into it - invert to
+   black/yellow instead, same as on the yellow hero. */
+.card .button.primary {
+	color: var(--color-brand);
+}
+
+.card .button.primary::before {
+	background: var(--color-text);
+}
+
+.card .button.primary:hover {
+	color: var(--color-text);
+}
+
+.card .button.primary:hover::before {
 	background: #fff;
-	border-radius: var(--radius-lg);
-	padding: 1.6rem 1.75rem;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
-	transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-}
-
-.card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 10px 24px rgba(33, 33, 33, 0.1);
-	transition-duration: 0.15s;
-}
-
-/* Cards that already contain their own animated element (e.g. a button)
-   shouldn't also lift on hover - that reads as too much motion at once. */
-.card.no-hover:hover {
-	transform: none;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
 }
 
 .card h3 {
@@ -687,28 +756,52 @@ section.block .section-head a.more:hover {
 }
 
 .mission-card {
-	background: #fff;
-	border-radius: var(--radius-lg);
-	padding: 1.6rem 1.75rem;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
-	transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+	position: relative;
+	z-index: 0;
+	padding: 1.8rem 2.1rem;
+	transition: opacity 0.6s ease;
 }
 
-.mission-card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 10px 24px rgba(33, 33, 33, 0.1);
-	transition-duration: 0.15s;
+.mission-card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: #fff;
+	transform: skewX(-6deg);
+	box-shadow: 0 3px 10px rgba(26, 24, 3, 0.14);
+	transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mission-card:hover::before {
+	box-shadow: 0 6px 18px rgba(26, 24, 3, 0.22);
+}
+
+/* Black is a hover-only state, not a permanent fill - all cards start white
+   on the yellow section and turn black on hover. */
+.mission-card:hover::before {
+	background: var(--color-text);
 }
 
 .mission-card h3 {
 	margin: 0 0 0.5em;
 	font-size: 1.25rem;
 	line-height: 1.4;
+	transition: color 0.25s ease;
 }
 
 .mission-card p {
 	margin: 0;
 	color: var(--color-text-muted);
+	transition: color 0.25s ease;
+}
+
+.mission-card:hover h3 {
+	color: #fff;
+}
+
+.mission-card:hover p {
+	color: rgba(255, 255, 255, 0.75);
 }
 
 .mission-cta {
@@ -717,43 +810,52 @@ section.block .section-head a.more:hover {
 
 /* Supporter cards */
 .supporter-card {
-	background: #fff;
-	border-radius: var(--radius-lg);
+	background: var(--color-bg);
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
-	transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-}
-
-.supporter-card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 10px 24px rgba(33, 33, 33, 0.1);
-	transition-duration: 0.15s;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	transition: opacity 0.6s ease;
 }
 
 .supporter-card img {
 	width: 100%;
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
-	background: var(--color-bg-alt);
+	background: var(--color-bg);
 }
 
 .supporter-card .body {
 	padding: 0.8rem 0.9rem 1rem;
+	background: var(--color-bg);
+	transition: background-color 0.25s ease;
+}
+
+.supporter-card:hover .body {
+	background: var(--color-text);
 }
 
 .supporter-card .name {
 	font-weight: 700;
 	font-size: 0.95rem;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
+	transition: color 0.25s ease;
+}
+
+.supporter-card:hover .name {
+	color: #fff;
 }
 
 .supporter-card .role {
 	font-size: 0.8rem;
-	color: var(--color-tan);
+	color: var(--color-text);
 	font-weight: 600;
+	transition: color 0.25s ease;
 	margin-bottom: 0.5rem;
+}
+
+.supporter-card:hover .role {
+	color: #fff;
 }
 
 /* Plain supporter list */
@@ -767,9 +869,8 @@ section.block .section-head a.more:hover {
 }
 
 .supporter-list li {
-	background: #f0e6d9;
-	color: var(--color-accent);
-	border-radius: 999px;
+	background: var(--color-bg-alt);
+	color: var(--color-text);
 	padding: 0.35rem 0.9rem;
 	font-size: 0.92rem;
 }
@@ -794,28 +895,27 @@ article.prose > :first-child > h2:first-child {
 
 /* Footer */
 .site-footer {
-	background: var(--color-bg-alt);
+	background: var(--color-text);
 	margin-top: 3rem;
 	padding: 3rem 0;
 	font-size: 0.95rem;
-	color: var(--color-text-muted);
+	color: #fff;
 }
 
 .site-footer a {
-	color: var(--color-text-muted);
+	color: #fff;
 }
 
 /* Full-width WhatsApp channel banner between the page content and the
-   footer - brand-green like the vote banner up top, so it bookends the
+   footer - brand-yellow like the vote banner up top, so it bookends the
    page instead of competing with the muted footer text. */
 .whatsapp-cta {
 	padding: 2.5rem 0;
 }
 
 .whatsapp-cta-card {
-	background: var(--color-bg-alt);
+	background: var(--color-brand);
 	color: var(--color-text);
-	border-radius: var(--radius-lg);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -823,6 +923,25 @@ article.prose > :first-child > h2:first-child {
 	gap: 1.25rem;
 	padding: 1.5rem 1.75rem;
 	text-align: left;
+	box-shadow: 0 4px 14px rgba(26, 24, 3, 0.18);
+}
+
+/* The banner is already yellow, so its primary button inverts to black/yellow
+   instead of yellow-on-yellow. */
+.whatsapp-cta-card .button.primary {
+	color: var(--color-brand);
+}
+
+.whatsapp-cta-card .button.primary::before {
+	background: var(--color-text);
+}
+
+.whatsapp-cta-card .button.primary:hover {
+	color: var(--color-text);
+}
+
+.whatsapp-cta-card .button.primary:hover::before {
+	background: #fff;
 }
 
 @media (max-width: 40rem) {
@@ -840,7 +959,7 @@ article.prose > :first-child > h2:first-child {
 }
 
 .whatsapp-cta-text strong {
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .whatsapp-button {
@@ -877,7 +996,7 @@ article.prose > :first-child > h2:first-child {
 	padding: 1.4rem 0;
 	font-weight: 600;
 	font-size: 1.2rem;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .claims summary::-webkit-details-marker {
@@ -890,7 +1009,7 @@ article.prose > :first-child > h2:first-child {
 	font-weight: 400;
 	font-size: 1.6rem;
 	line-height: 1;
-	color: var(--color-tan);
+	color: var(--color-text);
 	display: inline-block;
 	transition: transform 0.25s ease;
 }
@@ -919,10 +1038,9 @@ article.prose > :first-child > h2:first-child {
 	list-style: none;
 	margin: 0 0 2.5rem;
 	padding: 0.25rem 1.5rem;
-	background: #fff;
-	border-radius: var(--radius-lg);
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
-	transition: opacity 0.6s ease, transform 0.6s ease;
+	background: var(--color-bg-alt);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	transition: opacity 0.6s ease;
 }
 
 .cost-summary li {
@@ -941,7 +1059,7 @@ article.prose > :first-child > h2:first-child {
 .cost-summary-sign {
 	flex: 0 0 auto;
 	width: 1.6em;
-	color: var(--color-tan);
+	color: var(--color-text);
 	font-weight: 700;
 	text-align: center;
 }
@@ -962,11 +1080,7 @@ article.prose > :first-child > h2:first-child {
 	margin-top: 0.2rem;
 	padding-top: 1.1rem;
 	font-weight: 700;
-	color: var(--color-brand-dark);
-}
-
-.cost-summary-total .cost-summary-sign {
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .cost-summary-total .cost-summary-value {
@@ -983,9 +1097,8 @@ article.prose > :first-child > h2:first-child {
 	gap: 1.25rem;
 	margin-top: 1.5rem;
 	padding: 1.5rem;
-	background: #fff;
-	border-radius: var(--radius-lg);
-	box-shadow: 0 1px 3px rgba(33, 33, 33, 0.06);
+	background: var(--color-bg-alt);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
 }
 
 .cost-calc-row {
@@ -1018,7 +1131,7 @@ article.prose > :first-child > h2:first-child {
 .cost-calc-legend {
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .cost-calc input[type='number'] {
@@ -1026,9 +1139,9 @@ article.prose > :first-child > h2:first-child {
 	max-width: 100%;
 	padding: 0.55rem 0.7rem;
 	font: inherit;
-	border: 1px solid var(--color-border);
+	border: none;
 	border-radius: var(--radius);
-	background: var(--color-bg);
+	background: var(--color-control);
 }
 
 .cost-calc-field-salary input[type='number'] {
@@ -1055,10 +1168,23 @@ article.prose > :first-child > h2:first-child {
 }
 
 .cost-calc-choice input[type='radio'] {
-	accent-color: var(--color-brand);
+	appearance: none;
 	width: 1.1em;
 	height: 1.1em;
 	margin: 0;
+	border-radius: 50%;
+	border: none;
+	background: var(--color-control);
+	cursor: pointer;
+}
+
+.cost-calc-choice input[type='radio']:checked {
+	background: var(--color-brand);
+}
+
+.cost-calc-choice input[type='radio']:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 2px;
 }
 
 .cost-calc-hint {
@@ -1072,33 +1198,37 @@ article.prose > :first-child > h2:first-child {
 .cost-calc-explainer {
 	margin: 0 0 1.5rem;
 	padding: 0.4rem 1.1rem;
-	border-radius: var(--radius);
-	background: #fff;
-	transition: opacity 0.6s ease, transform 0.6s ease;
+	background: var(--color-bg-alt);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	transition: opacity 0.6s ease;
 }
 
 .cost-calc-explainer summary {
 	cursor: pointer;
 	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 0.7rem 0;
 	font-weight: 600;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .cost-calc-explainer summary::-webkit-details-marker {
 	display: none;
 }
 
-.cost-calc-explainer summary::before {
+.cost-calc-explainer summary::after {
 	content: '+';
-	display: inline-block;
-	width: 1.1em;
+	flex: none;
 	font-weight: 400;
-	color: var(--color-tan);
+	font-size: 1.6rem;
+	line-height: 1;
+	color: var(--color-text);
 	transition: transform 0.25s ease;
 }
 
-.cost-calc-explainer[open] summary::before {
+.cost-calc-explainer[open] summary::after {
 	transform: rotate(45deg);
 }
 
@@ -1131,7 +1261,7 @@ article.prose > :first-child > h2:first-child {
 
 .cost-calc-explainer th {
 	font-weight: 600;
-	color: var(--color-brand-dark);
+	color: var(--color-text);
 }
 
 .cost-calc-explainer th:not(:first-child),
@@ -1146,9 +1276,9 @@ article.prose > :first-child > h2:first-child {
 .cost-calc-result {
 	margin-top: 1.5rem;
 	padding: 1.5rem;
-	border-radius: var(--radius-lg);
 	background: var(--color-brand);
-	color: #fff;
+	color: var(--color-text);
+	box-shadow: 0 4px 14px rgba(26, 24, 3, 0.18);
 }
 
 .cost-calc-headline {
@@ -1181,12 +1311,12 @@ article.prose > :first-child > h2:first-child {
 .cost-calc-context {
 	margin-top: 1.5rem;
 	padding-top: 1.25rem;
-	border-top: 1px solid rgba(255, 255, 255, 0.28);
+	border-top: 1px solid rgba(33, 33, 33, 0.2);
 }
 
 .cost-calc-context h3 {
 	margin-bottom: 0.4rem;
-	color: #fff;
+	color: var(--color-text);
 }
 
 .cost-calc-context p {
