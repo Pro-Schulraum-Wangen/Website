@@ -299,22 +299,12 @@ nav.main-nav a[aria-current='page'] {
 }
 
 .hero.photo .hero-meta-highlight {
-	position: relative;
-	z-index: 0;
-	color: var(--color-text);
-	padding: 0.3em 0.6em;
-	display: inline-block;
-}
-
-/* Same skewed-background-behind-upright-text technique as the buttons/cards,
-   and the same -12deg angle, so the text itself never slants. */
-.hero.photo .hero-meta-highlight::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	z-index: -1;
 	background: var(--color-brand);
-	transform: skewX(-12deg);
+	color: var(--color-text);
+	padding: 0.15em 0.35em;
+	border-radius: 0.2em;
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
 }
 
 .hero.photo .hero-meta-highlight a {
