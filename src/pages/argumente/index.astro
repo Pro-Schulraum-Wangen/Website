@@ -400,9 +400,9 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 					Dieser Punkt braucht etwas mehr Einordnung. Die Rickenbacherwiese
 					ist grundsätzlich eine interessante Fläche. Falls die Gemeinde die
 					Möglichkeit erhält, dieses strategisch gelegene Grundstück zu
-					einem vernünftigen Preis zu kaufen, sollte sie einen Erwerb aus
-					unserer Sicht ernsthaft prüfen. Das bedeutet aber noch nicht, dass
-					dort kurzfristig eine Turnhalle gebaut werden kann.
+					einem vernünftigen Preis zu kaufen, wäre ein Erwerb sicherlich
+					prüfenswert. Das bedeutet aber noch nicht, dass dort kurz- oder
+					mittelfristig eine Turnhalle gebaut werden kann.
 				</p>
 
 				<p>
@@ -555,8 +555,8 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 					<strong>
 						Die Rickenbacherwiese ist somit durchaus eine interessante
 						Landreserve, deren Kauf die Gemeinde bei einer guten
-						Gelegenheit prüfen sollte. Sie ist aber noch kein kurzfristig
-						verfügbares Baugrundstück und der Vorschlag der Petitionäre
+						Gelegenheit prüfen sollte. Sie ist aber noch kein kurz- oder
+						mittelfristig verfügbares Baugrundstück und der Vorschlag der Petitionäre
 						noch kein mit dem Gemeindeprojekt vergleichbares
 						Alternativprojekt. Das Gemeindeprojekt zeigt bereits, dass die
 						benötigte Anlage auf bestehendem gemeindeeigenem Boden
@@ -694,7 +694,19 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 		details.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 
-	window.addEventListener('DOMContentLoaded', openClaimFromHash);
+	// On a fresh page load with a #hash already in the URL (a deep link, e.g.
+	// shared via WhatsApp), the self-hosted webfonts may still be loading when
+	// DOMContentLoaded fires. Once they swap in, that reflow can shift the
+	// claim's position below where we already scrolled to, landing slightly
+	// above the target — most noticeable on a cold cache (in-app browsers),
+	// which is also why a refresh (warm cache, fonts load instantly) fixes
+	// it. Wait for fonts before the initial scroll; hashchange (the user
+	// clicking a link while already on the page) doesn't need this, since
+	// layout is already stable by then.
+	window.addEventListener('DOMContentLoaded', () => {
+		const fontsReady = document.fonts?.ready ?? Promise.resolve();
+		fontsReady.then(openClaimFromHash);
+	});
 	window.addEventListener('hashchange', openClaimFromHash);
 
 	document.addEventListener('click', async (event) => {
