@@ -1027,6 +1027,13 @@ article.prose > :first-child > h2:first-child {
 	font-style: italic;
 }
 
+/* Keeps the "Behauptungen eingeordnet" heading clear of the sticky header
+   when linked to directly via #behauptungen-eingeordnet (e.g. the homepage
+   button), same offset logic as the individual claim anchors below. */
+#behauptungen-eingeordnet {
+	scroll-margin-top: calc(var(--sticky-header-height) + 1.5rem);
+}
+
 /* Claims / facts accordion (native <details>) */
 .claims details {
 	border-bottom: 1px solid var(--color-border);
