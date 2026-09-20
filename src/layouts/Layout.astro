@@ -133,6 +133,23 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 				};
 				setScrolled();
 				window.addEventListener('scroll', setScrolled, { passive: true });
+
+				// Keeps --sticky-header-height in sync with the real, rendered
+				// header height (varies by device: hamburger vs. full nav, nav
+				// wrapping onto a second line, etc.), so anything scrolling to
+				// an anchor can offset for the sticky header without guessing.
+				var setHeaderHeight = function () {
+					document.documentElement.style.setProperty(
+						'--sticky-header-height',
+						header.getBoundingClientRect().height + 'px',
+					);
+				};
+				setHeaderHeight();
+				if ('ResizeObserver' in window) {
+					new ResizeObserver(setHeaderHeight).observe(header);
+				} else {
+					window.addEventListener('resize', setHeaderHeight);
+				}
 			})();
 		</script>
 		<script is:inline>

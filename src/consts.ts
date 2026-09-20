@@ -15,6 +15,8 @@ export const DOCUMENTS = {
 	steuerfusstabelle: '/dokumente/Steuerfusstabelle_2026.pdf',
 	// Amt für Finanzen Kanton Schwyz, Gemeindefinanzstatistik 2020.
 	gemeindefinanzstatistik: '/dokumente/Gemeindefinanzstatistik_2020.pdf',
+	// Nettoverschuldung der Schwyzer Gemeinden 2025.
+	nettoverschuldung2025: '/dokumente/Schwyzer_Gemeinden_Nettoverschuldung_2025.pdf',
 	// Scan des March-Anzeiger-Artikels der SVP Wangen vom 4. September 2026.
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
 	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
@@ -28,11 +30,6 @@ export const DOCUMENTS = {
 // External tax calculator run by the Swiss federal tax administration.
 export const ESTV_CALCULATOR_URL =
 	'https://swisstaxcalculator.estv.admin.ch/#/calculator/income-wealth-tax';
-
-// LUSTAT (Kanton Luzern): Nettoschuld pro Einwohner 2024, used to put
-// Knutwil's debt level into context in the "Behauptungen" section.
-export const LUSTAT_KNUTWIL_URL =
-	'https://www.lustat.ch/monitoring/finanzkennzahlen-gemeinden/nettoschuld-pro-einwohner-in/2024';
 
 // The file on the main branch that holds the tax-calculator logic.
 export const GITHUB_CALCULATOR_URL =

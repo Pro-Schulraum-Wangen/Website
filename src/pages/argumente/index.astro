@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import CostCalculator from '../../components/CostCalculator.astro';
-import { DOCUMENTS, LUSTAT_KNUTWIL_URL } from '../../consts';
+import { DOCUMENTS } from '../../consts';
 
 import situationsplanImg from '../../assets/visualizations/situationsplan.jpg';
 
@@ -15,79 +15,104 @@ const rendered = await Promise.all(allArguments.map((entry) => render(entry)));
 // Placeholder: facts and claims about the school building project.
 // Text and images are placeholders and still need to be replaced with
 // the details from the municipal council's official message (Botschaft).
-const claims: { claim: string; body: string; image?: typeof situationsplanImg }[] = [
+const claims: { id: string; claim: string; body: string; image?: typeof situationsplanImg }[] = [
 	{
+		id: 'verschuldung',
 		claim: '«Wangen wäre eine der am höchsten verschuldeten Gemeinden der ganzen Schweiz.»',
 		body: `
 				<p>
 					<strong>Der Hinweis auf die steigende Verschuldung ist berechtigt.</strong>
-					Die Investitionen sind gross und Wangen wird dafür Schulden aufnehmen
-					müssen. Eine hohe Verschuldung bedeutet aber nicht automatisch, dass
-					eine Gemeinde ein strukturelles Finanzproblem hat. Gerade bei grossen
-					Bau- und Infrastrukturprojekten ist es auch in anderen Schweizer
-					Gemeinden nicht ungewöhnlich, dass die Verschuldung vorübergehend
-					deutlich ansteigt.
+					Dennoch lässt sich diese Aussage so nicht belegen. Die geplanten
+					Investitionen sind gross und Wangen wird dafür Schulden aufnehmen
+					müssen.
 				</p>
 
 				<p>
 					Gemäss der <a href="${DOCUMENTS.botschaft}" target="_blank" rel="noopener">Finanzplanung in der Abstimmungsbotschaft (siehe Seite 48)</a>
-					wird für Wangen mit einer maximalen Nettoschuld von
-					<strong>CHF 6'300 pro Einwohner</strong> gerechnet. Gleichzeitig wird
-					die Finanzierung bei einem Steuerfuss von 150 % als langfristig
-					tragbar beurteilt.
+					wird für Wangen mit einer maximalen Nettoschuld von rund
+					<strong>CHF 6'300 pro Einwohner</strong> gerechnet. Das ist eine hohe
+					Verschuldung und soll nicht kleingeredet werden.
 				</p>
 
 				<p>
-					Ein Blick in den <strong>Kanton Luzern</strong> hilft bei der Einordnung.
-					Dort gelten Nettoschulden von mehr als
-					<strong>CHF 2'500 pro Einwohner</strong> als hoch. Trotzdem lagen 2024
-					zwölf Gemeinden darüber. <a href="${LUSTAT_KNUTWIL_URL}" target="_blank" rel="noopener">Knutwil wies mit <strong>CHF 7'259 pro Einwohner</strong> den höchsten Wert auf</a>.
-					Die hohe Verschuldung ist dort wesentlich durch grosse Investitionen
-					in die Infrastruktur entstanden.
+					Entscheidend ist jedoch auch, wie diese Verschuldung zustande kommt,
+					wie sie sich über die Jahre entwickelt und ob sie für die Gemeinde
+					langfristig tragbar ist. Die Finanzplanung berücksichtigt die geplanten
+					Investitionen ausdrücklich und beurteilt die Finanzierung bei einem
+					Steuerfuss von 150 % als langfristig tragbar.
 				</p>
 
 				<p>
-					Auch im <strong>Kanton Schwyz</strong> zeigt sich, wie stark solche Werte
-					je nach Investitionsphase schwanken können. In der <a href="${DOCUMENTS.gemeindefinanzstatistik}" target="_blank" rel="noopener">Gemeindefinanzstatistik 2020 (siehe Seite 10)</a>
-					hatte Wangen eine Nettoschuld von
-					<strong>CHF 1'122 pro Einwohner</strong>. Im benachbarten Tuggen waren es
-					<strong>CHF 3'958</strong>, in Lachen sogar <strong>CHF 5'644 pro Einwohner</strong>.
+					Wie stark solche Werte schwanken können, zeigt ein Blick auf die
+					Schwyzer Gemeinden.
 				</p>
 
 				<p>
-					Tuggen verfügte damals über eine mit Wangen vergleichbare Steuerkraft und
-					hatte in den Jahren zuvor grössere Investitionen getätigt, unter anderem in
-					Feuerwehrgebäude, Doppelkindergarten und Strassenbau. Auch Lachen befand
-					sich in einer Phase umfangreicher Investitionen, unter anderem mit der
-					Kernerneuerung des Dorfzentrums.
+					Gemäss der <a href="${DOCUMENTS.gemeindefinanzstatistik}" target="_blank" rel="noopener">Gemeindefinanzstatistik 2020 (siehe Seite 10)</a>
+					hatte Wangen damals eine Nettoschuld von
+					<strong>CHF 1'122 pro Einwohner</strong>. Im benachbarten
+					<strong>Tuggen waren es CHF 3'958</strong>, in <strong>Lachen sogar
+					CHF 5'644 pro Einwohner</strong> <em>(damals nach erheblichen
+					Investitionen unter anderem in die Kernerneuerung und die neue
+					Kernentlastungsstrasse)</em>.
+				</p>
+
+				<p>
+					Fünf Jahre später sieht das Bild bereits wieder deutlich anders aus.
+					Ein Blick auf die <a href="${DOCUMENTS.nettoverschuldung2025}" target="_blank" rel="noopener">Nettoverschuldung der Schwyzer Gemeinden 2025</a>
+					zeigt, wie sich die finanzielle Situation der einzelnen Gemeinden
+					seither verändert hat.
+				</p>
+
+				<p>
+					<strong>Genau der Vergleich zwischen 2020 und 2025 ist wichtig:</strong>
+					Die Nettoverschuldung einer Gemeinde ist keine statische Grösse. Sie
+					kann in Phasen grosser Investitionen deutlich ansteigen und sich in
+					den darauffolgenden Jahren wieder verändern. Ein hoher Wert in einem
+					einzelnen Jahr bedeutet deshalb nicht automatisch, dass eine Gemeinde
+					dauerhaft ein strukturelles Finanzproblem hat.
+				</p>
+
+				<p>
+					Das Beispiel Lachen zeigt gleichzeitig, dass eine hohe Verschuldung
+					ernst genommen werden muss. Bereits 2020 begründete der Gemeinderat
+					eine beantragte Steuererhöhung unter anderem mit der Finanzierung
+					grosser Infrastrukturprojekte und dem Ziel, einen weiteren Anstieg der
+					Schulden zu verhindern.
 				</p>
 
 				<p>
 					<strong>
-						Wangen wird mit maximal CHF 6'300 pro Einwohner hoch verschuldet sein.
-						Die Finanzplanung berücksichtigt diese Verschuldung jedoch ausdrücklich
-						und beurteilt die Finanzierung bei einem Steuerfuss von 150 % als
-						langfristig tragbar. Die Schulden entstehen wesentlich durch grosse
-						Investitionen, denen mit der neuen Schul- und Sportanlage ein
-						langfristiger Gegenwert gegenübersteht.
+						Wangen wird mit maximal rund CHF 6'300 Nettoschuld pro Einwohner
+						stark verschuldet sein. Die Finanzplanung berücksichtigt diese
+						Verschuldung jedoch ausdrücklich und beurteilt die Finanzierung bei
+						einem Steuerfuss von 150 % als langfristig tragbar. Entscheidend ist
+						deshalb nicht nur die Höhe der Schulden zu einem bestimmten
+						Zeitpunkt, sondern auch, weshalb sie entstehen, wie sie sich
+						weiterentwickeln und ob die Gemeinde sie langfristig tragen kann.
 					</strong>
 				</p>
 		`,
 	},
 	{
+		id: 'alternativprojekte',
 		claim: '«Es gibt konkrete Alternativprojekte für die neue Schulanlage.»',
 		body: `
 				<p>
 					<strong>Es gibt alternative Ideen, aber keine abgeklärten Alternativprojekte.</strong>
-					Derzeit werden insbesondere zwei unterschiedliche Vorschläge diskutiert.
+					Bekannt sind uns insbesondere zwei Websites, auf denen Alternativen zum
+					vorliegenden Projekt thematisiert werden. Zudem spricht sich die
+					<strong>SVP Wangen gegen das vorliegende Projekt</strong> aus. Zwischen der
+					SVP Wangen und der Gruppe der Petitionäre gibt es personelle
+					Überschneidungen.
 				</p>
 
 				<p>
-					<strong>Vorschlag der Petitionäre:</strong>
+					<strong>Petitionäre:</strong>
 					Die Initianten hinter <a href="https://www.schule-wangen.ch/" target="_blank" rel="noopener">schule-wangen.ch</a>
 					sind bekannt und haben viel Zeit und Eigenleistung in ihre Alternative
 					investiert. Dieses politische Engagement und die damit angestossene Diskussion
-					verdienen Anerkennung. Ihr Vorschlag ist bereits relativ detailliert beschrieben,
+					verdienen Anerkennung. Ihre Idee ist bereits relativ detailliert beschrieben,
 					aber noch kein abgeklärtes Bauprojekt. Insbesondere die Machbarkeit der
 					Rickenbacherwiese, die Kosten und zahlreiche weitere planerische Fragen
 					müssten erst verbindlich geklärt werden.
@@ -96,30 +121,47 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 				<p>
 					<strong>IG Pro Primarschule Siebnen-Wangen:</strong>
 					Auf <a href="https://www.primarschule-siebnen-wangen.ch/" target="_blank" rel="noopener">primarschule-siebnen-wangen.ch</a>
-					wird eine weitere Alternative mit einer Primarschule in Siebnen vorgeschlagen.
-					Wer der IG angehört oder wer die Initiative verantwortet, wird auf der Website
-					nicht offengelegt. Wir stehen einem solchen anonymen
-					Vorgehen kritisch gegenüber. Wer sich mit einem eigenen Vorschlag in die
-					politische Diskussion einbringt, sollte aus unserer Sicht auch transparent
-					machen, wer dahintersteht. Der Vorschlag befindet sich zudem noch in einem
-					sehr frühen Stadium und müsste umfassend geprüft und geplant werden.
+					wird die Idee einer Primarschule in Siebnen präsentiert. Wer der IG
+					angehört oder wer die Initiative verantwortet, wird auf der Website nicht
+					offengelegt. Die Idee befindet sich noch in einem sehr frühen Stadium und
+					müsste umfassend geprüft und geplant werden.
+				</p>
+
+				<p>
+					Und dann stellt sich auch eine ganz praktische Frage:
+					<strong>Wer übernimmt diese jahrelange Arbeit?</strong> Werden sich die
+					Petitionäre nach einem Nein auch über Jahre in die konkrete
+					Weiterentwicklung ihrer Idee einbringen, die notwendigen Abklärungen
+					mittragen und die aufwendige Planungsarbeit bis zu einem neuen
+					abstimmungsreifen Projekt begleiten? Wer würde die Idee einer
+					Primarschule in Siebnen weiterverfolgen? Oder liegt diese Knochenarbeit
+					am Ende wieder bei Gemeinde, Schulrat und einer Planungskommission,
+					welche die Schulraumplanung nochmals neu aufrollen müssten?
 				</p>
 
 				<p>
 					<strong>
-						Die beiden unterschiedlichen Vorschläge zeigen gleichzeitig, dass bei einem
-						Nein nicht einfach eine fertige Alternative bereitsteht. Zuerst müsste wieder
-						geklärt werden, welcher Weg überhaupt eine politische Mehrheit findet.
-						Anschliessend müssten wesentliche Abklärungen und Planungsarbeiten neu
-						durchgeführt werden. Gemäss Abstimmungsbotschaft würde dies mehrere Jahre
-						dauern. Der bisherige Planungskredit von CHF 740'000 wäre verloren und auch
-						die provisorisch zugesicherten Kantonsbeiträge von rund CHF 5,6 Mio. würden
-						entfallen.
+						Die diskutierten Alternativen sind Ideen, aber keine abgeklärten
+						Projekte, die bei einem Nein einfach umgesetzt werden könnten. Schon
+						die beiden Websites zeigen, dass unterschiedliche Vorstellungen darüber
+						bestehen, wie es weitergehen soll. Zuerst müsste deshalb wieder geklärt
+						werden, welcher Weg überhaupt machbar ist und eine politische Mehrheit
+						findet. Anschliessend müssten wesentliche Abklärungen und
+						Planungsarbeiten neu durchgeführt und ein neues Projekt bis zur
+						Abstimmungsreife entwickelt werden. Wir Befürworter gehen davon aus,
+						dass dies mehrere Jahre dauern würde. Auch die Abstimmungsbotschaft
+						rechnet bei einer Neuplanung mit einer Verzögerung von mehreren Jahren.
+						Der bisherige Planungskredit von CHF 740'000 wäre verloren und auch die
+						für das heutige Projekt provisorisch zugesicherten Kantonsbeiträge von
+						rund CHF 5,6 Mio. würden entfallen. Ein Nein bedeutet deshalb nicht,
+						dass eine fertige Alternative bereitsteht. Was danach realisiert werden
+						könnte und wann, wäre zunächst offen.
 					</strong>
 				</p>
 		`,
 	},
 	{
+		id: 'mitwirkung',
 		claim: '«Die Bevölkerung konnte bei der Planung des Projekts nicht mitreden.»',
 		body: `
 				<p>
@@ -150,6 +192,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 		`,
 	},
 	{
+		id: 'schuelerzahlen',
 		claim:
 			'«Die Schülerzahlen werden stark zurückgehen und es braucht künftig deutlich weniger Schulraum.»',
 		body: `
@@ -198,6 +241,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 		`,
 	},
 	{
+		id: 'turnhalle-turnverein',
 		claim: '«Die grosse Turnhalle wird nur für den Turnverein Wangen gebaut.»',
 		body: `
 				<p>
@@ -237,6 +281,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 		`,
 	},
 	{
+		id: 'sanierung-geprueft',
 		claim: '«Eine Sanierung der bestehenden Schulhäuser wurde nie geprüft.»',
 		body: `
 				<p>
@@ -287,6 +332,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 		`,
 	},
 	{
+		id: 'schulhaus1-leerstand',
 		claim: '«Das Schulhaus 1 wird nach dem Neubau nicht mehr gebraucht und steht leer.»',
 		body: `
 				<p>
@@ -347,6 +393,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 		`,
 	},
 	{
+		id: 'rickenbacherwiese',
 		claim: '«Die neue Turnhalle könnte auf der Rickenbacherwiese gebaut werden.»',
 		body: `
 				<p>
@@ -579,7 +626,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 	<section class="block alt">
 		<div class="wrap narrow">
 			<div class="section-head">
-				<h2>Behauptungen eingeordnet</h2>
+				<h2 id="behauptungen-eingeordnet">Behauptungen eingeordnet</h2>
 			</div>
 			<p class="tagline">
 				Kritische Fragen und unterschiedliche Meinungen gehören zum politischen
@@ -591,7 +638,7 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 			<div class="claims">
 				<div class="claims-list">
 					{claims.map((c) => (
-						<details>
+						<details id={c.id}>
 							<summary>{c.claim}</summary>
 							<div class="claim-body">
 								<div set:html={c.body} />
@@ -605,6 +652,24 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 										format="webp"
 									/>
 								)}
+								<button type="button" class="copy-link-btn" data-claim-id={c.id}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+										<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+									</svg>
+									<span class="copy-link-label">Link kopieren</span>
+								</button>
 							</div>
 						</details>
 					))}
@@ -615,3 +680,41 @@ const claims: { claim: string; body: string; image?: typeof situationsplanImg }[
 
 	<CostCalculator />
 </Layout>
+
+<script>
+	function openClaimFromHash() {
+		const hash = window.location.hash.slice(1);
+		if (!hash) return;
+		const details = document.getElementById(hash);
+		if (!(details instanceof HTMLDetailsElement)) return;
+		details.open = true;
+		// scroll-margin-top on .claims details (kept in sync with the sticky
+		// header's real height in Layout.astro) keeps the title clear of the
+		// header here, no matter how tall the header is on a given device.
+		details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	window.addEventListener('DOMContentLoaded', openClaimFromHash);
+	window.addEventListener('hashchange', openClaimFromHash);
+
+	document.addEventListener('click', async (event) => {
+		const button = (event.target as HTMLElement).closest<HTMLButtonElement>('.copy-link-btn');
+		if (!button) return;
+		const claimId = button.dataset.claimId;
+		if (!claimId) return;
+		const label = button.querySelector<HTMLElement>('.copy-link-label');
+		const url = `${window.location.origin}${window.location.pathname}#${claimId}`;
+		try {
+			await navigator.clipboard.writeText(url);
+			const original = label?.textContent;
+			if (label) label.textContent = 'Link kopiert!';
+			button.classList.add('is-copied');
+			setTimeout(() => {
+				if (label) label.textContent = original ?? 'Link kopieren';
+				button.classList.remove('is-copied');
+			}, 2000);
+		} catch {
+			window.prompt('Link kopieren:', url);
+		}
+	});
+</script>

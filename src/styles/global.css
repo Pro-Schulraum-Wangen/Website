@@ -24,6 +24,9 @@
 	--radius-lg: 0;
 	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	--font-heading: var(--font-body); /* sans-serif everywhere */
+	/* Fallback for the real, JS-measured value set on .site-header (see
+	   Layout.astro) — used before that script runs and if JS is unavailable. */
+	--sticky-header-height: 4.5rem;
 }
 
 * {
@@ -1027,6 +1030,10 @@ article.prose > :first-child > h2:first-child {
 /* Claims / facts accordion (native <details>) */
 .claims details {
 	border-bottom: 1px solid var(--color-border);
+	/* Keeps the claim's title clear of the sticky header when scrolled to
+	   via its #anchor, on any device/nav height. The extra 1.5rem is
+	   breathing room so the title isn't flush against the header. */
+	scroll-margin-top: calc(var(--sticky-header-height) + 1.5rem);
 }
 
 .claims details:first-of-type {
@@ -1078,6 +1085,45 @@ article.prose > :first-child > h2:first-child {
 .claims .claim-body img {
 	border-radius: var(--radius-lg);
 	margin-top: 1rem;
+}
+
+.claims .copy-link-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin-top: 1rem;
+	padding: 0;
+	border: none;
+	background: none;
+	font: inherit;
+	font-size: 0.85rem;
+	/* Same color as an inline text link (see the plain `a` rule above). */
+	color: var(--color-text);
+	transition: color 0.25s ease;
+	cursor: pointer;
+}
+
+.claims .copy-link-btn svg {
+	width: 15px;
+	height: 15px;
+	flex: none;
+}
+
+.claims .copy-link-btn .copy-link-label {
+	text-decoration: underline;
+	text-underline-offset: 0.2rem;
+}
+
+.claims .copy-link-btn:hover {
+	color: var(--color-brand-deep);
+}
+
+.claims .copy-link-btn.is-copied {
+	color: var(--color-brand-deep);
+}
+
+.claims .copy-link-btn.is-copied .copy-link-label {
+	text-decoration: none;
 }
 
 /* Cost calculator (homepage) */
