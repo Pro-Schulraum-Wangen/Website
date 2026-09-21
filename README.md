@@ -59,10 +59,12 @@ One `.md` file per argument. `order` controls the sort order (lower number =
 higher up on the page). `summary` is the short teaser text, the rest of the
 file is the full text (Markdown).
 
-### Videos (`src/content/videos.yaml`)
+### Leserbriefe und Medien (`src/content/leserbriefe/`, shown at `/medien/`)
 
-A YAML list, not a folder of individual files. `youtubeId` is the part of
-the YouTube URL after `v=`. See the comments in the file for an example.
+One `.md` file per letter/media contribution. `excerpt` is the short teaser
+shown on the `/medien` overview, the rest of the file is the full text
+(Markdown). `published: false` hides an entry without deleting the file –
+see `beispiel-vorlage.md` for the expected format.
 
 ## Deployment
 
@@ -79,7 +81,7 @@ src/
   content/          All content (Markdown/YAML) – see above
   components/       Reusable page building blocks (e.g. the cost calculator)
   layouts/          Shared page layout (header/footer)
-  pages/            Routes (index, argumente, unterstuetzer, videos, mitmachen, datenschutz)
+  pages/            Routes (index, argumente, unterstuetzer, medien, mitmachen, datenschutz)
   lib/              Small helpers shared between pages
   styles/           Global CSS
   assets/           Images (optimized by Astro)
