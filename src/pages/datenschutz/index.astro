@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { SITE_TITLE, RESPONSIBLE_PEOPLE } from '../../consts';
+import { SITE_TITLE, RESPONSIBLE_PEOPLE, CONTACT_EMAIL } from '../../consts';
 
 const lastUpdated = '9. September 2026';
 ---
@@ -32,15 +32,15 @@ const lastUpdated = '9. September 2026';
 					{
 						RESPONSIBLE_PEOPLE.map((p) => (
 							<li>
-								<strong>{p.name}</strong> – {p.role},{' '}
-								<a href={`mailto:${p.email}`}>{p.email}</a>
+								<strong>{p.name}</strong> – {p.role}
 							</li>
 						))
 					}
 				</ul>
 				<p>
-					Für Fragen zum Datenschutz oder zu Ihrem Eintrag als Unterstützer:in
-					können Sie sich an eine dieser Personen wenden.
+					Bei Fragen zum Projekt, zur Website, zum Datenschutz oder zu Ihrem
+					Eintrag als Unterstützer:in können Sie sich an{' '}
+					<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> wenden.
 				</p>
 
 				<h2>Finanzierung</h2>
@@ -54,8 +54,7 @@ const lastUpdated = '9. September 2026';
 				<p>
 					Für unvermeidbare Sachkosten, beispielsweise für Druckmaterialien,
 					Hosting oder Werbung, wird die Kampagne durch kleine Spenden
-					finanziert. Pro Spenderin oder Spender werden maximal CHF 1'000
-					angenommen. Grössere Beiträge werden nicht entgegengenommen.
+					finanziert.
 				</p>
 				<p>
 					Als inhaltliche Grundlagen verwenden wir ausschliesslich öffentlich
@@ -107,8 +106,8 @@ const lastUpdated = '9. September 2026';
 				<p>
 					Im Rahmen des schweizerischen Datenschutzgesetzes haben Sie das Recht auf
 					Auskunft über die von uns bearbeiteten Personendaten sowie auf deren
-					Berichtigung oder Löschung. Wenden Sie sich dafür an eine der oben
-					genannten Personen.
+					Berichtigung oder Löschung. Wenden Sie sich dafür an{' '}
+					<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
 				</p>
 
 				<h2>Änderungen</h2>

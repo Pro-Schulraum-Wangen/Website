@@ -35,17 +35,17 @@ export const ESTV_CALCULATOR_URL =
 export const GITHUB_CALCULATOR_URL =
 	'https://github.com/Pro-Schulraum-Wangen/Website/blob/main/src/components/CostCalculator.astro';
 
-// Address for enquiries about the website and about supporter entries.
-export const CONTACT_EMAIL = 'info@philippbruhin.ch';
+// General contact address for the campaign – questions about the project,
+// the website, or supporter entries.
+export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
 export const SUPPORT_FORM_URL =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 
 // WhatsApp channel with occasional news about the vote and the project.
 export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMSNt29754hT9Aqr1V';
 
-// Social links shown in the footer. No dedicated Instagram account yet, so
-// this points at the Instagram homepage until one exists.
-export const INSTAGRAM_URL = 'https://www.instagram.com/';
+// Social links shown in the footer.
+export const INSTAGRAM_URL = 'https://www.instagram.com/schulanlageambuechberg';
 export const YOUTUBE_URL = 'https://www.youtube.com/@ProSchulraumWangen';
 
 // People responsible for this website (shown in the privacy notice).

@@ -12,6 +12,7 @@ import {
 	WHATSAPP_CHANNEL_URL,
 	INSTAGRAM_URL,
 	YOUTUBE_URL,
+	CONTACT_EMAIL,
 } from '../consts';
 import ogSourceImg from '../assets/visualizations/dorfplatz-primarschule_02.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
@@ -216,6 +217,10 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 						<p>
 							Offizielle Informationen der Gemeinde zum Projekt finden Sie auf der{' '}
 							<a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">{OFFICIAL_SITE_LABEL}</a>.
+						</p>
+						<p>
+							Fragen? Schreiben Sie uns an{' '}
+							<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
 						</p>
 					</div>
 					<div class="footer-social">
