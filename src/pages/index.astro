@@ -1,5 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
@@ -22,6 +23,15 @@ const heroBg = await getImage({
 });
 
 const { photo: photoSupporters, count: supporterCount } = await getSupporters();
+
+const latestLetters = (await getCollection('letters', ({ data }) => data.published))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+});
 ---
 
 <Layout>
@@ -122,6 +132,27 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 			</p>
 		</div>
 	</section>
+
+	{latestLetters.length > 0 && (
+		<section class="block">
+			<div class="wrap">
+				<div class="section-head">
+					<h2>Leserbriefe und Medien</h2>
+					<a class="more" href="/medien/">Alle Leserbriefe &amp; Medien →</a>
+				</div>
+				<ul class="letters-list compact">
+					{latestLetters.map((entry) => (
+						<li>
+							<a href={`/medien/${entry.id}/`}>{entry.data.title}</a>
+							<span class="letters-meta">
+								{entry.data.author} · {letterDateFormatter.format(entry.data.date)}
+							</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+	)}
 
 	<section class="block">
 		<div class="wrap">

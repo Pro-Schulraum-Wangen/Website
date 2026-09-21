@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const letters = (await getCollection('letters', ({ data }) => data.published)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+	title="Leserbriefe und Medien"
+	description="Leserbriefe und Medienbeiträge von Menschen aus Wangen und der Umgebung zum Projekt Schulanlage «Am Buechberg»."
+>
+	<section class="hero">
+		<div class="wrap narrow">
+			<h1>Leserbriefe und Medien</h1>
+			<p class="tagline">Was Menschen aus Wangen und der Umgebung zum Projekt schreiben.</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap narrow">
+			{letters.length > 0 ? (
+				<ul class="letters-list">
+					{letters.map((entry) => (
+						<li>
+							<div class="letters-row">
+								<h2><a href={`/medien/${entry.id}/`}>{entry.data.title}</a></h2>
+								<p class="letters-meta">
+									{entry.data.author} · {dateFormatter.format(entry.data.date)}
+								</p>
+							</div>
+							<p>{entry.data.excerpt}</p>
+							<a class="more" href={`/medien/${entry.id}/`}>Lesen →</a>
+						</li>
+					))}
+				</ul>
+			) : (
+				<p class="empty-note">Noch keine Leserbriefe eingetragen.</p>
+			)}
+		</div>
+	</section>
+</Layout>

@@ -613,16 +613,20 @@ section.block .section-head {
 	margin-bottom: 1.75rem;
 }
 
-section.block .section-head a.more {
-	font-size: 1rem;
+a.more {
 	font-weight: 600;
-	white-space: nowrap;
+	text-decoration: none;
 	display: inline-block;
 	transition: transform 0.25s ease, color 0.25s ease;
 }
 
-section.block .section-head a.more:hover {
+a.more:hover {
 	transform: translateX(3px);
+}
+
+section.block .section-head a.more {
+	font-size: 1rem;
+	white-space: nowrap;
 }
 
 /* Cards / grids */
@@ -1025,6 +1029,61 @@ article.prose > :first-child > h2:first-child {
 .empty-note {
 	color: var(--color-text-muted);
 	font-style: italic;
+}
+
+/* Leserbriefe / letters – shared between the /leserbriefe overview (full
+   title + excerpt + "weiterlesen") and the homepage teaser (.compact:
+   title + meta only, no excerpt). */
+.letters-list {
+	list-style: none;
+	margin: 0 0 1.5rem;
+	padding: 0;
+}
+
+.letters-list li {
+	padding: 1.4rem 0;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.letters-list li:first-child {
+	border-top: 1px solid var(--color-border);
+}
+
+.letters-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 0.3rem 1rem;
+	margin-bottom: 0.3rem;
+}
+
+.letters-list h2 {
+	margin: 0;
+	font-size: 1.3rem;
+}
+
+.letters-list h2 a {
+	text-decoration: none;
+}
+
+.letters-meta {
+	color: var(--color-text-muted);
+	font-size: 0.9rem;
+	white-space: nowrap;
+}
+
+.letters-list.compact li {
+	padding: 0.9rem 0;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.5rem 0.75rem;
+}
+
+.letters-list.compact a {
+	font-weight: 600;
 }
 
 /* Keeps the "Behauptungen eingeordnet" heading clear of the sticky header

@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const letters = await getCollection('letters', ({ data }) => data.published);
+	return letters.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout title={entry.data.title} description={entry.data.excerpt}>
+	<section class="block">
+		<div class="wrap narrow">
+			<article class="prose">
+				<p><a href="/medien/">← Alle Leserbriefe und Medien</a></p>
+				<h1>{entry.data.title}</h1>
+				<p class="letters-meta">
+					{entry.data.author} · {dateFormatter.format(entry.data.date)}
+				</p>
+				<Content />
+			</article>
+		</div>
+	</section>
+</Layout>
