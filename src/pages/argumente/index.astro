@@ -686,19 +686,19 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 	function openClaimFromHash() {
 		const hash = window.location.hash.slice(1);
 		if (!hash) return;
-		const details = document.getElementById(hash);
-		if (!(details instanceof HTMLDetailsElement)) return;
-		details.open = true;
-		// scroll-margin-top on .claims details (kept in sync with the sticky
-		// header's real height in Layout.astro) keeps the title clear of the
-		// header here, no matter how tall the header is on a given device.
-		details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		const target = document.getElementById(hash);
+		if (!target) return;
+		if (target instanceof HTMLDetailsElement) target.open = true;
+		// scroll-margin-top (kept in sync with the sticky header's real height
+		// in Layout.astro) keeps the target clear of the header here, no
+		// matter how tall the header is on a given device.
+		target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 
 	// On a fresh page load with a #hash already in the URL (a deep link, e.g.
 	// shared via WhatsApp), the self-hosted webfonts may still be loading when
 	// DOMContentLoaded fires. Once they swap in, that reflow can shift the
-	// claim's position below where we already scrolled to, landing slightly
+	// target's position below where we already scrolled to, landing slightly
 	// above the target — most noticeable on a cold cache (in-app browsers),
 	// which is also why a refresh (warm cache, fonts load instantly) fixes
 	// it. Wait for fonts before the initial scroll; hashchange (the user
