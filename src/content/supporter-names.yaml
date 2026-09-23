@@ -48,6 +48,10 @@
   name: 'Jörg Bruhin'
   lastName: 'Bruhin'
   location: 'Wangen'
+- id: markus-bruhin
+  name: 'Markus Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
 - id: romana-bruhin
   name: 'Romana Bruhin'
   lastName: 'Bruhin'
@@ -276,6 +280,10 @@
   name: 'Sereina Küttel'
   lastName: 'Küttel'
   location: 'Wangen'
+- id: urs-kuettel
+  name: 'Urs Küttel'
+  lastName: 'Küttel'
+  location: 'Wangen'
 - id: claudia-laib
   name: 'Claudia Laib'
   lastName: 'Laib'
@@ -323,6 +331,10 @@
 - id: rahel-maechler
   name: 'Rahel Mächler'
   lastName: 'Mächler'
+  location: 'Wangen'
+- id: jutta-nussbaumer
+  name: 'Jutta Nussbaumer'
+  lastName: 'Nussbaumer'
   location: 'Wangen'
 - id: irene-odermatt
   name: 'Irène Odermatt'
