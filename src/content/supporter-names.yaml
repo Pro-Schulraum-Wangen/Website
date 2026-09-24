@@ -144,6 +144,10 @@
   name: 'Martin Halef'
   lastName: 'Halef'
   location: 'Siebnen'
+- id: ladina-halter
+  name: 'Ladina Halter'
+  lastName: 'Halter'
+  location: 'Schübelbach'
 - id: petra-hegner
   name: 'Petra Hegner'
   lastName: 'Hegner'
