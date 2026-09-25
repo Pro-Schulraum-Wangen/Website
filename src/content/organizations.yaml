@@ -15,6 +15,12 @@
   name: 'Damenturnverein Wangen SZ'
   url: 'https://www.dtvwangensz.ch/'
   logo: '../assets/organizations/dtv_wangen.png'
+- id: fdp-wangen
+  name: 'FDP Wangen SZ'
+  url: 'https://www.fdp-sz.ch/partei/orts-und-bezirksparteien/wangen'
+  logo: '../assets/organizations/fdp_wangen.jpg'
+  background: '#12a7e3'
+  published: false # wartet auf Rückmeldung der FDP
 - id: ftv-wangen
   name: 'Frauenturnverein Wangen SZ'
   url: 'https://www.ftv-wangensz.ch/'
@@ -47,8 +53,9 @@
   name: 'Red Devils March-Höfe Altendorf'
   url: 'https://www.reddevils.ch/'
   logo: '../assets/organizations/red_devils.png'
-- id: sp
-  name: 'SP'
+- id: sp-wangen
+  name: 'SP Wangen'
+  url: 'https://spschwyz.ch/sp-wangen/'
   logo: '../assets/organizations/sp.png'
 - id: stv-wangen
   name: 'STV Wangen SZ'
