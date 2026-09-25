@@ -74,7 +74,7 @@ const MAX_TEXT_LENGTH = 1500;
 			list.replaceChildren(
 				...stories.map((s) => {
 					const li = document.createElement('li');
-					const text = document.createElement('p');
+					const text = document.createElement('blockquote');
 					text.className = 'story-text';
 					text.textContent = s.text;
 					const meta = document.createElement('p');

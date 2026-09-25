@@ -1695,11 +1695,34 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 
 .story-text {
 	margin: 0;
+	font-style: italic;
+	font-size: 1.1rem;
 	white-space: pre-line; /* keep the line breaks people typed */
 }
 
+/* large grey quotation mark behind the start of each story */
+.story-text {
+	position: relative;
+	z-index: 0;
+	padding-top: 2rem;
+}
+
+.story-text::before {
+	content: '\201C';
+	position: absolute;
+	z-index: -1;
+	top: -1.25rem;
+	left: -0.6rem;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 7rem;
+	font-style: normal;
+	line-height: 1;
+	color: var(--color-control);
+	pointer-events: none;
+}
+
 .story-meta {
-	margin: 0.6rem 0 0;
+	margin: 1rem 0 0;
 	font-size: 0.85rem;
 	font-weight: 700;
 	color: var(--color-text-muted);

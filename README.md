@@ -118,29 +118,70 @@ npx wrangler d1 execute wangen-stories --local --command \
 `char(10)` inserts a line break. Leave out `status` (or use `'pending'`)
 to create a story that still needs approval.
 
-### Review and approve stories
+### Review and approve stories (live site, Cloudflare dashboard)
 
-Locally, add `--local` to the commands below; for the live site, use
-`--remote` or paste the SQL into the D1 console in the Cloudflare dashboard
-(Storage & databases → D1 → wangen-stories → Console).
+1. Log in at https://dash.cloudflare.com and open
+   **Storage & databases → D1 SQLite Database → wangen-stories**.
+2. Switch to the **Console** tab.
+3. Paste one of the queries below into the input field at the bottom and
+   click **Execute**. Run one query at a time.
+
+List the stories waiting for approval (note the `id`):
 
 ```sql
--- stories waiting for approval
-SELECT id, created_at, name, text FROM stories WHERE status = 'pending';
+SELECT id, created_at, name, text FROM stories WHERE status = 'pending' ORDER BY created_at;
+```
 
--- approve / reject
+Approve a story (replace `5` with its `id`):
+
+```sql
 UPDATE stories SET status = 'approved', reviewed_at = datetime('now') WHERE id = 5;
-UPDATE stories SET status = 'rejected', reviewed_at = datetime('now') WHERE id = 6;
+```
 
--- remove a story completely (e.g. on request)
+Approve several at once:
+
+```sql
+UPDATE stories SET status = 'approved', reviewed_at = datetime('now') WHERE id IN (5, 8, 9);
+```
+
+Reject a story (it stays in the database but is never shown):
+
+```sql
+UPDATE stories SET status = 'rejected', reviewed_at = datetime('now') WHERE id = 6;
+```
+
+Take a published story offline again, or delete it completely (e.g. on
+request):
+
+```sql
+UPDATE stories SET status = 'rejected' WHERE id = 5;
 DELETE FROM stories WHERE id = 7;
 ```
 
-Example with Wrangler:
+Show everything that is currently published:
+
+```sql
+SELECT id, created_at, name, text FROM stories WHERE status = 'approved' ORDER BY created_at DESC;
+```
+
+Approved stories appear on `/geschichten-von-wangen/` within about a
+minute (the list is cached for 60 seconds). The **Explore Data** button
+(top right) is handy for browsing the whole table.
+
+Tip: in the console, the up/down arrow keys bring back previous queries, so
+you only need to change the `id`.
+
+### Review and approve stories (Wrangler / local)
+
+The same SQL works from the terminal. Use `--remote` for the live database
+and `--local` for the local test database:
 
 ```sh
 npx wrangler d1 execute wangen-stories --remote --command \
   "SELECT id, created_at, name, text FROM stories WHERE status = 'pending'"
+
+npx wrangler d1 execute wangen-stories --local --command \
+  "UPDATE stories SET status='approved', reviewed_at=datetime('now') WHERE id = 1"
 ```
 
 ### Database changes
