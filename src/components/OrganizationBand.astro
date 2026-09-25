@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const organizations = (await getCollection('organizations', ({ data }) => data.published)).sort(
+	(a, b) => a.data.name.localeCompare(b.data.name, 'de-CH'),
+);
+---
+
+{
+	organizations.length > 0 && (
+		<>
+		<div class="wrap">
+			<p class="org-intro">
+				Auch Vereine und weitere Organisationen stehen hinter dem Projekt – über Partei- und
+				Vereinsgrenzen hinweg, im gemeinsamen Interesse an einer zeitgemässen Schulanlage für
+				Wangen.
+			</p>
+		</div>
+		<div class="org-band">
+			{/* The list is rendered twice so the band can loop seamlessly;
+			    the second copy is hidden from screen readers and keyboard. */}
+			<div class="org-track">
+				{[false, true].map((isCopy) => (
+					<ul class="org-list" aria-hidden={isCopy ? 'true' : undefined}>
+						{organizations.map((o) => {
+							const Tag = o.data.url ? 'a' : 'div';
+							return (
+								<li>
+									<Tag
+										class="org-tile"
+										href={o.data.url}
+										target={o.data.url ? '_blank' : undefined}
+										rel={o.data.url ? 'noopener' : undefined}
+										tabindex={isCopy && o.data.url ? -1 : undefined}
+									>
+										<span
+											class="org-logo"
+											style={o.data.background ? `background: ${o.data.background};` : undefined}
+										>
+											<Image src={o.data.logo} alt="" height={160} format="webp" loading="eager" />
+										</span>
+										<span class="org-name">{o.data.name}</span>
+									</Tag>
+								</li>
+							);
+						})}
+					</ul>
+				))}
+			</div>
+		</div>
+		</>
+	)
+}

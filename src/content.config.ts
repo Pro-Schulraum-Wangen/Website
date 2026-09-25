@@ -34,6 +34,21 @@ const supporterNames = defineCollection({
 	}),
 });
 
+// Clubs and organisations backing the project – shown as a scrolling
+// logo band. Logos can have any size; the band fits them into equal tiles.
+const organizations = defineCollection({
+	loader: file('./src/content/organizations.yaml'),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string(),
+			url: z.string().url().optional(),
+			logo: image(),
+			// only for logos that come with their own full-bleed background
+			background: z.string().optional(),
+			published: z.boolean().default(true),
+		}),
+});
+
 // Arguments for the project – public, factual, referencing the
 // municipality's official message (Botschaft).
 const arguments_ = defineCollection({
@@ -69,6 +84,7 @@ const letters = defineCollection({
 export const collections = {
 	supporters,
 	supporterNames,
+	organizations,
 	arguments: arguments_,
 	letters,
 };

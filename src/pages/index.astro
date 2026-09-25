@@ -2,6 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import OrganizationBand from '../components/OrganizationBand.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
@@ -193,6 +194,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 				</p>
 			)}
 		</div>
+		<OrganizationBand />
 	</section>
 
 	<section class="block alt">

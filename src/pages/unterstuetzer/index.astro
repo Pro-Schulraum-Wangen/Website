@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import OrganizationBand from '../../components/OrganizationBand.astro';
 import { getSupporters } from '../../lib/supporters';
 
 const { photo: withImage, names: withoutImage, count } = await getSupporters();
@@ -77,6 +78,10 @@ const { photo: withImage, names: withoutImage, count } = await getSupporters();
 			</section>
 		)
 	}
+
+	<section class="block">
+		<OrganizationBand />
+	</section>
 
 	{
 		count === 0 && (

@@ -1,0 +1,55 @@
+# Vereine und Organisationen, die das Projekt unterstützen.
+# Sie laufen als Logo-Band über die Startseite und die Unterstützer:innen-Seite.
+# - logo: Pfad relativ zu dieser Datei, Grösse egal (wird automatisch eingepasst)
+# - url: optional, ohne url ist die Kachel nicht verlinkt
+# - background: optional, nur für Logos mit eigenem, vollflächigem Hintergrund
+- id: bbtrails
+  name: 'buechbergTRAILS'
+  url: 'https://www.bbtrails.ch/'
+  logo: '../assets/organizations/bbtrails.png'
+- id: die-mitte-wangen
+  name: 'Die Mitte Wangen'
+  logo: '../assets/organizations/die_mitte_wangen.png'
+- id: dtv-wangen
+  name: 'Damenturnverein Wangen SZ'
+  url: 'https://www.dtvwangensz.ch/'
+  logo: '../assets/organizations/dtv_wangen.png'
+- id: ftv-wangen
+  name: 'Frauenturnverein Wangen SZ'
+  url: 'https://www.ftv-wangensz.ch/'
+  logo: '../assets/organizations/ftv_wangen.png'
+- id: glp-schwyz
+  name: 'GLP Kanton Schwyz'
+  url: 'https://sz.grunliberale.ch/'
+  logo: '../assets/organizations/glp_schwyz.png'
+- id: js-wangen-wintersport
+  name: 'J+S Wangen SZ Wintersport'
+  url: 'https://www.junds-wangensz.ch/'
+  logo: '../assets/organizations/js_wangen_wintersport.jpg'
+  background: '#111728'
+- id: maennerriege-wangen
+  name: 'Männerriege Wangen SZ'
+  url: 'https://www.mr-wangensz.ch/'
+  logo: '../assets/organizations/maennerriege_wangen.png'
+- id: march-united
+  name: 'March United'
+  logo: '../assets/organizations/march_united.png'
+- id: musikschule-obermarch
+  name: 'Musikschule Region Obermarch'
+  url: 'https://msro.ch/'
+  logo: '../assets/organizations/musikschule_obermarch.png'
+- id: mv-wangen
+  name: 'Musikverein Wangen SZ'
+  url: 'https://www.mvwangen.ch/'
+  logo: '../assets/organizations/mv_wangen.png'
+- id: red-devils
+  name: 'Red Devils March-Höfe Altendorf'
+  url: 'https://www.reddevils.ch/'
+  logo: '../assets/organizations/red_devils.png'
+- id: sp
+  name: 'SP'
+  logo: '../assets/organizations/sp.png'
+- id: stv-wangen
+  name: 'STV Wangen SZ'
+  url: 'https://www.stv-wangensz.ch/'
+  logo: '../assets/organizations/stv_wangen.png'
