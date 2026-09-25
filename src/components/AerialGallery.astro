@@ -1,0 +1,125 @@
+---
+// Full-width, swipeable gallery of historic aerial photos of Wangen and Siebnen.
+// Native horizontal scrolling with scroll-snap; the buttons and year chips are
+// a small progressive enhancement on top.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+export interface AerialPhoto {
+	src: ImageMetadata;
+	place: string;
+	year: number;
+	alt: string;
+	credit: string;
+	// set for Creative Commons images
+	license?: { label: string; url: string };
+}
+
+interface Props {
+	photos: AerialPhoto[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div class="aerial-gallery" data-aerial-gallery>
+	<div class="aerial-track" tabindex="0" aria-label="Luftbilder von Wangen und Siebnen, von 1948 bis 2018" data-aerial-track>
+		{
+			photos.map((p, i) => (
+				<figure class="aerial-slide" id={`luftbild-${p.year}`} data-aerial-slide>
+					<div class="aerial-media">
+						<Image
+							src={p.src}
+							alt={p.alt}
+							widths={[800, 1400, 2000].filter((w) => w < p.src.width).concat(p.src.width > 2000 ? [] : [p.src.width])}
+							width={Math.min(2000, p.src.width)}
+							sizes="100vw"
+							format="webp"
+							quality={70}
+							loading={i === 0 ? 'eager' : 'lazy'}
+						/>
+						<span class="aerial-year" aria-hidden="true">{p.year}</span>
+					</div>
+					<figcaption>
+						<strong>
+							{p.place} {p.year}
+						</strong>
+						<span class="aerial-credit">
+							{p.credit}
+							{p.license && (
+								<>
+									{', '}
+									<a href={p.license.url} target="_blank" rel="noopener license">
+										{p.license.label}
+									</a>
+								</>
+							)}
+						</span>
+					</figcaption>
+				</figure>
+			))
+		}
+	</div>
+
+	<div class="wrap narrow aerial-controls">
+		<button type="button" class="aerial-arrow" data-aerial-prev aria-label="Vorheriges Bild">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17-5-5 5-5" /><path d="m18 17-5-5 5-5" /></svg>
+		</button>
+		<nav class="aerial-years" aria-label="Jahr auswählen">
+			{
+				photos.map((p) => (
+					<a href={`#luftbild-${p.year}`} data-aerial-chip>
+						{p.year}
+					</a>
+				))
+			}
+		</nav>
+		<button type="button" class="aerial-arrow" data-aerial-next aria-label="Nächstes Bild">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 17 5-5-5-5" /><path d="m13 17 5-5-5-5" /></svg>
+		</button>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-aerial-gallery]').forEach((gallery) => {
+		const track = gallery.querySelector<HTMLElement>('[data-aerial-track]')!;
+		const slides = [...gallery.querySelectorAll<HTMLElement>('[data-aerial-slide]')];
+		const chips = [...gallery.querySelectorAll<HTMLAnchorElement>('[data-aerial-chip]')];
+		const prev = gallery.querySelector<HTMLButtonElement>('[data-aerial-prev]')!;
+		const next = gallery.querySelector<HTMLButtonElement>('[data-aerial-next]')!;
+		let current = 0;
+
+		const goTo = (index: number) => {
+			const i = Math.max(0, Math.min(slides.length - 1, index));
+			track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+		};
+
+		const setActive = (index: number) => {
+			current = index;
+			chips.forEach((c, i) => c.toggleAttribute('aria-current', i === index));
+			prev.disabled = index === 0;
+			next.disabled = index === slides.length - 1;
+		};
+
+		prev.addEventListener('click', () => goTo(current - 1));
+		next.addEventListener('click', () => goTo(current + 1));
+		chips.forEach((chip, i) =>
+			chip.addEventListener('click', (e) => {
+				// scroll the gallery sideways instead of jumping the page
+				e.preventDefault();
+				goTo(i);
+			}),
+		);
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) setActive(slides.indexOf(entry.target as HTMLElement));
+				}
+			},
+			{ root: track, threshold: 0.6 },
+		);
+		slides.forEach((s) => observer.observe(s));
+		setActive(0);
+	});
+</script>

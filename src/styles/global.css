@@ -494,6 +494,23 @@ nav.main-nav a[aria-current='page'] {
 	background: var(--color-brand);
 }
 
+/* Black button that turns white on hover – for use on grey (.alt) sections */
+.button.dark {
+	color: var(--color-brand);
+}
+
+.button.dark::before {
+	background: var(--color-text);
+}
+
+.button.dark:hover {
+	color: var(--color-text);
+}
+
+.button.dark:hover::before {
+	background: #fff;
+}
+
 .button.is-disabled,
 .button.is-disabled:hover {
 	color: var(--color-text-muted);
@@ -1401,7 +1418,7 @@ article.prose > :first-child > h2:first-child {
 	font: inherit;
 	border: none;
 	border-radius: var(--radius);
-	background: var(--color-control);
+	background: var(--color-bg);
 }
 
 .cost-calc-field-salary input[type='number'] {
@@ -1434,7 +1451,7 @@ article.prose > :first-child > h2:first-child {
 	margin: 0;
 	border-radius: 50%;
 	border: none;
-	background: var(--color-control);
+	background: var(--color-bg);
 	cursor: pointer;
 }
 
@@ -1654,16 +1671,26 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 /* «Was macht Wangen besonders?» – story form and approved stories */
 .stories-list {
 	list-style: none;
-	margin: 0 0 2.5rem;
+	margin: 0 0 3.5rem;
 	padding: 0;
-	display: grid;
-	gap: 1.25rem;
 }
 
+/* stories are separated by a short yellow bar instead of boxes */
 .stories-list li {
-	padding: 1.25rem 1.5rem;
-	background: var(--color-bg-alt);
-	border-left: 4px solid var(--color-brand);
+	padding: 2.75rem 0;
+}
+
+.stories-list li + li::before {
+	content: '';
+	display: block;
+	width: 4.5rem; /* about 2 cm */
+	height: 5px;
+	margin-bottom: 2.75rem;
+	background: var(--color-brand);
+}
+
+.stories-list li + li {
+	padding-top: 0;
 }
 
 .story-text {
@@ -1681,6 +1708,9 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 .story-form {
 	display: grid;
 	gap: 0.5rem;
+	padding: 1.5rem;
+	background: var(--color-bg-alt);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
 }
 
 .story-form label {
@@ -1709,7 +1739,7 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 
 .story-form textarea:focus-visible,
 .story-form input:focus-visible {
-	outline: 2px solid var(--color-text);
+	outline: 2px solid var(--color-brand);
 	outline-offset: 1px;
 }
 
@@ -1753,4 +1783,139 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
+}
+
+/* Homepage: «Wangen im Wandel», invitation to share memories below the gallery */
+.wangen-change {
+	margin-top: 4rem;
+}
+
+/* «Geschichten von Wangen»: full-width aerial photo gallery */
+.aerial-section {
+	padding-bottom: 1rem;
+}
+
+/* Title block that follows the gallery instead of preceding it */
+.hero.hero-after-gallery {
+	padding-top: 2.5rem;
+}
+
+/* same line as the form below it */
+.hero.hero-after-gallery p.tagline {
+	max-width: none;
+}
+
+.aerial-track {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+
+.aerial-track::-webkit-scrollbar {
+	display: none;
+}
+
+.aerial-track:focus-visible {
+	outline: 3px solid var(--color-brand);
+	outline-offset: -3px;
+}
+
+.aerial-slide {
+	flex: 0 0 100%;
+	margin: 0;
+	scroll-snap-align: start;
+}
+
+.aerial-media {
+	position: relative;
+	background: var(--color-text);
+}
+
+.aerial-media img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	height: auto;
+	object-fit: cover;
+}
+
+.aerial-year {
+	position: absolute;
+	left: max(1.25rem, calc((100% - var(--max-width-narrow)) / 2 + 1.25rem));
+	bottom: 1rem;
+	padding: 0.2rem 0.9rem;
+	background: var(--color-brand);
+	color: var(--color-text);
+	font-family: var(--font-heading);
+	font-size: clamp(2rem, 6vw, 4rem);
+	font-weight: 800;
+	line-height: 1.1;
+}
+
+.aerial-slide figcaption {
+	max-width: var(--max-width-narrow);
+	margin: 0 auto;
+	padding: 0.75rem 1.25rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 0.75rem;
+	align-items: baseline;
+}
+
+.aerial-credit {
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
+
+.aerial-credit a {
+	color: inherit;
+}
+
+.aerial-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 1.25rem;
+}
+
+.aerial-years {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	justify-content: center;
+	flex: 1;
+}
+
+.aerial-years a {
+	padding: 0.3rem 0.7rem;
+	background: var(--color-bg-alt);
+	color: var(--color-text);
+	font-weight: 700;
+	font-size: 0.9rem;
+	text-decoration: none;
+}
+
+.aerial-years a:hover,
+.aerial-years a[aria-current] {
+	background: var(--color-brand);
+}
+
+.aerial-arrow {
+	flex: 0 0 auto;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: none;
+	background: var(--color-text);
+	color: var(--color-brand);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.aerial-arrow:disabled {
+	opacity: 0.3;
+	cursor: default;
 }

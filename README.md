@@ -5,10 +5,10 @@ school and sports facility «Am Buechberg» in Wangen SZ (ballot vote on
 29 November 2026).
 
 Built with [Astro](https://astro.build). All content lives as
-Markdown/YAML files in this repo. The only dynamic part is the story form
-«Was macht Wangen besonders?» on the homepage: a small Cloudflare Worker
+Markdown/YAML files in this repo. The only dynamic part is the story form on the
+page «Geschichten von Wangen» (`/geschichten-von-wangen/`): a small Cloudflare Worker
 (`worker/index.js`) stores submissions in a Cloudflare D1 database – see
-[Stories](#stories-was-macht-wangen-besonders) below.
+[Stories](#stories-geschichten-von-wangen) below.
 
 ## Run locally
 
@@ -73,12 +73,12 @@ shown on the `/medien` overview, the rest of the file is the full text
 (Markdown). `published: false` hides an entry without deleting the file –
 see `beispiel-vorlage.md` for the expected format.
 
-## Stories («Was macht Wangen besonders?»)
+## Stories («Geschichten von Wangen»)
 
 Visitors submit a short text (max. 1500 characters, plain text, line
 breaks allowed) and optionally their name. Each submission is stored with
 its IP address and the status `pending`. Only stories set to `approved`
-appear on the homepage.
+appear on the page.
 
 Rules enforced by the Worker (`worker/index.js`):
 
@@ -103,8 +103,8 @@ restarts – there is no need to recreate it each time. Then:
 npm run preview:cf    # builds the site and starts the Worker locally
 ```
 
-Open http://localhost:8787 and submit a story through the form on the
-homepage.
+Open http://localhost:8787/geschichten-von-wangen/ and submit a story
+through the form.
 
 ### Create a story without the form
 
@@ -164,7 +164,7 @@ src/
   content/          All content (Markdown/YAML) – see above
   components/       Reusable page building blocks (e.g. the cost calculator)
   layouts/          Shared page layout (header/footer)
-  pages/            Routes (index, argumente, unterstuetzer, medien, mitmachen, datenschutz)
+  pages/            Routes (index, argumente, unterstuetzer, medien, mitmachen, geschichten-von-wangen, datenschutz)
   lib/              Small helpers shared between pages
   styles/           Global CSS
   assets/           Images (optimized by Astro)

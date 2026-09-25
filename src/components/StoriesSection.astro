@@ -1,5 +1,5 @@
 ---
-// «Was macht Wangen besonders?» – form + approved stories.
+// «Geschichten von Wangen» – form + approved stories.
 // Submissions go to the worker (worker/index.js) and are stored in Cloudflare D1.
 // They only appear here after being approved.
 
@@ -7,20 +7,11 @@
 const MAX_TEXT_LENGTH = 1500;
 ---
 
-<section class="block stories" id="wangen-besonders">
+<section class="block stories" id="erinnerungen">
 	<div class="wrap narrow">
-		<div class="section-head">
-			<h2>Was macht Wangen für Sie besonders?</h2>
-		</div>
-		<p class="lead">
-			Ob Sie hier aufgewachsen sind, hier wohnen, zur Schule gegangen sind oder in einem Verein
-			mitmachen: Wangen hat viele Geschichten. Erzählen Sie uns, was unser Dorf für Sie besonders
-			macht – von früher, von heute, ganz egal aus welcher Zeit.
-		</p>
-
 		<ul class="stories-list" data-stories-list hidden></ul>
 
-		<form class="card no-hover story-form" data-story-form novalidate>
+		<form class="story-form" data-story-form novalidate>
 			<label for="story-text">Ihr Beitrag</label>
 			<textarea
 				id="story-text"
@@ -55,6 +46,7 @@ const MAX_TEXT_LENGTH = 1500;
 			<button class="button primary" type="submit">Beitrag senden</button>
 			<p class="story-message" data-story-message role="status" hidden></p>
 		</form>
+
 	</div>
 </section>
 
