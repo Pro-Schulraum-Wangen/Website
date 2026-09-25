@@ -1833,12 +1833,18 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	background: var(--color-text);
 }
 
+/* Compact strip (about 16:7) by default, 4:3 once expanded. Heights are
+   in vw so the switch can animate smoothly. */
 .aerial-media img {
 	display: block;
 	width: 100%;
-	aspect-ratio: 4 / 3;
-	height: auto;
+	height: max(43.75vw, 15rem);
 	object-fit: cover;
+	transition: height 0.45s ease;
+}
+
+.aerial-gallery.is-expanded .aerial-media img {
+	height: 75vw;
 }
 
 .aerial-year {
@@ -1913,6 +1919,59 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+}
+
+/* expand / minimise: icon + label, one of the two states is shown */
+.aerial-toggle {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 2.75rem;
+	padding: 0 1rem;
+	border: none;
+	background: var(--color-text);
+	color: var(--color-brand);
+	font: inherit;
+	font-weight: 700;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.aerial-toggle:hover {
+	background: var(--color-brand);
+	color: var(--color-text);
+}
+
+.aerial-toggle .toggle-state {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.aerial-toggle svg {
+	width: 1.2rem;
+	height: 1.2rem;
+}
+
+.aerial-toggle .icon-minimize,
+.aerial-gallery.is-expanded .aerial-toggle .icon-expand {
+	display: none;
+}
+
+.aerial-gallery.is-expanded .aerial-toggle .icon-minimize {
+	display: inline-flex;
+}
+
+/* Small screens: always the full 4:3 view, no toggle */
+@media (max-width: 700px) {
+	.aerial-toggle {
+		display: none;
+	}
+
+	.aerial-media img {
+		height: 75vw;
+	}
 }
 
 .aerial-arrow:disabled {
