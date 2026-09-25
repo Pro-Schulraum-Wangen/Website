@@ -1,0 +1,156 @@
+---
+// «Geschichten von Wangen» – form + approved stories.
+// Submissions go to the worker (worker/index.js) and are stored in Cloudflare D1.
+// They only appear here after being approved.
+
+// keep in sync with MAX_TEXT_LENGTH in worker/index.js
+const MAX_TEXT_LENGTH = 1500;
+---
+
+<section class="block stories" id="erinnerungen">
+	<div class="wrap narrow">
+		<ul class="stories-list" data-stories-list hidden></ul>
+
+		<form class="story-form" data-story-form novalidate>
+			<label for="story-text">Ihr Beitrag</label>
+			<textarea
+				id="story-text"
+				name="text"
+				rows="8"
+				maxlength={MAX_TEXT_LENGTH}
+				required
+				placeholder="Zum Beispiel eine Erinnerung, ein Ort, ein Mensch oder ein Moment, der für Sie zu Wangen gehört …"
+			></textarea>
+			<p class="story-counter" aria-live="polite">
+				<span data-story-count>0</span> / {MAX_TEXT_LENGTH} Zeichen
+			</p>
+
+			<label for="story-name">Name <span class="optional">(freiwillig)</span></label>
+			<input id="story-name" name="name" type="text" maxlength="80" autocomplete="name" />
+
+			{/* Honeypot – hidden from people, bots tend to fill it in */}
+			<div class="story-hp" aria-hidden="true">
+				<label for="story-website">Website</label>
+				<input id="story-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+			</div>
+
+			<label class="story-consent">
+				<input type="checkbox" name="consent" required />
+				<span>
+					Ich bin einverstanden, dass mein Beitrag und mein Name (falls angegeben) nach einer
+					Prüfung auf dieser Website veröffentlicht werden. Mehr dazu in der{' '}
+					<a href="/datenschutz/">Datenschutzerklärung</a>.
+				</span>
+			</label>
+
+			<button class="button primary" type="submit">Beitrag senden</button>
+			<p class="story-message" data-story-message role="status" hidden></p>
+		</form>
+
+	</div>
+</section>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-story-form]');
+	const list = document.querySelector<HTMLUListElement>('[data-stories-list]');
+
+	const dateFormatter = new Intl.DateTimeFormat('de-CH', {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+	});
+
+	type Story = { id: number; name: string | null; text: string; created_at: string };
+
+	// Approved stories. Rendered with textContent only, so submitted text can
+	// never be interpreted as HTML.
+	async function loadStories() {
+		if (!list) return;
+		try {
+			const res = await fetch('/api/stories');
+			if (!res.ok) return;
+			const { stories } = (await res.json()) as { stories: Story[] };
+			if (stories.length === 0) return;
+			list.replaceChildren(
+				...stories.map((s) => {
+					const li = document.createElement('li');
+					const text = document.createElement('p');
+					text.className = 'story-text';
+					text.textContent = s.text;
+					const meta = document.createElement('p');
+					meta.className = 'story-meta';
+					const date = dateFormatter.format(new Date(s.created_at.replace(' ', 'T') + 'Z'));
+					meta.textContent = s.name ? `${s.name} · ${date}` : date;
+					li.append(text, meta);
+					return li;
+				}),
+			);
+			list.hidden = false;
+		} catch {
+			// API not reachable (e.g. `astro dev` without the worker) – just show the form.
+		}
+	}
+
+	if (form) {
+		const textarea = form.querySelector<HTMLTextAreaElement>('textarea[name="text"]')!;
+		const counter = form.querySelector<HTMLElement>('[data-story-count]')!;
+		const message = form.querySelector<HTMLElement>('[data-story-message]')!;
+		const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+		const showMessage = (text: string, isError: boolean) => {
+			message.textContent = text;
+			message.classList.toggle('is-error', isError);
+			message.hidden = false;
+		};
+
+		textarea.addEventListener('input', () => {
+			counter.textContent = String(textarea.value.length);
+		});
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const data = new FormData(form);
+			const payload = {
+				text: String(data.get('text') ?? ''),
+				name: String(data.get('name') ?? ''),
+				website: String(data.get('website') ?? ''),
+				consent: data.get('consent') === 'on',
+			};
+
+			if (payload.text.trim().length < 20) {
+				showMessage('Bitte schreiben Sie mindestens 20 Zeichen.', true);
+				return;
+			}
+			if (!payload.consent) {
+				showMessage('Bitte bestätigen Sie die Einwilligung zur Veröffentlichung.', true);
+				return;
+			}
+
+			button.disabled = true;
+			try {
+				const res = await fetch('/api/stories', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload),
+				});
+				const result = await res.json().catch(() => ({}));
+				if (res.ok) {
+					form.reset();
+					counter.textContent = '0';
+					showMessage(
+						'Herzlichen Dank! Ihr Beitrag ist bei uns angekommen und erscheint nach einer kurzen Prüfung hier.',
+						false,
+					);
+				} else {
+					showMessage(result.error ?? 'Das hat leider nicht geklappt. Bitte versuchen Sie es später nochmals.', true);
+				}
+			} catch {
+				showMessage('Das hat leider nicht geklappt. Bitte versuchen Sie es später nochmals.', true);
+			} finally {
+				button.disabled = false;
+			}
+		});
+	}
+
+	loadStories();
+</script>

@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AerialGallery, { type AerialPhoto } from '../../components/AerialGallery.astro';
+import StoriesSection from '../../components/StoriesSection.astro';
+
+import wangen1948 from '../../assets/aerial/wangen_1948.jpg';
+import siebnen1953 from '../../assets/aerial/siebnen_1953.jpg';
+import wangen1955 from '../../assets/aerial/wangen_1955.jpg';
+import wangen1975 from '../../assets/aerial/wangen_1975.jpg';
+import wangen1990 from '../../assets/aerial/wangen_1990.jpg';
+import wangen2007 from '../../assets/aerial/wangen_2007.jpg';
+import wangen2018 from '../../assets/aerial/wangen_2018.jpg';
+
+const CC_BY_SA_4 = { label: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/deed.de' };
+
+const photos: AerialPhoto[] = [
+	{
+		src: wangen1948,
+		place: 'Wangen',
+		year: 1948,
+		alt: 'Schwarzweiss-Luftbild von Wangen 1948: vereinzelte Häuser zwischen Wiesen und Obstbäumen',
+		credit: 'Foto: Werner Friedli / ETH-Bibliothek Zürich, Bildarchiv, Wikimedia Commons',
+		license: CC_BY_SA_4,
+	},
+	{
+		src: siebnen1953,
+		place: 'Siebnen',
+		year: 1953,
+		alt: 'Schwarzweiss-Luftbild von Siebnen 1953 mit Blick auf die Berge',
+		credit: 'Foto: Werner Friedli / ETH-Bibliothek Zürich, Bildarchiv. Quelle: Wikimedia Commons',
+		license: CC_BY_SA_4,
+	},
+	{
+		src: wangen1955,
+		place: 'Wangen',
+		year: 1955,
+		alt: 'Schwarzweiss-Postkarte von Wangen 1955 mit Dorfkern, Kirche und Blick auf den Obersee',
+		credit: 'Foto: Postkarte, Max Eggler, Air-Technical-Works, Jona SG',
+	},
+	{
+		src: wangen1975,
+		place: 'Wangen',
+		year: 1975,
+		alt: 'Schwarzweiss-Luftbild von Wangen 1975 mit der Autobahn, die durch die Ebene führt',
+		credit: 'Foto: Hans Krebs (1938–2011) / ETH-Bibliothek Zürich, Bildarchiv',
+		license: CC_BY_SA_4,
+	},
+	{
+		src: wangen1990,
+		place: 'Wangen',
+		year: 1990,
+		alt: 'Farbiges Luftbild von Wangen 1990 mit Wohnquartieren, Feldern und dem Obersee',
+		credit: 'Foto: Photoramacolor AG / ETH-Bibliothek Zürich, Bildarchiv',
+		license: CC_BY_SA_4,
+	},
+	{
+		src: wangen2007,
+		place: 'Wangen',
+		year: 2007,
+		alt: 'Farbiges Luftbild von Wangen 2007 mit dem gewachsenen Dorf zwischen Feldern und Obersee',
+		credit: 'Foto: Schwyzer Kantonalbank (SZKB), veröffentlicht mit freundlicher Genehmigung',
+	},
+	{
+		src: wangen2018,
+		place: 'Wangen',
+		year: 2018,
+		alt: 'Luftbild von Wangen 2018 mit Dorfkern, Kirche, Schulhäusern und Neubauten',
+		credit: 'Foto: Philipp Bruhin / Wikimedia Commons',
+		license: CC_BY_SA_4,
+	},
+];
+---
+
+<Layout
+	title="Geschichten von Wangen"
+	description="Wangen im Wandel der Zeit: historische Luftbilder von 1948 bis 2018 und Erinnerungen der Menschen, die hier leben oder ihre Freizeit verbringen."
+>
+	<section class="aerial-section">
+		<AerialGallery photos={photos} />
+	</section>
+
+	<section class="hero hero-after-gallery">
+		<div class="wrap narrow">
+			<h1>Geschichten von Wangen</h1>
+			<p class="tagline">
+				Diese Bilder zeigen Wangen im Wandel der vergangenen rund 80 Jahre. Häuser, Strassen und
+				Plätze haben sich verändert. Doch zu jedem Bild gehören auch Geschichten, die man darauf
+				nicht sehen kann.
+			</p>
+			<p class="tagline">
+				Welche Erinnerungen wecken die Bilder bei Ihnen? Was gab es früher, das Wangen für Sie
+				besonders machte? Und was macht unser Dorf heute aus? Erzählen Sie uns von Orten, Menschen
+				oder Erlebnissen, die Sie mit Wangen verbinden. Wir freuen uns über kurze Kommentare ebenso
+				wie über längere Geschichten.
+			</p>
+		</div>
+	</section>
+
+	<StoriesSection />
+</Layout>

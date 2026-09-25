@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { SITE_TITLE, RESPONSIBLE_PEOPLE, CONTACT_EMAIL } from '../../consts';
 
-const lastUpdated = '9. September 2026';
+const lastUpdated = '25. September 2026';
 ---
 
 <Layout
@@ -81,7 +81,7 @@ const lastUpdated = '9. September 2026';
 					Diese Website setzt <strong>keine eigenen Cookies</strong> und verwendet{' '}
 					<strong>keine Analyse- oder Tracking-Dienste</strong> (zum Beispiel Google
 					Analytics). Ein Cookie-Banner ist deshalb nicht nötig. Die verwendeten
-					Schriftarten sind lokal auf dem Server eingebunden; es werden keine
+					Schriftarten sind lokal auf dem Server eingebunden. Es werden keine
 					Schriften von Drittanbietern nachgeladen.
 				</p>
 
@@ -98,8 +98,26 @@ const lastUpdated = '9. September 2026';
 					Namen und Wohnort, auf Wunsch zusätzlich ein Foto und ein kurzes
 					Statement. Mit der Meldung erklären Sie sich damit einverstanden, dass
 					diese Angaben auf dieser Website öffentlich veröffentlicht werden. Sie
-					können Ihre Einwilligung jederzeit widerrufen; wir entfernen Ihren
+					können Ihre Einwilligung jederzeit widerrufen. Wir entfernen Ihren
 					Eintrag dann so rasch wie möglich.
+				</p>
+
+				<h2>Beiträge «Geschichten von Wangen»</h2>
+				<p>
+					Über das Formular auf der Seite{' '}
+					<a href="/geschichten-von-wangen/">«Geschichten von Wangen»</a> können Sie freiwillig einen Text und
+					auf Wunsch Ihren Namen einreichen. Diese Angaben speichern wir zusammen
+					mit dem Zeitpunkt und Ihrer IP-Adresse in einer Datenbank bei Cloudflare.
+					Die IP-Adresse verwenden wir ausschliesslich, um Missbrauch zu verhindern
+					(höchstens drei Beiträge pro Tag). Sie wird nicht veröffentlicht und nicht
+					an Dritte weitergegeben.
+				</p>
+				<p>
+					Jeder Beitrag wird vor der Veröffentlichung von uns geprüft. Wir
+					entscheiden frei, ob und welche Beiträge wir veröffentlichen. Veröffentlicht
+					werden nur der Text, der Name (falls angegeben) und das Datum. Auf Wunsch
+					entfernen wir Ihren Beitrag jederzeit. Schreiben Sie uns dazu an{' '}
+					<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
 				</p>
 
 				<h2>Ihre Rechte</h2>
