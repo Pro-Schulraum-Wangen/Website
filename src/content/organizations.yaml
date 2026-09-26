@@ -40,6 +40,7 @@
   logo: '../assets/organizations/maennerriege_wangen.png'
 - id: march-united
   name: 'March United'
+  url: 'https://www.instagram.com/march_united/'
   logo: '../assets/organizations/march_united.png'
 - id: musikschule-obermarch
   name: 'Musikschule Region Obermarch'

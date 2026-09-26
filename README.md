@@ -12,6 +12,12 @@ page «Geschichten von Wangen» (`/geschichten-von-wangen/`): a small Cloudflare
 
 ## Run locally
 
+|                           | `npm run dev` (4321) | `npm run preview:cf` (8787)                           |
+| ------------------------- | -------------------- | ----------------------------------------------------- |
+| Website                   | ✅                   | ✅                                                    |
+| Form / posts              | ❌                   | ✅                                                    |
+| Changes show immediately  | ✅                   | ❌ you have to stop and restart it (it rebuilds first) |
+
 ```sh
 npm install
 npm run dev
@@ -25,8 +31,19 @@ npm run preview   # test the build locally
 ```
 
 `npm run dev` does not run the Worker, so the story form cannot send
-anything there. To test the form, use the Cloudflare preview instead (see
-below).
+anything there. To test the form, use `npm run preview:cf` instead
+(http://localhost:8787).
+
+About the database:
+
+- `npm run dev` uses no database at all.
+- `npm run preview:cf` uses a **local** test database in `.wrangler/` (not
+  committed). Create its table once after cloning with
+  `npm run db:migrate:local`. It survives restarts, and nothing you do there
+  touches the live data.
+- The live site uses the **remote** D1 database `wangen-stories`. Access it
+  through the Cloudflare dashboard or with `--remote` (see
+  [Stories](#stories-geschichten-von-wangen) below).
 
 ## Managing content
 
@@ -132,6 +149,13 @@ List the stories waiting for approval (note the `id`):
 SELECT id, created_at, name, text FROM stories WHERE status = 'pending' ORDER BY created_at;
 ```
 
+List all stories with every column (all statuses, IP included), oldest
+first:
+
+```sql
+SELECT * FROM stories ORDER BY created_at;
+```
+
 Approve a story (replace `5` with its `id`):
 
 ```sql
@@ -150,11 +174,16 @@ Reject a story (it stays in the database but is never shown):
 UPDATE stories SET status = 'rejected', reviewed_at = datetime('now') WHERE id = 6;
 ```
 
-Take a published story offline again, or delete it completely (e.g. on
-request):
+Take a published story offline again (replace `5` with its `id`):
 
 ```sql
 UPDATE stories SET status = 'rejected' WHERE id = 5;
+```
+
+Delete a single story permanently, e.g. on request (replace `7` with its
+`id`; this cannot be undone):
+
+```sql
 DELETE FROM stories WHERE id = 7;
 ```
 
