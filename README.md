@@ -103,6 +103,64 @@ Rules enforced by the Worker (`worker/index.js`):
 - 20–1500 characters, no links, consent checkbox required
 - a hidden honeypot field silently drops simple bots
 
+### Admin panel
+
+`/admin/` lists every story (any status), lets you change a story's status
+from a dropdown, and delete it (with a confirmation prompt). It's a plain
+static page that talks to three endpoints in `worker/index.js`:
+
+- `GET /api/admin/stories` – list all stories
+- `PATCH /api/admin/stories/:id` – change status (`{ "status": "approved" }`)
+- `DELETE /api/admin/stories/:id` – delete permanently
+
+Approving a story here makes it appear on `/geschichten-von-wangen/`
+within about a minute (the public list is cached for 60 seconds).
+
+These endpoints only check that the request carries a
+`Cf-Access-Authenticated-User-Email` header – they trust **Cloudflare
+Access** to have put it there. This means `/admin/` and `/api/admin/*` are
+wide open unless Access is configured for them in the Cloudflare dashboard
+(one-time setup, see below); there is no separate login built into the
+site itself.
+
+**One-time setup in Cloudflare (Zero Trust → Access):**
+
+1. If not done yet: **Zero Trust** → pick a team name when prompted (free).
+2. **Settings → Authentication** → make sure **One-time PIN** is enabled
+   (it is by default). This is what emails the login code – no mail setup
+   needed, Cloudflare sends it.
+3. **Access → Applications → Add an application → Self-hosted.**
+   - Domain: `pro-schulraum-wangen.ch`, path `/admin*`.
+   - Add a second path `/api/admin*` to the same application (or create a
+     second application with the same policy) – both must be covered.
+4. Add a policy: **Allow**, rule **Emails**, list every address that should
+   get access (e.g. `info@philippbruhin.ch`).
+5. Save.
+
+After that, opening `/admin/` asks for an email address, sends a one-time
+code to it, and only lets matching addresses through – before the request
+ever reaches the Worker.
+
+Locally (`npm run preview:cf`), there is no Cloudflare Access, so
+`/api/admin/*` always answers `403 Nicht autorisiert.`. To test the panel
+in the browser anyway, create a `.dev.vars` file in the repo root
+(gitignored, never deployed) with:
+
+```ini
+SKIP_ADMIN_AUTH=true
+```
+
+and restart `npm run preview:cf`. Set it back to `false` (or delete the
+file) when you're done – it only has any effect locally, but there's no
+reason to leave it on.
+
+Alternatively, without touching `.dev.vars`, you can hit the API directly
+by sending the header yourself:
+
+```sh
+curl -H "Cf-Access-Authenticated-User-Email: test@example.com" http://localhost:8787/api/admin/stories
+```
+
 ### Test locally
 
 Once after cloning (or after deleting `.wrangler/`, or after changing
@@ -134,84 +192,6 @@ npx wrangler d1 execute wangen-stories --local --command \
 
 `char(10)` inserts a line break. Leave out `status` (or use `'pending'`)
 to create a story that still needs approval.
-
-### Review and approve stories (live site, Cloudflare dashboard)
-
-1. Log in at https://dash.cloudflare.com and open
-   **Storage & databases → D1 SQLite Database → wangen-stories**.
-2. Switch to the **Console** tab.
-3. Paste one of the queries below into the input field at the bottom and
-   click **Execute**. Run one query at a time.
-
-List the stories waiting for approval (note the `id`):
-
-```sql
-SELECT id, created_at, name, text FROM stories WHERE status = 'pending' ORDER BY created_at;
-```
-
-List all stories with every column (all statuses, IP included), oldest
-first:
-
-```sql
-SELECT * FROM stories ORDER BY created_at;
-```
-
-Approve a story (replace `5` with its `id`):
-
-```sql
-UPDATE stories SET status = 'approved', reviewed_at = datetime('now') WHERE id = 5;
-```
-
-Approve several at once:
-
-```sql
-UPDATE stories SET status = 'approved', reviewed_at = datetime('now') WHERE id IN (5, 8, 9);
-```
-
-Reject a story (it stays in the database but is never shown):
-
-```sql
-UPDATE stories SET status = 'rejected', reviewed_at = datetime('now') WHERE id = 6;
-```
-
-Take a published story offline again (replace `5` with its `id`):
-
-```sql
-UPDATE stories SET status = 'rejected' WHERE id = 5;
-```
-
-Delete a single story permanently, e.g. on request (replace `7` with its
-`id`; this cannot be undone):
-
-```sql
-DELETE FROM stories WHERE id = 7;
-```
-
-Show everything that is currently published:
-
-```sql
-SELECT id, created_at, name, text FROM stories WHERE status = 'approved' ORDER BY created_at DESC;
-```
-
-Approved stories appear on `/geschichten-von-wangen/` within about a
-minute (the list is cached for 60 seconds). The **Explore Data** button
-(top right) is handy for browsing the whole table.
-
-Tip: in the console, the up/down arrow keys bring back previous queries, so
-you only need to change the `id`.
-
-### Review and approve stories (Wrangler / local)
-
-The same SQL works from the terminal. Use `--remote` for the live database
-and `--local` for the local test database:
-
-```sh
-npx wrangler d1 execute wangen-stories --remote --command \
-  "SELECT id, created_at, name, text FROM stories WHERE status = 'pending'"
-
-npx wrangler d1 execute wangen-stories --local --command \
-  "UPDATE stories SET status='approved', reviewed_at=datetime('now') WHERE id = 1"
-```
 
 ### Database changes
 

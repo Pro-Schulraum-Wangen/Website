@@ -1,0 +1,283 @@
+---
+// Internal tool, not part of the public site: no Layout, no nav, kept out
+// of search engines. Protected by Cloudflare Access, not by this page (see
+// README section "Admin panel") – anyone who reaches this URL without
+// passing Access will still hit a 403 from /api/admin/stories.
+---
+
+<!doctype html>
+<html lang="de-CH">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Admin · Stories</title>
+		<style is:global>
+			:root {
+				color-scheme: light;
+				--border: #bbb;
+				--bg-alt: #eee;
+				--pending: #b45309;
+				--approved: #15803d;
+				--rejected: #b91c1c;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				padding: 1.5rem;
+				font-family: system-ui, sans-serif;
+				background: #fff;
+				color: #111;
+			}
+			h1 {
+				font-size: 1.25rem;
+				margin: 0 0 1rem;
+			}
+			#status-message {
+				margin-bottom: 1rem;
+				font-size: 0.9rem;
+			}
+			#status-message[data-kind='error'] {
+				color: var(--rejected);
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 0.9rem;
+				border-top: 1px solid var(--border);
+			}
+			th,
+			td {
+				border-bottom: 1px solid var(--border);
+				padding: 0.6rem 0.5rem;
+				text-align: left;
+				vertical-align: top;
+			}
+			th {
+				background: var(--bg-alt);
+				border-bottom: 2px solid #888;
+				position: sticky;
+				top: 0;
+			}
+			tbody tr:nth-child(even) {
+				background: #f2f2f2;
+			}
+			tr.is-updating {
+				opacity: 0.5;
+			}
+			td.text-cell {
+				white-space: pre-wrap;
+				max-width: 32rem;
+			}
+			td.date-cell {
+				white-space: nowrap;
+				color: #555;
+			}
+			td.date-cell .time-part {
+				color: #888;
+				font-size: 0.85em;
+			}
+			td.ip-cell {
+				white-space: nowrap;
+				font-family: ui-monospace, monospace;
+				color: #555;
+			}
+			select {
+				font: inherit;
+				padding: 0.35rem 0.5rem;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background: #fff;
+				cursor: pointer;
+			}
+			select:hover {
+				border-color: #999;
+			}
+			select:focus-visible {
+				outline: 2px solid #666;
+				outline-offset: 1px;
+			}
+			select.status-pending {
+				color: var(--pending);
+				border-color: var(--pending);
+			}
+			select.status-approved {
+				color: var(--approved);
+				border-color: var(--approved);
+			}
+			select.status-rejected {
+				color: var(--rejected);
+				border-color: var(--rejected);
+			}
+			button.delete-button {
+				font: inherit;
+				padding: 0.35rem 0.7rem;
+				border: 1px solid var(--rejected);
+				color: var(--rejected);
+				background: #fff;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: background-color 0.15s ease, color 0.15s ease;
+			}
+			button.delete-button:hover {
+				background: var(--rejected);
+				color: #fff;
+			}
+			button.delete-button:focus-visible {
+				outline: 2px solid #666;
+				outline-offset: 1px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Stories – Übersicht</h1>
+		<p id="status-message">Lade …</p>
+		<table hidden id="stories-table">
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th>Name</th>
+					<th>IP</th>
+					<th>Text</th>
+					<th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="stories-body"></tbody>
+		</table>
+
+		<script>
+			const statusMessage = document.getElementById('status-message')!;
+			const table = document.getElementById('stories-table')!;
+			const tbody = document.getElementById('stories-body')!;
+
+			function setMessage(text: string, kind?: 'error') {
+				statusMessage.textContent = text;
+				if (kind) statusMessage.setAttribute('data-kind', kind);
+				else statusMessage.removeAttribute('data-kind');
+			}
+
+			function toDate(value: string) {
+				return new Date(value.replace(' ', 'T') + 'Z');
+			}
+
+			function formatDatePart(value: string) {
+				return toDate(value).toLocaleDateString('de-CH', { dateStyle: 'medium' });
+			}
+
+			function formatTimePart(value: string) {
+				return toDate(value).toLocaleTimeString('de-CH', { timeStyle: 'short' }) + ' Uhr';
+			}
+
+			type Story = {
+				id: number;
+				created_at: string;
+				name: string | null;
+				text: string;
+				status: 'pending' | 'approved' | 'rejected';
+				ip: string;
+			};
+
+			function renderRow(story: Story): HTMLTableRowElement {
+				const row = document.createElement('tr');
+				row.dataset.id = String(story.id);
+
+				const dateCell = document.createElement('td');
+				dateCell.className = 'date-cell';
+				const dateLine = document.createElement('div');
+				dateLine.textContent = formatDatePart(story.created_at);
+				const timeLine = document.createElement('div');
+				timeLine.className = 'time-part';
+				timeLine.textContent = formatTimePart(story.created_at);
+				dateCell.append(dateLine, timeLine);
+
+				const nameCell = document.createElement('td');
+				nameCell.textContent = story.name || '–';
+
+				const ipCell = document.createElement('td');
+				ipCell.className = 'ip-cell';
+				ipCell.textContent = story.ip;
+
+				const textCell = document.createElement('td');
+				textCell.className = 'text-cell';
+				textCell.textContent = story.text;
+
+				const statusCell = document.createElement('td');
+				const select = document.createElement('select');
+				select.className = `status-${story.status}`;
+				select.dataset.previousValue = story.status;
+				for (const value of ['pending', 'approved', 'rejected'] as const) {
+					const option = document.createElement('option');
+					option.value = value;
+					option.textContent = value;
+					if (value === story.status) option.selected = true;
+					select.appendChild(option);
+				}
+				select.addEventListener('change', () => updateStatus(story.id, select));
+				statusCell.appendChild(select);
+
+				const actionCell = document.createElement('td');
+				const deleteButton = document.createElement('button');
+				deleteButton.type = 'button';
+				deleteButton.className = 'delete-button';
+				deleteButton.textContent = 'Löschen';
+				deleteButton.addEventListener('click', () => deleteStory(story.id, row));
+				actionCell.appendChild(deleteButton);
+
+				row.append(dateCell, nameCell, ipCell, textCell, statusCell, actionCell);
+				return row;
+			}
+
+			async function updateStatus(id: number, select: HTMLSelectElement) {
+				const row = select.closest('tr')!;
+				const previousValue = select.dataset.previousValue!;
+				row.classList.add('is-updating');
+				try {
+					const res = await fetch(`/api/admin/stories/${id}`, {
+						method: 'PATCH',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ status: select.value }),
+					});
+					if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+					select.className = `status-${select.value}`;
+					select.dataset.previousValue = select.value;
+				} catch (err) {
+					select.value = previousValue;
+					setMessage(`Status konnte nicht geändert werden: ${(err as Error).message}`, 'error');
+				} finally {
+					row.classList.remove('is-updating');
+				}
+			}
+
+			async function deleteStory(id: number, row: HTMLTableRowElement) {
+				if (!confirm('Diese Story wirklich unwiderruflich löschen?')) return;
+				row.classList.add('is-updating');
+				try {
+					const res = await fetch(`/api/admin/stories/${id}`, { method: 'DELETE' });
+					if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+					row.remove();
+				} catch (err) {
+					row.classList.remove('is-updating');
+					setMessage(`Löschen fehlgeschlagen: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			async function load() {
+				try {
+					const res = await fetch('/api/admin/stories');
+					if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+					const { stories } = (await res.json()) as { stories: Story[] };
+					tbody.replaceChildren(...stories.map(renderRow));
+					table.hidden = false;
+					setMessage(`${stories.length} Stories geladen.`);
+				} catch (err) {
+					setMessage(`Konnte Stories nicht laden: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			load();
+		</script>
+	</body>
+</html>

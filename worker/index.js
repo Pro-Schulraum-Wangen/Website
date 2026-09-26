@@ -2,8 +2,21 @@
 // Only requests to /api/* reach this code (see `run_worker_first` in
 // wrangler.jsonc); every other page is served straight from ./dist.
 //
-//   POST /api/stories  – submit a story (stored as 'pending')
-//   GET  /api/stories  – list approved stories for the homepage
+//   POST /api/stories               – submit a story (stored as 'pending')
+//   GET  /api/stories               – list approved stories for the homepage
+//   GET    /api/admin/stories       – list every story, any status (admin panel)
+//   PATCH  /api/admin/stories/:id   – change a story's status
+//   DELETE /api/admin/stories/:id   – delete a story permanently
+//
+// The /api/admin/* routes are meant to sit behind Cloudflare Access (see
+// README section "Admin panel"). Access injects the
+// Cf-Access-Authenticated-User-Email header only on requests it has
+// authenticated, so requiring that header here fails closed if the Access
+// application is ever missing or misconfigured for these paths.
+//
+// Access doesn't run against local `wrangler dev`, so there's no way to get
+// that header locally. Set SKIP_ADMIN_AUTH=true in a local-only `.dev.vars`
+// file (never committed, never deployed) to bypass the check while testing.
 
 // Roughly half an A4 page of running text.
 const MAX_TEXT_LENGTH = 1500;
@@ -21,11 +34,35 @@ export default {
 			return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'GET, POST' });
 		}
 
+		if (pathname.startsWith('/api/admin/')) {
+			if (!isAuthorizedAdmin(request, env)) return json({ error: 'Nicht autorisiert.' }, 403);
+
+			if (pathname === '/api/admin/stories') {
+				if (request.method === 'GET') return listAllStories(env);
+				return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'GET' });
+			}
+
+			const match = pathname.match(/^\/api\/admin\/stories\/(\d+)$/);
+			if (match) {
+				const id = Number(match[1]);
+				if (request.method === 'PATCH') return updateStoryStatus(request, env, id);
+				if (request.method === 'DELETE') return deleteStory(env, id);
+				return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'PATCH, DELETE' });
+			}
+
+			return json({ error: 'Nicht gefunden.' }, 404);
+		}
+
 		if (pathname.startsWith('/api/')) return json({ error: 'Nicht gefunden.' }, 404);
 
 		return env.ASSETS.fetch(request);
 	},
 };
+
+function isAuthorizedAdmin(request, env) {
+	if (env.SKIP_ADMIN_AUTH === 'true') return true;
+	return Boolean(request.headers.get('Cf-Access-Authenticated-User-Email'));
+}
 
 async function listStories(env) {
 	const { results } = await env.DB.prepare(
@@ -85,6 +122,43 @@ async function submitStory(request, env) {
 		.run();
 
 	return json({ ok: true }, 201);
+}
+
+async function listAllStories(env) {
+	const { results } = await env.DB.prepare(
+		`SELECT id, created_at, name, text, status, reviewed_at, ip FROM stories
+		 ORDER BY created_at DESC`,
+	).all();
+	return json({ stories: results });
+}
+
+async function updateStoryStatus(request, env, id) {
+	let body;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: 'Ungültige Anfrage.' }, 400);
+	}
+
+	if (!['pending', 'approved', 'rejected'].includes(body.status)) {
+		return json({ error: 'Ungültiger Status.' }, 400);
+	}
+
+	const { meta } = await env.DB.prepare(
+		`UPDATE stories SET status = ?, reviewed_at = datetime('now') WHERE id = ?`,
+	)
+		.bind(body.status, id)
+		.run();
+	if (meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
+
+	return json({ ok: true });
+}
+
+async function deleteStory(env, id) {
+	const { meta } = await env.DB.prepare('DELETE FROM stories WHERE id = ?').bind(id).run();
+	if (meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
+
+	return json({ ok: true });
 }
 
 // Plain text only: normalises line breaks, drops control characters and
