@@ -106,11 +106,13 @@ Rules enforced by the Worker (`worker/index.js`):
 ### Admin panel
 
 `/admin/` lists every story (any status), lets you change a story's status
-from a dropdown, and delete it (with a confirmation prompt). It's a plain
+from a dropdown, edit its name and text ("Bearbeiten"), and delete it (with
+a confirmation prompt). It's a plain
 static page that talks to three endpoints in `worker/index.js`:
 
 - `GET /api/admin/stories` – list all stories
-- `PATCH /api/admin/stories/:id` – change status (`{ "status": "approved" }`)
+- `PATCH /api/admin/stories/:id` – change any of `status`, `name`, `text`
+  (e.g. `{ "status": "approved" }` or `{ "name": "Maria", "text": "…" }`)
 - `DELETE /api/admin/stories/:id` – delete permanently
 
 Approving a story here makes it appear on `/geschichten-von-wangen/`

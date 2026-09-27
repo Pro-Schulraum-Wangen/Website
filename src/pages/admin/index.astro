@@ -111,6 +111,72 @@
 				color: var(--rejected);
 				border-color: var(--rejected);
 			}
+			td.action-cell {
+				white-space: nowrap;
+			}
+			td.action-cell button + button {
+				margin-left: 0.4rem;
+			}
+			button.edit-button,
+			button.cancel-button {
+				font: inherit;
+				padding: 0.35rem 0.7rem;
+				border: 1px solid #888;
+				color: #333;
+				background: #fff;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: background-color 0.15s ease, color 0.15s ease;
+			}
+			button.edit-button:hover,
+			button.cancel-button:hover {
+				background: #333;
+				color: #fff;
+			}
+			button.save-button {
+				font: inherit;
+				padding: 0.35rem 0.7rem;
+				border: 1px solid var(--approved);
+				color: #fff;
+				background: var(--approved);
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			button.save-button:hover {
+				filter: brightness(1.1);
+			}
+			button:disabled {
+				opacity: 0.5;
+				cursor: default;
+			}
+			button:focus-visible,
+			input:focus-visible,
+			textarea:focus-visible {
+				outline: 2px solid #666;
+				outline-offset: 1px;
+			}
+			input.name-input,
+			textarea.text-input {
+				font: inherit;
+				width: 100%;
+				padding: 0.35rem 0.5rem;
+				border: 1px solid #999;
+				border-radius: 4px;
+				background: #fff;
+			}
+			textarea.text-input {
+				min-width: 24rem;
+				min-height: 10rem;
+				resize: vertical;
+			}
+			.char-count {
+				margin-top: 0.25rem;
+				font-size: 0.8rem;
+				color: #666;
+			}
+			.char-count.is-over {
+				color: var(--rejected);
+			}
 			button.delete-button {
 				font: inherit;
 				padding: 0.35rem 0.7rem;
@@ -152,6 +218,10 @@
 			const statusMessage = document.getElementById('status-message')!;
 			const table = document.getElementById('stories-table')!;
 			const tbody = document.getElementById('stories-body')!;
+
+			// Keep in sync with MAX_NAME_LENGTH / MAX_TEXT_LENGTH in worker/index.js.
+			const MAX_NAME_LENGTH = 80;
+			const MAX_TEXT_LENGTH = 1500;
 
 			function setMessage(text: string, kind?: 'error') {
 				statusMessage.textContent = text;
@@ -215,10 +285,18 @@
 					if (value === story.status) option.selected = true;
 					select.appendChild(option);
 				}
-				select.addEventListener('change', () => updateStatus(story.id, select));
+				select.addEventListener('change', () => updateStatus(story, select));
 				statusCell.appendChild(select);
 
 				const actionCell = document.createElement('td');
+				actionCell.className = 'action-cell';
+				const editButton = document.createElement('button');
+				editButton.type = 'button';
+				editButton.className = 'edit-button';
+				editButton.textContent = 'Bearbeiten';
+				editButton.addEventListener('click', () => startEditing(story, row));
+				actionCell.appendChild(editButton);
+
 				const deleteButton = document.createElement('button');
 				deleteButton.type = 'button';
 				deleteButton.className = 'delete-button';
@@ -230,12 +308,72 @@
 				return row;
 			}
 
-			async function updateStatus(id: number, select: HTMLSelectElement) {
+			function startEditing(story: Story, row: HTMLTableRowElement) {
+				const [, nameCell, , textCell, , actionCell] = row.children as unknown as HTMLTableCellElement[];
+
+				const nameInput = document.createElement('input');
+				nameInput.type = 'text';
+				nameInput.className = 'name-input';
+				nameInput.maxLength = MAX_NAME_LENGTH;
+				nameInput.placeholder = 'Anonym';
+				nameInput.value = story.name ?? '';
+				nameCell.replaceChildren(nameInput);
+
+				const textInput = document.createElement('textarea');
+				textInput.className = 'text-input';
+				textInput.value = story.text;
+				const charCount = document.createElement('div');
+				charCount.className = 'char-count';
+				const updateCharCount = () => {
+					charCount.textContent = `${textInput.value.length} / ${MAX_TEXT_LENGTH} Zeichen`;
+					charCount.classList.toggle('is-over', textInput.value.length > MAX_TEXT_LENGTH);
+				};
+				textInput.addEventListener('input', updateCharCount);
+				updateCharCount();
+				textCell.classList.remove('text-cell');
+				textCell.replaceChildren(textInput, charCount);
+
+				const saveButton = document.createElement('button');
+				saveButton.type = 'button';
+				saveButton.className = 'save-button';
+				saveButton.textContent = 'Speichern';
+
+				const cancelButton = document.createElement('button');
+				cancelButton.type = 'button';
+				cancelButton.className = 'cancel-button';
+				cancelButton.textContent = 'Abbrechen';
+				cancelButton.addEventListener('click', () => row.replaceWith(renderRow(story)));
+
+				saveButton.addEventListener('click', async () => {
+					saveButton.disabled = cancelButton.disabled = true;
+					row.classList.add('is-updating');
+					try {
+						const res = await fetch(`/api/admin/stories/${story.id}`, {
+							method: 'PATCH',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({ name: nameInput.value, text: textInput.value }),
+						});
+						const data = await res.json().catch(() => ({}));
+						if (!res.ok) throw new Error(data.error || res.statusText);
+						row.replaceWith(renderRow(data.story as Story));
+						setMessage('Änderungen gespeichert.');
+					} catch (err) {
+						row.classList.remove('is-updating');
+						saveButton.disabled = cancelButton.disabled = false;
+						setMessage(`Speichern fehlgeschlagen: ${(err as Error).message}`, 'error');
+					}
+				});
+
+				actionCell.replaceChildren(saveButton, cancelButton);
+				textInput.focus();
+			}
+
+			async function updateStatus(story: Story, select: HTMLSelectElement) {
 				const row = select.closest('tr')!;
 				const previousValue = select.dataset.previousValue!;
 				row.classList.add('is-updating');
 				try {
-					const res = await fetch(`/api/admin/stories/${id}`, {
+					const res = await fetch(`/api/admin/stories/${story.id}`, {
 						method: 'PATCH',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ status: select.value }),
@@ -243,6 +381,7 @@
 					if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
 					select.className = `status-${select.value}`;
 					select.dataset.previousValue = select.value;
+					story.status = select.value as Story['status'];
 				} catch (err) {
 					select.value = previousValue;
 					setMessage(`Status konnte nicht geändert werden: ${(err as Error).message}`, 'error');

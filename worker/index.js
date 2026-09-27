@@ -5,7 +5,7 @@
 //   POST /api/stories               – submit a story (stored as 'pending')
 //   GET  /api/stories               – list approved stories for the homepage
 //   GET    /api/admin/stories       – list every story, any status (admin panel)
-//   PATCH  /api/admin/stories/:id   – change a story's status
+//   PATCH  /api/admin/stories/:id   – change a story's status, name and/or text
 //   DELETE /api/admin/stories/:id   – delete a story permanently
 //
 // The /api/admin/* routes are meant to sit behind Cloudflare Access (see
@@ -45,7 +45,7 @@ export default {
 			const match = pathname.match(/^\/api\/admin\/stories\/(\d+)$/);
 			if (match) {
 				const id = Number(match[1]);
-				if (request.method === 'PATCH') return updateStoryStatus(request, env, id);
+				if (request.method === 'PATCH') return updateStory(request, env, id);
 				if (request.method === 'DELETE') return deleteStory(env, id);
 				return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'PATCH, DELETE' });
 			}
@@ -132,7 +132,10 @@ async function listAllStories(env) {
 	return json({ stories: results });
 }
 
-async function updateStoryStatus(request, env, id) {
+// Accepts any combination of `status`, `name` and `text`; fields left out
+// stay unchanged. Only a status change counts as a review, so editing the
+// wording alone doesn't touch reviewed_at.
+async function updateStory(request, env, id) {
 	let body;
 	try {
 		body = await request.json();
@@ -140,18 +143,47 @@ async function updateStoryStatus(request, env, id) {
 		return json({ error: 'Ungültige Anfrage.' }, 400);
 	}
 
-	if (!['pending', 'approved', 'rejected'].includes(body.status)) {
-		return json({ error: 'Ungültiger Status.' }, 400);
+	const assignments = [];
+	const values = [];
+
+	if ('status' in body) {
+		if (!['pending', 'approved', 'rejected'].includes(body.status)) {
+			return json({ error: 'Ungültiger Status.' }, 400);
+		}
+		assignments.push('status = ?', "reviewed_at = datetime('now')");
+		values.push(body.status);
 	}
 
-	const { meta } = await env.DB.prepare(
-		`UPDATE stories SET status = ?, reviewed_at = datetime('now') WHERE id = ?`,
-	)
-		.bind(body.status, id)
-		.run();
-	if (meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
+	if ('name' in body) {
+		const name = cleanLine(body.name);
+		if (name.length > MAX_NAME_LENGTH) {
+			return json({ error: `Der Name darf höchstens ${MAX_NAME_LENGTH} Zeichen lang sein.` }, 400);
+		}
+		assignments.push('name = ?');
+		values.push(name || null);
+	}
 
-	return json({ ok: true });
+	if ('text' in body) {
+		const text = cleanText(body.text);
+		if (!text) return json({ error: 'Der Text darf nicht leer sein.' }, 400);
+		if (text.length > MAX_TEXT_LENGTH) {
+			return json({ error: `Der Text darf höchstens ${MAX_TEXT_LENGTH} Zeichen lang sein.` }, 400);
+		}
+		assignments.push('text = ?');
+		values.push(text);
+	}
+
+	if (assignments.length === 0) return json({ error: 'Keine Änderungen angegeben.' }, 400);
+
+	const story = await env.DB.prepare(
+		`UPDATE stories SET ${assignments.join(', ')} WHERE id = ?
+		 RETURNING id, created_at, name, text, status, reviewed_at, ip`,
+	)
+		.bind(...values, id)
+		.first();
+	if (!story) return json({ error: 'Nicht gefunden.' }, 404);
+
+	return json({ ok: true, story });
 }
 
 async function deleteStory(env, id) {
