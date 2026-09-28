@@ -57,7 +57,7 @@ export const RESPONSIBLE_PEOPLE = [
 	},
 	{
 		name: 'Julia Cotti',
-		role: 'Kantonsrätin FTP',
+		role: 'Kantonsrätin FDP',
 		email: 'julia@cottis.ch',
 	},
 	{

@@ -16,11 +16,9 @@
   url: 'https://www.dtvwangensz.ch/'
   logo: '../assets/organizations/dtv_wangen.png'
 - id: fdp-wangen
-  name: 'FDP Wangen SZ'
+  name: 'FDP Wangen'
   url: 'https://www.fdp-sz.ch/partei/orts-und-bezirksparteien/wangen'
   logo: '../assets/organizations/fdp_wangen.jpg'
-  background: '#12a7e3'
-  published: false # wartet auf Rückmeldung der FDP
 - id: ftv-wangen
   name: 'Frauenturnverein Wangen SZ'
   url: 'https://www.ftv-wangensz.ch/'
