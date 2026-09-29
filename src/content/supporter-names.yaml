@@ -532,6 +532,10 @@
   name: 'Karin Vogel'
   lastName: 'Vogel'
   location: 'Wangen'
+- id: hanswerner-vogt
+  name: 'Hanswerner Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
 - id: jasmine-vogt
   name: 'Jasmine Vogt'
   lastName: 'Vogt'
