@@ -484,6 +484,10 @@
   name: 'Marcel Schwendeler'
   lastName: 'Schwendeler'
   location: 'Wangen'
+- id: remo-schaerer
+  name: 'Remo Schärer'
+  lastName: 'Schärer'
+  location: 'Wangen'
 - id: patrik-schaettin
   name: 'Patrik Schättin'
   lastName: 'Schättin'
