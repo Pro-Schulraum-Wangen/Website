@@ -52,6 +52,10 @@
   name: 'Red Devils March-Höfe Altendorf'
   url: 'https://www.reddevils.ch/'
   logo: '../assets/organizations/red_devils.png'
+- id: sc-siebnen
+  name: 'SC Siebnen'
+  url: 'https://www.sc-siebnen.ch/'
+  logo: '../assets/organizations/sc_siebnen_logo.jpg'
 - id: sp-wangen
   name: 'SP Wangen'
   url: 'https://spschwyz.ch/sp-wangen/'
