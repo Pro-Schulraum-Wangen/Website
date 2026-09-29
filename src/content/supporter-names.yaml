@@ -432,6 +432,10 @@
   name: 'Sinja Schmuckli'
   lastName: 'Schmuckli'
   location: 'Wangen'
+- id: roland-schneider
+  name: 'Roland Schneider'
+  lastName: 'Schneider'
+  location: 'Wangen'
 - id: barbara-schnellmann
   name: 'Barbara Schnellmann'
   lastName: 'Schnellmann'
