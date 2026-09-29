@@ -45,7 +45,7 @@
   lastName: 'Bruhin'
   location: 'Wangen'
 - id: joerg-bruhin
-  name: 'Jörg Bruhin'
+  name: 'Jörg Bruhin (1982)'
   lastName: 'Bruhin'
   location: 'Wangen'
 - id: markus-bruhin
@@ -111,7 +111,7 @@
 - id: peter-elmer
   name: 'Peter Elmer'
   lastName: 'Elmer'
-  location: 'Siebnen'
+  location: 'Siebnen-Galgenen'
 - id: iria-fernandez
   name: 'Iria Fernandez'
   lastName: 'Fernandez'
@@ -383,6 +383,10 @@
 - id: ramona-roth
   name: 'Ramona Roth'
   lastName: 'Roth'
+  location: 'Wangen'
+- id: irene-rothlin
+  name: 'Irene Rothlin'
+  lastName: 'Rothlin'
   location: 'Wangen'
 - id: andrea-rusch
   name: 'Andrea Rusch'
