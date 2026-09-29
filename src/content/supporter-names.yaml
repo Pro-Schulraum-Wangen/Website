@@ -248,6 +248,10 @@
   name: 'Christa Hüppin Coray'
   lastName: 'Hüppin Coray'
   location: 'Wangen'
+- id: freddy-iten
+  name: 'Freddy Iten'
+  lastName: 'Iten'
+  location: 'Wangen'
 - id: erika-kalt
   name: 'Erika Kalt'
   lastName: 'Kalt'
@@ -328,6 +332,14 @@
   name: 'Marylène Messina'
   lastName: 'Messina'
   location: 'Siebnen'
+- id: erich-morgenthaler
+  name: 'Erich Morgenthaler'
+  lastName: 'Morgenthaler'
+  location: 'Wangen'
+- id: monika-morgenthaler
+  name: 'Monika Morgenthaler'
+  lastName: 'Morgenthaler'
+  location: 'Wangen'
 - id: jonas-maechler
   name: 'Jonas Mächler'
   lastName: 'Mächler'
@@ -388,6 +400,10 @@
   name: 'Tanja Rüegg'
   lastName: 'Rüegg'
   location: 'Altendorf'
+- id: thomas-rueegge
+  name: 'Thomas Rüegge'
+  lastName: 'Rüegge'
+  location: 'Wangen'
 - id: anja-schmid
   name: 'Anja Schmid'
   lastName: 'Schmid'
@@ -420,6 +436,10 @@
   name: 'Daniela Schnellmann'
   lastName: 'Schnellmann'
   location: 'Wangen'
+- id: hans-schnellmann
+  name: 'Hans Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen / Galgenen'
 - id: janis-schnellmann
   name: 'Janis Schnellmann'
   lastName: 'Schnellmann'
