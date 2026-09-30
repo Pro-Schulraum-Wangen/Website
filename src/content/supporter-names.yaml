@@ -400,6 +400,10 @@
   name: 'Andrea Rusch'
   lastName: 'Rusch'
   location: 'Wangen'
+- id: christoph-rusch
+  name: 'Christoph Rusch'
+  lastName: 'Rusch'
+  location: 'Wangen'
 - id: hans-rusch
   name: 'Hans Rusch'
   lastName: 'Rusch'
@@ -444,6 +448,10 @@
   name: 'Roland Schneider'
   lastName: 'Schneider'
   location: 'Wangen'
+- id: adrian-schnellmann
+  name: 'Adrian Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Lachen'
 - id: barbara-schnellmann
   name: 'Barbara Schnellmann'
   lastName: 'Schnellmann'
@@ -476,6 +484,10 @@
   name: 'Timo Schnellmann'
   lastName: 'Schnellmann'
   location: 'Zürich'
+- id: yvonne-schnellmann
+  name: 'Yvonne Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
 - id: elias-schnidrig
   name: 'Elias Schnidrig'
   lastName: 'Schnidrig'
