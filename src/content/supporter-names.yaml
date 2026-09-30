@@ -292,12 +292,20 @@
   name: 'Urs Küttel'
   lastName: 'Küttel'
   location: 'Wangen'
+- id: bettina-laib
+  name: 'Bettina Laib'
+  lastName: 'Laib'
+  location: 'Wangen'
 - id: claudia-laib
   name: 'Claudia Laib'
   lastName: 'Laib'
   location: 'Wangen'
 - id: daniel-josef-laib
   name: 'Daniel Josef Laib'
+  lastName: 'Laib'
+  location: 'Wangen'
+- id: silvan-laib
+  name: 'Silvan Laib'
   lastName: 'Laib'
   location: 'Wangen'
 - id: martin-landolt
