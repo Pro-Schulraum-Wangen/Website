@@ -52,6 +52,14 @@
   name: 'Markus Bruhin'
   lastName: 'Bruhin'
   location: 'Wangen'
+- id: meinrad-bruhin
+  name: 'Meinrad Bruhin'
+  lastName: 'Bruhin'
+  location: 'Siebnen'
+- id: rita-bruhin
+  name: 'Rita Bruhin'
+  lastName: 'Bruhin'
+  location: 'Siebnen'
 - id: romana-bruhin
   name: 'Romana Bruhin'
   lastName: 'Bruhin'
@@ -444,8 +452,16 @@
   name: 'Sinja Schmuckli'
   lastName: 'Schmuckli'
   location: 'Wangen'
+- id: jana-schneider
+  name: 'Jana Schneider'
+  lastName: 'Schneider'
+  location: 'Wangen'
 - id: roland-schneider
   name: 'Roland Schneider'
+  lastName: 'Schneider'
+  location: 'Wangen'
+- id: sonja-schneider
+  name: 'Sonja Schneider'
   lastName: 'Schneider'
   location: 'Wangen'
 - id: adrian-schnellmann
@@ -528,6 +544,10 @@
   name: 'Silvan Seunig'
   lastName: 'Seunig'
   location: 'Wangen'
+- id: cristina-sogne
+  name: 'Cristina Sogne'
+  lastName: 'Sogne'
+  location: 'Siebnen'
 - id: corinne-stocker
   name: 'Corinne Stocker'
   lastName: 'Stocker'
