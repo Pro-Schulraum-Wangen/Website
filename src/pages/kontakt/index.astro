@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { SITE_TITLE, RESPONSIBLE_PEOPLE, CONTACT_EMAIL } from '../../consts';
+import komiteeImg from '../../assets/pro-komitee.jpg';
+
+// Committee members in the order they appear on the photo (left to right);
+// the remaining entries (webmaster) also receive mail sent to CONTACT_EMAIL.
+const committee = RESPONSIBLE_PEOPLE.filter((p) => p.role !== 'Webmaster');
+const webmaster = RESPONSIBLE_PEOPLE.find((p) => p.role === 'Webmaster');
+---
+
+<Layout
+	title="Kontakt"
+	description={`So erreichen Sie das Komitee ${SITE_TITLE}.`}
+>
+	<section class="hero">
+		<div class="wrap narrow">
+			<h1>Kontakt</h1>
+			<p class="tagline">
+				Fragen, Anregungen oder Kritik zum Projekt oder zu dieser Website? Wir freuen uns
+				über Ihre Nachricht.
+			</p>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap narrow">
+			<article class="prose">
+				<figure style="margin: 0 0 2rem;">
+					<Image
+						src={komiteeImg}
+						alt={`Das Komitee ${SITE_TITLE}: ${committee.map((p) => p.name).join(', ')}`}
+						width={1000}
+						quality={70}
+						format="webp"
+						style="display: block; width: 100%; height: auto; box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);"
+					/>
+					<figcaption style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-text-muted);">
+						Von links nach rechts: {committee.map((p) => p.name).join(', ')}
+					</figcaption>
+				</figure>
+
+				<h2>Das Komitee</h2>
+				<ul>
+					{
+						committee.map((p) => (
+							<li>
+								<strong>{p.name}</strong> – {p.role}
+							</li>
+						))
+					}
+				</ul>
+
+				<h2>Schreiben Sie uns</h2>
+				<p>
+					<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+				</p>
+				<p>
+					Ihre Nachricht geht an alle drei Mitglieder des Komitees
+					{webmaster && <> sowie an unseren Webmaster {webmaster.name}</>}.
+				</p>
+				<p>
+					Wie wir mit Ihren Angaben umgehen, lesen Sie in unserer{' '}
+					<a href="/datenschutz/">Datenschutzerklärung</a>.
+				</p>
+			</article>
+		</div>
+	</section>
+</Layout>
