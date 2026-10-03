@@ -444,6 +444,10 @@
   name: 'Petra Schmid'
   lastName: 'Schmid'
   location: 'Siebnen'
+- id: ramona-schmidlin
+  name: 'Ramona Schmidlin'
+  lastName: 'Schmidlin'
+  location: 'Galgenen'
 - id: claudia-schmuckli
   name: 'Claudia Schmuckli'
   lastName: 'Schmuckli'
