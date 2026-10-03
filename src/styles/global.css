@@ -1807,6 +1807,20 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	margin-top: 4rem;
 }
 
+/* Responsive YouTube embed, as wide as the surrounding text column */
+.video-embed {
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+}
+
+.video-embed iframe {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	height: auto;
+	border: 0;
+}
+
 /* «Geschichten von Wangen»: full-width aerial photo gallery */
 .aerial-section {
 	padding-bottom: 1rem;
