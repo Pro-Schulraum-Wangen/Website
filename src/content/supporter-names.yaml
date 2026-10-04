@@ -76,6 +76,10 @@
   name: 'Urs Bruhin'
   lastName: 'Bruhin'
   location: 'Wangen'
+- id: urs-bruhin-nuolen
+  name: 'Urs Bruhin'
+  lastName: 'Bruhin'
+  location: 'Nuolen'
 - id: ivo-baechtiger
   name: 'Ivo Bächtiger'
   lastName: 'Bächtiger'
@@ -131,6 +135,10 @@
 - id: roland-fontana
   name: 'Roland Fontana'
   lastName: 'Fontana'
+  location: 'Wangen'
+- id: rebecca-frischknecht
+  name: 'Rebecca Frischknecht'
+  lastName: 'Frischknecht'
   location: 'Wangen'
 - id: sarah-faessler
   name: 'Sarah Fässler'
