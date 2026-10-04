@@ -96,6 +96,10 @@
   name: 'Dario Donner'
   lastName: 'Donner'
   location: 'Wangen'
+- id: mira-donner
+  name: 'Mira Donner'
+  lastName: 'Donner'
+  location: 'Wangen'
 - id: regula-donner
   name: 'Regula Donner'
   lastName: 'Donner'
