@@ -396,6 +396,10 @@
   name: 'Dominik Richle'
   lastName: 'Richle'
   location: 'Wangen'
+- id: eliane-roth
+  name: 'Eliane Roth'
+  lastName: 'Roth'
+  location: 'Siebnen'
 - id: ramona-roth
   name: 'Ramona Roth'
   lastName: 'Roth'
@@ -438,6 +442,10 @@
   location: 'Siebnen'
 - id: karin-schmid
   name: 'Karin Schmid'
+  lastName: 'Schmid'
+  location: 'Siebnen'
+- id: livia-schmid
+  name: 'Livia Schmid'
   lastName: 'Schmid'
   location: 'Siebnen'
 - id: petra-schmid
@@ -596,6 +604,10 @@
   name: 'Martina Vogt'
   lastName: 'Vogt'
   location: 'Wangen'
+- id: paul-vogt
+  name: 'Paul Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
 - id: alessia-waser
   name: 'Alessia Waser'
   lastName: 'Waser'
@@ -623,6 +635,10 @@
 - id: carlo-weiss
   name: 'Carlo Weiss'
   lastName: 'Weiss'
+  location: 'Wangen'
+- id: alex-wosinski
+  name: 'Alex Wosinski'
+  lastName: 'Wosinski'
   location: 'Wangen'
 - id: brigitta-zimmermann
   name: 'Brigitta Zimmermann'

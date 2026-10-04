@@ -19,6 +19,8 @@ export const DOCUMENTS = {
 	nettoverschuldung2025: '/dokumente/Schwyzer_Gemeinden_Nettoverschuldung_2025.pdf',
 	// Scan des March-Anzeiger-Artikels der SVP Wangen vom 4. September 2026.
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
+	// Scan des ersten SVP-Flyer-Beitrags im March-Anzeiger vom 23. September 2026.
+	marchanzeigerSvpFlyer1: '/dokumente/2026-09-23_Marchanzeiger_SVP-Flyer_Teil_1.jpg',
 	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
 	zustandsbericht: '/dokumente/2022.11.30_Zustandsbericht_mit_groben_Sanierungskonzept.pdf',
 	// Rechnung 2023 der Gemeinde Wangen SZ.
