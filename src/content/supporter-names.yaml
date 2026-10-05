@@ -420,6 +420,10 @@
   name: 'Irene Rothlin'
   lastName: 'Rothlin'
   location: 'Wangen'
+- id: erika-ruoss
+  name: 'Erika Ruoss'
+  lastName: 'Ruoss'
+  location: 'Siebnen'
 - id: andrea-rusch
   name: 'Andrea Rusch'
   lastName: 'Rusch'
@@ -506,6 +510,10 @@
   location: 'Wangen / Galgenen'
 - id: janis-schnellmann
   name: 'Janis Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: leonie-schnellmann
+  name: 'Leonie Schnellmann'
   lastName: 'Schnellmann'
   location: 'Wangen'
 - id: manuela-schnellmann
