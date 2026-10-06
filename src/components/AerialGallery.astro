@@ -1,6 +1,6 @@
 ---
 // Full-width, swipeable gallery of historic aerial photos of Wangen and Siebnen.
-// Native horizontal scrolling with scroll-snap; the buttons and year chips are
+// Native horizontal scrolling with scroll-snap; the buttons and dots are
 // a small progressive enhancement on top.
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
@@ -20,13 +20,33 @@ interface Props {
 }
 
 const { photos } = Astro.props;
+
+// Unique anchor per photo – several photos can share a year (and even a place),
+// so the id is built from place + year with a counter for repeats.
+const seen = new Map<string, number>();
+const slideIds = photos.map((p) => {
+	const base = `luftbild-${p.place.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${p.year}`;
+	const n = (seen.get(base) ?? 0) + 1;
+	seen.set(base, n);
+	return n === 1 ? base : `${base}-${n}`;
+});
+
+// Dots are grouped by decade, each group labelled below («1970er»). Groups
+// follow the photo order, so the dots stay in the same order as the slides.
+const decades: { label: string; items: { photo: AerialPhoto; index: number }[] }[] = [];
+photos.forEach((photo, index) => {
+	const label = `${Math.floor(photo.year / 10) * 10}er`;
+	const last = decades.at(-1);
+	if (last?.label === label) last.items.push({ photo, index });
+	else decades.push({ label, items: [{ photo, index }] });
+});
 ---
 
 <div class="aerial-gallery" data-aerial-gallery>
-	<div class="aerial-track" id="aerial-track" tabindex="0" aria-label="Luftbilder von Wangen und Siebnen, von 1948 bis 2018" data-aerial-track>
+	<div class="aerial-track" id="aerial-track" tabindex="0" aria-label="Luftbilder von Wangen, Nuolen und Siebnen, von 1948 bis 2018" data-aerial-track>
 		{
 			photos.map((p, i) => (
-				<figure class="aerial-slide" id={`luftbild-${p.year}`} data-aerial-slide>
+				<figure class="aerial-slide" id={slideIds[i]} data-aerial-slide>
 					<div class="aerial-media">
 						<Image
 							src={p.src}
@@ -65,12 +85,17 @@ const { photos } = Astro.props;
 		<button type="button" class="aerial-arrow" data-aerial-prev aria-label="Vorheriges Bild">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17-5-5 5-5" /><path d="m18 17-5-5 5-5" /></svg>
 		</button>
-		<nav class="aerial-years" aria-label="Jahr auswählen">
+		<nav class="aerial-dots" aria-label="Bild auswählen">
 			{
-				photos.map((p) => (
-					<a href={`#luftbild-${p.year}`} data-aerial-chip>
-						{p.year}
-					</a>
+				decades.map((d) => (
+					<div class="aerial-decade">
+						<div class="aerial-decade-dots">
+							{d.items.map(({ photo: p, index: i }) => (
+								<a href={`#${slideIds[i]}`} aria-label={`${p.place} ${p.year}`} title={`${p.place} ${p.year}`} data-aerial-chip />
+							))}
+						</div>
+						<span class="aerial-decade-label" aria-hidden="true">{d.label}</span>
+					</div>
 				))
 			}
 		</nav>
