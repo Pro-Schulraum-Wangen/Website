@@ -33,7 +33,33 @@
 			}
 			h1 {
 				font-size: 1.25rem;
-				margin: 0 0 1rem;
+				margin: 0;
+			}
+			.page-head {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 0.75rem;
+				margin-bottom: 1rem;
+			}
+			a.link-button {
+				font-size: 0.9rem;
+				padding: 0.35rem 0.7rem;
+				border: 1px solid #888;
+				color: #333;
+				background: #fff;
+				border-radius: 4px;
+				text-decoration: none;
+				transition: background-color 0.15s ease, color 0.15s ease;
+			}
+			a.link-button:hover {
+				background: #333;
+				color: #fff;
+			}
+			a.link-button:focus-visible {
+				outline: 2px solid #666;
+				outline-offset: 1px;
 			}
 			#status-message {
 				margin-bottom: 1rem;
@@ -198,7 +224,13 @@
 		</style>
 	</head>
 	<body>
-		<h1>Stories – Übersicht</h1>
+		<div class="page-head">
+			<h1>Stories – Übersicht</h1>
+			<!-- relative link: works live as well as with `npm run preview:cf` -->
+			<a class="link-button" href="/geschichten-von-wangen/" target="_blank" rel="noopener">
+				Öffentliche Seite «Geschichten von Wangen» ↗
+			</a>
+		</div>
 		<p id="status-message">Lade …</p>
 		<table hidden id="stories-table">
 			<thead>
