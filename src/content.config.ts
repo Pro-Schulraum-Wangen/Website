@@ -71,14 +71,19 @@ const arguments_ = defineCollection({
 // people from Wangen and the surrounding area wrote about the project.
 const letters = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/leserbriefe' }),
-	schema: z.object({
-		title: z.string(),
-		author: z.string(),
-		date: z.coerce.date(),
-		// short intro text shown on the /medien overview before the "lesen" link
-		excerpt: z.string(),
-		published: z.boolean().default(true),
-	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			author: z.string(),
+			date: z.coerce.date(),
+			// short intro text shown on the /medien overview before the "lesen" link
+			excerpt: z.string(),
+			// optional photo above the full text (not on the overview);
+			// imageAlt doubles as the caption below it
+			image: image().optional(),
+			imageAlt: z.string().optional(),
+			published: z.boolean().default(true),
+		}),
 });
 
 export const collections = {

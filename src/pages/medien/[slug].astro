@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -25,6 +26,23 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 				<p class="letters-meta">
 					{entry.data.author} · {dateFormatter.format(entry.data.date)}
 				</p>
+				{entry.data.image && (
+					<figure style="margin: 0 0 2rem;">
+						<Image
+							src={entry.data.image}
+							alt={entry.data.imageAlt ?? entry.data.title}
+							width={1000}
+							quality={70}
+							format="webp"
+							style="display: block; width: 100%; height: auto; box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);"
+						/>
+						{entry.data.imageAlt && (
+							<figcaption style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-text-muted);">
+								{entry.data.imageAlt}
+							</figcaption>
+						)}
+					</figure>
+				)}
 				<Content />
 			</article>
 		</div>

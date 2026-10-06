@@ -1164,8 +1164,8 @@ article.prose > :first-child > h2:first-child {
 	border-bottom: 1px solid var(--color-border);
 }
 
-.letters-list li:first-child {
-	border-top: 1px solid var(--color-border);
+.letters-list li:last-child {
+	border-bottom: none;
 }
 
 .letters-row {
@@ -1805,6 +1805,20 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 /* Homepage: «Wangen im Wandel», invitation to share memories below the gallery */
 .wangen-change {
 	margin-top: 4rem;
+}
+
+/* Responsive YouTube embed, as wide as the surrounding text column */
+.video-embed {
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+}
+
+.video-embed iframe {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	height: auto;
+	border: 0;
 }
 
 /* «Geschichten von Wangen»: full-width aerial photo gallery */
