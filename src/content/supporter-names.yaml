@@ -132,6 +132,10 @@
   name: 'Iria Fernandez'
   lastName: 'Fernandez'
   location: 'Wangen'
+- id: manuela-fontana
+  name: 'Manuela Fontana'
+  lastName: 'Fontana'
+  location: 'Wangen'
 - id: roland-fontana
   name: 'Roland Fontana'
   lastName: 'Fontana'
