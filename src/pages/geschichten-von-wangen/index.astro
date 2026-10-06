@@ -229,6 +229,18 @@ const photos: AerialPhoto[] = [
 	description="Wangen im Wandel der Zeit: historische Luftbilder von 1948 bis 2018 und Erinnerungen der Menschen, die hier leben oder ihre Freizeit verbringen."
 >
 	<section class="aerial-section">
+		<!-- Smaller screens only (see CSS). Hidden until the script below has checked that
+		     it wasn't dismissed before, so it never flashes up on load. -->
+		<div class="wrap narrow">
+			<aside class="small-screen-note" hidden data-small-screen-note>
+				<p>
+					<strong>Schön, dass Sie hier sind!</strong> Die historischen Luftbilder kommen auf einem
+					grösseren Bildschirm viel besser zur Geltung. Schauen Sie sich die Bilder doch einmal am PC
+					oder auf einem Tablet im Querformat an: <strong>pro-schulraum-wangen.ch/geschichten-von-wangen</strong>
+				</p>
+				<button type="button" aria-label="Hinweis schliessen" data-small-screen-note-close>×</button>
+			</aside>
+		</div>
 		<AerialGallery photos={photos} />
 	</section>
 
@@ -251,3 +263,23 @@ const photos: AerialPhoto[] = [
 
 	<StoriesSection />
 </Layout>
+
+<script>
+	// Remembers the dismissal in localStorage (stays in the browser, never sent
+	// to the server). If storage is unavailable the note simply shows again.
+	const KEY = 'small-screen-note-dismissed';
+	const note = document.querySelector<HTMLElement>('[data-small-screen-note]');
+	if (note) {
+		let dismissed = false;
+		try {
+			dismissed = localStorage.getItem(KEY) === '1';
+		} catch {}
+		if (!dismissed) note.hidden = false;
+		note.querySelector('[data-small-screen-note-close]')?.addEventListener('click', () => {
+			note.hidden = true;
+			try {
+				localStorage.setItem(KEY, '1');
+			} catch {}
+		});
+	}
+</script>

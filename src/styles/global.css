@@ -1826,6 +1826,44 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	padding-bottom: 1rem;
 }
 
+/* Hint on smaller screens (same breakpoint as the hamburger menu) to look
+   at the aerial photos on a bigger screen */
+.small-screen-note {
+	display: none;
+}
+
+@media (max-width: 56rem) {
+	.small-screen-note:not([hidden]) {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		margin: 1rem 0;
+		padding: 0.9rem 1rem;
+		background: var(--color-bg-alt);
+		border-left: 4px solid var(--color-brand);
+		font-size: 0.95rem;
+	}
+}
+
+.small-screen-note p {
+	margin: 0;
+	flex: 1;
+	overflow-wrap: anywhere;
+}
+
+.small-screen-note button {
+	flex: 0 0 auto;
+	width: 2rem;
+	height: 2rem;
+	margin: -0.3rem -0.4rem 0 0;
+	border: none;
+	background: none;
+	color: var(--color-text);
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
 /* Title block that follows the gallery instead of preceding it */
 .hero.hero-after-gallery {
 	padding-top: 2.5rem;
@@ -2027,8 +2065,9 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	display: inline-flex;
 }
 
-/* Small screens: always the full 4:3 view, no toggle, no decade labels */
-@media (max-width: 700px) {
+/* From the hamburger-menu breakpoint down: always the full 4:3 view, no
+   toggle, and plain, evenly spaced dots (decade labels would only add clutter) */
+@media (max-width: 56rem) {
 	.aerial-toggle {
 		display: none;
 	}
@@ -2037,7 +2076,6 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 		height: 75vw;
 	}
 
-	/* decade labels would only add clutter here: plain, evenly spaced dots */
 	.aerial-decade-label {
 		display: none;
 	}
