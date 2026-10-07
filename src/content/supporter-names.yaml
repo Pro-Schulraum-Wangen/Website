@@ -32,6 +32,10 @@
   name: 'Franziska Bellmont'
   lastName: 'Bellmont'
   location: 'Wangen'
+- id: karin-bodmer
+  name: 'Karin Bodmer'
+  lastName: 'Bodmer'
+  location: 'Wangen'
 - id: andreas-bruhin
   name: 'Andreas Bruhin'
   lastName: 'Bruhin'
@@ -135,6 +139,10 @@
 - id: iria-fernandez
   name: 'Iria Fernandez'
   lastName: 'Fernandez'
+  location: 'Wangen'
+- id: dominik-fontana
+  name: 'Dominik Fontana'
+  lastName: 'Fontana'
   location: 'Wangen'
 - id: manuela-fontana
   name: 'Manuela Fontana'
@@ -640,6 +648,10 @@
   name: 'Hanswerner Vogt'
   lastName: 'Vogt'
   location: 'Wangen'
+- id: jules-vogt
+  name: 'Jules Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
 - id: jasmine-vogt
   name: 'Jasmine Vogt'
   lastName: 'Vogt'
@@ -695,6 +707,14 @@
 - id: renato-zimmermann
   name: 'Renato Zimmermann'
   lastName: 'Zimmermann'
+  location: 'Siebnen'
+- id: antoinette-zischek
+  name: 'Antoinette Zischek'
+  lastName: 'Zischek'
+  location: 'Siebnen'
+- id: remo-zischek
+  name: 'Remo Zischek'
+  lastName: 'Zischek'
   location: 'Siebnen'
 - id: aurel-zueger
   name: 'Aurel Züger'
