@@ -632,6 +632,10 @@
   name: 'Roland Ulrich'
   lastName: 'Ulrich'
   location: 'Wangen'
+- id: guido-vesti
+  name: 'Guido Vesti'
+  lastName: 'Vesti'
+  location: 'Wangen'
 - id: karin-vogel
   name: 'Karin Vogel'
   lastName: 'Vogel'
@@ -655,6 +659,10 @@
 - id: paul-vogt
   name: 'Paul Vogt'
   lastName: 'Vogt'
+  location: 'Wangen'
+- id: heinz-vogt-bamert
+  name: 'Heinz Vogt-Bamert'
+  lastName: 'Vogt-Bamert'
   location: 'Wangen'
 - id: alessia-waser
   name: 'Alessia Waser'
