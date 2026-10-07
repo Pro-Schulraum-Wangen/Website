@@ -19,4 +19,4 @@ Das Komitee nimmt die kritischen Fragen zu den Kosten und den Aussenanlagen erns
 
 Das Komitee lädt alle Interessierten ein, sich auf der Website zu informieren, Argumente und Zahlen nachzulesen, den Steuerrechner auszuprobieren und dem Komitee beizutreten.
 
-[Originalartikel im March-Anzeiger vom 7. Oktober 2026](/dokumente/2026-10-07_Marchanzeiger_Gruendung_Pro-Komitee.png)
+[Originalartikel im March-Anzeiger vom 7. Oktober 2026](/dokumente/2026-10-07_Marchanzeiger_Gruendung_Pro-Komitee.jpg)
