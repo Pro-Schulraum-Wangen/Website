@@ -18,3 +18,5 @@ Bereits über 200 Wangnerinnen und Wangner sowie zahlreiche Vereine und Organisa
 Das Komitee nimmt die kritischen Fragen zu den Kosten und den Aussenanlagen ernst. «Ein Nein würde jedoch bedeuten, dass die Planung von vorne beginnt», erklärt Raphael Seunig. Das mit Projektierungskrediten von CHF 740’000 ausgearbeitete Projekt würde dann nicht realisiert. Die provisorisch zugesagten Kantonsbeiträge von CHF 5.6 Mio. könnten für dieses Projekt nicht genutzt werden, und der akute Schulraumbedarf bliebe bestehen.
 
 Das Komitee lädt alle Interessierten ein, sich auf der Website zu informieren, Argumente und Zahlen nachzulesen, den Steuerrechner auszuprobieren und dem Komitee beizutreten.
+
+[Originalartikel im March-Anzeiger vom 7. Oktober 2026](/dokumente/2026-10-07_Marchanzeiger_Gruendung_Pro-Komitee.png)

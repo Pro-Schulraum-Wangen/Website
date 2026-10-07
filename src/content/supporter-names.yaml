@@ -12,6 +12,10 @@
   name: 'Stefan Andres'
   lastName: 'Andres'
   location: 'Uznach'
+- id: kurt-badat
+  name: 'Kurt Badat'
+  lastName: 'Badat'
+  location: 'Wangen'
 - id: andrea-bajrami
   name: 'Andrea Bajrami'
   lastName: 'Bajrami'
