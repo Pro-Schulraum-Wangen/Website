@@ -71,7 +71,7 @@ async function listStories(env) {
 		 ORDER BY created_at DESC
 		 LIMIT 100`,
 	).all();
-	return json({ stories: results }, 200, { 'Cache-Control': 'public, max-age=60' });
+	return json({ stories: results }, 200, { 'Cache-Control': 'no-store' });
 }
 
 async function submitStory(request, env) {

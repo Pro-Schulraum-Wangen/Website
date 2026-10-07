@@ -9,6 +9,16 @@ const MAX_TEXT_LENGTH = 1500;
 
 <section class="block stories" id="erinnerungen">
 	<div class="wrap narrow">
+		<div class="stories-status" data-stories-status role="status">
+			<p class="stories-loading" data-stories-loading>
+				<span class="spinner" aria-hidden="true"></span>
+				Geschichten werden geladen …
+			</p>
+			<div class="stories-error" data-stories-error hidden>
+				<p>Die Geschichten konnten leider nicht geladen werden.</p>
+				<button class="button" type="button" data-stories-retry>Erneut versuchen</button>
+			</div>
+		</div>
 		<ul class="stories-list" data-stories-list hidden></ul>
 
 		<form class="story-form" data-story-form novalidate>
@@ -53,6 +63,10 @@ const MAX_TEXT_LENGTH = 1500;
 <script>
 	const form = document.querySelector<HTMLFormElement>('[data-story-form]');
 	const list = document.querySelector<HTMLUListElement>('[data-stories-list]');
+	const status = document.querySelector<HTMLElement>('[data-stories-status]');
+	const loading = document.querySelector<HTMLElement>('[data-stories-loading]');
+	const loadError = document.querySelector<HTMLElement>('[data-stories-error]');
+	const retry = document.querySelector<HTMLButtonElement>('[data-stories-retry]');
 
 	const dateFormatter = new Intl.DateTimeFormat('de-CH', {
 		day: 'numeric',
@@ -65,11 +79,16 @@ const MAX_TEXT_LENGTH = 1500;
 	// Approved stories. Rendered with textContent only, so submitted text can
 	// never be interpreted as HTML.
 	async function loadStories() {
-		if (!list) return;
+		if (!list || !status || !loading || !loadError) return;
+		status.hidden = false;
+		loading.hidden = false;
+		loadError.hidden = true;
 		try {
-			const res = await fetch('/api/stories');
-			if (!res.ok) return;
+			const res = await fetch('/api/stories', { cache: 'no-store' });
+			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 			const { stories } = (await res.json()) as { stories: Story[] };
+			// No approved stories yet – nothing to show, just the form.
+			status.hidden = true;
 			if (stories.length === 0) return;
 			list.replaceChildren(
 				...stories.map((s) => {
@@ -87,9 +106,14 @@ const MAX_TEXT_LENGTH = 1500;
 			);
 			list.hidden = false;
 		} catch {
-			// API not reachable (e.g. `astro dev` without the worker) – just show the form.
+			// API not reachable or answered with an error (also under `astro dev`
+			// without the worker) – say so and offer a retry.
+			loading.hidden = true;
+			loadError.hidden = false;
 		}
 	}
+
+	retry?.addEventListener('click', () => loadStories());
 
 	if (form) {
 		const textarea = form.querySelector<HTMLTextAreaElement>('textarea[name="text"]')!;

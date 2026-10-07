@@ -1689,6 +1689,45 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	padding: 1.5rem 0 0; /* room for the first story's quotation mark */
 }
 
+/* shown in place of the stories while they load, or if loading fails */
+.stories-status {
+	margin: 0 0 5rem;
+}
+
+.stories-loading {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	color: var(--color-text-muted);
+}
+
+.stories-loading[hidden] {
+	display: none;
+}
+
+.stories-loading .spinner {
+	flex: none;
+	width: 1.25rem;
+	height: 1.25rem;
+	border: 3px solid var(--color-bg-alt);
+	border-top-color: var(--color-brand-deep);
+	border-radius: 50%;
+	animation: stories-spin 0.8s linear infinite;
+}
+
+@keyframes stories-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.stories-error p {
+	margin: 0 0 1rem;
+	font-weight: 700;
+	color: #9b1c1c;
+}
+
 /* each story is marked by a yellow bar on its left, like a pull quote.
    The bar hugs the story; the spacing between stories sits outside it. */
 .stories-list li {
