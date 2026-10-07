@@ -348,6 +348,10 @@
   name: 'Daniel Josef Laib'
   lastName: 'Laib'
   location: 'Wangen'
+- id: maria-laib
+  name: 'Maria Laib'
+  lastName: 'Laib'
+  location: 'Wangen'
 - id: silvan-laib
   name: 'Silvan Laib'
   lastName: 'Laib'
@@ -698,6 +702,10 @@
   location: 'Wangen'
 - id: alex-wosinski
   name: 'Alex Wosinski'
+  lastName: 'Wosinski'
+  location: 'Wangen'
+- id: andrea-wosinski
+  name: 'Andrea Wosinski'
   lastName: 'Wosinski'
   location: 'Wangen'
 - id: brigitta-zimmermann
