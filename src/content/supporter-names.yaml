@@ -8,6 +8,10 @@
   name: 'Katja Aldi'
   lastName: 'Aldi'
   location: 'Wangen'
+- id: roman-anderegg
+  name: 'Roman Anderegg'
+  lastName: 'Anderegg'
+  location: 'Wangen'
 - id: stefan-andres
   name: 'Stefan Andres'
   lastName: 'Andres'
@@ -188,6 +192,10 @@
   name: 'Toni Adrian Heiz'
   lastName: 'Heiz'
   location: 'Kaltbrunn'
+- id: peter-hiestand
+  name: 'Peter Hiestand'
+  lastName: 'Hiestand'
+  location: 'Wangen'
 - id: angelika-holenstein
   name: 'Angelika Holenstein'
   lastName: 'Holenstein'
@@ -284,6 +292,10 @@
   name: 'Erika Kalt'
   lastName: 'Kalt'
   location: 'Wangen'
+- id: max-kalt
+  name: 'Max Kalt'
+  lastName: 'Kalt'
+  location: 'Siebnen'
 - id: margrit-kaufmann
   name: 'Margrit Kaufmann'
   lastName: 'Kaufmann'
