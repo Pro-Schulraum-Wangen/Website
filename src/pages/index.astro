@@ -148,6 +148,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 						<li>
 							<a href={`/medien/${entry.id}/`}>{entry.data.title}</a>
 							<span class="letters-meta">
+								{entry.data.source && <span class="letters-source">{entry.data.source}</span>}
 								{entry.data.author} · {letterDateFormatter.format(entry.data.date)}
 							</span>
 						</li>

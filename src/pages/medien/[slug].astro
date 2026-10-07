@@ -24,6 +24,7 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 				<p><a href="/medien/">← Alle Leserbriefe und Medien</a></p>
 				<h1>{entry.data.title}</h1>
 				<p class="letters-meta">
+					{entry.data.source && <span class="letters-source">{entry.data.source}</span>}
 					{entry.data.author} · {dateFormatter.format(entry.data.date)}
 				</p>
 				{entry.data.image && (

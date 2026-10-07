@@ -76,6 +76,9 @@ const letters = defineCollection({
 			title: z.string(),
 			author: z.string(),
 			date: z.coerce.date(),
+			// optional medium where the piece appeared (e.g. 'March-Anzeiger'),
+			// shown as a small badge next to author and date
+			source: z.string().optional(),
 			// short intro text shown on the /medien overview before the "lesen" link
 			excerpt: z.string(),
 			// optional photo above the full text (not on the overview);

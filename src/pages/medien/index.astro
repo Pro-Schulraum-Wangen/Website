@@ -29,6 +29,7 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 							<div class="letters-row">
 								<h2><a href={`/medien/${entry.id}/`}>{entry.data.title}</a></h2>
 								<p class="letters-meta">
+									{entry.data.source && <span class="letters-source">{entry.data.source}</span>}
 									{entry.data.author} · {dateFormatter.format(entry.data.date)}
 								</p>
 							</div>
