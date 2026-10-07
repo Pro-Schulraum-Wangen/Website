@@ -376,6 +376,14 @@
   name: 'Monika Morgenthaler'
   lastName: 'Morgenthaler'
   location: 'Wangen'
+- id: georg-maechler
+  name: 'Georg Mächler'
+  lastName: 'Mächler'
+  location: 'Nuolen'
+- id: irene-maechler
+  name: 'Irene Mächler'
+  lastName: 'Mächler'
+  location: 'Nuolen'
 - id: jonas-maechler
   name: 'Jonas Mächler'
   lastName: 'Mächler'
