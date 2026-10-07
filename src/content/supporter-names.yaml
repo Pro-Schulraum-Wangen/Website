@@ -8,10 +8,6 @@
   name: 'Katja Aldi'
   lastName: 'Aldi'
   location: 'Wangen'
-- id: roman-anderegg
-  name: 'Roman Anderegg'
-  lastName: 'Anderegg'
-  location: 'Wangen'
 - id: stefan-andres
   name: 'Stefan Andres'
   lastName: 'Andres'
@@ -659,10 +655,6 @@
 - id: paul-vogt
   name: 'Paul Vogt'
   lastName: 'Vogt'
-  location: 'Wangen'
-- id: heinz-vogt-bamert
-  name: 'Heinz Vogt-Bamert'
-  lastName: 'Vogt-Bamert'
   location: 'Wangen'
 - id: alessia-waser
   name: 'Alessia Waser'
