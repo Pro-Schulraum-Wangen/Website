@@ -56,6 +56,9 @@ html {
 
 body {
 	margin: 0;
+	/* Mobile Chrome ignores overflow-x on html alone; clip (unlike hidden)
+	   doesn't create a scroll container, so the sticky header keeps working. */
+	overflow-x: clip;
 	background: var(--color-bg);
 	color: var(--color-text);
 	font-family: var(--font-body);
@@ -1203,6 +1206,19 @@ article.prose > :first-child > h2:first-child {
 	font-weight: 600;
 	letter-spacing: 0.02em;
 	vertical-align: 0.1em;
+}
+
+/* On small screens the badge gets its own line, so the nowrap author/date
+   line can't push the page wider than the viewport. */
+@media (max-width: 34rem) {
+	.letters-meta {
+		white-space: normal;
+	}
+
+	.letters-source {
+		display: table;
+		margin: 0 0 0.3rem;
+	}
 }
 
 .letters-list.compact li {

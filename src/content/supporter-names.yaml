@@ -428,6 +428,10 @@
   name: 'Lia Paglia'
   lastName: 'Paglia'
   location: 'Nuolen'
+- id: lea-reber
+  name: 'Lea Reber'
+  lastName: 'Reber'
+  location: 'Siebnen'
 - id: bettina-rechsteiner
   name: 'Bettina Rechsteiner'
   lastName: 'Rechsteiner'
