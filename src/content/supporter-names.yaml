@@ -88,6 +88,10 @@
   name: 'Urs Bruhin'
   lastName: 'Bruhin'
   location: 'Nuolen'
+- id: hedy-bruhin-deuber
+  name: 'Hedy Bruhin-Deuber'
+  lastName: 'Bruhin-Deuber'
+  location: 'Wangen'
 - id: ivo-baechtiger
   name: 'Ivo Bächtiger'
   lastName: 'Bächtiger'
@@ -95,6 +99,10 @@
 - id: maria-baechtiger
   name: 'Maria Bächtiger'
   lastName: 'Bächtiger'
+  location: 'Wangen'
+- id: martina-boesch
+  name: 'Martina Bösch'
+  lastName: 'Bösch'
   location: 'Wangen'
 - id: michael-boesch
   name: 'Michael Bösch'
@@ -728,6 +736,10 @@
   name: 'Remo Zischek'
   lastName: 'Zischek'
   location: 'Siebnen'
+- id: monika-zuppiger
+  name: 'Monika Zuppiger'
+  lastName: 'Zuppiger'
+  location: 'Wangen'
 - id: aurel-zueger
   name: 'Aurel Züger'
   lastName: 'Züger'
