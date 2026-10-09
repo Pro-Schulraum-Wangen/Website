@@ -48,6 +48,10 @@
   name: 'Daniel Bruhin'
   lastName: 'Bruhin'
   location: 'Wangen'
+- id: heinz-bruhin
+  name: 'Heinz Bruhin'
+  lastName: 'Bruhin'
+  location: 'Nuolen'
 - id: irene-bruhin
   name: 'Irene Bruhin'
   lastName: 'Bruhin'
@@ -472,6 +476,10 @@
   name: 'Erika Ruoss'
   lastName: 'Ruoss'
   location: 'Siebnen'
+- id: josi-ruoss
+  name: 'Josi Ruoss'
+  lastName: 'Ruoss'
+  location: 'Siebnen'
 - id: andrea-rusch
   name: 'Andrea Rusch'
   lastName: 'Rusch'
@@ -496,6 +504,10 @@
   name: 'Thomas Rüegge'
   lastName: 'Rüegge'
   location: 'Wangen'
+- id: daniela-schibli
+  name: 'Daniela Schibli'
+  lastName: 'Schibli'
+  location: 'Siebnen'
 - id: anja-schmid
   name: 'Anja Schmid'
   lastName: 'Schmid'
