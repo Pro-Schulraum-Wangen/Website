@@ -20,6 +20,10 @@
   name: 'Andrea Bajrami'
   lastName: 'Bajrami'
   location: 'Wangen'
+- id: rebekka-bamert
+  name: 'Rebekka Bamert'
+  lastName: 'Bamert'
+  location: 'Altendorf'
 - id: marina-baumann
   name: 'Marina Baumann'
   lastName: 'Baumann'
