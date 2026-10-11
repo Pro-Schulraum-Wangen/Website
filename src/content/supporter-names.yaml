@@ -568,6 +568,10 @@
   name: 'Daniela Schnellmann'
   lastName: 'Schnellmann'
   location: 'Wangen'
+- id: fabienne-schnellmann
+  name: 'Fabienne Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Hirzel'
 - id: hans-schnellmann
   name: 'Hans Schnellmann'
   lastName: 'Schnellmann'
