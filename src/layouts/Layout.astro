@@ -21,18 +21,21 @@ import YouTubeIcon from '../components/YouTubeIcon.astro';
 interface Props {
 	title?: string;
 	description?: string;
+	// optional page-specific share image; falls back to the default one
+	image?: ImageMetadata;
 }
 
-const { title, description = SITE_DESCRIPTION } = Astro.props;
+const { title, description = SITE_DESCRIPTION, image } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : `${SITE_TITLE} – Ja zur neuen Schulanlage «Am Buechberg»`;
 const currentPath = new URL(Astro.request.url).pathname;
 const canonicalURL = new URL(currentPath, Astro.site);
 
-// Shared social-share image (Open Graph / Twitter Card), cropped to the
-// 1200×630 size those platforms expect. Sized and compressed separately
+// Social-share image (Open Graph / Twitter Card) – the page's own image if
+// given, otherwise the shared default – cropped to the 1200×630 size those
+// platforms expect. Sized and compressed separately
 // from the on-page hero background, which needs a much larger source.
 const ogImage = await getImage({
-	src: ogSourceImg,
+	src: image ?? ogSourceImg,
 	width: 1200,
 	height: 630,
 	position: 'attention',

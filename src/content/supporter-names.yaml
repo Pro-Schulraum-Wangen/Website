@@ -40,6 +40,10 @@
   name: 'Karin Bodmer'
   lastName: 'Bodmer'
   location: 'Wangen'
+- id: morena-borelli
+  name: 'Morena Borelli'
+  lastName: 'Borelli'
+  location: 'Wangen'
 - id: andreas-bruhin
   name: 'Andreas Bruhin'
   lastName: 'Bruhin'
@@ -100,6 +104,10 @@
   name: 'Hedy Bruhin-Deuber'
   lastName: 'Bruhin-Deuber'
   location: 'Wangen'
+- id: susi-brunner
+  name: 'Susi Brunner'
+  lastName: 'Brunner'
+  location: 'Wangen'
 - id: ivo-baechtiger
   name: 'Ivo Bächtiger'
   lastName: 'Bächtiger'
@@ -107,6 +115,10 @@
 - id: maria-baechtiger
   name: 'Maria Bächtiger'
   lastName: 'Bächtiger'
+  location: 'Wangen'
+- id: ernst-boesch
+  name: 'Ernst Bösch'
+  lastName: 'Bösch'
   location: 'Wangen'
 - id: martina-boesch
   name: 'Martina Bösch'
@@ -176,6 +188,10 @@
   name: 'Sarah Fässler'
   lastName: 'Fässler'
   location: 'Lachen'
+- id: silvia-gehrig
+  name: 'Silvia Gehrig'
+  lastName: 'Gehrig'
+  location: 'Nuolen'
 - id: flavia-geu
   name: 'Flavia Geu'
   lastName: 'Geu'
@@ -304,6 +320,14 @@
   name: 'Christa Hüppin Coray'
   lastName: 'Hüppin Coray'
   location: 'Wangen'
+- id: armin-hueppin-schaetti
+  name: 'Armin Hüppin-Schätti'
+  lastName: 'Hüppin-Schätti'
+  location: 'Wangen'
+- id: brigitta-hueppin-schaetti
+  name: 'Brigitta Hüppin-Schätti'
+  lastName: 'Hüppin-Schätti'
+  location: 'Wangen'
 - id: freddy-iten
   name: 'Freddy Iten'
   lastName: 'Iten'
@@ -387,6 +411,10 @@
 - id: jeannette-lueoend
   name: 'Jeannette Lüönd'
   lastName: 'Lüönd'
+  location: 'Wangen'
+- id: nico-marthy
+  name: 'Nico Marthy'
+  lastName: 'Marthy'
   location: 'Wangen'
 - id: seraina-mathieu
   name: 'Seraina Mathieu'
