@@ -308,6 +308,10 @@
   name: 'Remo Hüppin'
   lastName: 'Hüppin'
   location: 'Wangen'
+- id: sabrina-hueppin
+  name: 'Sabrina Hüppin'
+  lastName: 'Hüppin'
+  location: 'Wangen'
 - id: sandro-hueppin
   name: 'Sandro Hüppin'
   lastName: 'Hüppin'
