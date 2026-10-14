@@ -7,9 +7,13 @@ imageAlt: 'Visualisierung: ein Klassenzimmer im neuen Schulhaus'
 ---
 
 Wangen wächst. Schon heute fehlen gemäss der Schulraumplanung **24 Räume** für einen
-funktionierenden Schulbetrieb: Gruppenräume im Kindergarten, Räume für die
-sonderpädagogische Unterstützung, Platz für die schulergänzende Betreuung. Erste
-Provisorien sind bereits in Betrieb, bestehende Räume werden zweckentfremdet.
+zeitgemässen und funktionierenden Schulbetrieb. Dazu gehören insbesondere Gruppenräume
+zwischen jeweils zwei Klassenzimmern, die für einen differenzierten Unterricht dringend
+benötigt werden. Die Klassen werden zunehmend vielfältiger, die Anzahl der Kinder mit
+unterschiedlichen Bedürfnissen wächst und die Leistungsunterschiede zwischen den
+Schülerinnen und Schülern nehmen zu. Im Weiteren fehlen Gruppenräume im Kindergarten und
+Räume für die sonderpädagogische Unterstützung. Erste Provisorien sind bereits in
+Betrieb, bestehende Räume werden zweckentfremdet.
 
 Die Schulhäuser 2A (Baujahr 1954), 2B (1997) und 3 (1969) sowie die alte Turnhalle (1969) stehen am
 Ende ihrer wirtschaftlichen Nutzungsdauer. Eine Sanierung würde das Grundproblem nicht
