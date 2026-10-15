@@ -788,6 +788,10 @@
   name: 'Remo Zischek'
   lastName: 'Zischek'
   location: 'Siebnen'
+- id: gabriel-zuppiger
+  name: 'Gabriel Zuppiger'
+  lastName: 'Zuppiger'
+  location: 'Wangen'
 - id: monika-zuppiger
   name: 'Monika Zuppiger'
   lastName: 'Zuppiger'
