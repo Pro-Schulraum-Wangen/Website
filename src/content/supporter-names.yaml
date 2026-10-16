@@ -788,6 +788,18 @@
   name: 'Remo Zischek'
   lastName: 'Zischek'
   location: 'Siebnen'
+- id: linda-zonder
+  name: 'Linda Zonder'
+  lastName: 'Zonder'
+  location: 'Wangen'
+- id: robin-zonder
+  name: 'Robin Zonder'
+  lastName: 'Zonder'
+  location: 'Wangen'
+- id: sara-zonder
+  name: 'Sara Zonder'
+  lastName: 'Zonder'
+  location: 'Wangen'
 - id: gabriel-zuppiger
   name: 'Gabriel Zuppiger'
   lastName: 'Zuppiger'
