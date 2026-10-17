@@ -6,7 +6,7 @@ order: 20
 
 Wer Nein stimmt, stimmt nicht für den Status quo: Der Status quo ist keine Option mehr.
 Auch bei einer Ablehnung müssen die Schulhäuser 2A, 2B und 3 sowie die alte Turnhalle
-saniert werden: Kosten von rund **CHF 13 Mio.** (Stand 2023), dazu Provisorien während
+saniert werden: Kosten von rund **CHF 13 Mio.** (Stand 2022), dazu Provisorien während
 der Sanierung von rund **CHF 5 Mio.**
 
 Gleichzeitig geht die provisorisch zugesicherte kantonale Baubeitragszusage von rund
