@@ -21,6 +21,8 @@ export const DOCUMENTS = {
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
 	// Scan des ersten SVP-Flyer-Beitrags im March-Anzeiger vom 23. September 2026.
 	marchanzeigerSvpFlyer1: '/dokumente/2026-09-23_Marchanzeiger_SVP-Flyer_Teil_1.jpg',
+	// Schule Wangen, Schülerprognose (Stand Oktober 2025).
+	schuelerprognose: '/dokumente/2026-10_Schuelerprognosnen_Wangen_SZ.png',
 	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
 	zustandsbericht: '/dokumente/2022.11.30_Zustandsbericht_mit_groben_Sanierungskonzept.pdf',
 	// Rechnung 2023 der Gemeinde Wangen SZ.
