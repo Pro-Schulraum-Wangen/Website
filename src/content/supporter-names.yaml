@@ -200,6 +200,10 @@
   name: 'Ruedy Gresch'
   lastName: 'Gresch'
   location: 'Wangen'
+- id: yvonne-guntlin-fontana
+  name: 'Yvonne Guntlin Fontana'
+  lastName: 'Guntlin Fontana'
+  location: 'Wangen'
 - id: annette-halef
   name: 'Annette Halef'
   lastName: 'Halef'
@@ -228,6 +232,10 @@
   name: 'Toni Adrian Heiz'
   lastName: 'Heiz'
   location: 'Kaltbrunn'
+- id: katrin-hensel
+  name: 'Katrin Hensel'
+  lastName: 'Hensel'
+  location: 'Wangen'
 - id: peter-hiestand
   name: 'Peter Hiestand'
   lastName: 'Hiestand'
@@ -240,6 +248,10 @@
   name: 'Martina Holenstein'
   lastName: 'Holenstein'
   location: 'Lachen'
+- id: simon-holenstein
+  name: 'Simon Holenstein'
+  lastName: 'Holenstein'
+  location: 'Reichenburg'
 - id: melanie-huang-eichhorn
   name: 'Melanie Huang-Eichhorn'
   lastName: 'Huang-Eichhorn'
@@ -638,6 +650,10 @@
   location: 'Wangen'
 - id: elias-schnidrig
   name: 'Elias Schnidrig'
+  lastName: 'Schnidrig'
+  location: 'Wangen'
+- id: ilka-schnidrig
+  name: 'Ilka Schnidrig'
   lastName: 'Schnidrig'
   location: 'Wangen'
 - id: luca-schnyder
