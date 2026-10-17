@@ -11,6 +11,9 @@ import sportanlageImg from '../assets/visualizations/sportanlage-turnhalle.jpg';
 import klassenzimmerImg from '../assets/visualizations/klassenzimmer-interior.jpg';
 import turnhalleImg from '../assets/visualizations/turnhalle-interior.jpg';
 import situationsplanImg from '../assets/visualizations/situationsplan.jpg';
+import turnhalleSh3Img from '../assets/buildings/turnhalle_sh3_wangen.jpg';
+import sh2ProvisoriumImg from '../assets/buildings/sh2_wangen_sowie_provisorium.jpg';
+import mzhImg from '../assets/buildings/mzh_wangen.jpg';
 
 // Used as a CSS background-image on the hero section (needs a plain URL,
 // not an <img> element, so we go through getImage() instead of <Image>).
@@ -203,7 +206,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 	<section class="block alt">
 		<div class="wrap">
 			<div class="section-head">
-				<h2>Ein neues Stück Wangen</h2>
+				<h2 id="ein-neues-stueck-wangen"><a class="heading-anchor" href="#ein-neues-stueck-wangen">Ein neues Stück Wangen</a></h2>
 			</div>
 			<p class="lead">
 				Eine moderne Schule, zeitgemässe Sportanlagen und ein neuer Dorfplatz als
@@ -271,7 +274,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 
 		<div class="wrap narrow wangen-change">
 			<div class="section-head">
-				<h2>Wangen im Wandel</h2>
+				<h2 id="wangen-im-wandel"><a class="heading-anchor" href="#wangen-im-wandel">Wangen im Wandel</a></h2>
 			</div>
 			<div class="video-embed">
 				<iframe
@@ -304,7 +307,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 	<section class="block">
 		<div class="wrap narrow">
 			<div class="section-head">
-				<h2>«Zu teuer. Zu gross. Das geht doch auch anders.»</h2>
+				<h2 id="zu-teuer"><a class="heading-anchor" href="#zu-teuer">«Zu teuer. Zu gross. Das geht doch auch anders.»</a></h2>
 			</div>
 			<p><strong>Schon gehört? Wir auch.</strong></p>
 			<p>
@@ -318,34 +321,151 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 			<p>
 				Es wurden auch andere Wege diskutiert: die Wiese nebenan, eine Lösung
 				in Siebnen oder die Sanierung der bestehenden Gebäude. Für den
-				Projektierungskredit von CHF 740’000 haben Fachpersonen Möglichkeiten
-				untersucht und das vorliegende Projekt erarbeitet. Hinter dem Vorschlag
-				stehen also bereits mehrere Jahre Planung und konkrete Abklärungen.
+				Projektierungskredit von CHF 740’000 haben Fachpersonen verschiedene
+				Möglichkeiten untersucht und das vorliegende Projekt erarbeitet.
+				Dahinter stehen mehrere Jahre Planung und konkrete Abklärungen.
+			</p>
+			<h3 id="kosten-ja-nein" class="vote-compare-title"><a class="heading-anchor" href="#kosten-ja-nein">Was kostet ein Ja, was kostet ein Nein?</a></h3>
+		</div>
+		<div class="wrap">
+			<div class="vote-compare">
+				<div class="vote-card yes">
+					<p class="vote-card-label">Bei einem Ja</p>
+					<p class="vote-card-amount">CHF 50 Mio. <span>netto</span></p>
+					<p class="vote-card-note">
+						CHF 55,6 Mio. brutto abzüglich rund CHF 5,6 Mio. Kantonsbeiträge.
+						Mit verbindlichem Kostendach des Gesamtleisters.
+					</p>
+					<ul class="vote-list">
+						<li><strong>18 Klassenzimmer</strong> und 32 Gruppen- und Spezialräume</li>
+						<li><strong>Dreifachkindergarten</strong> mit eigenem Aussenbereich</li>
+						<li><strong>Dreifachturnhalle</strong> mit Tribüne für Schule und Vereine</li>
+						<li><strong>Tiefgarage</strong> mit 75 Parkplätzen und Zivilschutzanlage</li>
+						<li><strong>Turnhalle 2029, Schulhaus 2031</strong> bezugsbereit</li>
+					</ul>
+				</div>
+				<div class="vote-card no">
+					<p class="vote-card-label">Bei einem Nein</p>
+					<p class="vote-card-amount">CHF 6,3 Mio. <span>stehen auf dem Spiel</span></p>
+					<dl class="vote-costs">
+						<div><dt>Für das heutige Projekt vorgesehene Kantonsbeiträge</dt><dd>CHF 5,6 Mio.</dd></div>
+						<div><dt>Bewilligter Projektierungskredit</dt><dd>CHF 0,74 Mio.</dd></div>
+					</dl>
+					<p class="vote-card-sub">Und trotzdem bleiben notwendige Investitionen:</p>
+					<dl class="vote-costs">
+						<div><dt>Sanierung bestehender Schulgebäude und Turnhalle bis 2042 (Schätzung von 2022, heute voraussichtlich teurer)</dt><dd>rund CHF 13 Mio.</dd></div>
+						<div><dt>Zusätzliche Provisorien gemäss Kostenschätzung</dt><dd>rund CHF 5 Mio.</dd></div>
+						<div class="total"><dt>Insgesamt, ohne zusätzlichen Schulraum oder neue Turnhalle</dt><dd>rund CHF 18 Mio.</dd></div>
+					</dl>
+					<p class="vote-card-note vote-card-footnote">
+						Hinzu kommen mögliche Mehrkosten durch Verzögerungen und eine
+						erneute Planung.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="wrap narrow">
+			<h3 id="das-bleibt-bei-einem-nein" class="vote-compare-title"><a class="heading-anchor" href="#das-bleibt-bei-einem-nein">Das bleibt bei einem Nein</a></h3>
+		</div>
+		<div class="wrap">
+			<div class="gallery-grid status-quo">
+				<figure>
+					<div class="gallery-media">
+						<Image
+							src={sh2ProvisoriumImg}
+							alt="Schulhaus 2 mit Schulcontainern auf dem Pausenplatz"
+							width={900}
+							height={675}
+							fit="cover"
+							quality={65}
+							format="webp"
+						/>
+					</div>
+					<figcaption>
+						<strong>Schulhaus 2 und Schulcontainer</strong>
+						Schon heute reicht der Schulraum nicht aus. Zusätzliche Schulcontainer auf dem Pausenplatz sind notwendig.
+					</figcaption>
+				</figure>
+				<figure>
+					<div class="gallery-media">
+						<Image
+							src={turnhalleSh3Img}
+							alt="Turnhalle beim Schulhaus 3"
+							width={900}
+							height={675}
+							fit="cover"
+							quality={65}
+							format="webp"
+						/>
+					</div>
+					<figcaption>
+						<strong>Turnhalle Schulhaus 3</strong>
+						Die Turnhalle ist zu klein und entspricht nicht mehr den heutigen Anforderungen.
+					</figcaption>
+				</figure>
+				<figure>
+					<div class="gallery-media">
+						<Image
+							src={mzhImg}
+							alt="Mehrzweckgebäude Wangen"
+							width={900}
+							height={675}
+							fit="cover"
+							quality={65}
+							format="webp"
+						/>
+					</div>
+					<figcaption>
+						<strong>Mehrzweckgebäude Wangen</strong>
+						Das MZG ist durch Vereine, Trainings und Veranstaltungen bereits stark ausgelastet. Zusätzliche Kapazitäten fehlen.
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+		<div class="wrap narrow status-quo-after">
+			<h3 id="nach-einem-nein" class="vote-compare-title"><a class="heading-anchor" href="#nach-einem-nein">Und wie geht es nach einem Nein weiter?</a></h3>
+			<p>
+				Das Projekt wäre abgelehnt. Doch die Probleme wären nicht gelöst. Die
+				Gemeinde müsste erneut Varianten prüfen, eine neue Planung erarbeiten
+				und eine mehrheitsfähige Lösung finden.
 			</p>
 			<p>
-				Man kann nach dieser Abwägung zum Schluss kommen, das Projekt
-				abzulehnen. Wichtig ist aber, was dann geschieht: Ein Nein bringt uns
-				nicht unmittelbar zu einer anderen Schulanlage. Die Gemeinde müsste
-				erneut klären, welche Lösung machbar, finanzierbar und mehrheitsfähig
-				ist. Schon heute vertreten die Gruppen, die das Projekt ablehnen,
-				unterschiedliche Alternativen. Die Planung würde nochmals von vorne
-				beginnen. Die bereits
-				investierten CHF 740’000 wären damit nicht in das umgesetzte Projekt
-				geflossen. Auch die für das heutige Projekt provisorisch zugesagten
-				CHF 5,6 Mio. Kantonsbeiträge wären für eine neue Lösung nicht
-				gesichert. Währenddessen bleibt der Schulraumbedarf bestehen.
+				<strong>Wer macht dann weiter? Welche Alternative wird verfolgt? Was
+				kostet sie? Und wann könnte sie umgesetzt werden?</strong>
 			</p>
 			<p>
-				Eine Alternative vorzuschlagen, ist ein wichtiger Beitrag zur
-				Diskussion. Sie bis zu einem abstimmungsreifen Projekt zu entwickeln,
-				braucht darüber hinaus Zeit, Facharbeit und Entscheide. Wir halten das
-				vorliegende Projekt für eine gute Lösung: Es ist solide geplant,
-				realistisch umsetzbar und gemäss Finanzplanung für Wangen tragbar.
-				Deshalb möchten wir es kritisch begleiten und dort weiterentwickeln, wo
-				es möglich ist.
+				Die Gegner vertreten unterschiedliche Vorstellungen. Eine Turnhalle auf
+				der Wiese nebenan, eine Primarschule in Siebnen oder die Sanierung
+				bestehender Gebäude. Doch bisher liegt keine vergleichbar ausgearbeitete
+				Alternative mit verbindlichem Kostenrahmen und Zeitplan vor.
+			</p>
+			<h3 id="verantwortung" class="vote-compare-title"><a class="heading-anchor" href="#verantwortung">Wer übernimmt danach die Verantwortung?</a></h3>
+			<p>
+				Für das weitere politische Vorgehen ist der Gemeinderat verantwortlich.
+				Das Ressort Hochbau/Liegenschaften wird aktuell von der SVP geführt. Zu
+				den Aufgaben im Bereich Gemeindeliegenschaften gehören die
+				Bewirtschaftung, der Unterhalt und die bauliche Entwicklung der
+				gemeindeeigenen Gebäude.
 			</p>
 			<p>
-				Am Ende steht eine einfache Frage:
+				<strong>Die entscheidende Frage bleibt: Wer bringt nach einem Nein eine
+				neue, tragbare und mehrheitsfähige Lösung auf den Tisch? Und wann?</strong>
+			</p>
+			<p>
+				Während erneut geplant, diskutiert und gerechnet wird, warten unsere
+				Kinder, Lehrpersonen und Vereine weiter auf zeitgemässe Räumlichkeiten.
+			</p>
+			<p>
+				Eine Alternative vorzuschlagen, ist einfach. Sie zu einem umsetzbaren
+				und finanzierbaren Projekt zu entwickeln, braucht hingegen Jahre,
+				Facharbeit und politische Entscheide.
+			</p>
+			<p>
+				Wir halten das vorliegende Projekt für eine gute Lösung. Es ist
+				sorgfältig geplant, realistisch umsetzbar und gemäss Finanzplanung für
+				Wangen tragbar. Es schafft nicht nur dringend benötigten Schulraum,
+				sondern auch einen attraktiven Dorfplatz und neue Möglichkeiten für
+				unsere Vereine und das Dorfleben.
 			</p>
 			<p>
 				<strong>Wollen wir gemeinsam in unser Dorf investieren und Wangen für

@@ -826,6 +826,189 @@ section.block .section-head a.more {
 	font-weight: 700;
 }
 
+/* Yes/No cost comparison (homepage): two cards side by side, stacked on
+   small screens. Yes = campaign yellow, No = ink. */
+.vote-compare {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+@media (max-width: 52rem) {
+	.vote-compare {
+		grid-template-columns: 1fr;
+	}
+}
+
+.vote-card {
+	padding: 2rem 2.1rem;
+	box-shadow: 0 3px 10px rgba(26, 24, 3, 0.14);
+}
+
+.vote-card.yes {
+	background: var(--color-brand);
+	color: var(--color-text);
+}
+
+.vote-card.no {
+	background: var(--color-text);
+	color: #fff;
+}
+
+.vote-card p {
+	margin: 0;
+}
+
+.vote-card-label {
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.vote-card-amount {
+	font-size: clamp(2rem, 5vw, 2.8rem);
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	margin: 0.3rem 0 0.8rem !important;
+}
+
+.vote-card-amount span {
+	font-size: 0.5em;
+	font-weight: 600;
+	letter-spacing: 0;
+}
+
+.vote-card-note {
+	font-size: 0.98rem;
+	margin-bottom: 1.2rem !important;
+}
+
+.vote-card-sub {
+	font-size: 0.98rem;
+	font-weight: 600;
+	margin: 1.2rem 0 0.4rem !important;
+}
+
+.vote-costs {
+	margin: 0;
+	font-size: 0.98rem;
+}
+
+.vote-costs div {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 1rem;
+	padding: 0.35rem 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.vote-costs dt {
+	margin: 0;
+}
+
+.vote-costs dd {
+	margin: 0;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.vote-costs .total {
+	border-bottom: none;
+	font-weight: 700;
+}
+
+.vote-list {
+	list-style: none;
+	margin: 1.4rem 0 0;
+	padding: 0;
+	font-size: 0.98rem;
+}
+
+.vote-list li {
+	position: relative;
+	padding-left: 1.9rem;
+	margin-bottom: 0.45rem;
+	line-height: 1.5;
+}
+
+.vote-list li::before {
+	position: absolute;
+	left: 0;
+	top: 0.05em;
+	width: 1.3rem;
+	height: 1.3rem;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	font-size: 0.8rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.vote-card.yes .vote-list li::before {
+	content: '✓';
+	background: var(--color-text);
+	color: var(--color-brand);
+}
+
+.vote-card.no .vote-list li::before {
+	content: '✕';
+	background: #fff;
+	color: var(--color-text);
+}
+
+/* Linkable headings: the title itself is the #anchor link, with a "#"
+   hint on hover. Offset keeps it clear of the sticky header. */
+:is(h2, h3):has(> .heading-anchor) {
+	scroll-margin-top: calc(var(--sticky-header-height) + 1.5rem);
+}
+
+.heading-anchor {
+	color: inherit;
+	text-decoration: none;
+}
+
+.heading-anchor::after {
+	content: ' #';
+	color: var(--color-brand-deep);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.heading-anchor:hover::after,
+.heading-anchor:focus-visible::after {
+	opacity: 1;
+}
+
+.vote-compare-title {
+	margin: 2.2rem 0 1.2rem;
+	font-size: 1.35rem;
+}
+
+/* Photos of the current buildings: wider than the surrounding narrow
+   text column, but part of the same section, so only little spacing. */
+.gallery-grid.status-quo {
+	margin-bottom: 2rem;
+}
+
+.status-quo-after > :first-child {
+	margin-top: 0;
+}
+
+.gallery-grid.status-quo figcaption strong {
+	display: block;
+	color: var(--color-text);
+}
+
+.vote-card-footnote {
+	margin: 1rem 0 0 !important;
+	opacity: 0.8;
+}
+
 /* Supporter cards */
 .supporter-card {
 	background: var(--color-bg);
