@@ -836,14 +836,24 @@ section.block .section-head a.more {
 }
 
 @media (max-width: 52rem) {
+	/* Stacked: cancel the .wrap gutter so the cards run edge to edge and
+	   the content gets the full width. */
 	.vote-compare {
 		grid-template-columns: 1fr;
+		margin-inline: -1.25rem;
 	}
 }
 
 .vote-card {
+	min-width: 0;
 	padding: 2rem 2.1rem;
 	box-shadow: 0 3px 10px rgba(26, 24, 3, 0.14);
+}
+
+@media (max-width: 52rem) {
+	.vote-card {
+		padding: 1.75rem 1.25rem;
+	}
 }
 
 .vote-card.yes {
