@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import CostCalculator from '../../components/CostCalculator.astro';
+import CostOverview from '../../components/CostOverview.astro';
 import { DOCUMENTS } from '../../consts';
 
 import situationsplanImg from '../../assets/visualizations/situationsplan.jpg';
@@ -855,7 +855,7 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 		</div>
 	</section>
 
-	<CostCalculator />
+	<CostOverview />
 </Layout>
 
 <script>

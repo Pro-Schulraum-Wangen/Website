@@ -1,19 +1,74 @@
 ---
-// Interactive cost calculator for the homepage.
+// Cost overview for the arguments page.
 //
 // Figures are taken from the municipal council's official message
 // ("Botschaft Neubau Schulanlage Wangen «Am Buechberg»", 11 June 2026):
 // - chapter 3 / 9.1 / 9.4: gross cost, cantonal contributions, net cost
-// - chapter 9.8 to 9.10: planned tax-rate rise from 135 % to 150 % and the
-//   resulting additional municipal tax per year by taxable income.
+// - chapter 9.8 to 9.10: planned tax-rate rise from 135 % to 150 %, the
+//   resulting additional municipal tax per year by taxable income, and the
+//   share of taxpayers per income bracket (cantonal tax statistics 2022).
 
-import { DOCUMENTS, ESTV_CALCULATOR_URL, GITHUB_CALCULATOR_URL } from '../consts';
+import { DOCUMENTS, ESTV_CALCULATOR_URL } from '../consts';
 
 const GROSS_COST = 55_600_000;
 const CANTON_CONTRIBUTION = 5_600_000;
 const NET_COST = GROSS_COST - CANTON_CONTRIBUTION;
 
 const fmt = (n: number) => n.toLocaleString('de-CH');
+const pct = (n: number) => n.toFixed(1) + ' %';
+
+// Table from Botschaft chapter 9.10. `single` / `couple` are the maximum
+// additional municipal tax per year at 2026 rates (without "Kultussteuer"); for
+// the top bracket they are a minimum instead. `share` is the percentage of
+// taxpayers in Wangen in 2022.
+// The table lists 11.5 % for the 60k–80k bracket, the pie chart next to it
+// 11.6 %; 11.5 % is used because it adds up to 100 % and matches the 77.8 %
+// headline.
+// `color` is a single-hue sequential ramp from campaign yellow (low income)
+// to ink (high income), interpolated in OKLab.
+const BRACKETS = [
+	{ label: "CHF 0 bis 60'000", short: "bis 60'000", share: 66.3, single: 255, couple: 203, color: '#e4da22' },
+	{ label: "CHF 60'001 bis 80'000", short: "60'001–80'000", share: 11.5, single: 371, couple: 301, color: '#c1b91d' },
+	{ label: "CHF 80'001 bis 100'000", short: "80'001–100'000", share: 7.6, single: 488, couple: 407, color: '#9f9818' },
+	{ label: "CHF 100'001 bis 120'000", short: "100'001–120'000", share: 4.8, single: 605, couple: 517, color: '#7f7913' },
+	{ label: "CHF 120'001 bis 150'000", short: "120'001–150'000", share: 4.1, single: 780, couple: 693, color: '#605b0e' },
+	{ label: "CHF 150'001 bis 250'000", short: "150'001–250'000", share: 3.8, single: 1365, couple: 1278, color: '#433f09' },
+	{ label: "über CHF 250'000", short: "über 250'000", share: 1.9, single: 1365, couple: 1278, color: '#272505', atLeast: true },
+];
+
+// Upper bound of taxable income for each bracket; the last one is open-ended.
+const BRACKET_MAXES = [60_000, 80_000, 100_000, 120_000, 150_000, 250_000];
+
+const SHARE_UP_TO_80K = BRACKETS[0].share + BRACKETS[1].share;
+
+// Donut geometry, computed at build time. Segments start at 12 o'clock and run
+// clockwise in bracket order.
+const SIZE = 200;
+const CENTER = SIZE / 2;
+const OUTER = 98;
+const INNER = 58;
+const totalShare = BRACKETS.reduce((sum, b) => sum + b.share, 0);
+
+const point = (radius: number, angle: number) => {
+	const a = angle - Math.PI / 2;
+	return `${(CENTER + radius * Math.cos(a)).toFixed(3)} ${(CENTER + radius * Math.sin(a)).toFixed(3)}`;
+};
+
+let cursor = 0;
+const segments = BRACKETS.map((b) => {
+	const start = (cursor / totalShare) * 2 * Math.PI;
+	cursor += b.share;
+	const end = (cursor / totalShare) * 2 * Math.PI;
+	const large = end - start > Math.PI ? 1 : 0;
+	const d = [
+		`M ${point(OUTER, start)}`,
+		`A ${OUTER} ${OUTER} 0 ${large} 1 ${point(OUTER, end)}`,
+		`L ${point(INNER, end)}`,
+		`A ${INNER} ${INNER} 0 ${large} 0 ${point(INNER, start)}`,
+		'Z',
+	].join(' ');
+	return { ...b, d };
+});
 ---
 
 <section class="block">
@@ -44,8 +99,8 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 		<p>
 			Zur Finanzierung der Schulanlage und weiterer bereits geplanter Investitionen
 			plant der Gemeinderat, den Steuerfuss ab 2028 von 135 % auf 150 % zu erhöhen –
-			also zurück auf das Niveau von 2025. Rechnen Sie aus, was das für Sie
-			ungefähr kostet.
+			also zurück auf das Niveau von 2025. Die Tabelle unten zeigt, was das je nach
+			steuerbarem Einkommen ungefähr kostet.
 		</p>
 
 		<details class="cost-calc-explainer">
@@ -143,23 +198,119 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 					<a href={ESTV_CALCULATOR_URL} target="_blank" rel="noopener">
 						Steuerrechner der Eidgenössischen Steuerverwaltung
 					</a>. Welche Mehrkosten die Erhöhung für Ihren Haushalt ungefähr bedeutet,
-					zeigt der Rechner unten.
+					zeigt die Tabelle unten.
 				</p>
 			</div>
 		</details>
 
-		<form class="cost-calc" id="cost-calc" novalidate>
+		<div class="cost-impact">
+			<h4 class="cost-impact-title">
+				Zusätzliche Gemeindesteuer pro Jahr bei einem Steuerfuss von 150 % statt 135 %
+			</h4>
+			<div class="cost-calc-table-wrap">
+				<table class="cost-impact-table">
+					<thead>
+						<tr>
+							<th scope="col">Steuerbares Einkommen</th>
+							<th scope="col">Anteil Steuer&shy;pflichtige 2022</th>
+							<th scope="col">Allein&shy;stehende 2026</th>
+							<th scope="col">Ehepaare 2026</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							BRACKETS.map((b) => (
+								<tr>
+									<th scope="row">{b.label}</th>
+									<td>{pct(b.share)}</td>
+									<td>
+										{b.atLeast ? 'ab' : 'bis'} CHF {fmt(b.single)}
+									</td>
+									<td>
+										{b.atLeast ? 'ab' : 'bis'} CHF {fmt(b.couple)}
+									</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+			<p class="cost-impact-note">
+				Ohne Kultussteuer, Zahlen gerundet. Massgebend ist das steuerbare Einkommen
+				nach allen Abzügen, nicht der Bruttolohn. Der Anteil Steuerpflichtige stammt
+				aus der Steuerstatistik des Kantons Schwyz 2022, die Steuerbeträge beruhen auf
+				den Tarifen 2026.
+			</p>
+
+			<figure class="cost-share">
+				<svg
+					class="cost-donut"
+					viewBox={`0 0 ${SIZE} ${SIZE}`}
+					role="img"
+					aria-labelledby="cost-share-caption"
+				>
+					{
+						segments.map((s, i) => (
+							<path d={s.d} fill={s.color} data-index={i}>
+								<title>
+									{s.label}: {pct(s.share)} der Steuerpflichtigen
+								</title>
+							</path>
+						))
+					}
+				</svg>
+				<figcaption class="cost-share-body">
+					<p class="cost-share-caption" id="cost-share-caption">
+						Steuerpflichtige in Wangen nach steuerbarem Einkommen (2022)
+					</p>
+					<p class="cost-share-highlight">
+						<strong>{pct(SHARE_UP_TO_80K)}</strong> der Steuerpflichtigen haben ein
+						steuerbares Einkommen bis CHF 80'000. Für sie beträgt die Mehrbelastung
+						höchstens CHF 371 (alleinstehend) bzw. CHF 301 (verheiratet) pro Jahr.
+					</p>
+					<ul class="cost-share-legend">
+						{
+							segments.map((s, i) => (
+								<li data-index={i}>
+									<span class="cost-share-swatch" style={`background: ${s.color}`} aria-hidden="true" />
+									<span class="cost-share-label">{s.short}</span>
+									<span class="cost-share-value">{pct(s.share)}</span>
+								</li>
+							))
+						}
+					</ul>
+				</figcaption>
+			</figure>
+		</div>
+
+		<h3 class="cost-calc-title">Grobe Einstufung für Ihren Haushalt</h3>
+		<p>
+			Wo ungefähr liegen Sie in der Tabelle? Der Rechner schätzt Ihr steuerbares
+			Einkommen aus dem Bruttolohn und ordnet Sie der passenden Stufe zu.
+		</p>
+		<p class="cost-calc-warning">
+			<strong>Bitte mit Vorsicht geniessen:</strong> Das ist nur eine grobe
+			Einstufung auf Basis der Tabelle in der Botschaft der Gemeinde, keine
+			Steuerberechnung. Das steuerbare Einkommen wird pauschal mit 80 % des
+			Bruttolohns angenommen; Ihre tatsächlichen Abzüge (z. B. für Kinder) können
+			stark davon abweichen. Ausgewiesen wird jeweils der Höchstbetrag der Stufe.
+			Für steuerbare Einkommen über CHF 250'000 enthält die Botschaft keine
+			genaueren Zahlen, der Rechner liefert dort keine hilfreiche Angabe.
+		</p>
+
+		<form
+			class="cost-calc"
+			id="cost-calc"
+			novalidate
+			data-brackets={JSON.stringify(BRACKETS.map(({ single, couple }) => ({ single, couple })))}
+			data-maxes={JSON.stringify(BRACKET_MAXES)}
+		>
 			<div class="cost-calc-field">
 				<span class="cost-calc-legend">Zivilstand</span>
 				<div class="cost-calc-choice">
 					<label><input type="radio" name="status" value="single" checked /> Alleinstehend</label>
 					<label><input type="radio" name="status" value="couple" /> Verheiratet</label>
 				</div>
-				<p class="cost-calc-hint">
-					Der Kanton Schwyz kennt für Alleinstehende und Verheiratete
-					unterschiedliche Steuertarife. Bei gleichem Einkommen fällt die
-					zusätzliche Steuer für Verheiratete deshalb etwas tiefer aus.
-				</p>
 			</div>
 
 			<div class="cost-calc-row">
@@ -209,95 +360,71 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 				</div>
 			</div>
 
-			<button type="submit" class="button primary" id="calc-submit" aria-disabled="true">Berechnen</button>
+			<button type="submit" class="button primary" id="calc-submit" aria-disabled="true">Einstufen</button>
 		</form>
 
 		<div class="cost-calc-result" id="cost-calc-result" aria-live="polite" hidden>
-			<p class="cost-calc-headline">Geschätzte zusätzliche Gemeindesteuer pro Jahr</p>
+			<p class="cost-calc-headline">Grobe Schätzung der zusätzlichen Gemeindesteuer pro Jahr</p>
 			<p class="cost-calc-big">
 				<span id="calc-out-added">…</span>
-				<span class="cost-calc-big-label">
-					das sind rund <span id="calc-out-month">…</span> pro Monat
+				<span class="cost-calc-big-label" id="calc-out-month-wrap">
+					das sind bis zu <span id="calc-out-month">…</span> pro Monat
 				</span>
 			</p>
-			<p class="cost-calc-note">
-				Heute, bei einem Steuerfuss von 135 %, zahlen Sie rund{' '}
-				<span id="calc-out-current">…</span> Gemeindesteuer pro Jahr; bei 150 %
-				wären es rund <span id="calc-out-new">…</span>. Bis 2025 lag der Steuerfuss
-				bereits bei 150 %, die Erhöhung bringt ihn also dorthin zurück.
-			</p>
 			<p class="cost-calc-note" id="calc-out-basis"></p>
-			<p class="cost-calc-note">
-				Der Steuerfuss wird jährlich neu festgelegt. 150 % gilt voraussichtlich
-				für rund 5 bis 10 Jahre.
+			<p class="cost-calc-note" id="calc-out-top" hidden>
+				Für steuerbare Einkommen über CHF 250'000 nennt die Botschaft nur diesen
+				Mindestbetrag. Wie hoch die Mehrbelastung tatsächlich ist, lässt sich daraus
+				nicht ableiten. Nutzen Sie dafür den{' '}
+				<a href={ESTV_CALCULATOR_URL} target="_blank" rel="noopener">
+					Steuerrechner der Eidgenössischen Steuerverwaltung
+				</a>.
 			</p>
+			<p class="cost-calc-note">
+				Nur eine grobe Einstufung auf Basis der Botschaft, keine Steuerberechnung.
+			</p>
+		</div>
 
-			<div class="cost-calc-context">
-				<h3>Sie bekommen dafür einen Gegenwert</h3>
-				<p>
-					Dieser Betrag ist kein verlorenes Geld. Investitionen in die Gemeinde
-					schaffen einen konkreten Gegenwert: gute Schulen, zeitgemässe Infrastruktur,
-					attraktive öffentliche Räume und gute Bedingungen für Vereine und das
-					Dorfleben. All das trägt dazu bei, dass Wangen auch langfristig ein
-					attraktiver Wohn- und Lebensort bleibt.
-				</p>
-				<p>
-					Von einer modernen Schul- und Sportanlage, einer neu gestalteten Umgebung
-					und besseren Räumen für die Vereine profitiert das ganze Dorf, auch wer keine
-					schulpflichtigen Kinder hat.
-				</p>
-				<p>
-					Und «einfach nichts tun» gibt es nicht: Gewisse Investitionen sind so oder so
-					nötig. Ein Nein kostet die Gemeinde laut Botschaft des Gemeinderates über
-					CHF 23 Mio. für Sanierungen der alten Gebäude, für Provisorien und durch den
-					Verlust der zugesicherten Kantonsbeiträge. Die bestehenden Raumprobleme wären
-					damit trotzdem nicht gelöst.
-				</p>
-			</div>
+		<div class="cost-value">
+			<h3>Sie bekommen dafür einen Gegenwert</h3>
+			<p>
+				Dieser Betrag ist kein verlorenes Geld. Investitionen in die Gemeinde
+				schaffen einen konkreten Gegenwert: gute Schulen, zeitgemässe Infrastruktur,
+				attraktive öffentliche Räume und gute Bedingungen für Vereine und das
+				Dorfleben. All das trägt dazu bei, dass Wangen auch langfristig ein
+				attraktiver Wohn- und Lebensort bleibt.
+			</p>
+			<p>
+				Von einer modernen Schul- und Sportanlage, neu gestalteten Aussenanlagen
+				und besseren Räumen für die Vereine profitiert das ganze Dorf, auch wer keine
+				schulpflichtigen Kinder hat.
+			</p>
+			<p>
+				Und «einfach nichts tun» gibt es nicht: Gewisse Investitionen sind so oder so
+				nötig. Ein Nein kostet die Gemeinde laut Botschaft des Gemeinderates über
+				CHF 23 Mio. für Sanierungen der alten Gebäude, für Provisorien und durch den
+				Verlust der zugesicherten Kantonsbeiträge. Die bestehenden Raumprobleme wären
+				damit trotzdem nicht gelöst.
+			</p>
 		</div>
 
 		<p class="cost-calc-disclaimer">
-			Grobe Schätzung auf Basis des Bruttolohns. Das steuerbare Einkommen nach
-			Abzügen (und damit der effektive Betrag) liegt in der Regel tiefer. Kinderabzüge
-			und weitere persönliche Abzüge sind nicht abgebildet; für Familien mit Kindern
-			fällt der Betrag entsprechend tiefer aus. Ohne Kirchensteuer. Die
-			Steuerfuss-Erhöhung auf 150 % finanziert die Schulanlage sowie weitere bereits
-			geplante Investitionen. Quelle:{' '}
+			Der Steuerfuss wird jährlich neu festgelegt; 150 % gilt voraussichtlich für rund
+			5 bis 10 Jahre. Die Steuerfuss-Erhöhung finanziert die Schulanlage sowie weitere
+			bereits geplante Investitionen. Quelle:{' '}
 			<a href={DOCUMENTS.botschaft} target="_blank" rel="noopener">
 				Botschaft des Gemeinderates Wangen
 			</a>{' '}
-			vom 11. Juni 2026, Kapitel 9. Die vollständige Berechnung lässt sich jederzeit im{' '}
-			<a href={GITHUB_CALCULATOR_URL} target="_blank" rel="noopener">
-				öffentlichen Quellcode auf GitHub
-			</a>{' '}
-			nachvollziehen.
+			vom 11. Juni 2026, Kapitel 9.10.
 		</p>
-		<noscript>
-			<p class="cost-calc-disclaimer">Für den Rechner muss JavaScript aktiviert sein.</p>
-		</noscript>
 	</div>
 </section>
 
 <script>
+	// Rough bracket lookup: gross salary -> taxable income (flat 80 %) -> the
+	// first bracket of the Botschaft table that contains it. Shows that
+	// bracket's maximum; the open top bracket only has a minimum.
 	type Status = 'single' | 'couple';
-
-	// Additional municipal tax per year caused by the 135 % to 150 % rise (a
-	// 15-point step), by taxable income, for singles and couples
-	// (Botschaft, chapter 9.10).
-	const BRACKETS: { max: number; single: number; couple: number }[] = [
-		{ max: 60_000, single: 255, couple: 203 },
-		{ max: 80_000, single: 371, couple: 301 },
-		{ max: 100_000, single: 488, couple: 407 },
-		{ max: 120_000, single: 605, couple: 517 },
-		{ max: 150_000, single: 780, couple: 693 },
-		{ max: 250_000, single: 1365, couple: 1278 },
-		{ max: Infinity, single: 1365, couple: 1278 },
-	];
-
-	// The municipal tax scales linearly with the tax rate ("Steuerfuss"), so the
-	// 15-point step is 1/9 of today's 135 % level and 1/10 of the 150 % level.
-	const CURRENT_FACTOR = 135 / 15;
-	const NEW_FACTOR = 150 / 15;
 
 	// Rough conversion from gross salary to taxable income (social-security
 	// contributions, occupational and insurance deductions, standard allowances).
@@ -314,9 +441,9 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 	const statusInputs = document.querySelectorAll<HTMLInputElement>('input[name="status"]');
 	const outAdded = document.getElementById('calc-out-added');
 	const outMonth = document.getElementById('calc-out-month');
-	const outCurrent = document.getElementById('calc-out-current');
-	const outNew = document.getElementById('calc-out-new');
+	const outMonthWrap = document.getElementById('calc-out-month-wrap');
 	const outBasis = document.getElementById('calc-out-basis');
+	const outTop = document.getElementById('calc-out-top');
 
 	if (
 		form &&
@@ -329,10 +456,12 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 		salaryPartnerInput &&
 		outAdded &&
 		outMonth &&
-		outCurrent &&
-		outNew &&
-		outBasis
+		outMonthWrap &&
+		outBasis &&
+		outTop
 	) {
+		const brackets: { single: number; couple: number }[] = JSON.parse(form.dataset.brackets ?? '[]');
+		const maxes: number[] = JSON.parse(form.dataset.maxes ?? '[]');
 		const fmt = (n: number) => 'CHF ' + Math.round(n).toLocaleString('de-CH');
 
 		const getStatus = (): Status =>
@@ -399,22 +528,42 @@ const fmt = (n: number) => n.toLocaleString('de-CH');
 
 			const grossYear = salary * months + partnerSalary * partnerMonths;
 			const taxable = grossYear * TAXABLE_RATIO;
-			const bracket = BRACKETS.find((b) => taxable <= b.max) ?? BRACKETS[BRACKETS.length - 1];
-			const added = bracket[status];
+			const index = maxes.findIndex((max) => taxable <= max);
+			const isTop = index === -1;
+			const added = brackets[isTop ? brackets.length - 1 : index][status];
 
-			outAdded.textContent = fmt(added);
+			outAdded.textContent = (isTop ? 'mindestens ' : 'bis zu ') + fmt(added);
 			outMonth.textContent = fmt(added / 12);
-			outCurrent.textContent = fmt(added * CURRENT_FACTOR);
-			outNew.textContent = fmt(added * NEW_FACTOR);
+			outMonthWrap.hidden = isTop;
+			outTop.hidden = !isTop;
 			outBasis.textContent =
 				'Geschätzt aus einem ' +
 				(status === 'couple' ? 'gemeinsamen Bruttolohn' : 'Bruttolohn') +
 				' von ' +
 				fmt(grossYear) +
-				' pro Jahr, steuerbares Einkommen rund ' +
+				' pro Jahr, steuerbares Einkommen pauschal rund ' +
 				fmt(taxable) +
-				'.';
+				' (Stufe ' +
+				(isTop
+					? "über CHF 250'000"
+					: (index === 0 ? 'CHF 0' : fmt(maxes[index - 1] + 1)) + ' bis ' + fmt(maxes[index])) +
+				').';
 			result.hidden = false;
+		});
+	}
+
+	// Highlight a donut segment while its legend entry (or the segment itself)
+	// is hovered.
+	const figure = document.querySelector<HTMLElement>('.cost-share');
+	if (figure) {
+		const targets = figure.querySelectorAll<HTMLElement | SVGElement>('[data-index]');
+		const setActive = (index: string | null) => {
+			figure.classList.toggle('is-focus', index !== null);
+			targets.forEach((el) => el.classList.toggle('is-active', el.dataset.index === index));
+		};
+		targets.forEach((el) => {
+			el.addEventListener('mouseenter', () => setActive(el.dataset.index ?? null));
+			el.addEventListener('mouseleave', () => setActive(null));
 		});
 	}
 </script>

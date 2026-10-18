@@ -35,10 +35,6 @@ export const DOCUMENTS = {
 export const ESTV_CALCULATOR_URL =
 	'https://swisstaxcalculator.estv.admin.ch/#/calculator/income-wealth-tax';
 
-// The file on the main branch that holds the tax-calculator logic.
-export const GITHUB_CALCULATOR_URL =
-	'https://github.com/Pro-Schulraum-Wangen/Website/blob/main/src/components/CostCalculator.astro';
-
 // General contact address for the campaign – questions about the project,
 // the website, or supporter entries.
 export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
