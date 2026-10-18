@@ -17,8 +17,9 @@ Betrieb, bestehende Räume werden zweckentfremdet.
 
 Die Schulhäuser 2A (Baujahr 1954), 2B (1997) und 3 (1969) sowie die alte Turnhalle (1969) stehen am
 Ende ihrer wirtschaftlichen Nutzungsdauer. Eine Sanierung würde das Grundproblem nicht
-lösen: Der fehlende Unterrichtsraum bliebe bestehen, und zentrale Anforderungen wie
-Barrierefreiheit, Brandschutz und Erdbebensicherheit liessen sich in den alten Gebäuden
-gar nicht erfüllen.
+lösen: Der fehlende Unterrichtsraum bliebe weiterhin bestehen. Gleichzeitig könnten
+zentrale Anforderungen wie Barrierefreiheit, Brandschutz und Erdbebensicherheit in den
+bestehenden Gebäuden nur mit erheblichem baulichem und finanziellem Aufwand – sofern
+überhaupt vollständig möglich – erfüllt werden.
 
 **Warten löst das Problem nicht, es verschärft es.**

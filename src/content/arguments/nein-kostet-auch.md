@@ -12,8 +12,8 @@ der Sanierung von rund **CHF 5 Mio.**
 Gleichzeitig geht die provisorisch zugesicherte kantonale Baubeitragszusage von rund
 **CHF 5.6 Mio.** verloren, und der investierte Planungskredit von CHF 740'000.– für
 Richtprojekt und Gesamtleistungswettbewerb ist verloren. In Summe kostet ein Nein die
-Gemeinde über **CHF 23 Mio.**, ohne dass damit ein einziges zusätzliches
-Klassenzimmer entsteht.
+Gemeinde über **CHF 23 Mio.**, ohne dass damit zusätzlicher Schulraum
+entsteht.
 
 Die Gemeinde müsste danach von vorne planen: mehrere Jahre Verzögerung, in denen sich
 die Raumsituation weiter verschärft und die Baukosten durch die Teuerung weiter
