@@ -1,11 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { SUPPORT_FORM_URL } from '../../consts';
+import { SUPPORT_FORM_URL, FLYER_PICKUP_EMAIL } from '../../consts';
 ---
 
 <Layout
 	title="Mitmachen"
-	description="So werden Sie als Unterstützer:in der Schulanlage «Am Buechberg» auf dieser Seite sichtbar."
+	description="So unterstützen Sie die Schulanlage «Am Buechberg»: als Unterstützer:in auf dieser Seite sichtbar werden oder beim Verteilen der Flyer mithelfen."
 >
 	<section class="hero">
 		<div class="wrap narrow">
@@ -13,8 +13,9 @@ import { SUPPORT_FORM_URL } from '../../consts';
 			<p class="tagline">
 				Diese Seite lebt von Menschen, die sichtbar hinter dem Projekt stehen. Ob Sie in Wangen
 				wohnen, aus der Umgebung kommen, in einem Verein aktiv sind oder die Schul-, Sport- und
-				Freizeitinfrastruktur nutzen, Sie sind herzlich willkommen. Machen Sie mit. Es dauert nur
-				zwei Minuten.
+				Freizeitinfrastruktur nutzen, Sie sind herzlich willkommen. Tragen Sie sich als
+				Unterstützer:in ein, das dauert nur zwei Minuten. Oder helfen Sie mit, unseren Flyer in
+				Ihrer Strasse zu verteilen.
 			</p>
 		</div>
 	</section>
@@ -31,6 +32,22 @@ import { SUPPORT_FORM_URL } from '../../consts';
 				<a class="button primary" href={SUPPORT_FORM_URL} target="_blank" rel="noopener">
 					Formular ausfüllen
 				</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="block">
+		<div class="wrap narrow">
+			<div class="card no-hover">
+				<h3>Flyer verteilen</h3>
+				<p>
+					Helfen Sie mit, unseren Flyer in Wangen, Nuolen und Siebnen-Wangen in die Briefkästen zu
+					bringen. Suchen Sie sich auf der Karte eine oder mehrere Strassen aus. Die Flyer können
+					Sie am Samstag, 31. Oktober, von 8 bis 11 Uhr oder nach Vereinbarung (
+					<a href={`mailto:${FLYER_PICKUP_EMAIL}`}>{FLYER_PICKUP_EMAIL}</a>) bei Jonas Küttel an der
+					Bahnhofstrasse abholen.
+				</p>
+				<a class="button primary" href="/flyer/">Strassen auswählen</a>
 			</div>
 		</div>
 	</section>

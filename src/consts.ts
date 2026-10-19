@@ -38,6 +38,9 @@ export const ESTV_CALCULATOR_URL =
 // General contact address for the campaign – questions about the project,
 // the website, or supporter entries.
 export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
+
+// Flyer-Verteilung: pick-up by appointment with Jonas Küttel (STV Wangen SZ).
+export const FLYER_PICKUP_EMAIL = 'praesident@stv-wangensz.ch';
 export const SUPPORT_FORM_URL =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 

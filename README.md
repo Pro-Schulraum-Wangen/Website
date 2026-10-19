@@ -202,6 +202,38 @@ with `npm run db:migrate:local` (test database) and
 `npm run db:migrate:remote` (live database, before deploying code that
 relies on the change).
 
+## Flyer-Verteilung (`/flyer/`)
+
+Volunteers pick one or more streets on a map/list and enter first name,
+last name, e-mail, phone, street + no., ZIP + town and an optional note.
+They pick up the flyers themselves (we contact them to arrange it). Picked streets
+are then shown as «vergeben» to everyone (never who took them). Data lives
+in the same D1 database, tables `flyer_signups` and `flyer_streets`
+(`migrations/0002_create_flyer.sql`, e-mail and phone added in
+`0003_flyer_contact.sql`).
+
+- The streets were imported **once** from the official street directory
+  (swisstopo, `ch.swisstopo.amtliches-strassenverzeichnis`, `com_fosnr`
+  1349) including their geometry for the map. They are not re-fetched –
+  add, rename, split (e.g. «Zürcherstrasse (Nr. 1–40)») or delete streets in
+  the admin panel. Streets added there have no geometry, so they only
+  appear in the list, not on the map.
+- The map uses Leaflet with swisstopo tiles (no API key). Each street also
+  has a «Google Maps» link.
+- Worker rules: at most 30 streets and 5 sign-ups per IP per day; a street
+  already taken is rejected (409) instead of being overwritten.
+
+**Admin panel:** `/admin/flyer/` lists all sign-ups (edit, delete, CSV
+export) and all streets (add, edit, delete, assign/free via dropdown).
+Deleting a sign-up frees its streets. It's covered by the same Cloudflare
+Access application as `/admin/` (paths `/admin*` and `/api/admin*`).
+
+**Before deploying** apply new migrations to the live database:
+
+```sh
+npm run db:migrate:remote
+```
+
 ## Deployment
 
 This site runs as a **Cloudflare Worker with static assets**
@@ -216,11 +248,11 @@ src/
   content/          All content (Markdown/YAML) – see above
   components/       Reusable page building blocks (e.g. the cost calculator)
   layouts/          Shared page layout (header/footer)
-  pages/            Routes (index, argumente, unterstuetzer, medien, mitmachen, geschichten-von-wangen, datenschutz)
+  pages/            Routes (index, argumente, unterstuetzer, medien, mitmachen, flyer, geschichten-von-wangen, datenschutz, admin)
   lib/              Small helpers shared between pages
   styles/           Global CSS
   assets/           Images (optimized by Astro)
-worker/             Cloudflare Worker for the story form (/api/*)
+worker/             Cloudflare Worker for the story form and flyer sign-ups (/api/*)
 migrations/         D1 database schema (SQL)
 ```
 

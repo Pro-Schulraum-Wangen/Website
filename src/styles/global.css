@@ -2178,7 +2178,9 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 }
 
 .story-form textarea,
-.story-form input[type='text'] {
+.story-form input[type='text'],
+.story-form input[type='email'],
+.story-form input[type='tel'] {
 	width: 100%;
 	padding: 0.6rem 0.75rem;
 	font: inherit;
@@ -2527,4 +2529,219 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 .aerial-arrow:disabled {
 	opacity: 0.3;
 	cursor: default;
+}
+
+/* «Flyer verteilen» (/flyer/): map, street list and sign-up form.
+   The form reuses the .story-form styles; the loading/error state reuses
+   .stories-loading / .stories-error. */
+.flyer-status {
+	margin: 0 0 3rem;
+}
+
+.flyer-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+	gap: 2rem;
+	align-items: start;
+	margin-bottom: 4rem;
+}
+
+@media (max-width: 56rem) {
+	.flyer-layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.flyer-layout[hidden] {
+	display: none;
+}
+
+.flyer-map {
+	height: min(70vh, 40rem);
+	min-height: 22rem;
+	background: var(--color-bg-alt);
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+}
+
+/* Leaflet's panes and controls use z-indexes up to 1000. A stacking
+   context of its own keeps all of them below the sticky site header. */
+.flyer-map {
+	position: relative;
+	z-index: 0;
+}
+
+.flyer-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.5rem;
+	margin: 0.75rem 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.9rem;
+}
+
+.flyer-legend li {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* colours match STYLE in src/pages/flyer/index.astro */
+.flyer-swatch {
+	display: inline-block;
+	width: 1.5rem;
+	height: 0.35rem;
+}
+
+.flyer-swatch.is-free {
+	background: #1f5fa8;
+}
+
+.flyer-swatch.is-selected {
+	height: 0.55rem;
+	background: #c9a800;
+}
+
+.flyer-swatch.is-taken {
+	background: #15803d;
+}
+
+.flyer-progress {
+	margin: 0.5rem 0 0;
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.flyer-filter-label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 0.25rem;
+}
+
+.flyer-filter {
+	width: 100%;
+	padding: 0.6rem 0.75rem;
+	font: inherit;
+	color: var(--color-text);
+	border: none;
+	border-radius: var(--radius);
+	background: var(--color-bg-alt);
+}
+
+.flyer-filter:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 1px;
+}
+
+.flyer-streets {
+	max-height: min(70vh, 36rem);
+	overflow-y: auto;
+	margin: 0.75rem 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.95rem;
+	border-top: 1px solid var(--color-control);
+}
+
+.flyer-streets li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding: 0.35rem 0.5rem;
+	border-bottom: 1px solid var(--color-control);
+}
+
+.flyer-streets li[hidden] {
+	display: none;
+}
+
+.flyer-streets li.is-selected {
+	background: color-mix(in srgb, var(--color-brand) 35%, transparent);
+}
+
+.flyer-streets label {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	min-width: 0;
+	cursor: pointer;
+}
+
+.flyer-streets li.is-taken label {
+	cursor: default;
+	color: var(--color-text-muted);
+}
+
+.flyer-streets li.is-taken .flyer-street-name {
+	text-decoration: line-through;
+}
+
+.flyer-badge {
+	flex: none;
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: #15803d;
+}
+
+.flyer-street-actions {
+	display: flex;
+	flex: none;
+	gap: 0.75rem;
+	font-size: 0.8rem;
+}
+
+.flyer-street-actions button {
+	padding: 0;
+	border: none;
+	background: none;
+	font: inherit;
+	color: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.flyer-street-actions a {
+	color: inherit;
+}
+
+.flyer-form h2 {
+	margin-bottom: 0.25rem;
+}
+
+.flyer-form[hidden] {
+	display: none;
+}
+
+.flyer-selection {
+	margin: 0 0 1rem;
+	color: var(--color-text-muted);
+}
+
+.flyer-selection.has-selection {
+	color: var(--color-text);
+	font-weight: 700;
+}
+
+.flyer-fields {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem 1rem;
+	margin-bottom: 0.75rem;
+}
+
+@media (max-width: 40rem) {
+	.flyer-fields {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.flyer-fields label {
+	display: block;
+	margin-bottom: 0.25rem;
+}
+
+.flyer-contact {
+	margin: 2rem 0 0;
+	font-size: 0.95rem;
 }

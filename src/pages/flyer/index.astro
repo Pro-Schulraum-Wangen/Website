@@ -1,0 +1,456 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CONTACT_EMAIL, FLYER_PICKUP_EMAIL } from '../../consts';
+
+// Sign-ups go to the worker (worker/index.js, /api/flyer) and are stored in
+// Cloudflare D1. Only whether a street is taken is public, never who took it.
+
+// keep in sync with FLYER_MAX_FIELD_LENGTH / FLYER_MAX_NOTE_LENGTH in worker/index.js
+const MAX_FIELD_LENGTH = 100;
+const MAX_NOTE_LENGTH = 500;
+---
+
+<Layout
+	title="Flyer verteilen"
+	description="Helfen Sie mit, den Flyer zur Schulanlage «Am Buechberg» in Wangen, Nuolen und Siebnen-Wangen zu verteilen. Wählen Sie Ihre Strassen und tragen Sie sich ein."
+>
+	<section class="hero">
+		<div class="wrap narrow">
+			<h1>Flyer verteilen</h1>
+			<p class="tagline">
+				Damit möglichst alle Haushalte in Wangen von der neuen Schulanlage erfahren, verteilen wir
+				unseren Flyer gemeinsam. Wählen Sie eine oder mehrere Strassen, am liebsten in Ihrer Nähe,
+				und tragen Sie sich ein.
+			</p>
+			<p class="tagline">
+				Die Flyer können Sie bei Jonas Küttel an der Bahnhofstrasse abholen: am{' '}
+				<strong>Samstag, 31. Oktober, von 8 bis 11 Uhr</strong> oder nach Vereinbarung per E-Mail
+				an <a href={`mailto:${FLYER_PICKUP_EMAIL}`}>{FLYER_PICKUP_EMAIL}</a>. Wir kontaktieren Sie
+				nach Ihrer Anmeldung.
+			</p>
+		</div>
+	</section>
+
+	<section class="block flyer">
+		<div class="wrap">
+			<div class="flyer-status" data-flyer-status role="status">
+				<p class="stories-loading" data-flyer-loading>
+					<span class="spinner" aria-hidden="true"></span>
+					Strassen werden geladen …
+				</p>
+				<div class="stories-error" data-flyer-error hidden>
+					<p>Die Strassen konnten leider nicht geladen werden.</p>
+					<button class="button" type="button" data-flyer-retry>Erneut versuchen</button>
+				</div>
+			</div>
+
+			<div class="flyer-layout" data-flyer-content hidden>
+				<div class="flyer-map-column">
+					<div class="flyer-map" data-flyer-map aria-label="Karte der Strassen in Wangen"></div>
+					<ul class="flyer-legend" aria-label="Legende">
+						<li><span class="flyer-swatch is-free" aria-hidden="true"></span> noch frei</li>
+						<li><span class="flyer-swatch is-selected" aria-hidden="true"></span> Ihre Auswahl</li>
+						<li><span class="flyer-swatch is-taken" aria-hidden="true"></span> bereits vergeben</li>
+					</ul>
+					<p class="flyer-progress" data-flyer-progress></p>
+				</div>
+
+				<div class="flyer-list-column">
+					<label class="flyer-filter-label" for="flyer-filter">Strasse suchen</label>
+					<input
+						id="flyer-filter"
+						class="flyer-filter"
+						type="search"
+						placeholder="z. B. Zürcherstrasse"
+						autocomplete="off"
+						data-flyer-filter
+					/>
+					<ul class="flyer-streets" data-flyer-streets></ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="wrap narrow">
+			<form class="story-form flyer-form" data-flyer-form novalidate hidden>
+				<h2>Ich übernehme …</h2>
+				<p class="flyer-selection" data-flyer-selection aria-live="polite">
+					Noch keine Strasse ausgewählt. Wählen Sie oben in der Liste oder auf der Karte.
+				</p>
+
+				<div class="flyer-fields">
+					<div>
+						<label for="flyer-first-name">Vorname</label>
+						<input
+							id="flyer-first-name"
+							name="first_name"
+							type="text"
+							maxlength={MAX_FIELD_LENGTH}
+							autocomplete="given-name"
+							required
+						/>
+					</div>
+					<div>
+						<label for="flyer-last-name">Nachname</label>
+						<input
+							id="flyer-last-name"
+							name="last_name"
+							type="text"
+							maxlength={MAX_FIELD_LENGTH}
+							autocomplete="family-name"
+							required
+						/>
+					</div>
+					<div>
+						<label for="flyer-email">E-Mail</label>
+						<input
+							id="flyer-email"
+							name="email"
+							type="email"
+							maxlength={MAX_FIELD_LENGTH}
+							autocomplete="email"
+							required
+						/>
+					</div>
+					<div>
+						<label for="flyer-phone">Telefon</label>
+						<input
+							id="flyer-phone"
+							name="phone"
+							type="tel"
+							maxlength={MAX_FIELD_LENGTH}
+							autocomplete="tel"
+							placeholder="079 123 45 67"
+							required
+						/>
+					</div>
+					<div>
+						<label for="flyer-street">Strasse und Nr.</label>
+						<input
+							id="flyer-street"
+							name="street"
+							type="text"
+							maxlength={MAX_FIELD_LENGTH}
+							autocomplete="street-address"
+							required
+						/>
+					</div>
+					<div>
+						<label for="flyer-zip-city">PLZ und Ort</label>
+						<input
+							id="flyer-zip-city"
+							name="zip_city"
+							type="text"
+							maxlength={MAX_FIELD_LENGTH}
+							placeholder="8855 Wangen"
+							required
+						/>
+					</div>
+				</div>
+
+				<label for="flyer-note">Bemerkung <span class="optional">(freiwillig)</span></label>
+				<textarea
+					id="flyer-note"
+					name="note"
+					rows="3"
+					maxlength={MAX_NOTE_LENGTH}
+					placeholder="z. B. nur ein Teil der Strasse, Abholung nach Vereinbarung …"
+				></textarea>
+
+				{/* Honeypot – hidden from people, bots tend to fill it in */}
+				<div class="story-hp" aria-hidden="true">
+					<label for="flyer-website">Website</label>
+					<input id="flyer-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+				</div>
+
+				<label class="story-consent">
+					<input type="checkbox" name="consent" required />
+					<span>
+						Ich bin einverstanden, dass meine Angaben zur Organisation der Flyer-Verteilung gespeichert
+						werden. Öffentlich sichtbar ist nur, dass die Strasse vergeben ist, nicht von wem. Mehr dazu
+						in der <a href="/datenschutz/">Datenschutzerklärung</a>.
+					</span>
+				</label>
+
+				<button class="button primary" type="submit">Eintragen</button>
+				<p class="story-message" data-flyer-message role="status" hidden></p>
+			</form>
+
+			<p class="flyer-contact">
+				Fragen oder lieber ein ganzes Quartier? Schreiben Sie uns an{' '}
+				<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	import L from 'leaflet';
+	import 'leaflet/dist/leaflet.css';
+	import type { GeoJsonObject } from 'geojson';
+
+	type Street = {
+		id: number;
+		name: string;
+		zip: string | null;
+		geometry: GeoJsonObject | null;
+		taken: boolean;
+	};
+
+	const TOWNS: Record<string, string> = { '8853': 'Lachen SZ', '8854': 'Siebnen', '8855': 'Wangen SZ' };
+
+	const status = document.querySelector<HTMLElement>('[data-flyer-status]')!;
+	const loading = document.querySelector<HTMLElement>('[data-flyer-loading]')!;
+	const loadError = document.querySelector<HTMLElement>('[data-flyer-error]')!;
+	const content = document.querySelector<HTMLElement>('[data-flyer-content]')!;
+	const mapElement = document.querySelector<HTMLElement>('[data-flyer-map]')!;
+	const progress = document.querySelector<HTMLElement>('[data-flyer-progress]')!;
+	const filter = document.querySelector<HTMLInputElement>('[data-flyer-filter]')!;
+	const list = document.querySelector<HTMLUListElement>('[data-flyer-streets]')!;
+	const form = document.querySelector<HTMLFormElement>('[data-flyer-form]')!;
+	const selectionText = document.querySelector<HTMLElement>('[data-flyer-selection]')!;
+	const message = document.querySelector<HTMLElement>('[data-flyer-message]')!;
+	const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+	let streets: Street[] = [];
+	const selected = new Set<number>();
+	const layers = new Map<number, L.GeoJSON>();
+	const checkboxes = new Map<number, HTMLInputElement>();
+
+	// Colours match the legend swatches in global.css.
+	const STYLE = {
+		free: { color: '#1f5fa8', weight: 4, opacity: 0.75, fillOpacity: 0.15 },
+		selected: { color: '#c9a800', weight: 7, opacity: 1, fillOpacity: 0.35 },
+		taken: { color: '#15803d', weight: 4, opacity: 0.9, fillOpacity: 0.2 },
+	};
+
+	const map = L.map(mapElement, { scrollWheelZoom: false }).setView([47.19, 8.89], 14);
+	L.tileLayer('https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg', {
+		maxZoom: 19,
+		maxNativeZoom: 18,
+		attribution: '&copy; <a href="https://www.swisstopo.admin.ch/" target="_blank" rel="noopener">swisstopo</a>',
+	}).addTo(map);
+
+	function googleMapsUrl(street: Street) {
+		// Drop additions like «(Nr. 1–20)» that admins may add to split a street.
+		const name = street.name.replace(/\s*\(.*\)\s*/g, ' ').trim();
+		const zip = street.zip?.split(',')[0].trim();
+		const place = zip ? `${zip} ${TOWNS[zip] ?? ''}`.trim() : 'Wangen SZ';
+		return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name}, ${place}`)}`;
+	}
+
+	function styleFor(street: Street) {
+		if (street.taken) return STYLE.taken;
+		return selected.has(street.id) ? STYLE.selected : STYLE.free;
+	}
+
+	function toggle(street: Street, on = !selected.has(street.id)) {
+		if (street.taken) return;
+		if (on) selected.add(street.id);
+		else selected.delete(street.id);
+		const checkbox = checkboxes.get(street.id);
+		if (checkbox) checkbox.checked = on;
+		checkbox?.closest('li')?.classList.toggle('is-selected', on);
+		const layer = layers.get(street.id);
+		if (layer) {
+			layer.setStyle(styleFor(street));
+			if (on) layer.bringToFront();
+		}
+		updateSelection();
+	}
+
+	function updateSelection() {
+		const names = streets.filter((s) => selected.has(s.id)).map((s) => s.name);
+		selectionText.textContent =
+			names.length === 0
+				? 'Noch keine Strasse ausgewählt. Wählen Sie oben in der Liste oder auf der Karte.'
+				: `${names.length === 1 ? '1 Strasse' : `${names.length} Strassen`}: ${names.join(', ')}`;
+		selectionText.classList.toggle('has-selection', names.length > 0);
+	}
+
+	function renderList() {
+		checkboxes.clear();
+		list.replaceChildren(
+			...streets.map((street) => {
+				const li = document.createElement('li');
+				li.dataset.name = street.name.toLocaleLowerCase('de-CH');
+				li.classList.toggle('is-taken', street.taken);
+				li.classList.toggle('is-selected', selected.has(street.id));
+
+				const label = document.createElement('label');
+				const checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+				checkbox.disabled = street.taken;
+				checkbox.checked = selected.has(street.id);
+				checkbox.addEventListener('change', () => toggle(street, checkbox.checked));
+				checkboxes.set(street.id, checkbox);
+				const name = document.createElement('span');
+				name.className = 'flyer-street-name';
+				name.textContent = street.name;
+				label.append(checkbox, name);
+				if (street.taken) {
+					const badge = document.createElement('span');
+					badge.className = 'flyer-badge';
+					badge.textContent = '✓ vergeben';
+					label.append(badge);
+				}
+
+				const actions = document.createElement('span');
+				actions.className = 'flyer-street-actions';
+				if (layers.has(street.id)) {
+					const show = document.createElement('button');
+					show.type = 'button';
+					show.textContent = 'Karte';
+					show.title = `${street.name} auf der Karte zeigen`;
+					show.addEventListener('click', () => {
+						const layer = layers.get(street.id)!;
+						map.fitBounds(layer.getBounds(), { maxZoom: 17, padding: [30, 30] });
+						layer.openTooltip();
+						mapElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+					});
+					actions.append(show);
+				}
+				const google = document.createElement('a');
+				google.href = googleMapsUrl(street);
+				google.target = '_blank';
+				google.rel = 'noopener';
+				google.textContent = 'Google Maps';
+				google.title = `${street.name} in Google Maps öffnen`;
+				actions.append(google);
+
+				li.append(label, actions);
+				return li;
+			}),
+		);
+		applyFilter();
+	}
+
+	function renderMap() {
+		for (const layer of layers.values()) layer.remove();
+		layers.clear();
+		const all = L.featureGroup();
+		for (const street of streets) {
+			if (!street.geometry) continue;
+			const layer = L.geoJSON(street.geometry, { style: () => styleFor(street) });
+			layer.bindTooltip(`${street.name}${street.taken ? ' – bereits vergeben' : ''}`, { sticky: true });
+			layer.on('click', () => toggle(street));
+			layer.addTo(map);
+			all.addLayer(layer);
+			layers.set(street.id, layer);
+		}
+		// Taken streets underneath, so free ones stay easy to click.
+		for (const street of streets) if (!street.taken) layers.get(street.id)?.bringToFront();
+		if (all.getLayers().length > 0) map.fitBounds(all.getBounds(), { padding: [10, 10] });
+	}
+
+	function applyFilter() {
+		const query = filter.value.trim().toLocaleLowerCase('de-CH');
+		for (const li of list.children as HTMLCollectionOf<HTMLLIElement>) {
+			li.hidden = query !== '' && !li.dataset.name!.includes(query);
+		}
+	}
+
+	function updateProgress() {
+		const taken = streets.filter((s) => s.taken).length;
+		progress.textContent = `${taken} von ${streets.length} Strassen sind bereits vergeben.`;
+	}
+
+	async function load() {
+		status.hidden = false;
+		loading.hidden = false;
+		loadError.hidden = true;
+		try {
+			const res = await fetch('/api/flyer', { cache: 'no-store' });
+			if (!res.ok) throw new Error(`HTTP ${res.status}`);
+			streets = ((await res.json()) as { streets: Street[] }).streets;
+			// Forget selections that someone else has taken in the meantime.
+			for (const s of streets) if (s.taken) selected.delete(s.id);
+			status.hidden = true;
+			content.hidden = false;
+			form.hidden = false;
+			// The map container was hidden until now, so Leaflet has to re-measure it.
+			map.invalidateSize();
+			renderMap();
+			renderList();
+			updateSelection();
+			updateProgress();
+		} catch {
+			// API not reachable (also under `astro dev` without the worker).
+			loading.hidden = true;
+			loadError.hidden = false;
+		}
+	}
+
+	const showMessage = (text: string, isError: boolean) => {
+		message.textContent = text;
+		message.classList.toggle('is-error', isError);
+		message.hidden = false;
+	};
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const data = new FormData(form);
+		const payload = {
+			first_name: String(data.get('first_name') ?? '').trim(),
+			last_name: String(data.get('last_name') ?? '').trim(),
+			email: String(data.get('email') ?? '').trim(),
+			phone: String(data.get('phone') ?? '').trim(),
+			street: String(data.get('street') ?? '').trim(),
+			zip_city: String(data.get('zip_city') ?? '').trim(),
+			note: String(data.get('note') ?? ''),
+			website: String(data.get('website') ?? ''),
+			streets: [...selected],
+		};
+
+		if (selected.size === 0) {
+			showMessage('Bitte wählen Sie mindestens eine Strasse aus.', true);
+			return;
+		}
+		if (
+			!payload.first_name ||
+			!payload.last_name ||
+			!payload.email ||
+			!payload.phone ||
+			!payload.street ||
+			!payload.zip_city
+		) {
+			showMessage('Bitte füllen Sie alle Felder aus: Name, E-Mail, Telefon und Adresse.', true);
+			return;
+		}
+		if (data.get('consent') !== 'on') {
+			showMessage('Bitte bestätigen Sie die Einwilligung.', true);
+			return;
+		}
+
+		submitButton.disabled = true;
+		try {
+			const res = await fetch('/api/flyer', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+			});
+			const result = await res.json().catch(() => ({}));
+			if (res.ok) {
+				form.reset();
+				selected.clear();
+				showMessage(
+					'Herzlichen Dank! Ihre Strassen sind für Sie reserviert. Wir melden uns bei Ihnen, um die Abholung der Flyer zu vereinbaren.',
+					false,
+				);
+				await load();
+			} else {
+				showMessage(result.error ?? 'Das hat leider nicht geklappt. Bitte versuchen Sie es später nochmals.', true);
+				// Someone was faster: reload so the taken streets show up as such.
+				if (res.status === 409) await load();
+			}
+		} catch {
+			showMessage('Das hat leider nicht geklappt. Bitte versuchen Sie es später nochmals.', true);
+		} finally {
+			submitButton.disabled = false;
+		}
+	});
+
+	filter.addEventListener('input', applyFilter);
+	document.querySelector('[data-flyer-retry]')?.addEventListener('click', () => load());
+
+	load();
+</script>

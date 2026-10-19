@@ -8,6 +8,15 @@
 //   PATCH  /api/admin/stories/:id   – change a story's status, name and/or text
 //   DELETE /api/admin/stories/:id   – delete a story permanently
 //
+//   GET  /api/flyer                       – streets for /flyer/, with geometry and whether taken
+//   POST /api/flyer                       – sign up to distribute flyers in one or more streets
+//   GET    /api/admin/flyer               – every sign-up and every street (admin panel)
+//   PATCH  /api/admin/flyer/signups/:id   – edit a sign-up's personal details and/or picked_up
+//   DELETE /api/admin/flyer/signups/:id   – delete a sign-up (its streets become free again)
+//   POST   /api/admin/flyer/streets       – add a street
+//   PATCH  /api/admin/flyer/streets/:id   – rename a street and/or (re)assign it to a sign-up
+//   DELETE /api/admin/flyer/streets/:id   – delete a street
+//
 // The /api/admin/* routes are meant to sit behind Cloudflare Access (see
 // README section "Admin panel"). Access injects the
 // Cf-Access-Authenticated-User-Email header only on requests it has
@@ -24,6 +33,11 @@ const MIN_TEXT_LENGTH = 20;
 const MAX_NAME_LENGTH = 80;
 const MAX_PER_DAY = 3;
 
+const FLYER_MAX_FIELD_LENGTH = 100;
+const FLYER_MAX_NOTE_LENGTH = 500;
+const FLYER_MAX_STREETS = 30;
+const FLYER_MAX_PER_DAY = 5;
+
 export default {
 	async fetch(request, env) {
 		const { pathname } = new URL(request.url);
@@ -34,8 +48,16 @@ export default {
 			return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'GET, POST' });
 		}
 
+		if (pathname === '/api/flyer') {
+			if (request.method === 'GET') return listFlyerStreets(env);
+			if (request.method === 'POST') return submitFlyerSignup(request, env);
+			return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'GET, POST' });
+		}
+
 		if (pathname.startsWith('/api/admin/')) {
 			if (!isAuthorizedAdmin(request, env)) return json({ error: 'Nicht autorisiert.' }, 403);
+
+			if (pathname.startsWith('/api/admin/flyer')) return handleFlyerAdmin(request, env, pathname);
 
 			if (pathname === '/api/admin/stories') {
 				if (request.method === 'GET') return listAllStories(env);
@@ -190,6 +212,289 @@ async function deleteStory(env, id) {
 	const { meta } = await env.DB.prepare('DELETE FROM stories WHERE id = ?').bind(id).run();
 	if (meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
 
+	return json({ ok: true });
+}
+
+// ---------------------------------------------------------------------------
+// Flyer-Verteilung (/flyer/)
+// ---------------------------------------------------------------------------
+
+// Public list: no names, only whether a street is taken.
+async function listFlyerStreets(env) {
+	const { results } = await env.DB.prepare(
+		`SELECT id, name, zip, geometry, signup_id IS NOT NULL AS taken FROM flyer_streets
+		 ORDER BY name COLLATE NOCASE, id`,
+	).all();
+	const streets = results.map((s) => ({
+		...s,
+		taken: Boolean(s.taken),
+		geometry: s.geometry ? JSON.parse(s.geometry) : null,
+	}));
+	return json({ streets }, 200, { 'Cache-Control': 'no-store' });
+}
+
+async function submitFlyerSignup(request, env) {
+	let body;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: 'Ungültige Anfrage.' }, 400);
+	}
+
+	// Honeypot, see submitStory.
+	if (body.website) return json({ ok: true }, 201);
+
+	const person = readFlyerPerson(body);
+	if (person.error) return json({ error: person.error }, 400);
+
+	const streetIds = Array.isArray(body.streets)
+		? [...new Set(body.streets.map(Number).filter((id) => Number.isInteger(id) && id > 0))]
+		: [];
+	if (streetIds.length === 0) return json({ error: 'Bitte wählen Sie mindestens eine Strasse aus.' }, 400);
+	if (streetIds.length > FLYER_MAX_STREETS) {
+		return json({ error: `Bitte wählen Sie höchstens ${FLYER_MAX_STREETS} Strassen aus.` }, 400);
+	}
+
+	const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+	const { count } = await env.DB.prepare(
+		`SELECT COUNT(*) AS count FROM flyer_signups
+		 WHERE ip = ? AND created_at >= datetime('now', '-1 day')`,
+	)
+		.bind(ip)
+		.first();
+	if (count >= FLYER_MAX_PER_DAY) {
+		return json({ error: 'Zu viele Anmeldungen von diesem Anschluss. Bitte melden Sie sich bei uns per E-Mail.' }, 429);
+	}
+
+	const placeholders = streetIds.map(() => '?').join(', ');
+	const { results: streets } = await env.DB.prepare(
+		`SELECT id, name, signup_id FROM flyer_streets WHERE id IN (${placeholders})`,
+	)
+		.bind(...streetIds)
+		.all();
+	if (streets.length !== streetIds.length) {
+		return json({ error: 'Mindestens eine Strasse gibt es nicht mehr. Bitte laden Sie die Seite neu.' }, 400);
+	}
+	const taken = streets.filter((s) => s.signup_id !== null).map((s) => s.name);
+	if (taken.length > 0) {
+		return json({ error: `Bereits vergeben: ${taken.join(', ')}. Bitte wählen Sie andere Strassen.`, taken }, 409);
+	}
+
+	// One transaction: the sign-up plus its streets. `signup_id IS NULL` keeps
+	// a street someone else grabbed in the meantime from being overwritten.
+	const [, assigned] = await env.DB.batch([
+		env.DB.prepare(
+			`INSERT INTO flyer_signups (first_name, last_name, email, phone, street, zip_city, note, ip)
+			 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+		).bind(
+			person.first_name,
+			person.last_name,
+			person.email,
+			person.phone,
+			person.street,
+			person.zip_city,
+			person.note,
+			ip,
+		),
+		env.DB.prepare(
+			`UPDATE flyer_streets SET signup_id = last_insert_rowid()
+			 WHERE id IN (${placeholders}) AND signup_id IS NULL`,
+		).bind(...streetIds),
+	]);
+
+	return json({ ok: true, assigned: assigned.meta.changes }, 201);
+}
+
+// Validates the personal details of a sign-up. With `partial`, missing
+// fields are skipped (admin edits); otherwise all required fields must be set.
+function readFlyerPerson(body, partial = false) {
+	const labels = {
+		first_name: 'Vorname',
+		last_name: 'Nachname',
+		email: 'E-Mail',
+		phone: 'Telefon',
+		street: 'Strasse und Nr.',
+		zip_city: 'PLZ und Ort',
+	};
+	const person = {};
+	for (const [field, label] of Object.entries(labels)) {
+		if (partial && !(field in body)) continue;
+		const value = cleanLine(body[field]);
+		if (!value) return { error: `Bitte füllen Sie «${label}» aus.` };
+		if (value.length > FLYER_MAX_FIELD_LENGTH) {
+			return { error: `«${label}» darf höchstens ${FLYER_MAX_FIELD_LENGTH} Zeichen lang sein.` };
+		}
+		if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+			return { error: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' };
+		}
+		// digits plus the usual separators, at least 9 digits (e.g. 079 123 45 67)
+		if (field === 'phone' && (!/^\+?[\d\s()./-]+$/.test(value) || value.replace(/\D/g, '').length < 9)) {
+			return { error: 'Bitte geben Sie eine gültige Telefonnummer ein.' };
+		}
+		person[field] = value;
+	}
+	if (!partial || 'note' in body) {
+		const note = cleanText(body.note);
+		if (note.length > FLYER_MAX_NOTE_LENGTH) {
+			return { error: `Die Bemerkung darf höchstens ${FLYER_MAX_NOTE_LENGTH} Zeichen lang sein.` };
+		}
+		person.note = note || null;
+	}
+	return person;
+}
+
+async function handleFlyerAdmin(request, env, pathname) {
+	if (pathname === '/api/admin/flyer') {
+		if (request.method === 'GET') return listFlyerAdmin(env);
+		return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'GET' });
+	}
+
+	if (pathname === '/api/admin/flyer/streets') {
+		if (request.method === 'POST') return createFlyerStreet(request, env);
+		return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'POST' });
+	}
+
+	const match = pathname.match(/^\/api\/admin\/flyer\/(signups|streets)\/(\d+)$/);
+	if (!match) return json({ error: 'Nicht gefunden.' }, 404);
+	const [, kind, rawId] = match;
+	const id = Number(rawId);
+
+	if (kind === 'signups') {
+		if (request.method === 'PATCH') return updateFlyerSignup(request, env, id);
+		if (request.method === 'DELETE') return deleteFlyerSignup(env, id);
+	} else {
+		if (request.method === 'PATCH') return updateFlyerStreet(request, env, id);
+		if (request.method === 'DELETE') return deleteFlyerStreet(env, id);
+	}
+	return json({ error: 'Methode nicht erlaubt.' }, 405, { Allow: 'PATCH, DELETE' });
+}
+
+const FLYER_SIGNUP_COLUMNS =
+	'id, created_at, first_name, last_name, email, phone, street, zip_city, note, picked_up_at, ip';
+const FLYER_STREET_COLUMNS = 'id, name, zip, signup_id, geometry IS NOT NULL AS has_geometry';
+
+async function listFlyerAdmin(env) {
+	const [signups, streets] = await env.DB.batch([
+		env.DB.prepare(`SELECT ${FLYER_SIGNUP_COLUMNS} FROM flyer_signups ORDER BY created_at DESC, id DESC`),
+		env.DB.prepare(`SELECT ${FLYER_STREET_COLUMNS} FROM flyer_streets ORDER BY name COLLATE NOCASE, id`),
+	]);
+	return json({ signups: signups.results, streets: streets.results });
+}
+
+async function updateFlyerSignup(request, env, id) {
+	let body;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: 'Ungültige Anfrage.' }, 400);
+	}
+	const person = readFlyerPerson(body, true);
+	if (person.error) return json({ error: person.error }, 400);
+	const assignments = Object.keys(person).map((f) => `${f} = ?`);
+	const values = Object.values(person);
+
+	// `picked_up: true/false` (checkbox in the admin panel) stores or clears the time.
+	if ('picked_up' in body) {
+		if (typeof body.picked_up !== 'boolean') return json({ error: 'Ungültiger Wert für «Abgeholt».' }, 400);
+		assignments.push(body.picked_up ? "picked_up_at = datetime('now')" : 'picked_up_at = NULL');
+	}
+
+	if (assignments.length === 0) return json({ error: 'Keine Änderungen angegeben.' }, 400);
+
+	const signup = await env.DB.prepare(
+		`UPDATE flyer_signups SET ${assignments.join(', ')} WHERE id = ?
+		 RETURNING ${FLYER_SIGNUP_COLUMNS}`,
+	)
+		.bind(...values, id)
+		.first();
+	if (!signup) return json({ error: 'Nicht gefunden.' }, 404);
+	return json({ ok: true, signup });
+}
+
+async function deleteFlyerSignup(env, id) {
+	// Free the streets explicitly rather than relying on ON DELETE SET NULL,
+	// which only works while foreign keys are enforced.
+	const [, deleted] = await env.DB.batch([
+		env.DB.prepare('UPDATE flyer_streets SET signup_id = NULL WHERE signup_id = ?').bind(id),
+		env.DB.prepare('DELETE FROM flyer_signups WHERE id = ?').bind(id),
+	]);
+	if (deleted.meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
+	return json({ ok: true });
+}
+
+// Reads `name`, `zip` and `signup_id` from an admin request body. Fields left
+// out are skipped; `signup_id: null` frees the street.
+async function readFlyerStreet(body, env) {
+	const street = {};
+	if ('name' in body) {
+		const name = cleanLine(body.name);
+		if (!name) return { error: 'Der Strassenname darf nicht leer sein.' };
+		if (name.length > FLYER_MAX_FIELD_LENGTH) {
+			return { error: `Der Strassenname darf höchstens ${FLYER_MAX_FIELD_LENGTH} Zeichen lang sein.` };
+		}
+		street.name = name;
+	}
+	if ('zip' in body) {
+		street.zip = cleanLine(body.zip).slice(0, FLYER_MAX_FIELD_LENGTH) || null;
+	}
+	if ('signup_id' in body) {
+		if (body.signup_id === null || body.signup_id === '') {
+			street.signup_id = null;
+		} else {
+			const signupId = Number(body.signup_id);
+			const exists = await env.DB.prepare('SELECT 1 FROM flyer_signups WHERE id = ?').bind(signupId).first();
+			if (!exists) return { error: 'Diese Anmeldung gibt es nicht.' };
+			street.signup_id = signupId;
+		}
+	}
+	return street;
+}
+
+async function createFlyerStreet(request, env) {
+	let body;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: 'Ungültige Anfrage.' }, 400);
+	}
+	if (!('name' in body)) return json({ error: 'Der Strassenname darf nicht leer sein.' }, 400);
+	const street = await readFlyerStreet(body, env);
+	if (street.error) return json({ error: street.error }, 400);
+
+	const created = await env.DB.prepare(
+		`INSERT INTO flyer_streets (name, zip, signup_id) VALUES (?, ?, ?)
+		 RETURNING ${FLYER_STREET_COLUMNS}`,
+	)
+		.bind(street.name, street.zip ?? null, street.signup_id ?? null)
+		.first();
+	return json({ ok: true, street: created }, 201);
+}
+
+async function updateFlyerStreet(request, env, id) {
+	let body;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: 'Ungültige Anfrage.' }, 400);
+	}
+	const street = await readFlyerStreet(body, env);
+	if (street.error) return json({ error: street.error }, 400);
+	const fields = Object.keys(street);
+	if (fields.length === 0) return json({ error: 'Keine Änderungen angegeben.' }, 400);
+
+	const updated = await env.DB.prepare(
+		`UPDATE flyer_streets SET ${fields.map((f) => `${f} = ?`).join(', ')} WHERE id = ?
+		 RETURNING ${FLYER_STREET_COLUMNS}`,
+	)
+		.bind(...fields.map((f) => street[f]), id)
+		.first();
+	if (!updated) return json({ error: 'Nicht gefunden.' }, 404);
+	return json({ ok: true, street: updated });
+}
+
+async function deleteFlyerStreet(env, id) {
+	const { meta } = await env.DB.prepare('DELETE FROM flyer_streets WHERE id = ?').bind(id).run();
+	if (meta.changes === 0) return json({ error: 'Nicht gefunden.' }, 404);
 	return json({ ok: true });
 }
 

@@ -1,0 +1,532 @@
+---
+// Internal tool for the flyer distribution (/flyer/), same setup as the
+// stories panel in ../index.astro: protected by Cloudflare Access, which
+// must cover /admin* and /api/admin* (see README section "Admin panel").
+import '../../../styles/admin.css';
+---
+
+<!doctype html>
+<html lang="de-CH">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Admin · Flyer-Verteilung</title>
+	</head>
+	<body>
+		<div class="page-head">
+			<h1>Flyer-Verteilung</h1>
+			<div class="head-links">
+				<a class="link-button" href="/admin/">← Stories</a>
+				<a class="link-button" href="/flyer/" target="_blank" rel="noopener">Öffentliche Seite «Flyer verteilen» ↗</a>
+			</div>
+		</div>
+		<p id="status-message">Lade …</p>
+
+		<div id="content" hidden>
+			<h2 id="signups-title">Anmeldungen</h2>
+			<div class="toolbar">
+				<button type="button" class="plain-button" id="csv-button">Als CSV herunterladen</button>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Abgeholt</th>
+						<th>Datum</th>
+						<th>Vorname</th>
+						<th>Nachname</th>
+						<th>E-Mail</th>
+						<th>Telefon</th>
+						<th>Strasse und Nr.</th>
+						<th>PLZ und Ort</th>
+						<th>Strassen</th>
+						<th>Bemerkung</th>
+						<th>IP</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="signups-body"></tbody>
+			</table>
+
+			<h2 id="streets-title">Strassen</h2>
+			<div class="toolbar">
+				<input type="search" id="street-filter" placeholder="Strasse suchen" />
+				<select id="street-status-filter">
+					<option value="all">alle</option>
+					<option value="free">nur freie</option>
+					<option value="taken">nur vergebene</option>
+				</select>
+				<form id="add-street-form" class="toolbar" style="margin: 0">
+					<input type="text" name="name" placeholder="Neue Strasse, z. B. Zürcherstrasse (Nr. 1–40)" size="38" required />
+					<input type="text" name="zip" placeholder="PLZ" size="6" />
+					<button type="submit" class="add-button">Strasse hinzufügen</button>
+				</form>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Strasse</th>
+						<th>PLZ</th>
+						<th>Karte</th>
+						<th>Vergeben an</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="streets-body"></tbody>
+			</table>
+		</div>
+
+		<script>
+			type Signup = {
+				id: number;
+				created_at: string;
+				first_name: string;
+				last_name: string;
+				email: string | null;
+				phone: string | null;
+				street: string;
+				zip_city: string;
+				note: string | null;
+				picked_up_at: string | null;
+				ip: string;
+			};
+			type Street = { id: number; name: string; zip: string | null; signup_id: number | null; has_geometry: number };
+
+			// Keep in sync with FLYER_MAX_FIELD_LENGTH / FLYER_MAX_NOTE_LENGTH in worker/index.js.
+			const MAX_FIELD_LENGTH = 100;
+			const MAX_NOTE_LENGTH = 500;
+			const PERSON_FIELDS = ['first_name', 'last_name', 'email', 'phone', 'street', 'zip_city'] as const;
+
+			const statusMessage = document.getElementById('status-message')!;
+			const content = document.getElementById('content')!;
+			const signupsTitle = document.getElementById('signups-title')!;
+			const signupsBody = document.getElementById('signups-body')!;
+			const streetsTitle = document.getElementById('streets-title')!;
+			const streetsBody = document.getElementById('streets-body')!;
+			const streetFilter = document.getElementById('street-filter') as HTMLInputElement;
+			const streetStatusFilter = document.getElementById('street-status-filter') as HTMLSelectElement;
+			const addStreetForm = document.getElementById('add-street-form') as HTMLFormElement;
+
+			let signups: Signup[] = [];
+			let streets: Street[] = [];
+
+			function setMessage(text: string, kind?: 'error') {
+				statusMessage.textContent = text;
+				if (kind) statusMessage.setAttribute('data-kind', kind);
+				else statusMessage.removeAttribute('data-kind');
+			}
+
+			async function api<T>(url: string, method = 'GET', body?: unknown): Promise<T> {
+				const res = await fetch(url, {
+					method,
+					headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
+					body: body === undefined ? undefined : JSON.stringify(body),
+				});
+				const data = await res.json().catch(() => ({}));
+				if (!res.ok) throw new Error(data.error || res.statusText);
+				return data as T;
+			}
+
+			function toDate(value: string) {
+				return new Date(value.replace(' ', 'T') + 'Z');
+			}
+
+			function fullName(signup: Signup) {
+				return `${signup.first_name} ${signup.last_name}`;
+			}
+
+			function streetsOf(signupId: number) {
+				return streets.filter((s) => s.signup_id === signupId);
+			}
+
+			function cell(text: string, className?: string) {
+				const td = document.createElement('td');
+				td.textContent = text;
+				if (className) td.className = className;
+				return td;
+			}
+
+			// mailto:/tel: link, or a dash for sign-ups from before these fields existed
+			function linkCell(value: string | null, href: (v: string) => string) {
+				const td = document.createElement('td');
+				td.className = 'nowrap';
+				if (!value) {
+					td.textContent = '–';
+					td.classList.add('muted');
+					return td;
+				}
+				const a = document.createElement('a');
+				a.href = href(value);
+				a.textContent = value;
+				td.append(a);
+				return td;
+			}
+
+			function button(label: string, className: string, onClick: () => void) {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = className;
+				b.textContent = label;
+				b.addEventListener('click', onClick);
+				return b;
+			}
+
+			function updateTitles() {
+				const taken = streets.filter((s) => s.signup_id !== null).length;
+				const pickedUp = signups.filter((s) => s.picked_up_at !== null).length;
+				signupsTitle.textContent = `Anmeldungen (${signups.length}, davon ${pickedUp} abgeholt)`;
+				streetsTitle.textContent = `Strassen (${taken} von ${streets.length} vergeben)`;
+			}
+
+			// ---- Anmeldungen ----------------------------------------------------
+
+			function renderSignups() {
+				signupsBody.replaceChildren(...signups.map(renderSignupRow));
+				updateTitles();
+			}
+
+			function renderSignupRow(signup: Signup): HTMLTableRowElement {
+				const row = document.createElement('tr');
+				row.classList.toggle('is-picked-up', signup.picked_up_at !== null);
+
+				const pickedUpCell = document.createElement('td');
+				pickedUpCell.className = 'picked-up-cell';
+				const pickedUpLabel = document.createElement('label');
+				const checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+				checkbox.checked = signup.picked_up_at !== null;
+				checkbox.title = `Flyer von ${fullName(signup)} abgeholt`;
+				checkbox.addEventListener('change', () => setPickedUp(signup, checkbox, row));
+				pickedUpLabel.append(checkbox);
+				if (signup.picked_up_at) {
+					const when = document.createElement('span');
+					when.textContent = toDate(signup.picked_up_at).toLocaleDateString('de-CH', { dateStyle: 'medium' });
+					pickedUpLabel.append(when);
+				}
+				pickedUpCell.append(pickedUpLabel);
+
+				const dateCell = document.createElement('td');
+				dateCell.className = 'date-cell';
+				const dateLine = document.createElement('div');
+				dateLine.textContent = toDate(signup.created_at).toLocaleDateString('de-CH', { dateStyle: 'medium' });
+				const timeLine = document.createElement('div');
+				timeLine.className = 'time-part';
+				timeLine.textContent = toDate(signup.created_at).toLocaleTimeString('de-CH', { timeStyle: 'short' }) + ' Uhr';
+				dateCell.append(dateLine, timeLine);
+
+				const streetsCell = document.createElement('td');
+				const own = streetsOf(signup.id);
+				if (own.length === 0) {
+					streetsCell.textContent = '–';
+					streetsCell.className = 'muted';
+				} else {
+					const ul = document.createElement('ul');
+					ul.className = 'cell-list';
+					for (const s of own) {
+						const li = document.createElement('li');
+						li.textContent = s.name;
+						ul.append(li);
+					}
+					streetsCell.append(ul);
+				}
+
+				const actionCell = document.createElement('td');
+				actionCell.className = 'action-cell';
+				actionCell.append(
+					button('Bearbeiten', 'edit-button', () => editSignup(signup, row)),
+					button('Löschen', 'delete-button', () => deleteSignup(signup, row)),
+				);
+
+				row.append(
+					pickedUpCell,
+					dateCell,
+					cell(signup.first_name),
+					cell(signup.last_name),
+					linkCell(signup.email, (v) => `mailto:${v}`),
+					linkCell(signup.phone, (v) => `tel:${v.replace(/[^\d+]/g, '')}`),
+					cell(signup.street),
+					cell(signup.zip_city, 'nowrap'),
+					streetsCell,
+					cell(signup.note ?? '', 'text-cell'),
+					cell(signup.ip, 'ip-cell'),
+					actionCell,
+				);
+				return row;
+			}
+
+			function editSignup(signup: Signup, row: HTMLTableRowElement) {
+				const cells = row.children as unknown as HTMLTableCellElement[];
+				const inputs: Record<string, HTMLInputElement | HTMLTextAreaElement> = {};
+
+				PERSON_FIELDS.forEach((field, i) => {
+					const input = document.createElement('input');
+					input.type = 'text';
+					input.className = 'name-input';
+					input.maxLength = MAX_FIELD_LENGTH;
+					input.value = signup[field] ?? '';
+					inputs[field] = input;
+					cells[i + 2].replaceChildren(input);
+				});
+
+				const note = document.createElement('textarea');
+				note.className = 'text-input';
+				note.style.minWidth = '14rem';
+				note.style.minHeight = '5rem';
+				note.maxLength = MAX_NOTE_LENGTH;
+				note.value = signup.note ?? '';
+				inputs.note = note;
+				cells[9].classList.remove('text-cell');
+				cells[9].replaceChildren(note);
+
+				const save = button('Speichern', 'save-button', async () => {
+					save.disabled = cancel.disabled = true;
+					row.classList.add('is-updating');
+					try {
+						const body = Object.fromEntries(Object.entries(inputs).map(([k, el]) => [k, el.value]));
+						const { signup: updated } = await api<{ signup: Signup }>(`/api/admin/flyer/signups/${signup.id}`, 'PATCH', body);
+						signups = signups.map((s) => (s.id === updated.id ? updated : s));
+						renderSignups();
+						renderStreets(); // names in the "Vergeben an" dropdowns
+						setMessage('Änderungen gespeichert.');
+					} catch (err) {
+						row.classList.remove('is-updating');
+						save.disabled = cancel.disabled = false;
+						setMessage(`Speichern fehlgeschlagen: ${(err as Error).message}`, 'error');
+					}
+				});
+				const cancel = button('Abbrechen', 'cancel-button', () => row.replaceWith(renderSignupRow(signup)));
+				cells[11].replaceChildren(save, cancel);
+				inputs.first_name.focus();
+			}
+
+			async function setPickedUp(signup: Signup, checkbox: HTMLInputElement, row: HTMLTableRowElement) {
+				checkbox.disabled = true;
+				row.classList.add('is-updating');
+				try {
+					const { signup: updated } = await api<{ signup: Signup }>(`/api/admin/flyer/signups/${signup.id}`, 'PATCH', {
+						picked_up: checkbox.checked,
+					});
+					signups = signups.map((s) => (s.id === updated.id ? updated : s));
+					row.replaceWith(renderSignupRow(updated));
+					updateTitles();
+				} catch (err) {
+					checkbox.checked = !checkbox.checked;
+					checkbox.disabled = false;
+					row.classList.remove('is-updating');
+					setMessage(`«Abgeholt» konnte nicht gespeichert werden: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			async function deleteSignup(signup: Signup, row: HTMLTableRowElement) {
+				const count = streetsOf(signup.id).length;
+				const hint = count > 0 ? ` Die ${count === 1 ? 'Strasse wird' : `${count} Strassen werden`} wieder frei.` : '';
+				if (!confirm(`Anmeldung von ${fullName(signup)} wirklich unwiderruflich löschen?${hint}`)) return;
+				row.classList.add('is-updating');
+				try {
+					await api(`/api/admin/flyer/signups/${signup.id}`, 'DELETE');
+					signups = signups.filter((s) => s.id !== signup.id);
+					streets = streets.map((s) => (s.signup_id === signup.id ? { ...s, signup_id: null } : s));
+					renderSignups();
+					renderStreets();
+					setMessage(`Anmeldung von ${fullName(signup)} gelöscht.`);
+				} catch (err) {
+					row.classList.remove('is-updating');
+					setMessage(`Löschen fehlgeschlagen: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			function downloadCsv() {
+				const quote = (v: string) => `"${v.replace(/"/g, '""')}"`;
+				const lines = [
+					['Abgeholt', 'Datum', 'Vorname', 'Nachname', 'E-Mail', 'Telefon', 'Strasse und Nr.', 'PLZ und Ort', 'Strassen', 'Bemerkung'],
+					...signups.map((s) => [
+						s.picked_up_at ? toDate(s.picked_up_at).toLocaleDateString('de-CH') : '',
+						toDate(s.created_at).toLocaleString('de-CH'),
+						s.first_name,
+						s.last_name,
+						s.email ?? '',
+						s.phone ?? '',
+						s.street,
+						s.zip_city,
+						streetsOf(s.id)
+							.map((st) => st.name)
+							.join(', '),
+						s.note ?? '',
+					]),
+				].map((cols) => cols.map(quote).join(';'));
+				// BOM so Excel opens the umlauts correctly.
+				const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+				const link = document.createElement('a');
+				link.href = URL.createObjectURL(blob);
+				link.download = `flyer-verteilung-${new Date().toISOString().slice(0, 10)}.csv`;
+				link.click();
+				URL.revokeObjectURL(link.href);
+			}
+
+			// ---- Strassen -------------------------------------------------------
+
+			function renderStreets() {
+				const query = streetFilter.value.trim().toLocaleLowerCase('de-CH');
+				const mode = streetStatusFilter.value;
+				const visible = streets.filter(
+					(s) =>
+						(query === '' || s.name.toLocaleLowerCase('de-CH').includes(query)) &&
+						(mode === 'all' || (mode === 'taken') === (s.signup_id !== null)),
+				);
+				streetsBody.replaceChildren(...visible.map(renderStreetRow));
+				updateTitles();
+			}
+
+			function renderStreetRow(street: Street): HTMLTableRowElement {
+				const row = document.createElement('tr');
+
+				const assignCell = document.createElement('td');
+				const select = document.createElement('select');
+				select.className = street.signup_id !== null ? 'is-taken' : '';
+				const free = document.createElement('option');
+				free.value = '';
+				free.textContent = '– frei –';
+				select.append(free);
+				for (const s of [...signups].sort((a, b) => fullName(a).localeCompare(fullName(b), 'de-CH'))) {
+					const option = document.createElement('option');
+					option.value = String(s.id);
+					option.textContent = `${fullName(s)}, ${s.street}`;
+					select.append(option);
+				}
+				select.value = street.signup_id === null ? '' : String(street.signup_id);
+				select.addEventListener('change', () => assignStreet(street, select, row));
+				assignCell.append(select);
+
+				const actionCell = document.createElement('td');
+				actionCell.className = 'action-cell';
+				actionCell.append(
+					button('Bearbeiten', 'edit-button', () => editStreet(street, row)),
+					button('Löschen', 'delete-button', () => deleteStreet(street, row)),
+				);
+
+				row.append(
+					cell(street.name),
+					cell(street.zip ?? '', 'nowrap'),
+					cell(street.has_geometry ? 'ja' : '–', street.has_geometry ? '' : 'muted'),
+					assignCell,
+					actionCell,
+				);
+				return row;
+			}
+
+			function replaceStreet(updated: Street) {
+				streets = streets.map((s) => (s.id === updated.id ? updated : s));
+			}
+
+			async function assignStreet(street: Street, select: HTMLSelectElement, row: HTMLTableRowElement) {
+				row.classList.add('is-updating');
+				try {
+					const { street: updated } = await api<{ street: Street }>(`/api/admin/flyer/streets/${street.id}`, 'PATCH', {
+						signup_id: select.value === '' ? null : Number(select.value),
+					});
+					replaceStreet(updated);
+					renderSignups();
+					renderStreets();
+				} catch (err) {
+					row.classList.remove('is-updating');
+					select.value = street.signup_id === null ? '' : String(street.signup_id);
+					setMessage(`Zuweisung fehlgeschlagen: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			function editStreet(street: Street, row: HTMLTableRowElement) {
+				const cells = row.children as unknown as HTMLTableCellElement[];
+				const name = document.createElement('input');
+				name.type = 'text';
+				name.className = 'name-input';
+				name.maxLength = MAX_FIELD_LENGTH;
+				name.value = street.name;
+				cells[0].replaceChildren(name);
+				const zip = document.createElement('input');
+				zip.type = 'text';
+				zip.className = 'name-input';
+				zip.size = 6;
+				zip.value = street.zip ?? '';
+				cells[1].replaceChildren(zip);
+
+				const save = button('Speichern', 'save-button', async () => {
+					save.disabled = cancel.disabled = true;
+					row.classList.add('is-updating');
+					try {
+						const { street: updated } = await api<{ street: Street }>(`/api/admin/flyer/streets/${street.id}`, 'PATCH', {
+							name: name.value,
+							zip: zip.value,
+						});
+						replaceStreet(updated);
+						renderSignups();
+						renderStreets();
+						setMessage('Änderungen gespeichert.');
+					} catch (err) {
+						row.classList.remove('is-updating');
+						save.disabled = cancel.disabled = false;
+						setMessage(`Speichern fehlgeschlagen: ${(err as Error).message}`, 'error');
+					}
+				});
+				const cancel = button('Abbrechen', 'cancel-button', () => row.replaceWith(renderStreetRow(street)));
+				cells[4].replaceChildren(save, cancel);
+				name.focus();
+			}
+
+			async function deleteStreet(street: Street, row: HTMLTableRowElement) {
+				const owner = signups.find((s) => s.id === street.signup_id);
+				const hint = owner ? ` Sie ist an ${fullName(owner)} vergeben.` : '';
+				if (!confirm(`Strasse «${street.name}» wirklich löschen?${hint}`)) return;
+				row.classList.add('is-updating');
+				try {
+					await api(`/api/admin/flyer/streets/${street.id}`, 'DELETE');
+					streets = streets.filter((s) => s.id !== street.id);
+					renderSignups();
+					renderStreets();
+					setMessage(`Strasse «${street.name}» gelöscht.`);
+				} catch (err) {
+					row.classList.remove('is-updating');
+					setMessage(`Löschen fehlgeschlagen: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			addStreetForm.addEventListener('submit', async (e) => {
+				e.preventDefault();
+				const data = new FormData(addStreetForm);
+				const submit = addStreetForm.querySelector('button')!;
+				submit.disabled = true;
+				try {
+					const { street } = await api<{ street: Street }>('/api/admin/flyer/streets', 'POST', {
+						name: String(data.get('name') ?? ''),
+						zip: String(data.get('zip') ?? ''),
+					});
+					streets = [...streets, street].sort((a, b) => a.name.localeCompare(b.name, 'de-CH'));
+					addStreetForm.reset();
+					renderStreets();
+					setMessage(`Strasse «${street.name}» hinzugefügt.`);
+				} catch (err) {
+					setMessage(`Hinzufügen fehlgeschlagen: ${(err as Error).message}`, 'error');
+				} finally {
+					submit.disabled = false;
+				}
+			});
+
+			streetFilter.addEventListener('input', renderStreets);
+			streetStatusFilter.addEventListener('change', renderStreets);
+			document.getElementById('csv-button')!.addEventListener('click', downloadCsv);
+
+			async function load() {
+				try {
+					({ signups, streets } = await api<{ signups: Signup[]; streets: Street[] }>('/api/admin/flyer'));
+					renderSignups();
+					renderStreets();
+					content.hidden = false;
+					setMessage(`${signups.length} Anmeldungen und ${streets.length} Strassen geladen.`);
+				} catch (err) {
+					setMessage(`Konnte Daten nicht laden: ${(err as Error).message}`, 'error');
+				}
+			}
+
+			load();
+		</script>
+	</body>
+</html>
