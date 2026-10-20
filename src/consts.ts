@@ -21,6 +21,8 @@ export const DOCUMENTS = {
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
 	// Scan des ersten SVP-Flyer-Beitrags im March-Anzeiger vom 23. September 2026.
 	marchanzeigerSvpFlyer1: '/dokumente/2026-09-23_Marchanzeiger_SVP-Flyer_Teil_1.jpg',
+	// March-Anzeiger vom 30. März 2026: «Mehr Schüler im Kanton, aber unterschiedlich verteilt».
+	marchanzeigerMehrSchueler: '/dokumente/2026-03-30_March-Anzeiger_Mehr_Schueler.png',
 	// Schule Wangen, Schülerprognose (Stand Oktober 2025).
 	schuelerprognose: '/dokumente/2026-10_Schuelerprognosnen_Wangen_SZ.png',
 	// Landis AG, Zustandsbericht mit grobem Sanierungskonzept vom 30.11.2022.
@@ -40,7 +42,7 @@ export const ESTV_CALCULATOR_URL =
 export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
 
 // Flyer-Verteilung: pick-up by appointment with Jonas Küttel (STV Wangen SZ).
-export const FLYER_PICKUP_EMAIL = 'praesident@stv-wangensz.ch';
+export const FLYER_PICKUP_EMAIL = 'j.kuettel@hispeed.ch';
 export const SUPPORT_FORM_URL =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 

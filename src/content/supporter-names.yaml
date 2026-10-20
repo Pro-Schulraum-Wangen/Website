@@ -780,6 +780,10 @@
   name: 'Carlo Weiss'
   lastName: 'Weiss'
   location: 'Wangen'
+- id: severin-weiss
+  name: 'Severin Weiss'
+  lastName: 'Weiss'
+  location: 'Altendorf'
 - id: alex-wosinski
   name: 'Alex Wosinski'
   lastName: 'Wosinski'
