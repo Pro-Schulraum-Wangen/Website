@@ -292,13 +292,16 @@ const MAX_NOTE_LENGTH = 500;
 				const name = document.createElement('span');
 				name.className = 'flyer-street-name';
 				name.textContent = street.name;
-				label.append(checkbox, name);
+				const text = document.createElement('span');
+				text.className = 'flyer-street-text';
+				text.append(name);
 				if (street.taken) {
 					const badge = document.createElement('span');
 					badge.className = 'flyer-badge';
 					badge.textContent = '✓ vergeben';
-					label.append(badge);
+					text.append(badge);
 				}
+				label.append(checkbox, text);
 
 				const actions = document.createElement('span');
 				actions.className = 'flyer-street-actions';

@@ -2688,6 +2688,14 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	cursor: pointer;
 }
 
+.flyer-street-text {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	column-gap: 0.6rem;
+	min-width: 0;
+}
+
 .flyer-streets li.is-taken label {
 	cursor: default;
 	color: var(--color-text-muted);
