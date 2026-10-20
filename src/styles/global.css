@@ -1866,6 +1866,9 @@ article.prose > :first-child > h2:first-child {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	/* centres the donut once it wraps onto its own line (mobile); the text
+	   block grows to fill its line, so the desktop layout is unaffected */
+	justify-content: center;
 	gap: 1.5rem 2.5rem;
 	margin: 2rem 0 0;
 	padding-top: 1.5rem;
@@ -1884,6 +1887,23 @@ article.prose > :first-child > h2:first-child {
 	stroke-width: 2;
 	stroke-linejoin: round;
 	transition: opacity 0.15s ease;
+}
+
+.cost-donut text {
+	text-anchor: middle;
+	fill: var(--color-text);
+	font-variant-numeric: tabular-nums;
+	pointer-events: none;
+}
+
+.cost-donut-value {
+	font-size: 26px;
+	font-weight: 700;
+}
+
+.cost-donut-label {
+	font-size: 11px;
+	fill: var(--color-text-muted);
 }
 
 .cost-share.is-focus .cost-donut path:not(.is-active),

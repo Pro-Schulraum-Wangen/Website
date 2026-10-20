@@ -251,13 +251,15 @@ const segments = BRACKETS.map((b) => {
 				>
 					{
 						segments.map((s, i) => (
-							<path d={s.d} fill={s.color} data-index={i}>
+							<path d={s.d} fill={s.color} data-index={i} data-value={pct(s.share)} data-label={s.short}>
 								<title>
 									{s.label}: {pct(s.share)} der Steuerpflichtigen
 								</title>
 							</path>
 						))
 					}
+					<text class="cost-donut-value" x={CENTER} y={CENTER + 2} aria-hidden="true" />
+					<text class="cost-donut-label" x={CENTER} y={CENTER + 20} aria-hidden="true" />
 				</svg>
 				<figcaption class="cost-share-body">
 					<p class="cost-share-caption" id="cost-share-caption">
@@ -557,9 +559,15 @@ const segments = BRACKETS.map((b) => {
 	const figure = document.querySelector<HTMLElement>('.cost-share');
 	if (figure) {
 		const targets = figure.querySelectorAll<HTMLElement | SVGElement>('[data-index]');
+		const centerValue = figure.querySelector<SVGTextElement>('.cost-donut-value')!;
+		const centerLabel = figure.querySelector<SVGTextElement>('.cost-donut-label')!;
 		const setActive = (index: string | null) => {
 			figure.classList.toggle('is-focus', index !== null);
 			targets.forEach((el) => el.classList.toggle('is-active', el.dataset.index === index));
+			// Show the hovered segment's share in the middle of the donut.
+			const segment = figure.querySelector<SVGPathElement>(`path[data-index="${index}"]`);
+			centerValue.textContent = segment?.dataset.value ?? '';
+			centerLabel.textContent = segment?.dataset.label ?? '';
 		};
 		targets.forEach((el) => {
 			el.addEventListener('mouseenter', () => setActive(el.dataset.index ?? null));
