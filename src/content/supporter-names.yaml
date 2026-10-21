@@ -144,6 +144,14 @@
   name: 'Michael Caprani'
   lastName: 'Caprani'
   location: 'Wangen'
+- id: elia-cerere
+  name: 'Elia Cerere'
+  lastName: 'Cerere'
+  location: 'Wangen'
+- id: verena-cotti
+  name: 'Verena Cotti'
+  lastName: 'Cotti'
+  location: 'Wangen'
 - id: dario-donner
   name: 'Dario Donner'
   lastName: 'Donner'
@@ -803,6 +811,10 @@
 - id: andrea-wosinski
   name: 'Andrea Wosinski'
   lastName: 'Wosinski'
+  location: 'Wangen'
+- id: roman-wyler
+  name: 'Roman Wyler'
+  lastName: 'Wyler'
   location: 'Wangen'
 - id: brigitta-zimmermann
   name: 'Brigitta Zimmermann'
