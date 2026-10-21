@@ -36,6 +36,10 @@
   name: 'Franziska Bellmont'
   lastName: 'Bellmont'
   location: 'Wangen'
+- id: reto-blumer
+  name: 'Reto Blumer'
+  lastName: 'Blumer'
+  location: 'Wangen'
 - id: karin-bodmer
   name: 'Karin Bodmer'
   lastName: 'Bodmer'
@@ -43,6 +47,10 @@
 - id: morena-borelli
   name: 'Morena Borelli'
   lastName: 'Borelli'
+  location: 'Wangen'
+- id: angela-bruhin
+  name: 'Angela Bruhin'
+  lastName: 'Bruhin'
   location: 'Wangen'
 - id: andreas-bruhin
   name: 'Andreas Bruhin'
@@ -107,6 +115,10 @@
 - id: susi-brunner
   name: 'Susi Brunner'
   lastName: 'Brunner'
+  location: 'Wangen'
+- id: aline-burkhard
+  name: 'Aline Burkhard'
+  lastName: 'Burkhard'
   location: 'Wangen'
 - id: ivo-baechtiger
   name: 'Ivo Bächtiger'
