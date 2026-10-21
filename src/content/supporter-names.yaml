@@ -432,6 +432,10 @@
   name: 'Silvan Laib'
   lastName: 'Laib'
   location: 'Wangen'
+- id: ramon-laimbacher
+  name: 'Ramon Laimbacher'
+  lastName: 'Laimbacher'
+  location: 'Wangen'
 - id: martin-landolt
   name: 'Martin Landolt'
   lastName: 'Landolt'
