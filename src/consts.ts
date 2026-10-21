@@ -21,6 +21,10 @@ export const DOCUMENTS = {
 	marchanzeigerSvpNein: '/dokumente/2026-09-04_Marchanzeiger_Seite_4_SVP_Nein.jpg',
 	// Scan des ersten SVP-Flyer-Beitrags im March-Anzeiger vom 23. September 2026.
 	marchanzeigerSvpFlyer1: '/dokumente/2026-09-23_Marchanzeiger_SVP-Flyer_Teil_1.jpg',
+	// Scan des zweiten SVP-Flyer-Beitrags im March-Anzeiger vom 21. Oktober 2026.
+	marchanzeigerSvpFlyer2: '/dokumente/2026-10-21_Marchanzeiger_SVP-Flyer_Teil_2.png',
+	// March-Anzeiger vom 21. Oktober 2026: SVP-Beitrag «Weniger Geburten in Wangen».
+	marchanzeigerSvpWenigerGeburten: '/dokumente/2026-10-21_Marchanzeiger_SVP_Weniger_Geburten_in_Wangen.png',
 	// March-Anzeiger vom 30. März 2026: «Mehr Schüler im Kanton, aber unterschiedlich verteilt».
 	marchanzeigerMehrSchueler: '/dokumente/2026-03-30_March-Anzeiger_Mehr_Schueler.png',
 	// Schule Wangen, Schülerprognose (Stand Oktober 2025).
