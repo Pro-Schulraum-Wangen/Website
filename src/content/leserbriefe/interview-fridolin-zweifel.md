@@ -5,7 +5,7 @@ date: 2026-10-22
 excerpt: 'Fridolin Zweifel hat die Schulraumplanung kritisch begleitet. Heute sagt er Ja zum vorliegenden Projekt. Am 11. Oktober 2026 hat Philipp Bruhin von Pro Schulraum Wangen mit ihm über seine ursprünglichen Bedenken gesprochen und darüber, was ihn schliesslich überzeugt hat.'
 image: './interview-fridolin-zweifel.jpg'
 imageAlt: 'Fridolin Zweifel lebt seit 1983 mit seiner Familie in Wangen'
-published: false
+published: true
 ---
 
 Fridolin Zweifel hat die Schulraumplanung kritisch begleitet. Heute sagt er Ja zum vorliegenden Projekt. Am 11. Oktober 2026 hat Philipp Bruhin von Pro Schulraum Wangen mit ihm über seine ursprünglichen Bedenken gesprochen und darüber, was ihn schliesslich überzeugt hat.
