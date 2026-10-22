@@ -712,6 +712,10 @@
   name: 'Silvan Seunig'
   lastName: 'Seunig'
   location: 'Wangen'
+- id: sarah-sieber
+  name: 'Sarah Sieber'
+  lastName: 'Sieber'
+  location: 'Lachen'
 - id: cristina-sogne
   name: 'Cristina Sogne'
   lastName: 'Sogne'
