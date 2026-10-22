@@ -1,0 +1,173 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import klassenzimmerImg from '../assets/visualizations/klassenzimmer-interior.jpg';
+
+const links = [
+	{ href: '/argumente/', label: 'Argumente', text: 'Warum es die neue Schulanlage braucht' },
+	{ href: '/unterstuetzer/', label: 'Unterstützer:innen', text: 'Wer hinter dem Projekt steht' },
+	{ href: '/medien/', label: 'Medien', text: 'Leserbriefe, Interviews und Mitteilungen' },
+	{ href: '/kontakt/', label: 'Kontakt', text: 'Fragen und Anregungen an das Komitee' },
+];
+---
+
+<Layout title="Seite nicht gefunden" description="Diese Seite gibt es leider nicht.">
+	<section class="hero not-found">
+		<div class="wrap">
+			<div class="not-found-grid">
+				<div class="not-found-text">
+					<p class="not-found-code" aria-hidden="true">404</p>
+					<p class="not-found-label">Fehler 404 · Seite nicht gefunden</p>
+					<h1>Hier fehlt ein Zimmer.</h1>
+					<p class="tagline">
+						Die gesuchte Seite gibt es leider nicht. Vielleicht wurde sie verschoben oder der
+						Link ist veraltet. Im Gegensatz zum Schulraum in Wangen lässt sich das aber schnell
+						lösen.
+					</p>
+					<div class="button-row">
+						<a class="button primary" href="/">Zur Startseite</a>
+						<a class="button secondary" href="/argumente/">Argumente ansehen</a>
+					</div>
+				</div>
+				<figure class="not-found-figure">
+					<Image
+						src={klassenzimmerImg}
+						alt="Visualisierung eines Klassenzimmers in der neuen Schulanlage «Am Buechberg»"
+						width={900}
+						quality={70}
+						format="webp"
+					/>
+					<figcaption>Platz zum Lernen: Visualisierung eines Klassenzimmers in der neuen Schulanlage.</figcaption>
+				</figure>
+			</div>
+		</div>
+	</section>
+
+	<section class="block alt not-found-more">
+		<div class="wrap">
+			<h2>Vielleicht suchen Sie das hier</h2>
+			<ul class="not-found-links">
+				{
+					links.map((l) => (
+						<li>
+							<a href={l.href}>
+								<strong>{l.label} →</strong>
+								<span>{l.text}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.not-found-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.not-found-code {
+		display: inline-block;
+		margin: 0 0 1.25rem;
+		padding: 0.1em 0.35em;
+		background: var(--color-brand);
+		color: var(--color-brand-dark);
+		font-size: clamp(4.5rem, 12vw, 8rem);
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.04em;
+	}
+
+	.not-found-label {
+		margin: 0 0 0.75rem;
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+	}
+
+	.not-found-figure {
+		margin: 0;
+	}
+
+	/* global.css pulls the first block under a text hero flush (padding-top: 0);
+	   this one has its own background, so it needs the top padding back */
+	section.block.alt.not-found-more {
+		padding-top: 4.5rem;
+	}
+
+	.not-found-figure img {
+		display: block;
+		width: 100%;
+		height: auto;
+		box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+	}
+
+	.not-found-figure figcaption {
+		margin-top: 0.8rem;
+		font-size: 0.9rem;
+		color: var(--color-text-muted);
+	}
+
+	.not-found-links {
+		list-style: none;
+		margin: 1.5rem 0 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1rem;
+	}
+
+	.not-found-links a {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		height: 100%;
+		padding: 1.25rem;
+		border-top: 3px solid var(--color-border);
+		background: var(--color-bg);
+		color: var(--color-text);
+		text-decoration: none;
+		transition: background-color 0.15s ease;
+	}
+
+	.not-found-links a:hover,
+	.not-found-links a:focus-visible {
+		background: var(--color-brand-dark);
+		color: var(--color-bg);
+	}
+
+	.not-found-links span {
+		color: var(--color-text-muted);
+		font-size: 0.95rem;
+	}
+
+	.not-found-links a:hover span,
+	.not-found-links a:focus-visible span {
+		color: var(--color-bg);
+	}
+
+	@media (max-width: 64rem) {
+		.not-found-links {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 52rem) {
+		.not-found-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+
+	@media (max-width: 34rem) {
+		.not-found-links {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
