@@ -44,6 +44,10 @@
   name: 'Karin Bodmer'
   lastName: 'Bodmer'
   location: 'Wangen'
+- id: remo-bodmer
+  name: 'Remo Bodmer'
+  lastName: 'Bodmer'
+  location: 'Wangen'
 - id: morena-borelli
   name: 'Morena Borelli'
   lastName: 'Borelli'
@@ -727,6 +731,10 @@
 - id: janna-strieder
   name: 'Janna Strieder'
   lastName: 'Strieder'
+  location: 'Wangen'
+- id: raphael-sutter
+  name: 'Raphael Sutter'
+  lastName: 'Sutter'
   location: 'Wangen'
 - id: chantal-saeuberli
   name: 'Chantal Säuberli'
