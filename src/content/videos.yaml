@@ -1,5 +1,5 @@
 # «Eine Minute für Wangen» – YouTube Shorts (9:16) on the homepage.
-# Set `published: false` to show a video. The number in front of the `id`
+# Set `published: true` to show a video. The number in front of the `id`
 # sets the order on the page (01 first). `youtubeId` is the part after
 # youtube.com/shorts/ in the link.
 
@@ -7,7 +7,7 @@
   youtubeId: fSdt8fKR3m8
   name: Raphael Seunig
   title: Unsere Kinder verdienen eine gute Schule
-  published: false
+  published: true
 - id: 02-julia-cotti
   youtubeId: b1exL8irHQE
   name: Julia Cotti

@@ -88,6 +88,10 @@
   name: 'Meinrad Bruhin'
   lastName: 'Bruhin'
   location: 'Siebnen'
+- id: nicole-bruhin
+  name: 'Nicole Bruhin'
+  lastName: 'Bruhin'
+  location: 'Wangen'
 - id: rita-bruhin
   name: 'Rita Bruhin'
   lastName: 'Bruhin'
