@@ -23,6 +23,8 @@ export const DOCUMENTS = {
 	marchanzeigerSvpFlyer1: '/dokumente/2026-09-23_Marchanzeiger_SVP-Flyer_Teil_1.jpg',
 	// Scan des zweiten SVP-Flyer-Beitrags im March-Anzeiger vom 21. Oktober 2026.
 	marchanzeigerSvpFlyer2: '/dokumente/2026-10-21_Marchanzeiger_SVP-Flyer_Teil_2.png',
+	// Zweiter Flyer der IG Pro Primarschule Siebnen-Wangen (verteilt im Oktober 2026).
+	igFlyer2: '/dokumente/2026-10-23_Primarschule_Sienben-Fyler.jpg',
 	// March-Anzeiger vom 21. Oktober 2026: SVP-Beitrag «Weniger Geburten in Wangen».
 	marchanzeigerSvpWenigerGeburten: '/dokumente/2026-10-21_Marchanzeiger_SVP_Weniger_Geburten_in_Wangen.png',
 	// March-Anzeiger vom 30. März 2026: «Mehr Schüler im Kanton, aber unterschiedlich verteilt».
