@@ -1,0 +1,53 @@
+---
+// «Eine Minute für Wangen»: supporter videos (YouTube Shorts, 9:16) on the
+// homepage. Shows every video with `published: true` in videos.yaml,
+// ordered by the numbered id (01 first). Without any published video the
+// section shows a note that the series starts soon.
+import { getCollection } from 'astro:content';
+import { YOUTUBE_URL } from '../consts';
+
+const videos = (await getCollection('videos', ({ data }) => data.published))
+	.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<section class="block short-videos">
+	<div class="wrap">
+		<div class="section-head">
+			<h2 id="eine-minute-fuer-wangen"><a class="heading-anchor" href="#eine-minute-fuer-wangen">Eine Minute für Wangen</a></h2>
+			<a class="more" href={YOUTUBE_URL} target="_blank" rel="noopener">Alle Videos auf YouTube →</a>
+		</div>
+		<p class="lead">
+			Befürworterinnen und Befürworter erzählen, wer sie sind, was sie an Wangen
+			schätzen und weshalb sie Ja zur neuen Schulanlage sagen. Bis zur Abstimmung
+			schalten wir immer wieder ein neues Video auf. Es lohnt sich also,
+			regelmässig vorbeizuschauen.
+		</p>
+		{videos.length === 0 ? (
+			<p class="short-empty">
+				<strong>Ab dem 25. Oktober geht es los.</strong> Dann erscheint hier das erste
+				Video. Besuchen Sie die Seite regelmässig, es kommen laufend weitere dazu.
+			</p>
+		) : (
+			<div class="short-grid">
+				{videos.map((v) => (
+					<figure>
+						<div class="short-embed">
+							<iframe
+								src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`}
+								title={`${v.data.name}: ${v.data.title}`}
+								loading="lazy"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								referrerpolicy="strict-origin-when-cross-origin"
+								allowfullscreen
+							></iframe>
+						</div>
+						<figcaption>
+							<strong>{v.data.name}</strong>
+							{v.data.title}
+						</figcaption>
+					</figure>
+				))}
+			</div>
+		)}
+	</div>
+</section>

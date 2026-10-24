@@ -89,10 +89,24 @@ const letters = defineCollection({
 		}),
 });
 
+// «Eine Minute für Wangen» – short supporter videos (YouTube Shorts) on the
+// homepage. The numbered `id` sets the order on the page.
+const videos = defineCollection({
+	loader: file('./src/content/videos.yaml'),
+	schema: z.object({
+		youtubeId: z.string(),
+		name: z.string(),
+		title: z.string(),
+		// set to false to hide the video until it should go live
+		published: z.boolean().default(true),
+	}),
+});
+
 export const collections = {
 	supporters,
 	supporterNames,
 	organizations,
 	arguments: arguments_,
 	letters,
+	videos,
 };

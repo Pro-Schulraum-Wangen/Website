@@ -1,0 +1,60 @@
+# «Eine Minute für Wangen» – YouTube Shorts (9:16) on the homepage.
+# Set `published: false` to show a video. The number in front of the `id`
+# sets the order on the page (01 first). `youtubeId` is the part after
+# youtube.com/shorts/ in the link.
+
+- id: 01-raphael-seunig
+  youtubeId: fSdt8fKR3m8
+  name: Raphael Seunig
+  title: Unsere Kinder verdienen eine gute Schule
+  published: false
+- id: 02-julia-cotti
+  youtubeId: b1exL8irHQE
+  name: Julia Cotti
+  title: In die Zukunft von Wangen investieren
+  published: false
+- id: 03-jonas-kuettel
+  youtubeId: FRsKOwxnes0
+  name: Jonas Küttel
+  title: Eine grosse Chance für Jugend und Vereine
+  published: false
+- id: 04-michi-vogt
+  youtubeId: 9NGbkjMwcJA
+  name: Michi Vogt
+  title: Gute Sportförderung beginnt im Dorf
+  published: false
+- id: 05-doelf-hueppin
+  youtubeId: nCktlx_Jd58
+  name: Dölf Hüppin
+  title: Eine Investition in unser Zusammenleben
+  published: false
+- id: 06-fridolin-zweifel
+  youtubeId: rBzJGrMYxjU
+  name: Fridolin Zweifel
+  title: Vom Kritiker zum überzeugten Befürworter
+  published: false
+- id: 07-dani-hueppin
+  youtubeId: HrTaIlANjpc
+  name: Dani Hüppin
+  title: Für unsere Kinder und die nächsten Jahrzehnte
+  published: false
+- id: 08-philipp-bruhin
+  youtubeId: pRFjd3G5PN0
+  name: Philipp Bruhin
+  title: Investieren in das, was uns wichtig ist
+  published: false
+- id: 09-elmar-schnellmann
+  youtubeId: CcpqLuhMK48
+  name: Elmar Schnellmann
+  title: Gute Schulräume auch für unsere Enkel
+  published: false
+- id: 10-monika-schnellmann
+  youtubeId: i84kb8XBgYY
+  name: Monika Schnellmann
+  title: Helle Räume für unsere Kleinsten
+  published: false
+- id: 11-markus-kalt
+  youtubeId: UnPaxCr6N_M
+  name: Markus Kalt
+  title: Ein Generationenprojekt für Wangen
+  published: false

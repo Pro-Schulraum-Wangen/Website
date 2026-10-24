@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import OrganizationBand from '../components/OrganizationBand.astro';
+import ShortVideos from '../components/ShortVideos.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
@@ -64,6 +65,8 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 			)}
 		</div>
 	</section>
+
+	<ShortVideos />
 
 	<section class="block mission alt">
 		<div class="wrap">
