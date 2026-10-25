@@ -2653,6 +2653,44 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	outline-offset: 1px;
 }
 
+.flyer-status-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem 1.25rem;
+	margin: 0.6rem 0 0;
+	padding: 0;
+	border: none;
+	font-size: 0.9rem;
+}
+
+.flyer-status-filter label {
+	display: flex;
+	gap: 0.4rem;
+	align-items: center;
+	cursor: pointer;
+}
+
+/* Same flat dots as the tax calculator (.cost-calc-choice), but on a white
+   background, so the unchecked ones are grey instead of white. */
+.flyer-status-filter input {
+	appearance: none;
+	width: 1.1em;
+	height: 1.1em;
+	margin: 0;
+	border-radius: 50%;
+	background: var(--color-control);
+	cursor: pointer;
+}
+
+.flyer-status-filter input:checked {
+	background: var(--color-brand);
+}
+
+.flyer-status-filter input:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 2px;
+}
+
 .flyer-streets {
 	max-height: min(70vh, 36rem);
 	overflow-y: auto;

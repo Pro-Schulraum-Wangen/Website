@@ -61,7 +61,7 @@ const MAX_NOTE_LENGTH = 500;
 					<p class="flyer-progress" data-flyer-progress></p>
 					<p class="flyer-source">
 						Die Anzahl Briefkästen ist geschätzt: Sie entspricht der Anzahl Wohnungen pro Strasse
-						gemäss dem
+						gemäss dem{' '}
 						<a href="https://www.housing-stat.ch/" target="_blank" rel="noopener">Gebäude- und Wohnungsregister des Bundes</a>.
 					</p>
 				</div>
@@ -76,6 +76,11 @@ const MAX_NOTE_LENGTH = 500;
 						autocomplete="off"
 						data-flyer-filter
 					/>
+					<fieldset class="flyer-status-filter" aria-label="Strassen anzeigen" data-flyer-status-filter>
+						<label><input type="radio" name="flyer-status" value="all" checked /> Alle</label>
+						<label><input type="radio" name="flyer-status" value="free" /> Noch frei</label>
+						<label><input type="radio" name="flyer-status" value="taken" /> Vergeben</label>
+					</fieldset>
 					<ul class="flyer-streets" data-flyer-streets></ul>
 				</div>
 			</div>
@@ -230,6 +235,7 @@ const MAX_NOTE_LENGTH = 500;
 	const mapElement = document.querySelector<HTMLElement>('[data-flyer-map]')!;
 	const progress = document.querySelector<HTMLElement>('[data-flyer-progress]')!;
 	const filter = document.querySelector<HTMLInputElement>('[data-flyer-filter]')!;
+	const statusFilter = document.querySelector<HTMLFieldSetElement>('[data-flyer-status-filter]')!;
 	const list = document.querySelector<HTMLUListElement>('[data-flyer-streets]')!;
 	const form = document.querySelector<HTMLFormElement>('[data-flyer-form]')!;
 	const selectionText = document.querySelector<HTMLElement>('[data-flyer-selection]')!;
@@ -386,8 +392,12 @@ const MAX_NOTE_LENGTH = 500;
 
 	function applyFilter() {
 		const query = filter.value.trim().toLocaleLowerCase('de-CH');
+		const mode = statusFilter.querySelector<HTMLInputElement>('input:checked')?.value ?? 'all';
 		for (const li of list.children as HTMLCollectionOf<HTMLLIElement>) {
-			li.hidden = query !== '' && !li.dataset.name!.includes(query);
+			const taken = li.classList.contains('is-taken');
+			li.hidden =
+				(query !== '' && !li.dataset.name!.includes(query)) ||
+				(mode !== 'all' && (mode === 'taken') !== taken);
 		}
 	}
 
@@ -497,6 +507,7 @@ const MAX_NOTE_LENGTH = 500;
 	});
 
 	filter.addEventListener('input', applyFilter);
+	statusFilter.addEventListener('change', applyFilter);
 	document.querySelector('[data-flyer-retry]')?.addEventListener('click', () => load());
 
 	load();
