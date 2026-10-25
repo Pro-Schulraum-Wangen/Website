@@ -14,49 +14,59 @@
   youtubeId: b1exL8irHQE
   name: Julia Cotti
   title: In die Zukunft von Wangen investieren
+  date: 2026-10-26
   published: false
 - id: 03-jonas-kuettel
   youtubeId: FRsKOwxnes0
   name: Jonas Küttel
   title: Eine grosse Chance für Jugend und Vereine
+  date: 2026-10-27
   published: false
-- id: 04-michi-vogt
+- id: 04-dani-hueppin
+  youtubeId: HrTaIlANjpc
+  name: Dani Hüppin
+  title: Für unsere Kinder und die nächsten Jahrzehnte
+  date: 2026-10-28
+  published: false
+- id: 05-michi-vogt
   youtubeId: 9NGbkjMwcJA
   name: Michi Vogt
   title: Gute Sportförderung beginnt im Dorf
-  published: false
-- id: 05-doelf-hueppin
-  youtubeId: nCktlx_Jd58
-  name: Dölf Hüppin
-  title: Eine Investition in unser Zusammenleben
+  date: 2026-10-29
   published: false
 - id: 06-fridolin-zweifel
   youtubeId: rBzJGrMYxjU
   name: Fridolin Zweifel
   title: Vom Kritiker zum überzeugten Befürworter
+  date: 2026-10-30
   published: false
-- id: 07-dani-hueppin
-  youtubeId: HrTaIlANjpc
-  name: Dani Hüppin
-  title: Für unsere Kinder und die nächsten Jahrzehnte
-  published: false
-- id: 08-philipp-bruhin
-  youtubeId: pRFjd3G5PN0
-  name: Philipp Bruhin
-  title: Investieren in das, was uns wichtig ist
-  published: false
-- id: 09-elmar-schnellmann
-  youtubeId: CcpqLuhMK48
-  name: Elmar Schnellmann
-  title: Gute Schulräume auch für unsere Enkel
-  published: false
-- id: 10-monika-schnellmann
-  youtubeId: i84kb8XBgYY
-  name: Monika Schnellmann
-  title: Helle Räume für unsere Kleinsten
-  published: false
-- id: 11-markus-kalt
+- id: 07-markus-kalt
   youtubeId: UnPaxCr6N_M
   name: Markus Kalt
   title: Ein Generationenprojekt für Wangen
+  date: 2026-10-31
+  published: false
+- id: 08-doelf-hueppin
+  youtubeId: nCktlx_Jd58
+  name: Dölf Hüppin
+  title: Eine Investition in unser Zusammenleben
+  date: 2026-11-01
+  published: false
+- id: 09-monika-schnellmann
+  youtubeId: i84kb8XBgYY
+  name: Monika Schnellmann
+  title: Helle Räume für unsere Kleinsten
+  date: 2026-11-02
+  published: false
+- id: 10-philipp-bruhin
+  youtubeId: pRFjd3G5PN0
+  name: Philipp Bruhin
+  title: Investieren in das, was uns wichtig ist
+  date: 2026-11-03
+  published: false
+- id: 11-elmar-schnellmann
+  youtubeId: CcpqLuhMK48
+  name: Elmar Schnellmann
+  title: Gute Schulräume auch für unsere Enkel
+  date: 2026-11-04
   published: false
