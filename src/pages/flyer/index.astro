@@ -59,6 +59,11 @@ const MAX_NOTE_LENGTH = 500;
 						<li><span class="flyer-swatch is-taken" aria-hidden="true"></span> bereits vergeben</li>
 					</ul>
 					<p class="flyer-progress" data-flyer-progress></p>
+					<p class="flyer-source">
+						Die Anzahl Briefkästen ist geschätzt: Sie entspricht der Anzahl Wohnungen pro Strasse
+						gemäss dem
+						<a href="https://www.housing-stat.ch/" target="_blank" rel="noopener">Gebäude- und Wohnungsregister des Bundes</a>.
+					</p>
 				</div>
 
 				<div class="flyer-list-column">
@@ -198,9 +203,23 @@ const MAX_NOTE_LENGTH = 500;
 		id: number;
 		name: string;
 		zip: string | null;
+		// dwellings (≈ letterboxes) from the federal building register, null = unknown
+		households: number | null;
 		geometry: GeoJsonObject | null;
 		taken: boolean;
 	};
+
+	const number = new Intl.NumberFormat('de-CH');
+
+	function householdsLabel(street: Street) {
+		if (street.households === null) return '';
+		if (street.households === 0) return 'keine Wohnungen';
+		return `ca. ${number.format(street.households)} ${street.households === 1 ? 'Briefkasten' : 'Briefkästen'}`;
+	}
+
+	function sumHouseholds(list: Street[]) {
+		return list.reduce((sum, s) => sum + (s.households ?? 0), 0);
+	}
 
 	const TOWNS: Record<string, string> = { '8853': 'Lachen SZ', '8854': 'Siebnen', '8855': 'Wangen SZ' };
 
@@ -265,11 +284,14 @@ const MAX_NOTE_LENGTH = 500;
 	}
 
 	function updateSelection() {
-		const names = streets.filter((s) => selected.has(s.id)).map((s) => s.name);
+		const chosen = streets.filter((s) => selected.has(s.id));
+		const names = chosen.map((s) => s.name);
+		const total = sumHouseholds(chosen);
 		selectionText.textContent =
 			names.length === 0
 				? 'Noch keine Strasse ausgewählt. Wählen Sie oben in der Liste oder auf der Karte.'
-				: `${names.length === 1 ? '1 Strasse' : `${names.length} Strassen`}: ${names.join(', ')}`;
+				: `${names.length === 1 ? '1 Strasse' : `${names.length} Strassen`}: ${names.join(', ')}` +
+					(total > 0 ? ` – ca. ${number.format(total)} Briefkästen` : '');
 		selectionText.classList.toggle('has-selection', names.length > 0);
 	}
 
@@ -295,6 +317,13 @@ const MAX_NOTE_LENGTH = 500;
 				const text = document.createElement('span');
 				text.className = 'flyer-street-text';
 				text.append(name);
+				const households = householdsLabel(street);
+				if (households) {
+					const count = document.createElement('span');
+					count.className = 'flyer-households';
+					count.textContent = households;
+					text.append(count);
+				}
 				if (street.taken) {
 					const badge = document.createElement('span');
 					badge.className = 'flyer-badge';
@@ -340,7 +369,11 @@ const MAX_NOTE_LENGTH = 500;
 		for (const street of streets) {
 			if (!street.geometry) continue;
 			const layer = L.geoJSON(street.geometry, { style: () => styleFor(street) });
-			layer.bindTooltip(`${street.name}${street.taken ? ' – bereits vergeben' : ''}`, { sticky: true });
+			const households = householdsLabel(street);
+			layer.bindTooltip(
+				`${street.name}${households ? ` (${households})` : ''}${street.taken ? ' – bereits vergeben' : ''}`,
+				{ sticky: true },
+			);
 			layer.on('click', () => toggle(street));
 			layer.addTo(map);
 			all.addLayer(layer);
@@ -359,8 +392,13 @@ const MAX_NOTE_LENGTH = 500;
 	}
 
 	function updateProgress() {
-		const taken = streets.filter((s) => s.taken).length;
-		progress.textContent = `${taken} von ${streets.length} Strassen sind bereits vergeben.`;
+		const taken = streets.filter((s) => s.taken);
+		const total = sumHouseholds(streets);
+		progress.textContent =
+			`${taken.length} von ${streets.length} Strassen sind bereits vergeben` +
+			(total > 0
+				? ` (ca. ${number.format(sumHouseholds(taken))} von ${number.format(total)} Briefkästen).`
+				: '.');
 	}
 
 	async function load() {

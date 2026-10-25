@@ -222,7 +222,7 @@ async function deleteStory(env, id) {
 // Public list: no names, only whether a street is taken.
 async function listFlyerStreets(env) {
 	const { results } = await env.DB.prepare(
-		`SELECT id, name, zip, geometry, signup_id IS NOT NULL AS taken FROM flyer_streets
+		`SELECT id, name, zip, households, geometry, signup_id IS NOT NULL AS taken FROM flyer_streets
 		 ORDER BY name COLLATE NOCASE, id`,
 	).all();
 	const streets = results.map((s) => ({
@@ -371,7 +371,7 @@ async function handleFlyerAdmin(request, env, pathname) {
 
 const FLYER_SIGNUP_COLUMNS =
 	'id, created_at, first_name, last_name, email, phone, street, zip_city, note, picked_up_at, ip';
-const FLYER_STREET_COLUMNS = 'id, name, zip, signup_id, geometry IS NOT NULL AS has_geometry';
+const FLYER_STREET_COLUMNS = 'id, name, zip, households, signup_id, geometry IS NOT NULL AS has_geometry';
 
 async function listFlyerAdmin(env) {
 	const [signups, streets] = await env.DB.batch([

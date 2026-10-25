@@ -2696,6 +2696,18 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	min-width: 0;
 }
 
+.flyer-source {
+	margin: 0.25rem 0 0;
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
+
+.flyer-households {
+	flex: none;
+	font-size: 0.8rem;
+	color: var(--color-text-muted);
+}
+
 .flyer-streets li.is-taken label {
 	cursor: default;
 	color: var(--color-text-muted);

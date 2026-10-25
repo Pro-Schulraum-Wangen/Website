@@ -67,6 +67,7 @@ import '../../../styles/admin.css';
 					<tr>
 						<th>Strasse</th>
 						<th>PLZ</th>
+						<th>Briefkästen</th>
 						<th>Karte</th>
 						<th>Vergeben an</th>
 						<th></th>
@@ -90,7 +91,15 @@ import '../../../styles/admin.css';
 				picked_up_at: string | null;
 				ip: string;
 			};
-			type Street = { id: number; name: string; zip: string | null; signup_id: number | null; has_geometry: number };
+			type Street = {
+				id: number;
+				name: string;
+				zip: string | null;
+				// dwellings (≈ letterboxes) from the federal building register, null = unknown
+				households: number | null;
+				signup_id: number | null;
+				has_geometry: number;
+			};
 
 			// Keep in sync with FLYER_MAX_FIELD_LENGTH / FLYER_MAX_NOTE_LENGTH in worker/index.js.
 			const MAX_FIELD_LENGTH = 100;
@@ -139,6 +148,14 @@ import '../../../styles/admin.css';
 				return streets.filter((s) => s.signup_id === signupId);
 			}
 
+			function sumHouseholds(list: Street[]) {
+				return list.reduce((sum, s) => sum + (s.households ?? 0), 0);
+			}
+
+			function householdsText(street: Street) {
+				return street.households === null ? '–' : String(street.households);
+			}
+
 			function cell(text: string, className?: string) {
 				const td = document.createElement('td');
 				td.textContent = text;
@@ -172,10 +189,12 @@ import '../../../styles/admin.css';
 			}
 
 			function updateTitles() {
-				const taken = streets.filter((s) => s.signup_id !== null).length;
+				const taken = streets.filter((s) => s.signup_id !== null);
 				const pickedUp = signups.filter((s) => s.picked_up_at !== null).length;
 				signupsTitle.textContent = `Anmeldungen (${signups.length}, davon ${pickedUp} abgeholt)`;
-				streetsTitle.textContent = `Strassen (${taken} von ${streets.length} vergeben)`;
+				streetsTitle.textContent =
+					`Strassen (${taken.length} von ${streets.length} vergeben, ` +
+					`${sumHouseholds(taken)} von ${sumHouseholds(streets)} Briefkästen)`;
 			}
 
 			// ---- Anmeldungen ----------------------------------------------------
@@ -224,10 +243,13 @@ import '../../../styles/admin.css';
 					ul.className = 'cell-list';
 					for (const s of own) {
 						const li = document.createElement('li');
-						li.textContent = s.name;
+						li.textContent = s.households === null ? s.name : `${s.name} (${s.households})`;
 						ul.append(li);
 					}
-					streetsCell.append(ul);
+					const total = document.createElement('div');
+					total.className = 'muted';
+					total.textContent = `Total ca. ${sumHouseholds(own)} Flyer`;
+					streetsCell.append(ul, total);
 				}
 
 				const actionCell = document.createElement('td');
@@ -338,7 +360,7 @@ import '../../../styles/admin.css';
 			function downloadCsv() {
 				const quote = (v: string) => `"${v.replace(/"/g, '""')}"`;
 				const lines = [
-					['Abgeholt', 'Datum', 'Vorname', 'Nachname', 'E-Mail', 'Telefon', 'Strasse und Nr.', 'PLZ und Ort', 'Strassen', 'Bemerkung'],
+					['Abgeholt', 'Datum', 'Vorname', 'Nachname', 'E-Mail', 'Telefon', 'Strasse und Nr.', 'PLZ und Ort', 'Strassen', 'Briefkästen', 'Bemerkung'],
 					...signups.map((s) => [
 						s.picked_up_at ? toDate(s.picked_up_at).toLocaleDateString('de-CH') : '',
 						toDate(s.created_at).toLocaleString('de-CH'),
@@ -351,6 +373,7 @@ import '../../../styles/admin.css';
 						streetsOf(s.id)
 							.map((st) => st.name)
 							.join(', '),
+						String(sumHouseholds(streetsOf(s.id))),
 						s.note ?? '',
 					]),
 				].map((cols) => cols.map(quote).join(';'));
@@ -407,6 +430,7 @@ import '../../../styles/admin.css';
 				row.append(
 					cell(street.name),
 					cell(street.zip ?? '', 'nowrap'),
+					cell(householdsText(street), street.households === null ? 'muted' : ''),
 					cell(street.has_geometry ? 'ja' : '–', street.has_geometry ? '' : 'muted'),
 					assignCell,
 					actionCell,
@@ -468,7 +492,7 @@ import '../../../styles/admin.css';
 					}
 				});
 				const cancel = button('Abbrechen', 'cancel-button', () => row.replaceWith(renderStreetRow(street)));
-				cells[4].replaceChildren(save, cancel);
+				cells[5].replaceChildren(save, cancel);
 				name.focus();
 			}
 
