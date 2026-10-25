@@ -1,12 +1,14 @@
 # «Eine Minute für Wangen» – YouTube Shorts (9:16) on the homepage.
 # Set `published: true` to show a video. The number in front of the `id`
 # sets the order on the page (01 first). `youtubeId` is the part after
-# youtube.com/shorts/ in the link.
+# youtube.com/shorts/ in the link. `date` (YYYY-MM-DD) is the release date
+# shown below the title – add it when publishing a video.
 
 - id: 01-raphael-seunig
   youtubeId: fSdt8fKR3m8
   name: Raphael Seunig
   title: Unsere Kinder verdienen eine gute Schule
+  date: 2026-10-25
   published: true
 - id: 02-julia-cotti
   youtubeId: b1exL8irHQE

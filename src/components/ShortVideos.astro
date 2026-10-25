@@ -8,6 +8,7 @@ import { YOUTUBE_URL } from '../consts';
 
 const videos = (await getCollection('videos', ({ data }) => data.published))
 	.sort((a, b) => a.id.localeCompare(b.id));
+const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
 <section class="block short-videos">
@@ -44,6 +45,11 @@ const videos = (await getCollection('videos', ({ data }) => data.published))
 						<figcaption>
 							<strong>{v.data.name}</strong>
 							{v.data.title}
+							{v.data.date && (
+								<time class="short-date" datetime={v.data.date.toISOString().slice(0, 10)}>
+									{dateFormatter.format(v.data.date)}
+								</time>
+							)}
 						</figcaption>
 					</figure>
 				))}

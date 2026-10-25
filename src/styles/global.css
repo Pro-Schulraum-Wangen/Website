@@ -2875,6 +2875,12 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	color: var(--color-text);
 }
 
+.short-grid figcaption .short-date {
+	display: block;
+	margin-top: 0.25rem;
+	font-size: 0.875rem;
+}
+
 @media (max-width: 34rem) {
 	.short-grid {
 		grid-template-columns: 1fr;
