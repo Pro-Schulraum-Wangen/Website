@@ -57,7 +57,8 @@ export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMSNt297
 
 // Social links shown in the footer.
 export const INSTAGRAM_URL = 'https://www.instagram.com/schulanlageambuechberg';
-export const YOUTUBE_URL = 'https://www.youtube.com/@ProSchulraumWangen';
+// Points to the Shorts tab, where all our videos are.
+export const YOUTUBE_URL = 'https://www.youtube.com/@ProSchulraumWangen/shorts';
 
 // People responsible for this website (shown in the privacy notice).
 export const RESPONSIBLE_PEOPLE = [
