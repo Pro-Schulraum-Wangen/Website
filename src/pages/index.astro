@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import OrganizationBand from '../components/OrganizationBand.astro';
 import ShortVideos from '../components/ShortVideos.astro';
+import MythCarousel from '../components/MythCarousel.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
@@ -488,5 +489,6 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 				<a class="button primary" href="/argumente/#behauptungen-eingeordnet">Kritische Fragen und Kosten</a>
 			</div>
 		</div>
+		<MythCarousel />
 	</section>
 </Layout>

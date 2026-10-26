@@ -1,0 +1,155 @@
+---
+// «Mythos oder Tatsache?»: the social media tiles as a carousel below the
+// «Kritische Fragen und Kosten» button on the homepage. Each tile links to
+// its claim on /argumente/, where the #anchor opens the matching <details>.
+// The track scrolls on its own every few seconds; it stops for good as soon
+// as someone uses it, and never moves with prefers-reduced-motion.
+// The tiles are rendered three times and the script keeps the view in the
+// middle copy, so scrolling in either direction loops without ever jumping
+// back to the start. The outer copies are hidden from screen readers.
+import { Image } from 'astro:assets';
+
+import verschuldungImg from '../assets/myth-or-fact/Verschuldung.png';
+import alternativprojekteImg from '../assets/myth-or-fact/Alternativprojekte.png';
+import zuegerdoerfliImg from '../assets/myth-or-fact/Zuegerdoerfli.png';
+import schulbuskostenImg from '../assets/myth-or-fact/Schulbuskosten.png';
+import mitwirkungImg from '../assets/myth-or-fact/Mitwirkung.png';
+import schuelerzahlenImg from '../assets/myth-or-fact/Schuelerzahlen.png';
+import klassengroessenImg from '../assets/myth-or-fact/Klassengroessen.png';
+import turnhalleImg from '../assets/myth-or-fact/Turnhalle.png';
+import sanierungImg from '../assets/myth-or-fact/Sanierung.png';
+import schulhaus1Img from '../assets/myth-or-fact/Schulhaus1.png';
+import rickenbacherwieseImg from '../assets/myth-or-fact/Rickenbacherwiese.png';
+import aussenanlagenImg from '../assets/myth-or-fact/Aussenanlagen.png';
+import mammutschuleImg from '../assets/myth-or-fact/Mammutschule.png';
+
+// Same order as the claims on /argumente/; `claim` is the <details> id there.
+const tiles = [
+	{ img: verschuldungImg, claim: 'verschuldung', topic: 'Verschuldung' },
+	{ img: alternativprojekteImg, claim: 'alternativprojekte', topic: 'Alternativprojekte' },
+	{ img: zuegerdoerfliImg, claim: 'zuegerdoerfli', topic: 'Bauland im Zügerdörfli' },
+	{ img: schulbuskostenImg, claim: 'schulbuskosten', topic: 'Schulbuskosten' },
+	{ img: mitwirkungImg, claim: 'mitwirkung', topic: 'Mitwirkung der Bevölkerung' },
+	{ img: schuelerzahlenImg, claim: 'schuelerzahlen', topic: 'Schülerzahlen' },
+	// no claim of its own, the class sizes are covered under the pupil numbers
+	{ img: klassengroessenImg, claim: 'schuelerzahlen', topic: 'Klassengrössen' },
+	{ img: turnhalleImg, claim: 'turnhalle-turnverein', topic: 'Turnhalle' },
+	{ img: sanierungImg, claim: 'sanierung-geprueft', topic: 'Sanierung' },
+	{ img: schulhaus1Img, claim: 'schulhaus1-leerstand', topic: 'Schulhaus 1' },
+	{ img: rickenbacherwieseImg, claim: 'rickenbacherwiese', topic: 'Rickenbacherwiese' },
+	{ img: aussenanlagenImg, claim: 'aussenanlagen', topic: 'Aussenanlagen' },
+	{ img: mammutschuleImg, claim: 'mammutschule', topic: 'Mammutschule' },
+];
+---
+
+<div class="myth-carousel" data-myth-carousel>
+	<ul class="myth-track" data-myth-track aria-label="Mythos oder Tatsache?">
+		{[0, 1, 2].map((copy) =>
+			tiles.map((t, i) => {
+				const clone = copy !== 1;
+				return (
+					<li aria-hidden={clone ? 'true' : undefined} data-myth-first={i === 0 ? copy : undefined}>
+						<a href={`/argumente/#${t.claim}`} tabindex={clone ? -1 : undefined}>
+							<Image
+								src={t.img}
+								alt={clone ? '' : `Mythos oder Tatsache? ${t.topic}. Zu den Fakten`}
+								widths={[320, 480, 720]}
+								sizes="(max-width: 40rem) 75vw, clamp(15rem, 22vw, 22rem)"
+								loading="lazy"
+							/>
+						</a>
+					</li>
+				);
+			}),
+		)}
+	</ul>
+	<div class="myth-controls">
+		<button type="button" data-myth-prev aria-label="Vorheriges Bild">←</button>
+		<button type="button" data-myth-next aria-label="Nächstes Bild">→</button>
+	</div>
+</div>
+
+<script>
+	const INTERVAL_MS = 4000;
+
+	for (const carousel of document.querySelectorAll<HTMLElement>('[data-myth-carousel]')) {
+		const track = carousel.querySelector<HTMLElement>('[data-myth-track]')!;
+		const prev = carousel.querySelector<HTMLButtonElement>('[data-myth-prev]')!;
+		const next = carousel.querySelector<HTMLButtonElement>('[data-myth-next]')!;
+
+		// one tile including the gap
+		const step = () => {
+			const [a, b] = track.querySelectorAll('li');
+			return b.offsetLeft - a.offsetLeft;
+		};
+		// distance between the first tile of one copy and the next
+		const setWidth = () => {
+			const [first, second] = track.querySelectorAll<HTMLElement>('[data-myth-first="0"], [data-myth-first="1"]');
+			return second.offsetLeft - first.offsetLeft;
+		};
+
+		// Jump by exactly one copy once the view drifts out of the middle one.
+		// The copies are identical and snap points line up, so nobody sees it.
+		function recentre() {
+			const width = setWidth();
+			if (track.scrollLeft < width * 0.5) track.scrollTo({ left: track.scrollLeft + width, behavior: 'instant' });
+			else if (track.scrollLeft > width * 1.5) track.scrollTo({ left: track.scrollLeft - width, behavior: 'instant' });
+		}
+
+		track.scrollTo({ left: setWidth(), behavior: 'instant' });
+		// scrollend is missing in older Safari, so also settle after a pause.
+		let settle: number | undefined;
+		track.addEventListener('scroll', () => {
+			window.clearTimeout(settle);
+			settle = window.setTimeout(recentre, 200);
+		});
+		track.addEventListener('scrollend', recentre);
+
+		function advance(direction: 1 | -1) {
+			track.scrollBy({ left: direction * step(), behavior: 'smooth' });
+		}
+
+		let timer: number | undefined;
+		let hovered = false;
+		const stop = () => {
+			window.clearInterval(timer);
+			timer = undefined;
+		};
+		const start = () => {
+			if (timer !== undefined || hovered || document.hidden) return;
+			timer = window.setInterval(() => advance(1), INTERVAL_MS);
+		};
+
+		prev.addEventListener('click', () => advance(-1));
+		next.addEventListener('click', () => advance(1));
+
+		if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			// Once someone swipes, clicks an arrow or tabs in, they are in charge.
+			let userTookOver = false;
+			const takeOver = () => {
+				userTookOver = true;
+				stop();
+			};
+			for (const type of ['pointerdown', 'wheel', 'focusin', 'keydown']) {
+				carousel.addEventListener(type, takeOver, { passive: true });
+			}
+			carousel.addEventListener('mouseenter', () => {
+				hovered = true;
+				stop();
+			});
+			carousel.addEventListener('mouseleave', () => {
+				hovered = false;
+				if (!userTookOver) start();
+			});
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden) stop();
+				else if (!userTookOver) start();
+			});
+			// Only run while the carousel is on screen.
+			new IntersectionObserver(([entry]) => {
+				if (entry.isIntersecting && !userTookOver) start();
+				else stop();
+			}).observe(carousel);
+		}
+	}
+</script>

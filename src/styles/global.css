@@ -2963,3 +2963,71 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 		margin-top: 2rem;
 	}
 }
+
+/* «Mythos oder Tatsache?» carousel on the homepage (MythCarousel.astro). */
+/* Full page width; the track still scrolls, just without a visible scrollbar. */
+.myth-carousel {
+	margin-top: 2.5rem;
+}
+
+.myth-track {
+	display: flex;
+	gap: 1rem;
+	margin: 0;
+	padding: 0.25rem 1rem 0.75rem;
+	list-style: none;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-padding-inline: 1rem;
+	scrollbar-width: none;
+}
+
+.myth-track::-webkit-scrollbar {
+	display: none;
+}
+
+.myth-track li {
+	flex: 0 0 clamp(15rem, 22vw, 22rem);
+	scroll-snap-align: start;
+}
+
+@media (max-width: 40rem) {
+	.myth-track li {
+		flex-basis: 75%;
+	}
+}
+
+.myth-track a {
+	display: block;
+}
+
+.myth-track img {
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+}
+
+.myth-controls {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.myth-controls button {
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 0;
+	background: var(--color-brand-dark);
+	color: var(--color-brand);
+	font: inherit;
+	font-size: 1.25rem;
+	cursor: pointer;
+}
+
+.myth-controls button:hover,
+.myth-controls button:focus-visible {
+	background: var(--color-brand);
+	color: var(--color-brand-dark);
+}
