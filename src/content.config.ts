@@ -97,9 +97,9 @@ const videos = defineCollection({
 		youtubeId: z.string(),
 		name: z.string(),
 		title: z.string(),
-		// release date, shown below the title
+		// release date, shown below the title; before it the video is a teaser
 		date: z.coerce.date().optional(),
-		// set to false to hide the video until it should go live
+		// set to false to hide the video completely
 		published: z.boolean().default(true),
 	}),
 });

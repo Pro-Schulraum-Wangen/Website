@@ -1,14 +1,23 @@
 ---
 // «Eine Minute für Wangen»: supporter videos (YouTube Shorts, 9:16) on the
 // homepage. Shows every video with `published: true` in videos.yaml,
-// ordered by the numbered id (01 first). Without any published video the
-// section shows a note that the series starts soon.
+// ordered by the numbered id (01 first). Like an advent calendar, a video
+// whose `date` is still ahead appears as a grey teaser with name and date;
+// a small script swaps in the player on the release day (Swiss time), so
+// no new deploy is needed for each video. On phones the teasers stay
+// behind a button, on larger screens they are always visible.
 import { getCollection } from 'astro:content';
 import { YOUTUBE_URL } from '../consts';
 
 const videos = (await getCollection('videos', ({ data }) => data.published))
 	.sort((a, b) => a.id.localeCompare(b.id));
 const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+const monthFormatter = new Intl.DateTimeFormat('de-CH', { month: 'long', timeZone: 'UTC' });
+// today in Swiss time as YYYY-MM-DD (sv-SE formats dates that way)
+const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Zurich' }).format(new Date());
+const isoDate = (date: Date) => date.toISOString().slice(0, 10);
+const isUpcoming = (date?: Date) => !!date && isoDate(date) > today;
+const upcomingCount = videos.filter((v) => isUpcoming(v.data.date)).length;
 ---
 
 <section class="block short-videos">
@@ -18,42 +27,84 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 			<a class="more" href={YOUTUBE_URL} target="_blank" rel="noopener">Alle Videos auf YouTube →</a>
 		</div>
 		<p class="lead">
-			Befürworterinnen und Befürworter erzählen in rund einer Minute, wer sie sind, was sie an Wangen
-			schätzen und weshalb sie Ja zur neuen Schulanlage sagen. Bis zur Abstimmung
-			schalten wir immer wieder ein neues Video auf. Es lohnt sich also,
-			regelmässig vorbeizuschauen.
+			Menschen aus Wangen und der Umgebung erzählen, was sie mit unserem Dorf verbindet und
+			weshalb sie Ja zur neuen Schulanlage sagen. In den nächsten Tagen erscheint jeden Tag ein
+			neues Video. Entdecken Sie schon jetzt, wer dabei ist. Vielleicht ist auch jemand dabei,
+			den Sie kennen.
 		</p>
-		{videos.length === 0 ? (
-			<p class="short-empty">
-				<strong>Ab dem 25. Oktober geht es los.</strong> Dann erscheint hier das erste
-				Video. Besuchen Sie die Seite regelmässig, es kommen laufend weitere dazu.
-			</p>
-		) : (
-			<div class="short-grid">
-				{videos.map((v) => (
-					<figure>
-						<div class="short-embed">
-							<iframe
-								src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`}
-								title={`${v.data.name}: ${v.data.title}`}
-								loading="lazy"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-								referrerpolicy="strict-origin-when-cross-origin"
-								allowfullscreen
-							></iframe>
-						</div>
+		<div class="short-grid" data-short-grid>
+			{videos.map((v) => {
+				const iframe = (
+					<iframe
+						src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`}
+						title={`${v.data.name}: ${v.data.title}`}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				);
+				const upcoming = isUpcoming(v.data.date);
+				return (
+					<figure class:list={{ 'short-upcoming': upcoming }} data-release={v.data.date && isoDate(v.data.date)}>
+						{upcoming && v.data.date ? (
+							<div class="short-embed short-teaser">
+								<span class="short-teaser-day">{v.data.date.getUTCDate()}</span>
+								<span class="short-teaser-month">{monthFormatter.format(v.data.date)}</span>
+								<span class="short-teaser-note">Video erscheint bald</span>
+								<template>{iframe}</template>
+							</div>
+						) : (
+							<div class="short-embed">{iframe}</div>
+						)}
 						<figcaption>
 							<strong>{v.data.name}</strong>
 							{v.data.title}
 							{v.data.date && (
-								<time class="short-date" datetime={v.data.date.toISOString().slice(0, 10)}>
-									{dateFormatter.format(v.data.date)}
+								<time class="short-date" datetime={isoDate(v.data.date)}>
+									{upcoming && <span class="short-date-prefix">Ab </span>}{dateFormatter.format(v.data.date)}
 								</time>
 							)}
 						</figcaption>
 					</figure>
-				))}
-			</div>
-		)}
+				);
+			})}
+		</div>
+		<div class="short-more" data-short-more hidden={upcomingCount === 0}>
+			<button type="button" class="button primary" data-short-more-button aria-expanded="false">
+				Geplante Videos anzeigen (<span data-short-more-count>{upcomingCount}</span>)
+			</button>
+		</div>
 	</div>
 </section>
+
+<script>
+	// The page is built ahead of time: unlock teasers whose release day has
+	// arrived since the last build.
+	const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Zurich' }).format(new Date());
+	const grid = document.querySelector<HTMLElement>('[data-short-grid]');
+	const more = document.querySelector<HTMLElement>('[data-short-more]');
+
+	if (grid && more) {
+		grid.querySelectorAll<HTMLElement>('figure.short-upcoming').forEach((figure) => {
+			if ((figure.dataset.release ?? '') > today) return;
+			const teaser = figure.querySelector<HTMLElement>('.short-teaser')!;
+			const template = teaser.querySelector('template')!;
+			teaser.replaceChildren(template.content.cloneNode(true));
+			teaser.classList.remove('short-teaser');
+			figure.classList.remove('short-upcoming');
+			figure.querySelector('.short-date-prefix')?.remove();
+		});
+
+		const remaining = grid.querySelectorAll('figure.short-upcoming').length;
+		more.querySelector('[data-short-more-count]')!.textContent = String(remaining);
+		more.hidden = remaining === 0;
+
+		const button = more.querySelector<HTMLButtonElement>('[data-short-more-button]')!;
+		button.addEventListener('click', () => {
+			grid.classList.add('show-upcoming');
+			button.setAttribute('aria-expanded', 'true');
+			more.hidden = true;
+		});
+	}
+</script>

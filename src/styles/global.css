@@ -2849,14 +2849,6 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	margin: 0;
 }
 
-/* Shown instead of the videos as long as none is published yet */
-.short-empty {
-	margin: 0;
-	padding: 1rem 1.25rem;
-	background: var(--color-bg-alt);
-	border-left: 4px solid var(--color-brand);
-}
-
 .short-embed iframe {
 	display: block;
 	width: 100%;
@@ -2881,6 +2873,46 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	font-size: 0.875rem;
 }
 
+/* Upcoming video, advent-calendar style: a grey 9:16 tile with the release
+   day, swapped for the player on that day (see ShortVideos.astro) */
+.short-teaser {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 9 / 16;
+	background: var(--color-bg-alt);
+	border-top: 4px solid var(--color-brand);
+	text-align: center;
+}
+
+.short-teaser-day {
+	font-size: 4.5rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.short-teaser-month {
+	margin-top: 0.25rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.short-teaser-note {
+	margin-top: 1.25rem;
+	font-size: 0.875rem;
+	color: var(--color-text-muted);
+}
+
+.short-upcoming figcaption strong {
+	color: var(--color-text-muted);
+}
+
+/* The "show planned videos" button is only needed on phones */
+.short-more {
+	display: none;
+}
+
 @media (max-width: 34rem) {
 	.short-grid {
 		grid-template-columns: 1fr;
@@ -2893,5 +2925,17 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 
 	.short-grid figcaption {
 		padding: 0.75rem 1.25rem 0;
+	}
+
+	/* One below the other, the teasers would make a long scroll: keep them
+	   behind a button until asked for */
+	.short-grid:not(.show-upcoming) .short-upcoming {
+		display: none;
+	}
+
+	.short-more:not([hidden]) {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
 	}
 }
