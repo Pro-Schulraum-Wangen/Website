@@ -880,3 +880,7 @@
   name: 'Kurt Salzmann'
   lastName: 'Salzmann'
   location: 'Wangen'
+- id: ferdinand-vogt
+  name: 'Ferdinand Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
