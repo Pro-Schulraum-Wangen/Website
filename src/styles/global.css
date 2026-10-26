@@ -2558,6 +2558,30 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	margin: 0 0 3rem;
 }
 
+.flyer-done {
+	max-width: var(--max-width-narrow);
+	margin: 0 auto 3rem;
+	padding: 1.5rem 2rem;
+	background: var(--color-brand);
+	color: var(--color-brand-dark);
+}
+
+.flyer-done h2 {
+	margin-top: 0;
+}
+
+.flyer-done p:last-child {
+	margin-bottom: 0;
+}
+
+.flyer-done a {
+	color: inherit;
+}
+
+.flyer-done[hidden] {
+	display: none;
+}
+
 .flyer-layout {
 	display: grid;
 	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);

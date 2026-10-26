@@ -50,6 +50,20 @@ const MAX_NOTE_LENGTH = 500;
 				</div>
 			</div>
 
+			<div class="flyer-done" data-flyer-done hidden>
+				<h2>Alle Strassen sind vergeben!</h2>
+				<p>
+					Dank Ihrer phänomenalen Hilfe hat jede Strasse in Wangen, Nuolen und Siebnen-Wangen eine
+					Verteilerin oder einen Verteiler gefunden. Herzlichen Dank allen, die mitmachen: Sie sorgen
+					dafür, dass die Schulanlage «Am Buechberg» in jedem Briefkasten ankommt.
+				</p>
+				<p>
+					Falls jemand ausfällt, werden einzelne Strassen wieder frei. Schauen Sie gerne später nochmals
+					vorbei, oder schreiben Sie uns an <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>,
+					wenn Sie bei Bedarf einspringen möchten.
+				</p>
+			</div>
+
 			<div class="flyer-layout" data-flyer-content hidden>
 				<div class="flyer-map-column">
 					<div class="flyer-map" data-flyer-map aria-label="Karte der Strassen in Wangen"></div>
@@ -232,6 +246,7 @@ const MAX_NOTE_LENGTH = 500;
 	const loading = document.querySelector<HTMLElement>('[data-flyer-loading]')!;
 	const loadError = document.querySelector<HTMLElement>('[data-flyer-error]')!;
 	const content = document.querySelector<HTMLElement>('[data-flyer-content]')!;
+	const done = document.querySelector<HTMLElement>('[data-flyer-done]')!;
 	const mapElement = document.querySelector<HTMLElement>('[data-flyer-map]')!;
 	const progress = document.querySelector<HTMLElement>('[data-flyer-progress]')!;
 	const filter = document.querySelector<HTMLInputElement>('[data-flyer-filter]')!;
@@ -421,9 +436,12 @@ const MAX_NOTE_LENGTH = 500;
 			streets = ((await res.json()) as { streets: Street[] }).streets;
 			// Forget selections that someone else has taken in the meantime.
 			for (const s of streets) if (s.taken) selected.delete(s.id);
+			const allTaken = streets.length > 0 && streets.every((s) => s.taken);
 			status.hidden = true;
 			content.hidden = false;
-			form.hidden = false;
+			done.hidden = !allTaken;
+			// Nothing left to pick, but keep the form while it shows the last thank-you.
+			form.hidden = allTaken && message.hidden;
 			// The map container was hidden until now, so Leaflet has to re-measure it.
 			map.invalidateSize();
 			renderMap();
