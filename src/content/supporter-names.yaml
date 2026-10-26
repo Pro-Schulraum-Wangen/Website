@@ -868,3 +868,15 @@
   name: 'Aurel Züger'
   lastName: 'Züger'
   location: 'Altendorf'
+- id: michael-janser
+  name: 'Michael Janser'
+  lastName: 'Janser'
+  location: 'Wangen'
+- id: fabienne-janser
+  name: 'Fabienne Janser'
+  lastName: 'Janser'
+  location: 'Wangen'
+- id: kurt-salzmann
+  name: 'Kurt Salzmann'
+  lastName: 'Salzmann'
+  location: 'Wangen'
