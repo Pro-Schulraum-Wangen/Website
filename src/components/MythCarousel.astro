@@ -54,7 +54,7 @@ const tiles = [
 								src={t.img}
 								alt={clone ? '' : `Mythos oder Tatsache? ${t.topic}. Zu den Fakten`}
 								widths={[320, 480, 720]}
-								sizes="(max-width: 40rem) 75vw, clamp(15rem, 22vw, 22rem)"
+								sizes="(max-width: 40rem) 85vw, clamp(15rem, 22vw, 22rem)"
 								loading="lazy"
 							/>
 						</a>
@@ -64,8 +64,13 @@ const tiles = [
 		)}
 	</ul>
 	<div class="myth-controls">
-		<button type="button" data-myth-prev aria-label="Vorheriges Bild">←</button>
-		<button type="button" data-myth-next aria-label="Nächstes Bild">→</button>
+		{/* same double chevrons as AerialGallery; SVG because ← → render at different sizes on some phones */}
+		<button type="button" data-myth-prev aria-label="Vorheriges Bild">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17-5-5 5-5" /><path d="m18 17-5-5 5-5" /></svg>
+		</button>
+		<button type="button" data-myth-next aria-label="Nächstes Bild">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 17 5-5-5-5" /><path d="m13 17 5-5-5-5" /></svg>
+		</button>
 	</div>
 </div>
 

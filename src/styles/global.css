@@ -2993,7 +2993,7 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 
 @media (max-width: 40rem) {
 	.myth-track li {
-		flex-basis: 75%;
+		flex-basis: 85%;
 	}
 }
 
@@ -3021,12 +3021,30 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	border: 0;
 	background: var(--color-brand-dark);
 	color: var(--color-brand);
-	font: inherit;
-	font-size: 1.25rem;
 	cursor: pointer;
 }
 
-.myth-controls button:hover,
+.myth-controls svg {
+	display: block;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: auto;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* Only real hover: on phones :hover sticks after a tap and left the
+   button yellow. */
+@media (hover: hover) {
+	.myth-controls button:hover {
+		background: var(--color-brand);
+		color: var(--color-brand-dark);
+	}
+}
+
 .myth-controls button:focus-visible {
 	background: var(--color-brand);
 	color: var(--color-brand-dark);
