@@ -1202,6 +1202,94 @@ article.prose > :first-child > h2:first-child {
 	margin-top: 0;
 }
 
+/* Before/after comparison table inside a Markdown article
+   (wrap the Markdown table in <div class="compare-table">). */
+.compare-table {
+	margin: 1.5em 0 2em;
+}
+
+.compare-table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+	line-height: 1.45;
+}
+
+.compare-table th,
+.compare-table td {
+	padding: 0.7rem 0.8rem;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.compare-table thead th {
+	background: var(--color-brand);
+	font-weight: 700;
+}
+
+.compare-table td:first-child {
+	width: 22%;
+}
+
+.compare-table td:nth-child(2) {
+	width: 32%;
+	color: var(--color-text-muted);
+}
+
+.compare-table td:nth-child(3) {
+	background: var(--color-bg-alt);
+}
+
+/* On phones each row becomes a small card: topic on top, then
+   «Früher» and «Heute» stacked with their own labels. */
+@media (max-width: 640px) {
+	.compare-table thead {
+		display: none;
+	}
+
+	.compare-table table,
+	.compare-table tbody,
+	.compare-table tr,
+	.compare-table td {
+		display: block;
+		width: auto;
+	}
+
+	.compare-table tr {
+		border-top: 2px solid var(--color-border);
+		padding-bottom: 0.4rem;
+	}
+
+	.compare-table td {
+		border-bottom: none;
+		padding: 0.4rem 0.6rem;
+	}
+
+	.compare-table td:first-child {
+		padding-top: 0.7rem;
+		font-size: 1.05rem;
+	}
+
+	.compare-table td:nth-child(2)::before,
+	.compare-table td:nth-child(3)::before {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-text);
+	}
+
+	.compare-table td:nth-child(2)::before {
+		content: 'Früher';
+	}
+
+	.compare-table td:nth-child(3)::before {
+		content: 'Heute';
+	}
+}
+
 /* Footer */
 .site-footer {
 	background: var(--color-text);
