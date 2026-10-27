@@ -196,6 +196,10 @@
   name: 'Iria Fernandez'
   lastName: 'Fernandez'
   location: 'Wangen'
+- id: annemiek-fontana
+  name: 'Annemiek Fontana'
+  lastName: 'Fontana'
+  location: 'Wangen'
 - id: dominik-fontana
   name: 'Dominik Fontana'
   lastName: 'Fontana'
@@ -438,6 +442,10 @@
   location: 'Wangen'
 - id: martin-landolt
   name: 'Martin Landolt'
+  lastName: 'Landolt'
+  location: 'Wangen'
+- id: neal-landolt
+  name: 'Neal Landolt'
   lastName: 'Landolt'
   location: 'Wangen'
 - id: neva-landolt
@@ -687,7 +695,7 @@
 - id: melinda-schnyder
   name: 'Melinda Schnyder'
   lastName: 'Schnyder'
-  location: 'Vorderthal'
+  location: 'Wangen'
 - id: marcel-schwendeler
   name: 'Marcel Schwendeler'
   lastName: 'Schwendeler'
