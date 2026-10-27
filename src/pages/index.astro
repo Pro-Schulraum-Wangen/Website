@@ -32,7 +32,7 @@ const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 
 const latestLetters = (await getCollection('letters', ({ data }) => data.published))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
+	.slice(0, 6);
 const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 	day: 'numeric',
 	month: 'long',

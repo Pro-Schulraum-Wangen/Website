@@ -884,3 +884,7 @@
   name: 'Ferdinand Vogt'
   lastName: 'Vogt'
   location: 'Wangen'
+- id: andrea-kistler
+  name: 'Andrea Kistler'
+  lastName: 'Kistler'
+  location: 'Siebnen'
