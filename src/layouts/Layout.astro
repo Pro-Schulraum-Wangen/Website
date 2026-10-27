@@ -10,11 +10,13 @@ import {
 	VOTE_DATE_LABEL,
 	DOCUMENTS,
 	WHATSAPP_CHANNEL_URL,
+	NEWSLETTER_SIGNUP_URL,
 	INSTAGRAM_URL,
 	YOUTUBE_URL,
 } from '../consts';
 import ogSourceImg from '../assets/visualizations/dorfplatz-primarschule_02.jpg';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import MailIcon from '../components/MailIcon.astro';
 import InstagramIcon from '../components/InstagramIcon.astro';
 import YouTubeIcon from '../components/YouTubeIcon.astro';
 
@@ -198,11 +200,17 @@ const ogImageURL = new URL(ogImage.src, Astro.site);
 				<div class="whatsapp-cta-card">
 					<p class="whatsapp-cta-text">
 						<strong>Auf dem Laufenden bleiben.</strong> In unserem WhatsApp-Kanal teilen wir in
-						loser Folge News zur Abstimmung und Einblicke rund um die neue Schulanlage.
+						loser Folge News zur Abstimmung und Einblicke rund um die neue Schulanlage. Oder
+						abonnieren Sie unseren Newsletter per E-Mail.
 					</p>
-					<a class="button primary whatsapp-button" href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noopener">
-						<WhatsAppIcon /> WhatsApp-Kanal beitreten
-					</a>
+					<div class="whatsapp-cta-buttons">
+						<a class="button primary whatsapp-button" href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noopener">
+							<WhatsAppIcon /> WhatsApp-Kanal beitreten
+						</a>
+						<a class="button primary whatsapp-button" href={NEWSLETTER_SIGNUP_URL} target="_blank" rel="noopener">
+							<MailIcon /> Newsletter abonnieren
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>

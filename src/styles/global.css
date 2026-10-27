@@ -1401,11 +1401,15 @@ article.prose > :first-child > h2:first-child {
 	background: #fff;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 42.5rem) {
 	.whatsapp-cta-card {
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
+	}
+
+	.whatsapp-cta-buttons {
+		width: 100%;
 	}
 }
 
@@ -1417,6 +1421,18 @@ article.prose > :first-child > h2:first-child {
 
 .whatsapp-cta-text strong {
 	color: var(--color-text);
+}
+
+/* Buttons are skewed parallelograms (see .button::before) whose corners
+   extend past their own box - a 1.4rem gap (matching .button-row) keeps
+   adjacent buttons' slanted edges from crossing, and centering keeps the
+   group clear of the card edge whenever it wraps onto its own line. */
+.whatsapp-cta-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.4rem;
+	flex-shrink: 0;
 }
 
 .whatsapp-button {

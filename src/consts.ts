@@ -55,6 +55,11 @@ export const SUPPORT_FORM_URL =
 // WhatsApp channel with occasional news about the vote and the project.
 export const WHATSAPP_CHANNEL_URL = 'https://whatsapp.com/channel/0029VbDMSNt29754hT9Aqr1V';
 
+// Brevo-hosted newsletter signup form. Linked to directly (no iframe/embed)
+// so no third-party script or font loads on our own pages.
+export const NEWSLETTER_SIGNUP_URL =
+	'https://a4890381.sibforms.com/serve/MUIFAGkXnww43V49eV9qHuqAidwSyWE5xQ4nHo4dgH_rzyU1TbhpPQn3P32uhaCPu15LQWv2a4AU0oibxCTJcz78NDyOgUcP4_mJmEtenOuIQxjwutm06OwLB9NJhmUw3Y0j1wk-cl8rQ73nkTz5wnW01XYAfjLgkv3rt5vfv_CQRezOzeGknm2ii9mQMq5kLcRfxneWE0SuDMlPFg==';
+
 // Social links shown in the footer.
 export const INSTAGRAM_URL = 'https://www.instagram.com/schulanlageambuechberg';
 // Points to the Shorts tab, where all our videos are.
