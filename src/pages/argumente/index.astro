@@ -930,7 +930,7 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 						const { Content } = rendered[i];
 						return (
 							<div style="margin-bottom: 2.5rem;">
-								<h2>{entry.data.title}</h2>
+								<h2 id={entry.id}><a class="heading-anchor" href={`#${entry.id}`}>{entry.data.title}</a></h2>
 								<p><strong>{entry.data.summary}</strong></p>
 								{entry.data.image && (
 									<Image
@@ -959,7 +959,7 @@ const claims: { id: string; claim: string; body: string; image?: typeof situatio
 	<section class="block alt">
 		<div class="wrap narrow">
 			<div class="section-head">
-				<h2 id="behauptungen-eingeordnet">Behauptungen eingeordnet</h2>
+				<h2 id="behauptungen-eingeordnet"><a class="heading-anchor" href="#behauptungen-eingeordnet">Behauptungen eingeordnet</a></h2>
 			</div>
 			<p class="tagline">
 				Kritische Fragen und unterschiedliche Meinungen gehören zum politischen
