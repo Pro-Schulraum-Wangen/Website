@@ -1251,7 +1251,9 @@ article.prose > :first-child > h2:first-child {
 	.compare-table table,
 	.compare-table tbody,
 	.compare-table tr,
-	.compare-table td {
+	.compare-table td,
+	.compare-table td:first-child,
+	.compare-table td:nth-child(2) {
 		display: block;
 		width: auto;
 	}

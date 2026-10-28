@@ -124,6 +124,10 @@
   name: 'Susi Brunner'
   lastName: 'Brunner'
   location: 'Wangen'
+- id: urs-brunner
+  name: 'Urs Brunner'
+  lastName: 'Brunner'
+  location: 'Wangen'
 - id: aline-burkhard
   name: 'Aline Burkhard'
   lastName: 'Burkhard'
@@ -352,6 +356,10 @@
   name: 'Sandro Hüppin'
   lastName: 'Hüppin'
   location: 'Wangen'
+- id: tanja-hueppin
+  name: 'Tanja Hüppin'
+  lastName: 'Hüppin'
+  location: 'Siebnen'
 - id: yvonne-hueppin
   name: 'Yvonne Hüppin'
   lastName: 'Hüppin'
@@ -540,6 +548,10 @@
   name: 'Dominik Richle'
   lastName: 'Richle'
   location: 'Wangen'
+- id: daniel-riess
+  name: 'Daniel Riess'
+  lastName: 'Riess'
+  location: 'Wangen'
 - id: eliane-roth
   name: 'Eliane Roth'
   lastName: 'Roth'
@@ -588,6 +600,10 @@
   name: 'Daniela Schibli'
   lastName: 'Schibli'
   location: 'Siebnen'
+- id: vreni-schibli
+  name: 'Vreni Schibli'
+  lastName: 'Schibli'
+  location: 'Wangen'
 - id: anja-schmid
   name: 'Anja Schmid'
   lastName: 'Schmid'
