@@ -1241,6 +1241,46 @@ article.prose > :first-child > h2:first-child {
 	background: var(--color-bg-alt);
 }
 
+/* Simple data table inside a Markdown article
+   (wrap the Markdown table in <div class="credit-table">). */
+.credit-table {
+	margin: 1.5em 0 1em;
+	overflow-x: auto;
+}
+
+.credit-table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+	line-height: 1.45;
+}
+
+.credit-table th,
+.credit-table td {
+	padding: 0.6rem 0.7rem;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.credit-table thead th {
+	background: var(--color-brand);
+	font-weight: 700;
+}
+
+.credit-table td:first-child,
+.credit-table td:nth-child(4) {
+	white-space: nowrap;
+}
+
+/* credit amount, right-aligned so the decimals line up; the heading
+   «Kredit in Mio. CHF» stays on one line, the description column gets narrower */
+.credit-table th:nth-child(3),
+.credit-table td:nth-child(3) {
+	text-align: right;
+	white-space: nowrap;
+}
+
 /* On phones each row becomes a small card: topic on top, then
    «Früher» and «Heute» stacked with their own labels. */
 @media (max-width: 640px) {

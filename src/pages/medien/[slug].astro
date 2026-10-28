@@ -42,7 +42,13 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 								{entry.data.imageAlt}
 								{entry.data.imageCredit && (
 									<span style="display: block; font-size: 0.8rem;">
-										{entry.data.imageCredit.text}
+										{entry.data.imageCredit.url ? (
+											<a href={entry.data.imageCredit.url} target="_blank" rel="noopener">
+												{entry.data.imageCredit.text}
+											</a>
+										) : (
+											entry.data.imageCredit.text
+										)}
 										{entry.data.imageCredit.license && (
 											<>
 												{', '}
