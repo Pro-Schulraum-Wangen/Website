@@ -1,11 +1,11 @@
 ---
 title: 'Schule früher und heute: Warum es mehr Räume braucht'
 author: 'Pro-Komitee'
-date: 2026-10-27
+date: 2026-10-28
 excerpt: 'Wer vor 30 oder 40 Jahren zur Schule ging oder unterrichtete, kennt ein Schulzimmer mit Pulten in Reihen und einer Wandtafel. Ein Vergleich, basierend auf Angaben der Schule Wangen, zeigt, wie sich der Unterricht seither verändert hat und weshalb heute mehr Räume nötig sind.'
 image: './schule-frueher-und-heute.jpg'
 imageAlt: 'Symbolbild (KI-generiert): Frontalunterricht früher (links), Gruppenarbeit heute (rechts)'
-published: false
+published: true
 ---
 
 Viele von uns haben noch ein klares Bild vor Augen: 25 Kinder sitzen in Reihen, vorne
@@ -28,7 +28,7 @@ Der folgende Vergleich basiert auf Angaben der Schule Wangen.
 | **Klassen** | Eher einheitlich, ähnliche Voraussetzungen | Vielfältig, neu zugezogene Kinder, grosse Leistungsunterschiede<br>→ **Räume für Kleingruppen** |
 | **Abklärungen** | Wenige Tests, Förderdiagnostik selten | Gesetzlich vorgeschriebene Abklärungen und Gespräche<br>→ **ruhige, vertrauliche Räume** |
 | **Medien und Informatik** | Keine digitalen Lernformen | Eigenes Fach mit Lernvideos, Podcasts und digitalen Projekten<br>→ **Räume für Aufnahmen** |
-| **Wohlbefinden** | Wenig Bewusstsein für Belastungen | Begleitung von Kindern mit ADHS, Autismus oder in Krisen<br>→ **Rückzugsräume** |
+| **Wohlbefinden** | Wenig Bewusstsein für Belastungen | Begleitung von Kindern mit ADHS, Autismus, Lese-Rechtschreibschwäche oder in Krisen, angepasste Lernziele, Nachteilsausgleich für Kinder mit einer Diagnose<br>→ **Rückzugsräume** und **separate Arbeitsplätze** |
 | **Beurteilung** | Schriftliche Prüfung am Schluss, eine Note | Begleitung des Lernprozesses mit Rückmeldungen, Gesprächen und Präsentationen<br>→ **Gesprächsräume** |
 
 </div>
