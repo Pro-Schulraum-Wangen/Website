@@ -896,3 +896,11 @@
   name: 'Andrea Kistler'
   lastName: 'Kistler'
   location: 'Siebnen'
+- id: olivia-rusch
+  name: 'Olivia Rusch'
+  lastName: 'Rusch'
+  location: 'Zürich'
+- id: lorena-vogt
+  name: 'Lorena Vogt'
+  lastName: 'Vogt'
+  location: 'Wangen'
