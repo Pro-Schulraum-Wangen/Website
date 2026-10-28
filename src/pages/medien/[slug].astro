@@ -37,9 +37,22 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 							format="webp"
 							style="display: block; width: 100%; height: auto; box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);"
 						/>
-						{entry.data.imageAlt && (
+						{(entry.data.imageAlt || entry.data.imageCredit) && (
 							<figcaption style="margin-top: 0.8rem; font-size: 0.9rem; color: var(--color-text-muted);">
 								{entry.data.imageAlt}
+								{entry.data.imageCredit && (
+									<span style="display: block; font-size: 0.8rem;">
+										{entry.data.imageCredit.text}
+										{entry.data.imageCredit.license && (
+											<>
+												{', '}
+												<a href={entry.data.imageCredit.license.url} target="_blank" rel="noopener">
+													{entry.data.imageCredit.license.label}
+												</a>
+											</>
+										)}
+									</span>
+								)}
 							</figcaption>
 						)}
 					</figure>

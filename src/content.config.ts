@@ -85,6 +85,13 @@ const letters = defineCollection({
 			// imageAlt doubles as the caption below it
 			image: image().optional(),
 			imageAlt: z.string().optional(),
+			// optional photo credit below the caption, e.g. for Creative Commons images
+			imageCredit: z
+				.object({
+					text: z.string(),
+					license: z.object({ label: z.string(), url: z.string().url() }).optional(),
+				})
+				.optional(),
 			published: z.boolean().default(true),
 		}),
 });
