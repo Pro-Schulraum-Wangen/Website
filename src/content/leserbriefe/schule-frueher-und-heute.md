@@ -1,7 +1,7 @@
 ---
 title: 'Schule früher und heute: Warum es mehr Räume braucht'
-author: 'Pro-Komitee'
-date: 2026-10-29
+author: 'Philipp Bruhin'
+date: 2026-10-28
 excerpt: 'Wer vor 30 oder 40 Jahren zur Schule ging oder unterrichtete, kennt ein Schulzimmer mit Pulten in Reihen und einer Wandtafel. Ein Vergleich, basierend auf Angaben der Schule Wangen, zeigt, wie sich der Unterricht seither verändert hat und weshalb heute mehr Räume nötig sind.'
 image: './schule-frueher-und-heute.jpg'
 imageAlt: 'Symbolbild (KI-generiert): Frontalunterricht früher (links), Gruppenarbeit heute (rechts)'
