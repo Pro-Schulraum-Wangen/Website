@@ -768,6 +768,10 @@
   name: 'Raphael Sutter'
   lastName: 'Sutter'
   location: 'Wangen'
+- id: sibylle-symietz
+  name: 'Sibylle Symietz'
+  lastName: 'Symietz'
+  location: 'Wangen'
 - id: chantal-saeuberli
   name: 'Chantal Säuberli'
   lastName: 'Säuberli'
