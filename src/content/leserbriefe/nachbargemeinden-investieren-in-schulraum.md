@@ -67,7 +67,9 @@ dem Bau begonnen und will im Sommer 2028 fertig sein. Galgenen rechnet nach dem 
 2026 mit dem Baustart im Herbst 2027 und dem Bezug im Sommer 2029. Wer heute Nein sagt und neu
 plant, verliert Jahre.
 
-## Projektvideo aus Altendorf
+## Projektvideos aus der March
+
+### Altendorf
 
 Die Gemeinde Altendorf hat ihr Projekt vor der Abstimmung 2022 in einem Animationsfilm
 vorgestellt. Er zeigt den damaligen Planungsstand.
@@ -83,28 +85,69 @@ vorgestellt. Er zeigt den damaligen Planungsstand.
 	></iframe>
 </div>
 
-Weitere Videos stellen die Gemeinden auf ihren eigenen Websites zur Verfügung:
+Wie weit der Bau inzwischen ist, zeigt das
+[Video zum Baufortschritt](https://www.altendorf.ch/public/upload/assets/6009/Anna%20im%20Park_Video%20Baufortschritt.mp4?fp=2)
+auf der Website der Gemeinde.
 
-- Altendorf: [Video zum Baufortschritt](https://www.altendorf.ch/public/upload/assets/6009/Anna%20im%20Park_Video%20Baufortschritt.mp4?fp=2)
-- Schübelbach: Videoserie zur Schulraum-Erweiterung Gutenbrunnen in vier Teilen auf YouTube, mit
-  Rektorin Barbara Schmutz und Gemeinderätin Leandra Spirig (Juni 2026)
-  - [Teil 1](https://www.youtube.com/watch?v=44f4CVQvkT4): Warum die Schulerweiterung nötig ist
-  - [Teil 2](https://www.youtube.com/watch?v=bRRbVVrbBQw): Sicherheit rund um die Baustelle, Schutz
-    aller Betroffenen
-  - [Teil 3](https://www.youtube.com/watch?v=7ZKtktsgbe4): Auswirkungen der Baustelle auf den
-    Schulbetrieb, das Bauprojekt im Unterricht, grösste Herausforderungen der Bauphase
-  - [Teil 4](https://www.youtube.com/watch?v=F598CMk51WI): Rückblick und Ausblick, Schritte bis zum
-    Spatenstich im Januar 2026, Eröffnung 2028
-- Tuggen: [Erklärvideo zum Schulhausneubau mit Gemeindesaal](https://www.tuggen.ch/public/upload/assets/1365/20250318_Erklaerungsvideo_Erstellung_Schulhausneubau_inkl._Gemeindesaal.mp4?fp=2) vom Informationsanlass im März 2025
-  - Fehlende Räume für Gruppenunterricht, Förderung und Begabungsförderung, Werkunterricht seit
-    Jahren im Containerprovisorium
-  - Mehr Platz für Tagesbetreuung und Mittagstisch (neues Kinderbetreuungsgesetz), Musikschule
-    und Religionsunterricht; der Kanton bestätigt den Raumbedarf und hat Subventionen zugesagt
-  - Neubau Eneda 2, Umnutzung von Eneda 1 zum Fachschulhaus, neu gestalteter Sportplatz mit
-    Spiel- und Begegnungsorten
-  - Gemeindesaal für Kultur, Vereinsanlässe und Gemeindeversammlungen
-  - Aufstockung von Eneda 1 geprüft, aber teurer und aufwendiger als ein Neubau
-  - Erstes neues Schulhaus seit 50 Jahren, Platz für die nächsten 30 Jahre
+### Schübelbach
+
+Die Gemeinde Schübelbach erklärt im ersten Teil ihrer Videoserie, warum die Schulerweiterung im
+Gutenbrunnen nötig ist.
+
+<div class="video-embed">
+	<iframe
+		src="https://www.youtube-nocookie.com/embed/44f4CVQvkT4"
+		title="Schulraum-Erweiterung Gutenbrunnen Schübelbach, Teil 1"
+		loading="lazy"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		referrerpolicy="strict-origin-when-cross-origin"
+		allowfullscreen
+	></iframe>
+</div>
+
+In den weiteren Teilen der Serie (Juni 2026) beantworten Rektorin Barbara Schmutz und
+Gemeinderätin Leandra Spirig Fragen zur Bauphase:
+
+- [Teil 2](https://www.youtube.com/watch?v=bRRbVVrbBQw): Sicherheit rund um die Baustelle, Schutz
+  aller Betroffenen
+- [Teil 3](https://www.youtube.com/watch?v=7ZKtktsgbe4): Auswirkungen der Baustelle auf den
+  Schulbetrieb, das Bauprojekt im Unterricht, grösste Herausforderungen der Bauphase
+- [Teil 4](https://www.youtube.com/watch?v=F598CMk51WI): Rückblick und Ausblick, die Schritte bis
+  zum Spatenstich:
+  - 2019: Beginn der Planung
+  - 2020: Projektierungskredit und Start des zweistufigen Projektwettbewerbs, aus dem das
+    Siegerprojekt «Mathilde» hervorging
+  - 2023: Baukredit durch die Stimmberechtigten, sobald die Kosten bekannt waren, danach
+    Ausarbeitung des Bauprojekts
+  - Januar 2026: Spatenstich
+  - 2028: geplante Eröffnung
+
+### Tuggen
+
+Die Gemeinde Tuggen hat ihr Projekt am Informationsanlass im März 2025 mit einem Erklärvideo
+vorgestellt.
+
+<div class="video-embed">
+	<video
+		src="https://www.tuggen.ch/public/upload/assets/1365/20250318_Erklaerungsvideo_Erstellung_Schulhausneubau_inkl._Gemeindesaal.mp4?fp=2"
+		title="Erklärvideo Schulhausneubau inkl. Gemeindesaal Tuggen"
+		controls
+		preload="metadata"
+		playsinline
+	></video>
+</div>
+
+Das Video zeigt:
+
+- Fehlende Räume für Gruppenunterricht, Förderung und Begabungsförderung, Werkunterricht seit
+  Jahren im Containerprovisorium
+- Mehr Platz für Tagesbetreuung und Mittagstisch (neues Kinderbetreuungsgesetz), Musikschule
+  und Religionsunterricht; der Kanton bestätigt den Raumbedarf und hat Subventionen zugesagt
+- Neubau Eneda 2, Umnutzung von Eneda 1 zum Fachschulhaus, neu gestalteter Sportplatz mit
+  Spiel- und Begegnungsorten
+- Gemeindesaal für Kultur, Vereinsanlässe und Gemeindeversammlungen
+- Aufstockung von Eneda 1 geprüft, aber teurer und aufwendiger als ein Neubau
+- Erstes neues Schulhaus seit 50 Jahren, Platz für die nächsten 30 Jahre
 
 ## Kein Preisvergleich
 

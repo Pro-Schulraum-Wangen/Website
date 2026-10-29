@@ -2420,7 +2420,8 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
 }
 
-.video-embed iframe {
+.video-embed iframe,
+.video-embed video {
 	display: block;
 	width: 100%;
 	aspect-ratio: 16 / 9;
