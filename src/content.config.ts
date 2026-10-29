@@ -89,6 +89,8 @@ const letters = defineCollection({
 			imageCredit: z
 				.object({
 					text: z.string(),
+					// optional link to where the image comes from
+					url: z.string().url().optional(),
 					license: z.object({ label: z.string(), url: z.string().url() }).optional(),
 				})
 				.optional(),
