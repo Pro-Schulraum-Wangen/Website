@@ -1,0 +1,151 @@
+---
+// Memes on the homepage, styled like social media posts: header with the
+// committee as author, the image, the caption (Markdown body of each file in
+// src/content/memes) and a download button so people can share the image
+// themselves. Newest first; beyond the first row the posts stay behind a
+// button so the homepage doesn't grow with every new meme.
+import { Image, getImage } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import { SITE_TITLE } from '../consts';
+
+const INITIAL_COUNT = 3;
+
+const memes = (await getCollection('memes', ({ data }) => data.published)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf() || b.id.localeCompare(a.id),
+);
+const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const posts = await Promise.all(
+	memes.map(async (meme) => {
+		// full-size JPG for the download: sharp enough for WhatsApp/Instagram,
+		// a fraction of the PNG's size
+		const download = await getImage({ src: meme.data.image, format: 'jpg', quality: 90 });
+		const fileName = meme.data.image.src.split('/').pop()!.split('.')[0] + '.jpg';
+		const { Content } = await render(meme);
+		return { meme, download, fileName, Content };
+	}),
+);
+---
+
+{posts.length > 0 && (
+	<section class="block">
+		<div class="wrap">
+			<div class="section-head meme-head">
+				<h2 id="memes"><a class="heading-anchor" href="#memes">Memes zum Teilen</a></h2>
+				<div class="meme-info" data-meme-info>
+					<button type="button" class="meme-info-button" aria-describedby="meme-info-tip" aria-expanded="false">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+							<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+							<path d="M12 17h.01" />
+						</svg>
+						Was ist ein Meme?
+					</button>
+					<p class="meme-info-tip" id="meme-info-tip" role="tooltip">
+						Ein Meme (gesprochen «Miim») ist ein Bild mit einem kurzen, oft humorvollen Text, das im
+						Internet von Person zu Person weitergeschickt wird, zum Beispiel per WhatsApp oder auf
+						Instagram und Facebook. Meist wird ein bekanntes Bild mit einem neuen Text versehen, so
+						lässt sich eine Botschaft mit einem Augenzwinkern auf den Punkt bringen.
+					</p>
+				</div>
+			</div>
+			<p class="lead">
+				Laden Sie die Memes mit dem Button herunter und teilen Sie sie mit Familie, Freunden und
+				Bekannten. So erreichen wir gemeinsam ganz Wangen.
+			</p>
+			<div class="meme-grid" data-meme-grid>
+				{posts.map(({ meme, download, fileName, Content }, i) => (
+					<article class="meme-post" hidden={i >= INITIAL_COUNT}>
+						<header class="meme-post-head">
+							<img class="meme-post-avatar" src="/favicon-96x96.png" alt="" width="40" height="40" />
+							<div>
+								<strong>{SITE_TITLE}</strong>
+								<time datetime={meme.data.date.toISOString().slice(0, 10)}>
+									{dateFormatter.format(meme.data.date)}
+								</time>
+							</div>
+						</header>
+						<Image
+							src={meme.data.image}
+							alt={meme.data.imageAlt}
+							widths={[400, 700, 1080]}
+							sizes="(max-width: 52rem) 100vw, 28rem"
+							format="webp"
+							class="meme-post-image"
+						/>
+						<div class="meme-post-actions">
+							<a class="button primary" href={download.src} download={fileName}>
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+								</svg>
+								Bild herunterladen
+							</a>
+						</div>
+						<div class="meme-post-text" data-meme-text>
+							<Content />
+						</div>
+						<button type="button" class="meme-post-toggle" data-meme-toggle aria-expanded="false" hidden>
+							Mehr lesen
+						</button>
+					</article>
+				))}
+			</div>
+			{posts.length > INITIAL_COUNT && (
+				<div class="meme-more" data-meme-more>
+					<button type="button" class="button primary">
+						Weitere Memes anzeigen ({posts.length - INITIAL_COUNT})
+					</button>
+				</div>
+			)}
+		</div>
+	</section>
+)}
+
+<script>
+	const more = document.querySelector<HTMLElement>('[data-meme-more]');
+	more?.querySelector('button')?.addEventListener('click', () => {
+		document.querySelectorAll<HTMLElement>('[data-meme-grid] .meme-post[hidden]').forEach((post) => {
+			post.hidden = false;
+		});
+		more.hidden = true;
+		updateToggles();
+	});
+
+	// Captions are cut to the same height so all posts line up; «Mehr lesen»
+	// only shows where the text is actually longer than that.
+	function updateToggles() {
+		document.querySelectorAll<HTMLButtonElement>('[data-meme-toggle]').forEach((toggle) => {
+			const text = toggle.previousElementSibling as HTMLElement;
+			if (toggle.getAttribute('aria-expanded') === 'true') return;
+			toggle.hidden = text.scrollHeight <= text.clientHeight + 1;
+		});
+	}
+
+	document.querySelectorAll<HTMLButtonElement>('[data-meme-toggle]').forEach((toggle) => {
+		toggle.addEventListener('click', () => {
+			const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+			toggle.setAttribute('aria-expanded', String(expanded));
+			toggle.previousElementSibling!.classList.toggle('is-expanded', expanded);
+			toggle.textContent = expanded ? 'Weniger anzeigen' : 'Mehr lesen';
+		});
+	});
+
+	updateToggles();
+	window.addEventListener('resize', updateToggles);
+
+	// «Was ist ein Meme?» shows on hover; tapping the button keeps it open on
+	// phones, a tap elsewhere or Escape closes it again.
+	const info = document.querySelector<HTMLElement>('[data-meme-info]');
+	const infoButton = info?.querySelector('button');
+	function setInfoOpen(open: boolean) {
+		info?.classList.toggle('is-open', open);
+		infoButton?.setAttribute('aria-expanded', String(open));
+	}
+	infoButton?.addEventListener('click', () => setInfoOpen(!info!.classList.contains('is-open')));
+	document.addEventListener('click', (event) => {
+		if (info && !info.contains(event.target as Node)) setInfoOpen(false);
+	});
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') setInfoOpen(false);
+	});
+</script>

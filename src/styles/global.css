@@ -3196,3 +3196,215 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	background: var(--color-brand);
 	color: var(--color-brand-dark);
 }
+
+/* Homepage: memes as social media posts (see MemePosts.astro). Three per row
+   on desktop, one below the other on phones; the caption sits below the
+   download button like a post text. */
+.meme-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 64rem) {
+	.meme-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 40rem) {
+	.meme-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.meme-post {
+	display: flex;
+	flex-direction: column;
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+}
+
+.meme-post[hidden] {
+	display: none;
+}
+
+.meme-post-head {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+}
+
+.meme-post-avatar {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	background: var(--color-brand);
+}
+
+.meme-post-head strong,
+.meme-post-head time {
+	display: block;
+	line-height: 1.3;
+}
+
+.meme-post-head time {
+	color: var(--color-text-muted);
+	font-size: 0.85rem;
+}
+
+.meme-post-image {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4 / 5;
+}
+
+.meme-post-actions {
+	padding: 1rem 1rem 0.25rem;
+}
+
+.meme-post-actions .button {
+	font-size: 0.95rem;
+	padding: 0.6rem 1.2rem;
+}
+
+/* Caption cut to a fixed height (about five lines) so every post is the
+   same height; a fade hints at the rest, «Mehr lesen» opens it. */
+.meme-post-text {
+	position: relative;
+	height: 8.5rem;
+	overflow: hidden;
+	margin: 0.5rem 1rem 0;
+	font-size: 0.95rem;
+	line-height: 1.5;
+}
+
+.meme-post-text::after {
+	content: '';
+	position: absolute;
+	inset: auto 0 0;
+	height: 2.5rem;
+	background: linear-gradient(transparent, var(--color-bg));
+}
+
+.meme-post-text.is-expanded {
+	height: auto;
+}
+
+.meme-post-text.is-expanded::after {
+	display: none;
+}
+
+.meme-post-toggle {
+	align-self: flex-start;
+	margin: 0.25rem 1rem 1rem;
+	padding: 0;
+	background: none;
+	border: none;
+	color: var(--color-text);
+	font: inherit;
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.meme-post-toggle[hidden] {
+	display: none;
+}
+
+/* keeps the bottom padding when no toggle is needed */
+.meme-post-text:has(+ .meme-post-toggle[hidden]) {
+	margin-bottom: 1rem;
+}
+
+.meme-post-text p {
+	margin: 0 0 0.75rem;
+}
+
+.meme-post-text p:first-child {
+	font-weight: 700;
+}
+
+.meme-post-text p:last-child {
+	margin-bottom: 0;
+}
+
+.meme-more {
+	margin-top: 1.5rem;
+	text-align: center;
+}
+
+/* «Was ist ein Meme?» top right of the section head, like the «more»
+   links elsewhere: the explanation opens as a bubble right below it on
+   hover (desktop) or tap (phones). */
+.meme-info {
+	position: relative;
+}
+
+.meme-info-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0;
+	background: none;
+	border: none;
+	color: var(--color-text);
+	font: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	white-space: nowrap;
+	cursor: help;
+}
+
+.meme-info-button svg {
+	width: 1.25rem;
+	height: 1.25rem;
+	flex: none;
+}
+
+.meme-info-tip {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	z-index: 10;
+	width: 26rem;
+	margin: 0.4rem 0 0;
+	padding: 0.85rem 1rem;
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 0.15);
+	color: var(--color-text);
+	font-size: 0.95rem;
+	font-weight: 400;
+	line-height: 1.5;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.15s, visibility 0.15s;
+}
+
+.meme-info:hover .meme-info-tip,
+.meme-info:focus-within .meme-info-tip,
+.meme-info.is-open .meme-info-tip {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* On phones the button wraps below the heading: the bubble then spans the
+   section head's full width instead of hanging off the screen's left edge. */
+@media (max-width: 40rem) {
+	.meme-head {
+		position: relative;
+	}
+
+	.meme-info {
+		position: static;
+	}
+
+	.meme-info-tip {
+		left: 0;
+		width: auto;
+	}
+}

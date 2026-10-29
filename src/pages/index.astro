@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import OrganizationBand from '../components/OrganizationBand.astro';
 import ShortVideos from '../components/ShortVideos.astro';
 import MythCarousel from '../components/MythCarousel.astro';
+import MemePosts from '../components/MemePosts.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
@@ -164,6 +165,8 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 			</div>
 		</section>
 	)}
+
+	<MemePosts />
 
 	<section class="block">
 		<div class="wrap">

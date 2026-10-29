@@ -113,6 +113,20 @@ const videos = defineCollection({
 	}),
 });
 
+// Memes for social media – shown on the homepage like posts, each with its
+// caption (the Markdown body) and a download button for the image.
+// Newest first; the numbered file name breaks ties on the same date.
+const memes = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/memes' }),
+	schema: ({ image }) =>
+		z.object({
+			image: image(),
+			imageAlt: z.string(),
+			date: z.coerce.date(),
+			published: z.boolean().default(true),
+		}),
+});
+
 export const collections = {
 	supporters,
 	supporterNames,
@@ -120,4 +134,5 @@ export const collections = {
 	arguments: arguments_,
 	letters,
 	videos,
+	memes,
 };

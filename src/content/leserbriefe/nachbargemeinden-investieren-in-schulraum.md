@@ -153,9 +153,7 @@ Das Video zeigt:
 
 Die Beträge lassen sich nicht direkt mit dem Projekt in Wangen vergleichen. Die Projekte
 unterscheiden sich stark in Umfang, Baujahr, Turnhallen, Tiefgaragen, Kindergärten und
-Gemeinschaftsräumen. Ein Beispiel: Die von Schübelbach genannten jährlichen Folgekosten von
-CHF 1’645’000 enthalten Abschreibungen (CHF 1’020’000) und Zinsen (CHF 510’000). Nur
-CHF 115’000 davon sind zusätzlicher Betrieb und Unterhalt.
+Gemeinschaftsräumen.
 
 Auch bei der Kostensicherheit gibt es einen Unterschied: Die Nachbargemeinden haben ihre Kredite
 ohne Kostendach bewilligt. In Wangen dagegen liegt ein
