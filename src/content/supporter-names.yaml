@@ -680,8 +680,16 @@
   name: 'Manuela Schnellmann'
   lastName: 'Schnellmann'
   location: 'Wangen'
+- id: marianne-schnellmann
+  name: 'Marianne Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
 - id: monika-schnellmann
   name: 'Monika Schnellmann'
+  lastName: 'Schnellmann'
+  location: 'Wangen'
+- id: pirmin-schnellmann
+  name: 'Pirmin Schnellmann'
   lastName: 'Schnellmann'
   location: 'Wangen'
 - id: remo-schnellmann
