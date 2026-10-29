@@ -39,6 +39,11 @@ Klick auf das Datum führt zur Quelle der Abstimmung.
 und Kultur am See» bewilligt.** Es enthält Turnhallen, die auch die Schule nutzt, ist aber kein
 reines Schulprojekt. Wir führen es deshalb nicht in der Tabelle.
 
+**Reichenburg hat am 28. September 2025 zudem rund 3,3 Millionen Franken für den Kauf der
+Liegenschaft Halder bewilligt (72 % Ja).** Das Land ist als Reserve für eine Dreifachturnhalle
+und weitere Schulanlagen vorgesehen. Weil es sich um einen Landkauf und nicht um einen Schulbau
+handelt, führen wir es nicht in der Tabelle.
+
 ## Was die Projekte gemeinsam haben
 
 **Mehr Kinder, mehr Räume.** Galgenen hat heute zehn Klassenzimmer in den Schulhäusern I bis
@@ -81,10 +86,25 @@ vorgestellt. Er zeigt den damaligen Planungsstand.
 Weitere Videos stellen die Gemeinden auf ihren eigenen Websites zur Verfügung:
 
 - Altendorf: [Video zum Baufortschritt](https://www.altendorf.ch/public/upload/assets/6009/Anna%20im%20Park_Video%20Baufortschritt.mp4?fp=2)
-- Schübelbach: Videoserie zur Schulraum-Erweiterung Gutenbrunnen in vier Teilen auf YouTube:
-  [Teil 1](https://www.youtube.com/watch?v=44f4CVQvkT4), [Teil 2](https://www.youtube.com/watch?v=bRRbVVrbBQw),
-  [Teil 3](https://www.youtube.com/watch?v=7ZKtktsgbe4), [Teil 4](https://www.youtube.com/watch?v=F598CMk51WI)
+- Schübelbach: Videoserie zur Schulraum-Erweiterung Gutenbrunnen in vier Teilen auf YouTube, mit
+  Rektorin Barbara Schmutz und Gemeinderätin Leandra Spirig (Juni 2026)
+  - [Teil 1](https://www.youtube.com/watch?v=44f4CVQvkT4): Warum die Schulerweiterung nötig ist
+  - [Teil 2](https://www.youtube.com/watch?v=bRRbVVrbBQw): Sicherheit rund um die Baustelle, Schutz
+    aller Betroffenen
+  - [Teil 3](https://www.youtube.com/watch?v=7ZKtktsgbe4): Auswirkungen der Baustelle auf den
+    Schulbetrieb, das Bauprojekt im Unterricht, grösste Herausforderungen der Bauphase
+  - [Teil 4](https://www.youtube.com/watch?v=F598CMk51WI): Rückblick und Ausblick, Schritte bis zum
+    Spatenstich im Januar 2026, Eröffnung 2028
 - Tuggen: [Erklärvideo zum Schulhausneubau mit Gemeindesaal](https://www.tuggen.ch/public/upload/assets/1365/20250318_Erklaerungsvideo_Erstellung_Schulhausneubau_inkl._Gemeindesaal.mp4?fp=2) vom Informationsanlass im März 2025
+  - Fehlende Räume für Gruppenunterricht, Förderung und Begabungsförderung, Werkunterricht seit
+    Jahren im Containerprovisorium
+  - Mehr Platz für Tagesbetreuung und Mittagstisch (neues Kinderbetreuungsgesetz), Musikschule
+    und Religionsunterricht; der Kanton bestätigt den Raumbedarf und hat Subventionen zugesagt
+  - Neubau Eneda 2, Umnutzung von Eneda 1 zum Fachschulhaus, neu gestalteter Sportplatz mit
+    Spiel- und Begegnungsorten
+  - Gemeindesaal für Kultur, Vereinsanlässe und Gemeindeversammlungen
+  - Aufstockung von Eneda 1 geprüft, aber teurer und aufwendiger als ein Neubau
+  - Erstes neues Schulhaus seit 50 Jahren, Platz für die nächsten 30 Jahre
 
 ## Kein Preisvergleich
 
@@ -112,5 +132,6 @@ Stand der Recherche: 29. Oktober 2026.
 - Schübelbach: [Botschaft zur Gemeindeversammlung vom 28. April 2023](https://www.schuebelbach.ch/_docn/4929325/20230428-Gemeindeversammlung-SG_Gutenbrunnen.pdf), [Projektseite der Gemeinde](https://www.schuebelbach.ch/erweiterunggutenbrunnen), [March24: Spatenstich](https://march24.ch/articles/358807-spatenstich-fuer-langersehntes-schulraumprojekt)
 - Bezirk March und Lachen, Sport und Kultur am See: [Sek 1 March, Erweiterung Schulhaus am Park](https://sek1march.ch/standorte/lachen/schulanlage/erweiterung.html), [Gemeinde Lachen, Abstimmung vom 24. November 2024](https://www.lachen.ch/aktuells/news.html/35/news/479)
 - Reichenburg: [Jahresbericht 2024 der Gemeinde](https://www.reichenburg.ch/public/upload/assets/2951/Reichenburg_Rechnung%202024_Langversion.pdf?fp=1), [March24: Rundgang durch das neue Schulhaus Am Bach](https://marchhoefe24.ch/articles/360455-rundgang-durch-das-neue-schulhaus-am-bach)
+- Reichenburg, Kauf Liegenschaft Halder: [Botschaft zur Gemeindeversammlung vom 27. Juni 2025](https://www.reichenburg.ch/public/upload/assets/2991/GzD_Reichenburg_ausserord_GV_27-06-2025.pdf?fp=1), [Gemeinde Reichenburg, Abstimmung vom 28. September 2025](https://www.reichenburg.ch/politik-verwaltung/politik/abstimmungen-wahlen/2021/abstimmung-vom-28-september-2025.html/448)
 - Tuggen: [Projektseite der Gemeinde](https://www.tuggen.ch/politik/laufende-projekte/erstellung-eines-schulhausneubaus-inkl-gemeindesaal.html/194), [FAQ zum Schulhausneubau](https://www.tuggen.ch/public/upload/assets/1531/2025.08.21-Schulhausneubau-FAQ.pdf?fp=1), [Voranschlag 2026 der Gemeinde](https://www.tuggen.ch/public/upload/assets/1644/2026_Budgetbrosch%C3%BCre_Voranschlag.pdf?fp=2)
 - Galgenen: [Erläuterungen der Gemeinde](https://www.galgenen.ch/schulhauserweiterung-tischmacherhof), [March24: Galgenen sagt Ja zu neuem Schulhaus](https://marchhoefe24.ch/articles/408617-galgenen-sagt-ja-zu-neuem-schulhaus)
