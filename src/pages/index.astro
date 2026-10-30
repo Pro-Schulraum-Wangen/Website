@@ -31,9 +31,8 @@ const heroBg = await getImage({
 
 const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 
-const latestLetters = (await getCollection('letters', ({ data }) => data.published))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 6);
+const letters = (await getCollection('letters', ({ data }) => data.published))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 	day: 'numeric',
 	month: 'long',
@@ -144,7 +143,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 		</div>
 	</section>
 
-	{latestLetters.length > 0 && (
+	{letters.length > 0 && (
 		<section class="block">
 			<div class="wrap">
 				<div class="section-head">
@@ -152,7 +151,7 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 					<a class="more" href="/medien/">Alle Leserbriefe &amp; Medien →</a>
 				</div>
 				<ul class="letters-list compact">
-					{latestLetters.map((entry) => (
+					{letters.map((entry) => (
 						<li>
 							<a href={`/medien/${entry.id}/`}>{entry.data.title}</a>
 							<span class="letters-meta">
