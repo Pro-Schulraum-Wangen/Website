@@ -612,6 +612,10 @@
   name: 'Benjamin Schmid'
   lastName: 'Schmid'
   location: 'Siebnen'
+- id: debora-schmid
+  name: 'Debora Schmid'
+  lastName: 'Schmid'
+  location: 'Siebnen'
 - id: karin-schmid
   name: 'Karin Schmid'
   lastName: 'Schmid'
