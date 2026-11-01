@@ -716,10 +716,6 @@
   name: 'Ilka Schnidrig'
   lastName: 'Schnidrig'
   location: 'Wangen'
-- id: luca-schnyder
-  name: 'Luca Schnyder'
-  lastName: 'Schnyder'
-  location: 'Wangen'
 - id: melinda-schnyder
   name: 'Melinda Schnyder'
   lastName: 'Schnyder'
