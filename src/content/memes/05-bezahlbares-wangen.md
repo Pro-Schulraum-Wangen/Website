@@ -7,8 +7,8 @@ published: true
 
 💡 Eine Gemeinde lebt vom Miteinander.
 
-Wir stehen füreinander ein, unterstützen uns und denken gemeinsam weiter. Das zeigen auch die vielen Vereine, die hinter dem Schulraumprojekt stehen.
+Wir stehen heute da, weil Menschen in unserer Gemeinde Verantwortung übernehmen, mitanpacken und über Jahre Knochenarbeit leisten. Wir unterstützen uns und denken gemeinsam weiter. Das zeigen auch die vielen Bewohnerinnen und Bewohner sowie Vereine, die hinter dem Schulraumprojekt stehen.
 
-Über Jahre haben Menschen gemeinsam Lösungen erarbeitet und Verantwortung übernommen. Diese Arbeit verdient Respekt.
+Bereits 2021 begann die Planung mit den Fragen: Was brauchen wir? Welche gesetzlichen Vorgaben müssen wir erfüllen? Welche Lösung ist baulich möglich und langfristig finanziell am sinnvollsten? Über Jahre wurde daran gearbeitet. Das verdient Respekt.
 
-Kritik gehört dazu. Doch im letzten Moment mit reisserischen Plakaten und Parolen wie «Das geht günstiger!», «Wir haben weniger Schüler!» und «Alles zu teuer!» aufzutreten, ersetzt keine gemeinsame Arbeit und schafft keine tragfähigen Lösungen.
+Kritik gehört dazu. Doch im letzten Moment mit reisserischen Plakaten, hypothetischen Annahmen und Schlagworten wie «Das geht günstiger!», «Wir haben weniger Schüler!» und «Alles zu teuer!» aufzutreten, ersetzt keine sorgfältige Planung. Wer heute fordert, Bedarf, Machbarkeit und Kosten zu prüfen, sollte anerkennen: Genau damit wurde vor fünf Jahren begonnen. Das vorliegende Projekt ist das Ergebnis dieser Arbeit: sorgfältig geplant, solide durchgerechnet und auf die langfristigen Bedürfnisse unserer Gemeinde ausgerichtet.
