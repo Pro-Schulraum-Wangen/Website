@@ -7,8 +7,10 @@ published: true
 
 💡 Eine Gemeinde lebt vom Miteinander.
 
-Wir stehen heute da, weil Menschen in unserer Gemeinde Verantwortung übernehmen, mitanpacken und über Jahre Knochenarbeit leisten. Wir unterstützen uns und denken gemeinsam weiter. Das zeigen auch die vielen Bewohnerinnen und Bewohner sowie Vereine, die hinter dem Schulraumprojekt stehen.
+Menschen übernehmen Verantwortung und leisten über Jahre Knochenarbeit für Wangen. Dieses Miteinander zeigen auch die vielen Menschen und Vereine, die hinter dem Schulraumprojekt stehen.
 
-Bereits 2021 begann die Planung mit den Fragen: Was brauchen wir? Welche gesetzlichen Vorgaben müssen wir erfüllen? Welche Lösung ist baulich möglich und langfristig finanziell am sinnvollsten? Über Jahre wurde daran gearbeitet. Das verdient Respekt.
+Seit 2021 wurde geprüft: Was brauchen wir? Was ist gesetzlich und baulich möglich? Welche Lösung ist langfristig finanziell sinnvoll?
 
-Kritik gehört dazu. Doch im letzten Moment mit reisserischen Plakaten, hypothetischen Annahmen und Schlagworten wie «Das geht günstiger!», «Wir haben weniger Schüler!» und «Alles zu teuer!» aufzutreten, ersetzt keine sorgfältige Planung. Wer heute fordert, Bedarf, Machbarkeit und Kosten zu prüfen, sollte anerkennen: Genau damit wurde vor fünf Jahren begonnen. Das vorliegende Projekt ist das Ergebnis dieser Arbeit: sorgfältig geplant, solide durchgerechnet und auf die langfristigen Bedürfnisse unserer Gemeinde ausgerichtet.
+Kritik gehört dazu. Doch im letzten Moment reisserische Plakate aufzustellen und «Das geht günstiger!», «Wir haben weniger Schüler!» oder «Alles zu teuer!» zu rufen, ersetzt keine sorgfältige Planung.
+
+Wer heute diese Prüfungen fordert, sollte anerkennen: Genau damit wurde vor fünf Jahren begonnen. Das Ergebnis liegt vor: sorgfältig geplant, solide durchgerechnet und langfristig ausgerichtet. Diese Arbeit verdient Respekt.
