@@ -2,6 +2,8 @@
 title: 'Beispiel-Titel des Leserbriefs'
 author: 'Vorname Nachname'
 date: 2026-01-01
+# optional: Art des Beitrags, wird als umrandetes Badge angezeigt
+# type: 'Leserbrief'
 # optional: Medium, in dem der Beitrag erschienen ist, wird als Badge angezeigt
 # source: 'March-Anzeiger'
 excerpt: 'Kurzer Einleitungstext (1–2 Sätze), der auf der Übersichtsseite /leserbriefe angezeigt wird, bevor man auf "weiterlesen" klickt.'

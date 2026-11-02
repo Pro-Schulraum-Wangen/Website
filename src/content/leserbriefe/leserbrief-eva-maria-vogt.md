@@ -2,6 +2,7 @@
 title: 'Grösser bedeutet nicht gefährlicher'
 author: 'Eva-Maria Vogt'
 date: 2026-10-27
+type: 'Leserbrief'
 source: 'March-Anzeiger'
 excerpt: 'Als Mutter von zwei Kindern, die in Wangen zur Schule gegangen sind, verstehe ich die Angst vor Gewalt und Mobbing sehr gut. Aber es ist falsch, dieses Problem auf die Grösse eines Schulhauses zu schieben.'
 published: true

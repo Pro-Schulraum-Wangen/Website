@@ -2,6 +2,7 @@
 title: 'Ja zu den Schulanlagen am Buechberg'
 author: 'Jürg Heer'
 date: 2026-10-30
+type: 'Leserbrief'
 source: 'March-Anzeiger'
 excerpt: 'Als langjähriges Mitglied verschiedener Dorfkommissionen und Dorfvereine liegt mir die Zukunft von Wangen sehr am Herzen. Nach dem erfolgreichen Aufbau unserer Altersinfrastruktur steht nun das nächste Generationenprojekt an: die Schulanlage am Buechberg.'
 published: true

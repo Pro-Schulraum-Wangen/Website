@@ -1534,12 +1534,16 @@ article.prose > :first-child > h2:first-child {
 	white-space: nowrap;
 }
 
-/* Medium a piece appeared in (e.g. «March-Anzeiger»), in campaign yellow */
+/* Kind of piece (e.g. «Leserbrief») and medium it appeared in
+   (e.g. «March-Anzeiger»), shown as badges before author and date */
+.letters-badges {
+	margin-right: 0.5rem;
+}
+
+.letters-type,
 .letters-source {
 	display: inline-block;
-	margin-right: 0.5rem;
 	padding: 0.1rem 0.5rem;
-	background: var(--color-brand);
 	color: var(--color-text);
 	font-size: 0.75rem;
 	font-weight: 600;
@@ -1547,14 +1551,29 @@ article.prose > :first-child > h2:first-child {
 	vertical-align: 0.1em;
 }
 
-/* On small screens the badge gets its own line, so the nowrap author/date
+/* outlined, so it reads as a label next to the yellow medium badge */
+.letters-type {
+	padding: calc(0.1rem - 1px) calc(0.5rem - 1px);
+	border: 1px solid currentColor;
+}
+
+.letters-type + .letters-source {
+	margin-left: 0.3rem;
+}
+
+/* Medium badge in campaign yellow */
+.letters-source {
+	background: var(--color-brand);
+}
+
+/* On small screens the badges get their own line, so the nowrap author/date
    line can't push the page wider than the viewport. */
 @media (max-width: 34rem) {
 	.letters-meta {
 		white-space: normal;
 	}
 
-	.letters-source {
+	.letters-badges {
 		display: table;
 		margin: 0 0 0.3rem;
 	}

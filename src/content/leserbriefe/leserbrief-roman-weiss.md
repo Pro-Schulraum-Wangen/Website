@@ -2,6 +2,7 @@
 title: 'Wangen braucht Schulraum'
 author: 'Roman Weiss'
 date: 2026-10-30
+type: 'Leserbrief'
 source: 'March-Anzeiger'
 excerpt: 'Als Jugendriegenleiter und ehemaliger Jugichef beim TV Wangen durfte ich viele Kinder dabei begleiten, Neues zu lernen und auszuprobieren. Kinder entwickeln sich dort am besten, wo ihre Stärken Platz haben.'
 published: true

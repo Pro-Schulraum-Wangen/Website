@@ -2,6 +2,7 @@
 title: 'Ein historisches Ja für Wangen: Zukunft anpacken'
 author: 'Markus Kalt'
 date: 2026-10-27
+type: 'Leserbrief'
 source: 'March-Anzeiger'
 excerpt: 'In unserem Dorf ist eine grossartige Aufbruchstimmung spürbar. Das Thema Schulhausneubau bewegt Wangen, und die Vorfreude auf das Generationenprojekt ist riesig.'
 published: true
