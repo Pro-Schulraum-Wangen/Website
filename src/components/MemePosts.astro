@@ -2,13 +2,13 @@
 // Memes on the homepage, styled like social media posts: header with the
 // committee as author, the image, the caption (Markdown body of each file in
 // src/content/memes) and a download button so people can share the image
-// themselves. Newest first; beyond the first row the posts stay behind a
+// themselves. Newest first; beyond the first two rows the posts stay behind a
 // button so the homepage doesn't grow with every new meme.
 import { Image, getImage } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import { SITE_TITLE } from '../consts';
 
-const INITIAL_COUNT = 3;
+const INITIAL_COUNT = 6;
 
 const memes = (await getCollection('memes', ({ data }) => data.published)).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf() || b.id.localeCompare(a.id),
