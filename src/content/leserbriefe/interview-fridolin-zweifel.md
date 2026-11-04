@@ -2,6 +2,7 @@
 title: 'Fridolin Zweifel: «Zuerst skeptisch, heute überzeugt»'
 author: 'Philipp Bruhin'
 date: 2026-10-22
+source: 'March-Anzeiger'
 excerpt: 'Fridolin Zweifel hat die Schulraumplanung kritisch begleitet. Heute sagt er Ja zum vorliegenden Projekt. Am 11. Oktober 2026 hat Philipp Bruhin von Pro Schulraum Wangen mit ihm über seine ursprünglichen Bedenken gesprochen und darüber, was ihn schliesslich überzeugt hat.'
 image: './interview-fridolin-zweifel.jpg'
 imageAlt: 'Fridolin Zweifel lebt seit 1983 mit seiner Familie in Wangen'
@@ -65,3 +66,5 @@ Unsere Vorfahren hatten ebenfalls den Mut, grosse Vorhaben anzupacken. Denken wi
 Mein Leitgedanke lautet: Wangen zuerst. Ich wünsche mir, dass wir sachlich und auf Grundlage der vorliegenden Fakten entscheiden. Für mich ist dieses Projekt eine überzeugende Investition in die Zukunft unserer Gemeinde.
 
 Lieber den Spatz in der Hand als die Taube auf dem Dach. Wir haben jetzt ein konkretes Projekt, das die Bedürfnisse von Schule, Sport und Bevölkerung zusammenführt. Deshalb stehe ich heute dahinter und sage am 29. November Ja.
+
+[Publireportage im March-Anzeiger vom 4. November 2026](/dokumente/2026-11-04_March-Anzeiger_Publi_Reportage_FridolinZweifel.png)
