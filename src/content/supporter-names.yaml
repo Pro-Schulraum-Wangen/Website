@@ -248,10 +248,6 @@
   name: 'Lukas Halef'
   lastName: 'Halef'
   location: 'Siebnen'
-- id: martin-halef
-  name: 'Martin Halef'
-  lastName: 'Halef'
-  location: 'Siebnen'
 - id: ladina-halter
   name: 'Ladina Halter'
   lastName: 'Halter'
