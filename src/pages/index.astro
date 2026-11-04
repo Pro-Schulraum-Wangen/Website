@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import OrganizationBand from '../components/OrganizationBand.astro';
 import ShortVideos from '../components/ShortVideos.astro';
+import FlyerCards from '../components/FlyerCards.astro';
 import MythCarousel from '../components/MythCarousel.astro';
 import MemePosts from '../components/MemePosts.astro';
 import { getSupporters } from '../lib/supporters';
@@ -66,6 +67,8 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 			)}
 		</div>
 	</section>
+
+	<FlyerCards />
 
 	<ShortVideos />
 

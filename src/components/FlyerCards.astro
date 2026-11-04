@@ -1,0 +1,63 @@
+---
+// «Unsere Flyer»: the committee's two flyers, right below the homepage hero.
+// Flyer 1 is the general one (supporting clubs, key arguments), flyer 2
+// answers the opponents' arguments. The cover image links to the PDF.
+// Covers live in src/assets/flyers so Astro serves small WebP versions;
+// the full-size PNGs for sharing stay in public/dokumente.
+import { Image } from 'astro:assets';
+import { DOCUMENTS } from '../consts';
+import flyer1Cover from '../assets/flyers/flyer-1-titelseite.png';
+import flyer2Cover from '../assets/flyers/flyer-2-titelseite.png';
+
+const flyers = [
+	{
+		label: 'Flyer Nr. 1',
+		title: 'Ihre Stimme? Unsere Zukunft!',
+		text: 'Das Projekt auf einen Blick: die wichtigsten Argumente für ein Ja und alle Vereine und Organisationen, die hinter der neuen Schulanlage stehen.',
+		pdf: DOCUMENTS.flyer1,
+		cover: flyer1Cover,
+		pages: [DOCUMENTS.flyer1Seite1, DOCUMENTS.flyer1Seite2, DOCUMENTS.flyer1Seite3, DOCUMENTS.flyer1Seite4],
+	},
+	{
+		label: 'Flyer Nr. 2',
+		title: 'Die Gegner sagen Nein. Was ihre Idee kostet, sagen sie nicht.',
+		text: 'Unsere Antwort auf die Argumente der Gegner: Ihre Variante kostet mehr und bringt weniger. Kosten, Turnhalle, Kantonsbeitrag und Bezug im direkten Vergleich.',
+		pdf: DOCUMENTS.flyer2,
+		cover: flyer2Cover,
+		pages: [DOCUMENTS.flyer2Seite1, DOCUMENTS.flyer2Seite2],
+	},
+];
+---
+
+<section class="block flyer-cards">
+	<div class="wrap">
+		<div class="section-head">
+			<h2 id="zum-nachlesen"><a class="heading-anchor" href="#zum-nachlesen">Zum Nachlesen und Weitergeben</a></h2>
+			<a class="more" href="/flyer/">Beim Verteilen helfen →</a>
+		</div>
+		<div class="flyer-card-grid">
+			{flyers.map((f) => (
+				<article class="card flyer-card">
+					<a class="flyer-card-cover" href={f.pdf} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+						<Image src={f.cover} alt="" widths={[320, 480, 640]} sizes="(max-width: 34rem) 16rem, (max-width: 64rem) 40vw, 20rem" format="webp" quality={75} />
+					</a>
+					<div class="flyer-card-body">
+						<p class="flyer-card-label">{f.label}</p>
+						<h3>{f.title}</h3>
+						<p>{f.text}</p>
+						<a class="button primary" href={f.pdf} target="_blank" rel="noopener">{f.label} öffnen (PDF)</a>
+						<p class="flyer-card-images">
+							Auch als Bild zum Teilen:{' '}
+							{f.pages.map((page, i) => (
+								<>
+									{i > 0 && ', '}
+									<a href={page} target="_blank" rel="noopener">Seite {i + 1}</a>
+								</>
+							))}
+						</p>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>

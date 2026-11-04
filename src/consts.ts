@@ -39,6 +39,11 @@ export const DOCUMENTS = {
 	zonenplan: '/dokumente/wang_zp_entwurf_20131016.pdf',
 	// Erster Flyer des Pro-Komitees (A5, verteilt ab 31. Oktober 2026).
 	flyer1: '/dokumente/2026-10-26_Flyer_A5_oSZ.pdf',
+	// Erster Flyer als Bilder (für Newsletter, WhatsApp, Social Media).
+	flyer1Seite1: '/dokumente/2026-10-26_Flyer_A5_oSZ-1.png',
+	flyer1Seite2: '/dokumente/2026-10-26_Flyer_A5_oSZ-2.png',
+	flyer1Seite3: '/dokumente/2026-10-26_Flyer_A5_oSZ-3.png',
+	flyer1Seite4: '/dokumente/2026-10-26_Flyer_A5_oSZ-4.png',
 	// Zweiter Flyer des Pro-Komitees (A4, «Was kostet ein Nein?», verteilt ab 7. November 2026).
 	flyer2: '/dokumente/2026-11-04_Flyer_A4_Pro-Schulraum.pdf',
 	// Zweiter Flyer als Bilder (für Newsletter, WhatsApp, Social Media).

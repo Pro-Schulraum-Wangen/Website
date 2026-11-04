@@ -3530,3 +3530,87 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 		margin: 0 auto;
 	}
 }
+
+/* Homepage: «Unsere Flyer», two large cards linking the flyer PDFs
+   (see FlyerCards.astro). Side by side, stacked on phones. */
+.flyer-card-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2rem;
+}
+
+.flyer-card {
+	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+	gap: 1.75rem;
+	align-items: start;
+	padding: 2rem;
+}
+
+.flyer-card-cover {
+	display: block;
+}
+
+.flyer-card-cover img {
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: 0 4px 14px rgba(26, 24, 3, 0.25);
+	transition: transform 0.25s ease;
+}
+
+.flyer-card-cover:hover img {
+	transform: translateY(-3px);
+}
+
+.flyer-card-body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.flyer-card h3 {
+	font-size: 1.45rem;
+	margin-bottom: 0.75rem;
+}
+
+.flyer-card p {
+	font-size: 1.1rem;
+	margin: 0 0 1.5rem;
+}
+
+.flyer-card .flyer-card-label {
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-bottom: 0.5rem;
+}
+
+.flyer-card .flyer-card-images {
+	font-size: 0.95rem;
+	margin: 1rem 0 0;
+}
+
+.flyer-card .flyer-card-images a {
+	color: var(--color-text);
+	font-weight: 700;
+}
+
+@media (max-width: 64rem) {
+	.flyer-card-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+}
+
+@media (max-width: 34rem) {
+	.flyer-card {
+		grid-template-columns: 1fr;
+		padding: 1.6rem;
+	}
+
+	.flyer-card-cover {
+		max-width: 16rem;
+	}
+}
