@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { SUPPORT_FORM_URL, FLYER_PICKUP_EMAIL } from '../../consts';
+import { SUPPORT_FORM_URL, FLYER_PICKUP_EMAIL, DOCUMENTS } from '../../consts';
 ---
 
 <Layout
@@ -51,7 +51,8 @@ import { SUPPORT_FORM_URL, FLYER_PICKUP_EMAIL } from '../../consts';
 					></iframe>
 				</div>
 				<p>
-					Helfen Sie mit, unseren zweiten Flyer in Wangen, Nuolen und Siebnen-Wangen in die
+					Helfen Sie mit, unseren{' '}
+					<a href={DOCUMENTS.flyer2} target="_blank" rel="noopener">zweiten Flyer</a> in Wangen, Nuolen und Siebnen-Wangen in die
 					Briefkästen zu bringen. Er zeigt, was ein Nein am 29. November kosten würde. Suchen Sie
 					sich auf der Karte eine oder mehrere Strassen aus. Die Flyer können Sie am Samstag,
 					7. November, von 9 bis 11 Uhr oder nach Vereinbarung

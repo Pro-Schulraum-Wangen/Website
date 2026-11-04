@@ -39,6 +39,8 @@ export const DOCUMENTS = {
 	zonenplan: '/dokumente/wang_zp_entwurf_20131016.pdf',
 	// Erster Flyer des Pro-Komitees (A5, verteilt ab 31. Oktober 2026).
 	flyer1: '/dokumente/2026-10-26_Flyer_A5_oSZ.pdf',
+	// Zweiter Flyer des Pro-Komitees (A4, «Was kostet ein Nein?», verteilt ab 7. November 2026).
+	flyer2: '/dokumente/2026-11-04_Flyer_A4_Pro-Schulraum.pdf',
 } as const;
 
 // External tax calculator run by the Swiss federal tax administration.
