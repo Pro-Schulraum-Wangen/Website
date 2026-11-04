@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { CONTACT_EMAIL, FLYER_PICKUP_EMAIL } from '../../consts';
+import { CONTACT_EMAIL, DOCUMENTS, FLYER_PICKUP_EMAIL } from '../../consts';
 
 // Sign-ups go to the worker (worker/index.js, /api/flyer) and are stored in
 // Cloudflare D1. Only whether a street is taken is public, never who took it.
@@ -11,16 +11,24 @@ const MAX_NOTE_LENGTH = 500;
 ---
 
 <Layout
-	title="Flyer verteilen"
-	description="Helfen Sie mit, den Flyer zur Schulanlage «Am Buechberg» in Wangen, Nuolen und Siebnen-Wangen zu verteilen. Wählen Sie Ihre Strassen und tragen Sie sich ein."
+	title="Flyer Nr. 2 verteilen"
+	description="Helfen Sie mit, den zweiten Flyer zur Schulanlage «Am Buechberg» in Wangen, Nuolen und Siebnen-Wangen zu verteilen. Wählen Sie Ihre Strassen und tragen Sie sich ein."
 >
 	<section class="hero">
 		<div class="wrap narrow">
-			<h1>Flyer verteilen</h1>
+			<h1>Flyer Nr. 2 verteilen</h1>
 			<p class="tagline">
-				Damit möglichst alle Haushalte in Wangen von der neuen Schulanlage erfahren, verteilen wir
-				unseren Flyer gemeinsam. Wählen Sie eine oder mehrere Strassen, am liebsten in Ihrer Nähe,
-				und tragen Sie sich ein.
+				Ab dem 31. Oktober haben wir bereits unseren{' '}
+				<a href={DOCUMENTS.flyer1} target="_blank" rel="noopener">ersten Flyer</a> mit allgemeinen
+				Informationen zur Kampagne und unseren Unterstützer:innen verteilt. Herzlichen Dank allen,
+				die mitgeholfen haben! Jetzt folgt der zweite Flyer: Er zeigt, was ein{' '}
+				<a href="/#kosten-ja-nein">Nein am 29. November kosten würde</a>.
+			</p>
+			<p class="tagline">
+				Damit auch der zweite Flyer möglichst alle Haushalte in Wangen erreicht, verteilen wir ihn
+				wieder gemeinsam. Alle Strassen sind dafür wieder frei. Wählen Sie eine oder mehrere
+				Strassen, am liebsten in Ihrer Nähe, und tragen Sie sich ein. Gerne auch wieder dieselben
+				Strassen wie beim ersten Mal.
 			</p>
 			<p class="tagline">
 				Uns ist bewusst, dass nicht alle in der Öffentlichkeit stehen möchten. Das Flyerverteilen ist
@@ -29,8 +37,8 @@ const MAX_NOTE_LENGTH = 500;
 				veröffentlicht.
 			</p>
 			<p class="tagline">
-				Die Flyer können Sie bei Jonas Küttel an der Bahnhofstrasse abholen: am{' '}
-				<strong>Samstag, 31. Oktober, von 8 bis 11 Uhr</strong> oder nach Vereinbarung per E-Mail
+				Die Flyer können Sie bei Raphael Seunig an der Schürwiesstrasse 10 in Wangen abholen: am{' '}
+				<strong>Samstag, 7. November, von 9 bis 11 Uhr</strong> oder nach Vereinbarung per E-Mail
 				an <a href={`mailto:${FLYER_PICKUP_EMAIL}`}>{FLYER_PICKUP_EMAIL}</a>. Wir kontaktieren Sie
 				nach Ihrer Anmeldung.
 			</p>
@@ -106,6 +114,13 @@ const MAX_NOTE_LENGTH = 500;
 				<p class="flyer-selection" data-flyer-selection aria-live="polite">
 					Noch keine Strasse ausgewählt. Wählen Sie oben in der Liste oder auf der Karte.
 				</p>
+				<div class="flyer-nudge" data-flyer-nudge aria-live="polite">
+					<p data-flyer-nudge-text>
+						Wir sind um jede Strasse dankbar. Wenn Sie gleich mehrere übernehmen können, ist das
+						natürlich noch besser.
+					</p>
+					<div class="flyer-nudge-suggestions" data-flyer-suggestions hidden></div>
+				</div>
 
 				<div class="flyer-fields">
 					<div>
@@ -254,6 +269,8 @@ const MAX_NOTE_LENGTH = 500;
 	const list = document.querySelector<HTMLUListElement>('[data-flyer-streets]')!;
 	const form = document.querySelector<HTMLFormElement>('[data-flyer-form]')!;
 	const selectionText = document.querySelector<HTMLElement>('[data-flyer-selection]')!;
+	const nudgeText = document.querySelector<HTMLElement>('[data-flyer-nudge-text]')!;
+	const suggestions = document.querySelector<HTMLElement>('[data-flyer-suggestions]')!;
 	const message = document.querySelector<HTMLElement>('[data-flyer-message]')!;
 	const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
@@ -314,6 +331,65 @@ const MAX_NOTE_LENGTH = 500;
 				: `${names.length === 1 ? '1 Strasse' : `${names.length} Strassen`}: ${names.join(', ')}` +
 					(total > 0 ? ` – ca. ${number.format(total)} Briefkästen` : '');
 		selectionText.classList.toggle('has-selection', names.length > 0);
+		updateNudge(chosen);
+	}
+
+	// Free streets close to the ones already picked, to encourage taking on one more.
+	const SUGGESTION_RADIUS_M = 600;
+	const MAX_SUGGESTIONS = 3;
+
+	function nearbyFreeStreets(chosen: Street[]) {
+		const centers = chosen.flatMap((s) => {
+			const layer = layers.get(s.id);
+			return layer ? [layer.getBounds().getCenter()] : [];
+		});
+		if (centers.length === 0) return [];
+		return streets
+			.filter((s) => !s.taken && !selected.has(s.id) && layers.has(s.id))
+			.map((s) => {
+				const center = layers.get(s.id)!.getBounds().getCenter();
+				return { street: s, distance: Math.min(...centers.map((c) => map.distance(c, center))) };
+			})
+			.filter((c) => c.distance <= SUGGESTION_RADIUS_M)
+			.sort((a, b) => a.distance - b.distance)
+			.slice(0, MAX_SUGGESTIONS)
+			.map((c) => c.street);
+	}
+
+	function updateNudge(chosen: Street[]) {
+		if (chosen.length === 0) {
+			nudgeText.textContent =
+				'Wir sind um jede Strasse dankbar. Wenn Sie gleich mehrere übernehmen können, ist das natürlich noch besser.';
+		} else if (chosen.length === 1) {
+			nudgeText.textContent =
+				'Danke! Eine Strasse ist oft schnell verteilt. Mögen Sie noch eine zweite in der Nähe übernehmen?';
+		} else if (chosen.length < 4) {
+			nudgeText.textContent =
+				'Super, herzlichen Dank! Je mehr Strassen pro Person, desto schneller erreicht der Flyer ganz Wangen.';
+		} else {
+			nudgeText.textContent = 'Phänomenal, vielen herzlichen Dank für Ihren grossen Einsatz!';
+		}
+
+		const nearby = chosen.length > 0 && chosen.length < 4 ? nearbyFreeStreets(chosen) : [];
+		suggestions.hidden = nearby.length === 0;
+		if (nearby.length === 0) {
+			suggestions.replaceChildren();
+			return;
+		}
+		const label = document.createElement('span');
+		label.textContent = 'In der Nähe noch frei:';
+		suggestions.replaceChildren(
+			label,
+			...nearby.map((street) => {
+				const button = document.createElement('button');
+				button.type = 'button';
+				button.className = 'flyer-suggestion';
+				const households = householdsLabel(street);
+				button.textContent = `+ ${street.name}${households ? ` (${households})` : ''}`;
+				button.addEventListener('click', () => toggle(street, true));
+				return button;
+			}),
+		);
 	}
 
 	function renderList() {

@@ -37,6 +37,8 @@ export const DOCUMENTS = {
 	rechnung2023: '/dokumente/Rechnung_2023.pdf',
 	// Zonenplan der Gemeinde Wangen SZ (Entwurf 2013).
 	zonenplan: '/dokumente/wang_zp_entwurf_20131016.pdf',
+	// Erster Flyer des Pro-Komitees (A5, verteilt ab 31. Oktober 2026).
+	flyer1: '/dokumente/2026-10-26_Flyer_A5_oSZ.pdf',
 } as const;
 
 // External tax calculator run by the Swiss federal tax administration.
@@ -47,8 +49,8 @@ export const ESTV_CALCULATOR_URL =
 // the website, or supporter entries.
 export const CONTACT_EMAIL = 'info@pro-schulraum-wangen.ch';
 
-// Flyer-Verteilung: pick-up by appointment with Jonas Küttel (STV Wangen SZ).
-export const FLYER_PICKUP_EMAIL = 'j.kuettel@hispeed.ch';
+// Flyer-Verteilung: pick-up by appointment with Raphael Seunig (Schürwiesstrasse 10, Wangen).
+export const FLYER_PICKUP_EMAIL = 'raphael.seunig@saveurs-vivre.ch';
 export const SUPPORT_FORM_URL =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfMK0bjt_cz2QVTm8ukIIVGsdsuvagwm4HNEEVDATdTyhnmpw/viewform?usp=publish-editor';
 
