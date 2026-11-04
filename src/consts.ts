@@ -101,6 +101,7 @@ export const VOTE_DATE_LABEL = 'Urnenabstimmung: Sonntag, 29. November 2026';
 export const NAV_LINKS = [
 	{ href: '/', label: 'Start' },
 	{ href: '/argumente/', label: 'Argumente' },
+	{ href: '/abstimmen/', label: 'Abstimmen' },
 	{ href: '/unterstuetzer/', label: 'Unterstützer:innen' },
 	{ href: '/mitmachen/', label: 'Mitmachen' },
 ] as const;

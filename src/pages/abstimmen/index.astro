@@ -1,0 +1,65 @@
+---
+// «So stimmen Sie ab»: explainer video (YouTube Short, 9:16) plus the steps
+// for voting by letterbox. Linked in the navigation and from the homepage
+// hero until the vote (see NAV_LINKS in consts.ts and index.astro).
+import Layout from '../../layouts/Layout.astro';
+import { OFFICIAL_SITE_URL, VOTE_DATE_LABEL } from '../../consts';
+
+// part after youtube.com/shorts/ in the link
+const YOUTUBE_ID = 'KomJrd3X2EY';
+---
+
+<Layout
+	title="So stimmen Sie ab"
+	description="Schritt für Schritt erklärt: So füllen Sie die Abstimmungsunterlagen zur Schulanlage «Am Buechberg» richtig aus und geben sie rechtzeitig ab."
+>
+	<section class="hero">
+		<div class="wrap">
+			<h1>So stimmen Sie ab</h1>
+			<p class="tagline">
+				Die Abstimmungsunterlagen sind da. Das Video zeigt Schritt für Schritt, wie Sie richtig
+				abstimmen, damit Ihre Stimme zählt.
+			</p>
+			<p class="tagline"><strong>{VOTE_DATE_LABEL}</strong></p>
+		</div>
+	</section>
+
+	<section class="block voting-guide">
+		<div class="wrap">
+			<div class="voting-guide-grid">
+				<div class="short-embed voting-guide-video">
+					<iframe
+						src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}`}
+						title="So stimmen Sie ab"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				</div>
+				<div class="voting-guide-text">
+					<ol class="voting-steps">
+						<li>
+							<strong>Stimmzettel ausfüllen</strong>
+							Wenn Sie der neuen Schulanlage «Am Buechberg» zustimmen, schreiben Sie ein deutliches <em>Ja</em> auf den dunkelblauen Stimmzettel.
+						</li>
+						<li>
+							<strong>Ins Stimmcouvert legen</strong>
+							Den Stimmzettel ins kleine Stimmcouvert stecken und zukleben.
+						</li>
+						<li>
+							<strong>Stimmrechtsausweis unterschreiben</strong>
+							Das ist der Zettel mit Ihrer Adresse und der Adresse der Gemeinde. Ohne Unterschrift ist die briefliche Stimme ungültig.
+						</li>
+						<li>
+							<strong>Rechtzeitig abgeben</strong>
+							Das Couvert direkt in den Briefkasten der Gemeinde beim Mehrzweckgebäude einwerfen.
+						</li>
+					</ol>
+					<p class="voting-guide-note">
+						Massgebend sind die Angaben in Ihren Abstimmungsunterlagen und auf der <a href={OFFICIAL_SITE_URL} target="_blank" rel="noopener">Website der Gemeinde</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

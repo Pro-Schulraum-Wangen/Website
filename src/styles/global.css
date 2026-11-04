@@ -3467,3 +3467,66 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 		width: auto;
 	}
 }
+
+/* «So stimmen Sie ab» page: explainer video (9:16) next to the voting
+   steps (see pages/abstimmen). Stacked on phones. */
+.voting-guide-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+	gap: 3rem;
+	align-items: start;
+}
+
+.voting-steps {
+	list-style: none;
+	counter-reset: voting-step;
+	margin: 0 0 1.75rem;
+	padding: 0;
+	display: grid;
+	gap: 1.25rem;
+}
+
+.voting-steps li {
+	counter-increment: voting-step;
+	position: relative;
+	padding-left: 3.25rem;
+	min-height: 2.25rem;
+}
+
+.voting-steps li::before {
+	content: counter(voting-step);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 2.25rem;
+	height: 2.25rem;
+	display: grid;
+	place-items: center;
+	background: var(--color-text);
+	color: var(--color-brand);
+	font-weight: 700;
+	transform: skewX(-12deg);
+}
+
+.voting-steps strong {
+	display: block;
+	font-size: 1.1rem;
+}
+
+.voting-guide-note {
+	font-size: 0.9rem;
+	margin: 0;
+}
+
+@media (max-width: 52rem) {
+	.voting-guide-grid {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.voting-guide-video {
+		max-width: 22rem;
+		width: 100%;
+		margin: 0 auto;
+	}
+}
