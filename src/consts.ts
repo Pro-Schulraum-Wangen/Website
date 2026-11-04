@@ -41,6 +41,9 @@ export const DOCUMENTS = {
 	flyer1: '/dokumente/2026-10-26_Flyer_A5_oSZ.pdf',
 	// Zweiter Flyer des Pro-Komitees (A4, «Was kostet ein Nein?», verteilt ab 7. November 2026).
 	flyer2: '/dokumente/2026-11-04_Flyer_A4_Pro-Schulraum.pdf',
+	// Zweiter Flyer als Bilder (für Newsletter, WhatsApp, Social Media).
+	flyer2Seite1: '/dokumente/2026-11-04_flyer_pro-schulraum-wangen-seite-1.png',
+	flyer2Seite2: '/dokumente/2026-11-04_flyer_pro-schulraum-wangen-seite-2.png',
 } as const;
 
 // External tax calculator run by the Swiss federal tax administration.
