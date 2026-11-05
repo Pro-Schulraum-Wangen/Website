@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { readingTimeLabel } from '../../lib/reading-time';
 
 const letters = (await getCollection('letters', ({ data }) => data.published)).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -35,7 +36,7 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 											{entry.data.source && <span class="letters-source">{entry.data.source}</span>}
 										</span>
 									)}
-									{entry.data.author} · {dateFormatter.format(entry.data.date)}
+									{entry.data.author} · {dateFormatter.format(entry.data.date)} · {readingTimeLabel(entry.body)}
 								</p>
 							</div>
 							<p>{entry.data.excerpt}</p>

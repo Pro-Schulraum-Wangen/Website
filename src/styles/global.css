@@ -1273,6 +1273,71 @@ article.prose > :first-child > h2:first-child {
 	white-space: nowrap;
 }
 
+/* Image with caption inside a Markdown article: wrap the Markdown image in
+   <figure class="article-figure"> (blank lines around it) so Astro still
+   optimizes it. Add «portrait» for tall screenshots so they don't fill the page. */
+.article-figure {
+	margin: 1.5em 0 2em;
+}
+
+.article-figure.portrait {
+	max-width: 24rem;
+	margin-inline: auto;
+}
+
+.article-figure p {
+	margin: 0;
+}
+
+.article-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: 0 2px 8px rgba(26, 24, 3, 0.14);
+}
+
+.article-figure figcaption {
+	margin-top: 0.8rem;
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+}
+
+/* Who is behind a campaign and is its budget public – overview table
+   in «Sechs Absender, zwei Budgets»
+   (wrap the Markdown table in <div class="sender-table">). */
+.sender-table {
+	margin: 1.5em 0 2em;
+	overflow-x: auto;
+}
+
+.sender-table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+	line-height: 1.45;
+}
+
+.sender-table th,
+.sender-table td {
+	padding: 0.6rem 0.7rem;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.sender-table thead th {
+	background: var(--color-brand);
+	font-weight: 700;
+}
+
+.sender-table td:first-child {
+	font-weight: 600;
+}
+
+.sender-table td:nth-child(4) {
+	white-space: nowrap;
+}
+
 /* credit amount, right-aligned so the decimals line up; the heading
    «Kredit in Mio. CHF» stays on one line, the description column gets narrower */
 .credit-table th:nth-child(3),

@@ -97,6 +97,9 @@ const letters = defineCollection({
 					license: z.object({ label: z.string(), url: z.string().url() }).optional(),
 				})
 				.optional(),
+			// optional share image (Open Graph) for links in WhatsApp, Facebook etc.;
+			// falls back to `image`, then to the site default. Best at 1200×630.
+			ogImage: image().optional(),
 			published: z.boolean().default(true),
 		}),
 });
