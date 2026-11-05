@@ -33,7 +33,9 @@ const heroBg = await getImage({
 const { photo: photoSupporters, count: supporterCount } = await getSupporters();
 
 const letters = (await getCollection('letters', ({ data }) => data.published))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	// homepage shows only the latest six; the full list lives on /medien/
+	.slice(0, 6);
 const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 	day: 'numeric',
 	month: 'long',
