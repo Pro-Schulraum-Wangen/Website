@@ -2,8 +2,7 @@
 name: 'Erwin Bachmann'
 lastName: 'Bachmann'
 role: 'Wangen'
-# Foto folgt – sobald vorhanden, hier eintragen:
-# image: '../../assets/supporters/erwin_bachmann.jpg'
+image: '../../assets/supporters/erwin_bachmann.jpg'
 date: 2026-11-04
 published: true
 ---
