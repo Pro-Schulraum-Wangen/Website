@@ -944,3 +944,7 @@
   name: 'Cindy Dönni'
   lastName: 'Dönni'
   location: 'Wangen'
+- id: bruno-doenni
+  name: 'Bruno Dönni'
+  lastName: 'Dönni'
+  location: 'Wangen'
