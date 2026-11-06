@@ -11,9 +11,7 @@ Bei Pro Schulraum Wangen stehen wir mit unseren Namen hinter unserer Haltung. Un
 
 Bei mehreren gegnerischen Gruppierungen bleibt nur teilweise bekannt, wer dahintersteht. Ein Beispiel sind die zwölf Wangner Gewerbebetriebe, die Transparenz von der Gemeinde fordern, selbst aber nur zwei Vertreter namentlich nennen. **Weshalb nicht auch selbst offen hinstehen?**
 
-Auch reisserische Plakate mit aus unserer Sicht fragwürdigen Aussagen fördern eher die Spaltung als eine sachliche Diskussion. Wir wünschen uns einen offenen Austausch: über konkrete Argumente, mit Menschen, die zu ihrer Haltung stehen, und ohne persönliche Verurteilungen.
-
-Hinter einer IG stehen Menschen mit einer Meinung. Diese darf man in Wangen vertreten, ob dafür oder dagegen.
+Auch reisserische Plakate mit aus unserer Sicht fragwürdigen Aussagen fördern eher die Spaltung unseres Dorfes als eine sachliche Diskussion. Wir wünschen uns einen offenen Austausch: über konkrete Argumente, mit Menschen, die zu ihrer Haltung stehen, und ohne persönliche Verurteilungen.
 
 Wir leben in einer tollen Gemeinde, in der wir schon vieles gemeinsam ermöglicht haben. Gegenseitiger Respekt und Verständnis gehören dazu, auch wenn wir unterschiedlicher Meinung sind. **Schliesslich sind wir Nachbarn und bleiben es auch nach der Abstimmung.**
 
