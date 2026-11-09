@@ -97,6 +97,8 @@
   published: true
 - id: 16-eva-vogt
   youtubeId: z153_k3jSJo
+  # temporary, remove this line to switch back to YouTube; the file must stay under 25 MiB
+  videoFile: /dokumente/ProSchulraumWangen_EvaVogt.mp4
   name: Eva Vogt
   title: Gute Bildung legt den Grundstein für morgen
   date: 2026-11-09
