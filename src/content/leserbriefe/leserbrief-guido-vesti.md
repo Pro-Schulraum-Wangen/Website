@@ -24,4 +24,10 @@ Der heutige Steuerfuss von 135 % wird lediglich auf 150 % erhöht werden müssen
 
 Ich verlasse mich auf die Aussagen des Gemeinderates und der Spezialisten und stimme aus voller Überzeugung für das Generationenprojekt.
 
+<div class="editor-note">
+
+**Anmerkung von Pro Schulraum Wangen:** Gemäss [Botschaft (Seite 50)](/dokumente/gemeinde_wangen-botschaft_schulanglage-A4_web.pdf#page=50) wird ein Steuerfuss von 150 Prozent für Investitionen von insgesamt rund 56 Millionen Franken als langfristig tragbar beurteilt. Für das Volumen von bis zu 70 Millionen Franken bis 2035 nennt sie keinen Steuerfuss.
+
+</div>
+
 [Originalartikel im March-Anzeiger vom 9. November 2026](/dokumente/2026-11-09_Marchanzeiger_Leserbriefe.png)

@@ -1302,6 +1302,19 @@ article.prose > :first-child > h2:first-child {
 	color: var(--color-text-muted);
 }
 
+/* Note added by the committee to a published text
+   (wrap the Markdown in <div class="editor-note">, blank lines around it). */
+.editor-note {
+	margin: 2em 0;
+	padding: 1em 1.25em;
+	background: var(--color-bg-alt);
+	border-left: 6px solid var(--color-brand);
+}
+
+.editor-note p {
+	margin: 0;
+}
+
 /* Who is behind a campaign and is its budget public – overview table
    in «Sechs Absender, zwei Budgets»
    (wrap the Markdown table in <div class="sender-table">). */
