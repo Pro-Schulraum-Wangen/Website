@@ -948,3 +948,19 @@
   name: 'Bruno Dönni'
   lastName: 'Dönni'
   location: 'Wangen'
+- id: riccarda-guntlin
+  name: 'Riccarda Guntlin'
+  lastName: 'Guntlin'
+  location: 'Wangen'
+- id: martina-fleischmann
+  name: 'Martina Fleischmann'
+  lastName: 'Fleischmann'
+  location: 'Wangen'
+- id: adrian-fleischmann
+  name: 'Adrian Fleischmann'
+  lastName: 'Fleischmann'
+  location: 'Wangen'
+- id: reto-fleischmann
+  name: 'Reto Fleischmann'
+  lastName: 'Fleischmann'
+  location: 'Wangen'
