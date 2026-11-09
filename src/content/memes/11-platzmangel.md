@@ -9,7 +9,7 @@ published: true
 
 Für eine säugende Muttersau mit ihren Ferkeln sehen die Bio-Suisse-Richtlinien mindestens 12 m² Gesamtfläche inklusive Laufhof vor. Gut, dass Tierwohl Platz bekommt.
 
-Auch unsere Kinder brauchen Platz für Bewegung. Wenn die Mehrzweckhalle wegen Veranstaltungen belegt ist, teilen sich rund 60 Kinder und acht Leitende die alte Turnhalle beim Schulhaus 3. Auf 290 m² bleiben rechnerisch rund 4,3 m² pro Person. Geräte und Matten beanspruchen zusätzlich Platz.
+Auch unsere Kinder brauchen Platz für Bewegung. Wenn die Mehrzweckhalle wegen Veranstaltungen belegt ist, teilen sich über 60 Kinder und acht Leitende die alte Turnhalle beim Schulhaus 3. Auf 290 m² bleiben rechnerisch rund 4,2 m² pro Person. Geräte und Matten beanspruchen zusätzlich Platz. Das Foto vom Training ist aktuell und stammt aus dem November 2026.
 
 Der Vergleich ist bewusst zugespitzt. Die engen Trainingsverhältnisse sind jedoch Realität.
 
