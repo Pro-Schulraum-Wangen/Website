@@ -34,9 +34,11 @@ Die erwarteten Kantonsbeiträge von 5,6 Millionen Franken senken die Finanzierun
 
 Bei den Folgen eines Neins unterscheiden wir klar: Für Sanierungen und Provisorien werden rund 18 Millionen Franken veranschlagt, Stand 2023 und ohne Teuerung. Hinzu kommen entgangene Kantonsbeiträge von 5,6 Millionen Franken sowie bereits investierte Planungskosten von 740’000 Franken, deren Ergebnis nicht umgesetzt würde. Diese Beträge sind keine sofort fällige Gesamtrechnung. Der fehlende Schulraum bleibt dennoch ungelöst.
 
+Die darin enthaltenen 13 Millionen Franken für die Sanierungen gehen auf den [Zustandsbericht der Landis AG von 2022](/dokumente/2022.11.30_Zustandsbericht_mit_groben_Sanierungskonzept.pdf#page=6) zurück, ein grobes Sanierungskonzept nach einem Rundgang durch die Gebäude. Schadstoffe, Erdbebensicherheit und Hindernisfreiheit waren nicht Teil dieses Berichts, und für die Sportanlagen liegt gemäss Botschaft noch keine Kostenschätzung vor. Wie sich diese Punkte und die Teuerung auf den Betrag auswirken, weiss heute niemand genau. Kleiner wird er dadurch kaum.
+
 Natürlich müssen wir Investitionen kritisch prüfen. Zur Rechnung gehört aber auch, was Wangen dafür erhält: zeitgemässe Schulen, Raum für Vereine und eine Infrastruktur, die unsere Gemeinde lebenswert hält. Wer nur die Kosten pro Kopf betrachtet, lässt diesen Nutzen ausser Acht. Auch der Verzicht hat seinen Preis, wenn unsere Gemeinde an Attraktivität verliert.
 
-Transparenz bedeutet für uns, ältere Prognosen und die aktuelle Beurteilung gemeinsam zu zeigen und sowohl die Kosten als auch den Nutzen verständlich einzuordnen.
+Transparenz bedeutet für uns, ältere Prognosen und die aktuelle Beurteilung gemeinsam zu zeigen und sowohl die Kosten als auch den Nutzen verständlich einzuordnen. Dazu gehört auch zu wissen, von wem ein Beitrag kommt. Die IG Bezahlbares Wangen nennt öffentlich nur eine Person. Unser Komitee tritt namentlich auf.
 
 *Komitee Pro Schulraum Wangen*
 
