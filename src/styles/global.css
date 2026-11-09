@@ -3144,8 +3144,7 @@ html.js-reveal .cost-calc-explainer:not(.is-visible) {
 	margin: 0;
 }
 
-.short-embed iframe,
-.short-embed video {
+.short-embed iframe {
 	display: block;
 	width: 100%;
 	aspect-ratio: 9 / 16;

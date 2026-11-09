@@ -110,8 +110,6 @@ const videos = defineCollection({
 	loader: file('./src/content/videos.yaml'),
 	schema: z.object({
 		youtubeId: z.string(),
-		// self-hosted MP4 (path below public/); replaces the YouTube player when set
-		videoFile: z.string().optional(),
 		name: z.string(),
 		title: z.string(),
 		// release date, shown below the title; before it the video is a teaser

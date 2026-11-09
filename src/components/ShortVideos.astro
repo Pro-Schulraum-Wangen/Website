@@ -34,15 +34,7 @@ const upcomingCount = videos.filter((v) => isUpcoming(v.data.date)).length;
 		</p>
 		<div class="short-grid" data-short-grid>
 			{videos.map((v) => {
-				const iframe = v.data.videoFile ? (
-					<video
-						src={`${v.data.videoFile}#t=0.1`}
-						title={`${v.data.name}: ${v.data.title}`}
-						controls
-						playsinline
-						preload="metadata"
-					></video>
-				) : (
+				const iframe = (
 					<iframe
 						src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`}
 						title={`${v.data.name}: ${v.data.title}`}
