@@ -11,6 +11,8 @@ Von Kritikern hört man oft: «Wir sind nicht gegen eine neue Schule oder eine T
 
 Doch eine ausgearbeitete Alternative liegt nicht vor. Was sie kosten würde, wann sie umgesetzt werden könnte und ob sie überhaupt eine Mehrheit fände, bleibt offen.
 
-**Auch ein Nein kostet Geld:** Im Nein-Szenario sind bereits mehr als 23 Millionen Franken nötig. Eine spätere neue Schule oder Turnhalle käme zusätzlich dazu. Gemäss der von der Gemeinde beauftragten Landis-Machbarkeitsstudie von 2023 wäre dieser Weg insgesamt teurer als das vorliegende Projekt.
+**Auch ein Nein kostet Geld:** Für Sanierungen und Provisorien werden rund **18 Millionen Franken** veranschlagt, Stand 2023 und ohne Teuerung. Dazu kommen **5,6 Millionen Franken an entgangenen Kantonsbeiträgen** und **740’000 Franken an bereits investierten Planungskosten**, deren Ergebnis nicht umgesetzt würde.
+
+Damit ist noch kein zusätzlicher Schulraum geschaffen. Eine spätere neue Schule oder Turnhalle müsste zusätzlich finanziert werden.
 
 💛 Am 29. November JA zu einer konkreten Lösung für Schule und Sport.
