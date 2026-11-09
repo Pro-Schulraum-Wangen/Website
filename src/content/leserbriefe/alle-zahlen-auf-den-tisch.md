@@ -43,5 +43,3 @@ Transparenz bedeutet für uns, ältere Prognosen und die aktuelle Beurteilung ge
 [Voranschlag 2026, Steuerpolitik auf den Seiten 9 und 10](/dokumente/Wangen_SZ_Voranschlag_2026.pdf#page=11)
 
 [Botschaft, Finanzierung und Tragbarkeit auf den Seiten 47 bis 50](/dokumente/gemeinde_wangen-botschaft_schulanglage-A4_web.pdf#page=47)
-
-[Stellungnahme der IG Bezahlbares Wangen im March-Anzeiger vom 9. November 2026](/dokumente/2026-11-09_Marchanzeiger_Inserat_IG-Bezahlbares-Wangen.png)
