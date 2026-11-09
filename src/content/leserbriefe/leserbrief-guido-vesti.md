@@ -26,7 +26,7 @@ Ich verlasse mich auf die Aussagen des Gemeinderates und der Spezialisten und st
 
 <div class="editor-note">
 
-**Anmerkung von Pro Schulraum Wangen:** Gemäss [Botschaft (Seite 50)](/dokumente/gemeinde_wangen-botschaft_schulanglage-A4_web.pdf#page=50) wird ein Steuerfuss von 150 Prozent für Investitionen von insgesamt rund 56 Millionen Franken als langfristig tragbar beurteilt. Für das Volumen von bis zu 70 Millionen Franken bis 2035 nennt sie keinen Steuerfuss.
+**Anmerkung von Pro Schulraum Wangen:** Gemäss [Botschaft (Seite 50)](/dokumente/gemeinde_wangen-botschaft_schulanglage-A4_web.pdf#page=50) wird ein Steuerfuss von 150 Prozent für Investitionen von insgesamt rund 56 Millionen Franken als langfristig tragbar beurteilt. Für das Volumen von bis zu 70 Millionen Franken bis 2035 nennt sie keinen Steuerfuss. Über weitere Vorhaben wird separat entschieden. Steueranpassungen sollen gemäss Gemeinderat nur erfolgen, «wenn sie aufgrund tatsächlich beschlossener Investitionen notwendig werden».
 
 </div>
 
