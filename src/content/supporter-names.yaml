@@ -964,3 +964,7 @@
   name: 'Reto Fleischmann'
   lastName: 'Fleischmann'
   location: 'Wangen'
+- id: olga-vogt-tonetto
+  name: 'Olga Vogt-Tonetto'
+  lastName: 'Vogt-Tonetto'
+  location: 'Wangen'
