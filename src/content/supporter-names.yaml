@@ -764,6 +764,14 @@
   name: 'Janna Strieder'
   lastName: 'Strieder'
   location: 'Wangen'
+- id: astrid-sutter
+  name: 'Astrid Sutter'
+  lastName: 'Sutter'
+  location: 'Wangen'
+- id: werner-sutter
+  name: 'Werner Sutter'
+  lastName: 'Sutter'
+  location: 'Wangen'
 - id: raphael-sutter
   name: 'Raphael Sutter'
   lastName: 'Sutter'
