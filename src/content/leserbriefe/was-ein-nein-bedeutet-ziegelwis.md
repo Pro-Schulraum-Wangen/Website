@@ -2,95 +2,91 @@
 title: 'Was ein Nein bedeutet: Die Geschichte der Ziegelwis'
 author: 'Philipp Bruhin'
 date: 2026-11-15
-excerpt: '2015 sagte die March Nein zu einem neuen Oberstufenschulhaus in Altendorf. Gespart wurde damit nichts: Seither hat der Bezirk fast 48 Millionen Franken in ein altes Schulhaus und seinen Ausbau gesteckt, und der Platz reicht noch immer nicht. Eine Geschichte, die zeigt, warum ein Nein oft teurer kommt.'
-image: './was-ein-nein-bedeutet-ziegelwis.png'
-imageAlt: 'Karte von Altendorf: Orange markiert sind die beiden Grundstücke in der Ziegelwis (rund 2,2 Hektaren), auf denen ab 2019 eine neue Oberstufenschule hätte stehen sollen.'
+excerpt: '2015 sagte die March Nein zu einer neuen Oberstufenschule in der Ziegelwis in Altendorf. Der Schulraum fehlte trotzdem: Später bewilligte die March fast 48 Millionen Franken für Kauf und Ausbau des alten Schulhauses in Lachen, mehr als damals für den Neubau eingeplant war.'
+image: './was-ein-nein-bedeutet-ziegelwis-uebersicht.png'
+imageAlt: 'Luftbild von Lachen und Altendorf: Am See das Schulhaus in Lachen, für dessen Kauf und Ausbau der Bezirk 47,9 Millionen Franken bewilligt hat, ohne eigene Turnhallen. Südlich der Autobahn die Ziegelwis, wo der verworfene Neubau mit eigener Turnhalle für geplante 42,5 Millionen Franken hätte entstehen sollen.'
 imageCredit:
-  text: 'Karte: WebGIS Kanton Schwyz, © swisstopo'
-  url: 'https://map.geo.sz.ch/s/FECKEZ'
+  text: 'Kartengrundlage: Google Maps, Beschriftung: Pro Schulraum Wangen'
+ogImage: './was-ein-nein-bedeutet-ziegelwis-uebersicht.png'
 published: true
 ---
 
-**Am 29. November stimmt Wangen über eine neue Schulanlage ab. Ein Nein klingt nach Sparen. Wie es in Wirklichkeit ausgehen kann, zeigt ein Beispiel aus unserer Nachbarschaft: die Ziegelwis in Altendorf. Dort hätte 2019 eine neue Schule eröffnen sollen. Gebaut wurde sie nie, und billiger ist es dadurch nicht geworden.**
+**Ein Nein klingt nach Sparen. Doch fehlender Schulraum verschwindet damit nicht. Das zeigt die Ziegelwis in Altendorf: Dort hätte 2019 eine neue Oberstufenschule eröffnen sollen. Stattdessen bewilligte die March später fast 48 Millionen Franken für den Kauf und Ausbau des alten Standorts in Lachen.**
 
-## Worum es ging
+## Warum der Bezirk neu bauen wollte
 
-Nach der Primarschule gehen Jugendliche aus der March in die Oberstufe, die «<a href="https://sek1march.ch/" target="_blank" rel="noopener">Sek 1 March</a>». Für diese Schule ist nicht die Gemeinde zuständig, sondern der <a href="https://www.bezirk-march.ch/" target="_blank" rel="noopener">Bezirk March</a>. Er führt drei Standorte: Siebnen, Buttikon und Lachen. In Lachen gehen die Jugendlichen aus Lachen und Altendorf zur Schule.
+<a href="https://sek1march.ch/" target="_blank" rel="noopener">Die Sek 1 March</a> führt drei Standorte: Siebnen, Buttikon und Lachen. In Lachen besuchen Jugendliche aus Lachen und Altendorf die Oberstufe.
 
-Dieser Standort in Lachen hatte schon vor über zehn Jahren ein Problem. Der Bezirk besass das Schulhaus gar nicht, er war nur Mieter bei der Gemeinde Lachen. Das <a href="https://maps.app.goo.gl/jrwJH24ukypTNKue8" target="_blank" rel="noopener">Schulhaus am Park</a> steht in Lachen direkt zwischen dem See und dem Sportplatz mit der roten 400-Meter-Laufbahn. Es war zu einem grossen Teil in den 1950er-Jahren gebaut worden. Es fehlten zwei Klassenzimmer, eine Schulküche, Werkräume und fünf Gruppenräume. Einige Räume entsprachen nicht einmal den kantonalen Vorschriften für Schulzimmer. Und weil auch die Turnhallen nur gemietet waren, fand der Sportunterricht teilweise über Mittag statt. Dazu kam: Der Mietvertrag lief im Juli 2019 aus, eine Verlängerung war nicht in Sicht. So steht es im <a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015 des Bezirks March</a> (Seite 35).
+Schon vor über zehn Jahren war das <a href="https://maps.app.goo.gl/jrwJH24ukypTNKue8" target="_blank" rel="noopener">Schulhaus in Lachen</a> zu klein. Es gehörte nicht einmal dem Bezirk, er war dort nur Mieter bei der Gemeinde Lachen. Es fehlten zwei Klassenzimmer, fünf Gruppenräume, eine Schulküche und je ein Zimmer für textiles und nichttextiles Werken. Einige Schulzimmer entsprachen nicht den kantonalen Vorgaben. Weil auch die Turnhallen nur gemietet waren, fand der Sportunterricht teilweise über Mittag statt. Zudem lief der Mietvertrag für das Schulhaus im Juli 2019 aus (<a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015, Seite 35</a>).
 
-## Die geplante Lösung: ein Neubau in der Ziegelwis
+Der <a href="https://www.bezirk-march.ch/" target="_blank" rel="noopener">Bezirksrat</a> wollte deshalb in der Ziegelwis neu bauen, auf Altendorfer Gemeindegebiet nahe Lachen. Das rund 22’000 Quadratmeter grosse Areal hätte er für 60 Jahre im Baurecht übernommen, für rund 274’000 Franken pro Jahr. Die Lage zeigt die <a href="https://map.geo.sz.ch/s/FECKEZ" target="_blank" rel="noopener">Karte des Kantons Schwyz</a>.
 
-Der Bezirksrat wollte deshalb in der Ziegelwis neu bauen. Das rund 22’000 Quadratmeter grosse Areal liegt auf Gemeindegebiet von Altendorf, nahe an Lachen, und gehörte der Gemeinde Altendorf und der Pfarrpfrundstiftung. Der Bezirk hätte das Land im Baurecht übernommen: Für die Nutzung während 60 Jahren hätte er einen jährlichen Baurechtszins von rund 274’000 Franken bezahlt. Die genaue Lage zeigt die <a href="https://map.geo.sz.ch/s/FECKEZ" target="_blank" rel="noopener">Karte des Kantons Schwyz</a>.
+<figure class="article-figure">
 
-Die Stimmberechtigten der ganzen March sollten zuerst über das Land und einen Planungskredit von 750'000 Franken entscheiden. Damit wollte der Bezirk einen Architekturwettbewerb durchführen. Der Fahrplan laut <a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015</a> (Seiten 36 bis 39):
+![Katasterplan von Altendorf: Orange markiert sind die Grundstücke 173 und 743 in der Ziegelwis, zusammen rund 2,2 Hektaren, zwischen Chatzenbach und Mülistrasse südlich der Autobahn A3.](./was-ein-nein-bedeutet-ziegelwis-kataster.png)
 
-- **2015:** Wettbewerb
-- **Juni 2016:** Abstimmung über den Baukredit
-- **Sommer 2019:** Bezug der neuen Schule
+<figcaption>Hier hätte ab 2019 die neue Oberstufenschule stehen sollen: die beiden Grundstücke in der Ziegelwis, Altendorf. Karte: <a href="https://map.geo.sz.ch/s/FECKEZ" target="_blank" rel="noopener">WebGIS Kanton Schwyz</a>, © swisstopo</figcaption>
+</figure>
 
-Ein Bild der neuen Schule gab es nie, denn das Projekt kam gar nicht erst bis zum Wettbewerb.
+Lachen hatte dem Bezirk bereits damals angeboten, das bestehende Schulhaus für 11 Millionen Franken zu kaufen. Der Bezirksrat hielt einen Neubau jedoch langfristig für wirtschaftlicher als Kauf, Sanierung und Ausbau mit weiterhin gemieteten Turnhallen (<a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015, Seiten 35–39</a>).
 
-Interessant ist, wie der Bezirksrat seinen Vorschlag begründete. Die Gemeinde Lachen hatte dem Bezirk schon damals angeboten, das alte Schulhaus für 11 Millionen Franken zu kaufen. Der Bezirksrat lehnte das ab. Er war überzeugt, «dass ein Neubau einer Schulanlage langfristig wirtschaftlicher ist als Kauf, Sanierung, Um- und Ausbau des Schulhauses am Park und eine weitere langfristige Einmietung bei der Gemeinde Lachen für den Sportunterricht» (<a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Bezirk March, Voranschlag 2015</a>, Seite 35).
+## Das Nein und seine Folgen
 
-## Das Nein
+Am 8. März 2015 lehnte die March die Vorlage für das Baurecht und einen Planungskredit von 750’000 Franken mit <a href="https://www.bezirk-march.ch/abstimmungsresultate/termine/1629305" target="_blank" rel="noopener">65,3 Prozent Nein</a> ab. Damit endete die Planung noch vor dem Architekturwettbewerb. Bekämpft wurde die Vorlage vor allem von der SVP March, die vor der Abstimmung ein eigenes Podium dazu organisierte (<a href="https://www.hoefe.ch/wp-content/uploads/2023/07/12.02.2015-baumschneiden.pdf" target="_blank" rel="noopener">March-Anzeiger vom 12. Februar 2015</a>). Ein Leserbrief sprach Jahre später von der «Frontalopposition» der SVP March (<a href="https://march24.ch/articles/69284-leserbriefe-zur-sek-i-march" target="_blank" rel="noopener">march24.ch, 2021</a>).
 
-Am 8. März 2015 lehnten die Stimmberechtigten der March die Vorlage mit 65,3 Prozent Nein ab (<a href="https://www.bezirk-march.ch/abstimmungsresultate/termine/1629305" target="_blank" rel="noopener">Bezirk March, Abstimmungsresultat</a>). Bekämpft wurde sie vor allem von der SVP March, die vor der Abstimmung ein eigenes Podium dazu organisierte (<a href="https://www.hoefe.ch/wp-content/uploads/2023/07/12.02.2015-baumschneiden.pdf" target="_blank" rel="noopener">March-Anzeiger vom 12. Februar 2015</a>). Ein Leserbrief sprach Jahre später von der «Frontalopposition» der SVP March (<a href="https://march24.ch/articles/69284-leserbriefe-zur-sek-i-march" target="_blank" rel="noopener">march24.ch, Leserbriefe zur Sek I March, 2021</a>).
+<div class="editor-note">
 
-## Was danach geschah
-
-Mit dem Nein verschwand das Problem nicht. Die Jugendlichen kamen trotzdem, und der Platz fehlte weiterhin. Also musste der Bezirk genau das tun, was er eigentlich vermeiden wollte.
-
-**2017 kaufte der Bezirk das alte Schulhaus doch.** Am 21. Mai 2017 stimmte die March dem Kauf für 11 Millionen Franken zu, dazu 2,2 Millionen Franken für neue Fachräume und einen rollstuhlgängigen Zugang (<a href="https://www.bezirk-march.ch/_rte/abstimmung/162085" target="_blank" rel="noopener">Bezirk March, Abstimmung vom 21. Mai 2017</a>). Den Boden darunter übernahm der Bezirk im Baurecht.
-
-**Ab 2018 wurde Schritt für Schritt umgebaut.** Neben dem Schulhaus kam ein Provisorium dazu, das stehen bleibt, bis ein Erweiterungsbau fertig ist. 2019 folgte ein neuer Wettbewerb, diesmal für den Ausbau in Lachen. Das alte Schulhaus soll bis etwa 2026/2027 nach und nach saniert werden (<a href="https://www.bezirk-march.ch/_docn/2839390/Bezirk_March_Verwaltungsbericht_zur_Rechnung_2019.pdf" target="_blank" rel="noopener">Verwaltungsbericht 2019 des Bezirks</a>).
-
-**2023 brauchte es trotzdem einen Erweiterungsbau.** Die March bewilligte dafür 34,7 Millionen Franken mit 66,1 Prozent Ja (<a href="https://www.new.sek1march.ch/standorte/lachen/schulanlage/erweiterung.html" target="_blank" rel="noopener">Sek 1 March, Erweiterung Lachen</a>).
-
-**Der Platz reicht noch immer nicht.** Spätestens auf das Schuljahr 2028/29 braucht die Sek 1 in Lachen mehr Schulraum (<a href="https://marchhoefe24.ch/articles/239584-die-sek-1-march-in-lachen-benoetigt-dringend-schulraum" target="_blank" rel="noopener">marchhoefe24.ch, 2. April 2024</a>). Weil für den Ausbau die alte Turnhalle weichen muss, plant die Gemeinde Lachen bis dahin eine provisorische Doppelturnhalle für 5,25 Millionen Franken, für die Gemeinde- und die Bezirksschule (<a href="https://www.lachen.ch/public/upload/assets/2433/Pr%C3%A4sentation%20Info-Anlass.pdf?fp=1" target="_blank" rel="noopener">Gemeinde Lachen, Präsentation Info-Anlass vom 24. September 2024</a>).
-
-## Die Rechnung
-
-Was hat der Bezirk March nach dem Nein für die Oberstufe in Lachen bewilligt? Die folgende Tabelle zählt nur die grossen Kredite, über die das Volk abgestimmt hat.
-
-<div class="credit-table">
-
-| Jahr | Wofür | Mio. CHF |
-|---|---|---:|
-| 2017 | Kauf des alten Schulhauses am Park, grösstenteils aus den 1950er-Jahren | 11,0 |
-| 2017 | Fachräume und rollstuhlgängiger Zugang im alten Schulhaus | 2,2 |
-| 2023 | Erweiterungsbau, weil der Platz trotzdem nicht reicht | 34,7 |
-| | **Total bewilligt** | **47,9** |
+Auch einige von uns haben damals Nein gestimmt. Dafür gab es unterschiedliche Gründe, die wir respektieren. Uns geht es hier allein um die Kosten und darum, dass später bauen oft teurer wird. Auch in Wangen rechnen wir damit, wie wir bereits in unserem <a href="/dokumente/2026-11-04_Flyer_A4_Pro-Schulraum.pdf" target="_blank" rel="noopener">zweiten Flyer</a> aufgezeigt haben.
 
 </div>
 
-Und das ist noch nicht alles. **Nicht** in diesen 47,9 Millionen enthalten sind:
+Der Schulraumbedarf blieb. Es folgte jene Lösung, die der Bezirksrat hatte vermeiden wollen:
 
-- das Provisorium beim Schulhaus, das seit 2018 steht
-- die laufenden Sanierungen und Umbauten im alten Gebäude
-- der jährliche Baurechtszins für den Boden in Lachen
-- die provisorische Doppelturnhalle der Gemeinde Lachen für 5,25 Millionen Franken
-- die Jahre, in denen Jugendliche in zu engen, nicht vorschriftsgemässen Räumen unterrichtet wurden
+- **2017:** Kauf des alten Schulhauses für 11 Millionen Franken sowie 2,2 Millionen für Fachräume und einen rollstuhlgängigen Zugang (<a href="https://www.bezirk-march.ch/_rte/abstimmung/162085" target="_blank" rel="noopener">Abstimmung vom 21. Mai 2017</a>).
+- **Ab 2018:** Provisorium und schrittweiser Umbau am bestehenden Standort (<a href="https://www.bezirk-march.ch/_docn/2839390/Bezirk_March_Verwaltungsbericht_zur_Rechnung_2019.pdf" target="_blank" rel="noopener">Verwaltungsbericht 2019</a>).
+- **2023:** Weitere 34,7 Millionen Franken für einen Erweiterungsbau, mit 66,1 Prozent Ja (<a href="https://www.new.sek1march.ch/standorte/lachen/schulanlage/erweiterung.html" target="_blank" rel="noopener">Sek 1 March, Erweiterung Lachen</a>).
 
-Ehrlicherweise muss man sagen: Was ein Neubau in der Ziegelwis gekostet hätte, weiss niemand. Eine Kostenschätzung gab es nicht, weil das Projekt schon vor dem Wettbewerb gestoppt wurde. Und auch der Neubau hätte etwas gekostet, zum Beispiel den Baurechtszins von 274'000 Franken pro Jahr.
+Statt die neue Schule 2019 zu beziehen, musste der Bezirk die Raumfrage am alten Standort weiterlösen. Laut einem <a href="https://marchhoefe24.ch/articles/239584-die-sek-1-march-in-lachen-benoetigt-dringend-schulraum" target="_blank" rel="noopener">Bericht vom April 2024</a> braucht es spätestens auf das Schuljahr 2028/29 zusätzlichen Schulraum.
 
-Sicher ist aber: Der Bezirk bezahlt heute fast 48 Millionen Franken für eine Lösung, die er 2014 selbst als die schlechtere und langfristig teurere bezeichnet hatte. Die Jugendlichen sitzen weiterhin in einem Gebäude aus den 1950er-Jahren, ergänzt durch Provisorien. Und statt 2019 wird die Raumfrage frühestens gegen Ende dieses Jahrzehnts gelöst sein.
+## Die Rechnung
 
-## Aufgeschoben ist nicht gespart
+<div class="sum-table">
 
-Die Geschichte der Ziegelwis zeigt im Kleinen, was ein Nein zu einem Schulhaus fast immer bedeutet:
+| Geplant für die Ziegelwis | Mio. CHF |
+|---|---:|
+| Planung und Architekturwettbewerb | 0,75 |
+| Neubau gemäss Finanzplan | 41,75 |
+| **Total geplant** | **42,5** |
 
-- **Das Problem bleibt.** Die Kinder sind da, mit oder ohne neues Schulhaus.
-- **Alles beginnt von vorne.** Neue Abklärungen, neue Wettbewerbe, neue Abstimmungen. Das dauert Jahre.
-- **Die Übergangszeit kostet.** Provisorien, Mieten und Sanierungen alter Gebäude sind kein gespartes Geld, sondern zusätzliches.
-- **Bauen wird teurer.** Die Baupreise im Hochbau sind seit Oktober 2020 um rund 16 Prozent gestiegen (<a href="https://dam-api.bfs.admin.ch/hub/api/dam/assets/36262128/master" target="_blank" rel="noopener">Bundesamt für Statistik, Baupreisindex Oktober 2025</a>). Wer wartet, bezahlt für das gleiche Schulhaus später mehr.
+</div>
 
-Fortschritt kostet Geld, das ist so. Aber wer jeden Fortschritt bekämpft, spart dieses Geld nicht. Er bezahlt es später, oft mehr, und bekommt dafür eine schlechtere Lösung.
+<div class="sum-table">
 
-## Was das für Wangen heisst
+| Stattdessen am Standort Lachen bewilligt | Mio. CHF |
+|---|---:|
+| Kauf des alten Schulhauses | 11,0 |
+| Fachräume und rollstuhlgängiger Zugang | 2,2 |
+| Erweiterungsbau | 34,7 |
+| **Total bewilligt** | **47,9** |
 
-Auch in Wangen fehlt heute Schulraum, und auch hier verschwindet das Problem mit einem Nein nicht. Die bestehenden Schulhäuser müssten trotzdem saniert werden, dazu kämen Provisorien. Der zugesagte Kantonsbeitrag von rund 5,6 Millionen Franken und der bereits ausgegebene Planungskredit von 740'000 Franken wären verloren. Zusammen kostet ein Nein die Gemeinde über 23 Millionen Franken, ohne dass ein einziges zusätzliches Schulzimmer entsteht (<a href="/argumente#nein-kostet-auch" target="_blank" rel="noopener">Argument: Ein Nein löst kein Problem, aber es kostet</a>).
+</div>
 
-Anders als damals in der Ziegelwis liegt in Wangen ein fertig ausgearbeitetes Projekt mit <a href="/argumente#kostendach" target="_blank" rel="noopener">verbindlichem Kostendach</a> auf dem Tisch. Wir wissen also, was wir bekommen und was es kostet.
+**Der Bezirk hat damit mehr bewilligt, als er damals für einen Neubau eingeplant hatte.** Hinzu kommen Ausgaben für Provisorien und weitere Sanierungen, soweit sie nicht in diesen Krediten enthalten sind.
 
-Die March hat 2015 Nein gesagt und bezahlt bis heute dafür. Bekämpft hatte die Vorlage damals vor allem die SVP March. Auch in Wangen setzt sich die SVP heute stark für ein Nein ein: Sie hat für ihre Kampagne ein Budget von 10’000 Franken gemeldet, mehr als jede andere Gruppierung im <a href="https://kanzlei.sz.ch/app/transparency/de/campaign-funding/24-859-8919-104" target="_blank" rel="noopener">Transparenzregister des Kantons Schwyz</a>. Dazu kommt die IG Bezahlbares Wangen, die mit denselben Argumenten gegen die Schulanlage auftritt. Sie fehlt im Transparenzregister, und wer genau hinter ihr steht, ist bis heute nicht bekannt. Wangen hat am 29. November die Chance, es besser zu machen. **Haben wir den Mut, in unsere Kinder und in unser Dorf zu investieren: Ja zur Schulanlage «Am Buechberg».**
+Zur Einordnung: Die 42,5 Millionen für die Ziegelwis waren eine Finanzplanzahl (<a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015, Seite 29</a>), kein ausgearbeiteter Kostenvoranschlag. Die Beträge stammen zudem aus unterschiedlichen Jahren. Sie zeigen deshalb keine exakte Ersparnis eines Neubaus, wohl aber: Auch die Alternative nach dem Nein wurde teuer.
+
+Auch die Turnhallen gehören zum Vergleich. Die Ziegelwis hätte eigene Hallen erhalten. In Lachen bleibt die Bezirksschule auf Hallen der Gemeinde angewiesen (<a href="https://marchhoefe24.ch/articles/239584-die-sek-1-march-in-lachen-benoetigt-dringend-schulraum" target="_blank" rel="noopener">marchhoefe24.ch, April 2024</a>). Deren neue Sport- und Kulturhalle kostet 57,6 Millionen Franken. Für die Übergangszeit war eine provisorische Doppelturnhalle für 5,25 Millionen vorgesehen (<a href="https://www.lachen.ch/public/upload/assets/2433/Pr%C3%A4sentation%20Info-Anlass.pdf?fp=1" target="_blank" rel="noopener">Gemeinde Lachen, Info-Anlass vom 24. September 2024</a>). Diese dienen auch anderen Nutzungen und lassen sich deshalb nicht vollständig der Bezirksschule zurechnen.
+
+Ein Baurechtszins wäre an beiden Schulstandorten angefallen. Er ist in keiner der beiden Tabellen enthalten. Am See in Lachen ist der Boden aber teurer: Dort verlangte die Gemeinde 17 Franken pro Quadratmeter, in der Ziegelwis wären es 12.50 Franken gewesen (<a href="https://www.bezirk-march.ch/_docn/1098530/Bezirk_Voranschlag_2015.pdf" target="_blank" rel="noopener">Voranschlag 2015, Seiten 35 und 36</a>).
+
+## Was Wangen daraus lernen kann
+
+Ein Nein verschiebt den Entscheid, beseitigt aber den Bedarf nicht. Neue Planungen brauchen Zeit. Währenddessen kosten Provisorien, Mieten und Sanierungen weiter Geld. Und Bauen wird teurer: Die Baupreise im Hochbau sind seit Oktober 2020 um rund 16 Prozent gestiegen (<a href="https://dam-api.bfs.admin.ch/hub/api/dam/assets/36262128/master" target="_blank" rel="noopener">Bundesamt für Statistik, Baupreisindex Oktober 2025</a>). Wer wartet, bezahlt für das gleiche Schulhaus später mehr.
+
+Auch in Wangen müssten die bestehenden Schulhäuser bei einem Nein saniert und Übergangslösungen finanziert werden. Gemäss unserer <a href="/argumente#nein-kostet-auch" target="_blank" rel="noopener">Zusammenstellung zur Nein-Variante</a> stehen dafür über 23 Millionen Franken im Raum, ohne zusätzlichen Schulraum. Darin enthalten sind der Verlust des zugesagten Kantonsbeitrags von rund 5,6 Millionen Franken und die bereits ausgegebenen Planungskosten von 740’000 Franken.
+
+In Wangen liegt heute ein ausgearbeitetes Projekt mit <a href="/argumente#kostendach" target="_blank" rel="noopener">verbindlichem Kostendach</a> vor. Wir wissen, welche Räume entstehen und was sie kosten.
+
+Die Ziegelwis zeigt: Ein Nein ist noch keine günstigere Lösung. Wangen kann am 29. November in eine langfristige Lösung investieren.
+
+**Ja zur Schul- und Sportanlage Am Buechberg. Für unsere Kinder und Jugend. Für unsere Vereine. Für ganz Wangen.**
