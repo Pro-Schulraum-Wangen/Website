@@ -17,12 +17,19 @@ const dateFormatter = new Intl.DateTimeFormat('de-CH', { day: 'numeric', month: 
 
 const posts = await Promise.all(
 	memes.map(async (meme) => {
+		// a post can hold several images (shown as a slider); each gets a
 		// full-size JPG for the download: sharp enough for WhatsApp/Instagram,
 		// a fraction of the PNG's size
-		const download = await getImage({ src: meme.data.image, format: 'jpg', quality: 90 });
-		const fileName = meme.data.image.src.split('/').pop()!.split('.')[0] + '.jpg';
+		const slides = await Promise.all(
+			[{ image: meme.data.image, alt: meme.data.imageAlt }, ...meme.data.moreImages].map(async ({ image, alt }) => ({
+				image,
+				alt,
+				download: await getImage({ src: image, format: 'jpg', quality: 90 }),
+				fileName: image.src.split('/').pop()!.split('.')[0] + '.jpg',
+			})),
+		);
 		const { Content } = await render(meme);
-		return { meme, download, fileName, Content };
+		return { meme, slides, Content };
 	}),
 );
 ---
@@ -54,7 +61,7 @@ const posts = await Promise.all(
 				Bekannten. So erreichen wir gemeinsam ganz Wangen.
 			</p>
 			<div class="meme-grid" data-meme-grid>
-				{posts.map(({ meme, download, fileName, Content }, i) => (
+				{posts.map(({ meme, slides, Content }, i) => (
 					<article class="meme-post" hidden={i >= INITIAL_COUNT}>
 						<header class="meme-post-head">
 							<img class="meme-post-avatar" src="/favicon-96x96.png" alt="" width="40" height="40" />
@@ -65,16 +72,45 @@ const posts = await Promise.all(
 								</time>
 							</div>
 						</header>
-						<Image
-							src={meme.data.image}
-							alt={meme.data.imageAlt}
-							widths={[400, 700, 1080]}
-							sizes="(max-width: 52rem) 100vw, 28rem"
-							format="webp"
-							class="meme-post-image"
-						/>
+						{slides.length === 1 ? (
+							<Image
+								src={slides[0].image}
+								alt={slides[0].alt}
+								widths={[400, 700, 1080]}
+								sizes="(max-width: 52rem) 100vw, 28rem"
+								format="webp"
+								class="meme-post-image"
+							/>
+						) : (
+							<div class="meme-slider" data-meme-slider role="group" aria-roledescription="Karussell" aria-label={`${slides.length} Bilder`}>
+								<ul class="meme-slider-track" data-meme-track>
+									{slides.map((slide, n) => (
+										<li data-download={slide.download.src} data-file-name={slide.fileName} aria-label={`Bild ${n + 1} von ${slides.length}`}>
+											<Image
+												src={slide.image}
+												alt={slide.alt}
+												widths={[400, 700, 1080]}
+												sizes="(max-width: 52rem) 100vw, 28rem"
+												format="webp"
+												loading="lazy"
+												class="meme-post-image"
+											/>
+										</li>
+									))}
+								</ul>
+								<button type="button" class="meme-slider-arrow prev" data-meme-prev aria-label="Vorheriges Bild" disabled>
+									<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+								</button>
+								<button type="button" class="meme-slider-arrow next" data-meme-next aria-label="Nächstes Bild">
+									<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+								</button>
+								<div class="meme-slider-dots" aria-hidden="true">
+									{slides.map((_, n) => <span class:list={{ 'is-active': n === 0 }} />)}
+								</div>
+							</div>
+						)}
 						<div class="meme-post-actions">
-							<a class="button primary" href={download.src} download={fileName}>
+							<a class="button primary" href={slides[0].download.src} download={slides[0].fileName} data-meme-download>
 								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 									<path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
 								</svg>
@@ -132,6 +168,37 @@ const posts = await Promise.all(
 
 	updateToggles();
 	window.addEventListener('resize', updateToggles);
+
+	// Posts with several images: swipe (or use the arrows) through a
+	// scroll-snap track; the dots and the download button follow the image
+	// in view.
+	document.querySelectorAll<HTMLElement>('[data-meme-slider]').forEach((slider) => {
+		const track = slider.querySelector<HTMLElement>('[data-meme-track]')!;
+		const slides = [...track.children] as HTMLElement[];
+		const dots = [...slider.querySelectorAll<HTMLElement>('.meme-slider-dots span')];
+		const prev = slider.querySelector<HTMLButtonElement>('[data-meme-prev]')!;
+		const next = slider.querySelector<HTMLButtonElement>('[data-meme-next]')!;
+		const download = slider.closest('.meme-post')?.querySelector<HTMLAnchorElement>('[data-meme-download]');
+		let current = 0;
+
+		function update() {
+			const index = Math.round(track.scrollLeft / track.clientWidth);
+			if (index === current || !slides[index]) return;
+			current = index;
+			dots.forEach((dot, n) => dot.classList.toggle('is-active', n === index));
+			prev.disabled = index === 0;
+			next.disabled = index === slides.length - 1;
+			if (download) {
+				download.href = slides[index].dataset.download!;
+				download.download = slides[index].dataset.fileName!;
+			}
+		}
+
+		const go = (step: number) => track.scrollTo({ left: (current + step) * track.clientWidth, behavior: 'smooth' });
+		prev.addEventListener('click', () => go(-1));
+		next.addEventListener('click', () => go(1));
+		track.addEventListener('scroll', update, { passive: true });
+	});
 
 	// «Was ist ein Meme?» shows on hover; tapping the button keeps it open on
 	// phones, a tap elsewhere or Escape closes it again.

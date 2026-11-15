@@ -128,6 +128,8 @@ const memes = defineCollection({
 		z.object({
 			image: image(),
 			imageAlt: z.string(),
+			// further images of a multi-image post, shown as a slider after `image`
+			moreImages: z.array(z.object({ image: image(), alt: z.string() })).default([]),
 			date: z.coerce.date(),
 			published: z.boolean().default(true),
 		}),
