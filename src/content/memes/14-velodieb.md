@@ -9,7 +9,7 @@ published: true
 
 Im March-Anzeiger vom 17. November steht, wie Michi Vogt einen mutmasslichen Velodieb gestellt hat. Auch bei der neuen Schulanlage bezieht er öffentlich Stellung.
 
-Danke, Michi, für deinen Einsatz! Menschen wie du machen unser Dorf lebenswert. 💛
+Danke Michi für deinen Einsatz! Menschen wie du machen unser Dorf lebenswert. 💛
 
 Wie viele andere steht Michi mit seinem Namen für seine Überzeugung ein und gibt den Befürwortern ein Gesicht. Das verdient Wertschätzung. Gerade heute ist es viel wert, wenn sichtbar ist, wer hinter einem Anliegen steht.
 
