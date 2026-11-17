@@ -944,10 +944,6 @@
   name: 'Lorena Vogt'
   lastName: 'Vogt'
   location: 'Wangen'
-- id: debora-schmid
-  name: 'Debora Schmid'
-  lastName: 'Schmid'
-  location: 'Siebnen'
 - id: cindy-doenni
   name: 'Cindy Dönni'
   lastName: 'Dönni'
