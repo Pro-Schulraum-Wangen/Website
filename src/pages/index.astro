@@ -7,6 +7,7 @@ import ShortVideos from '../components/ShortVideos.astro';
 import FlyerCards from '../components/FlyerCards.astro';
 import MythCarousel from '../components/MythCarousel.astro';
 import MemePosts from '../components/MemePosts.astro';
+import VoteResult from '../components/VoteResult.astro';
 import { getSupporters } from '../lib/supporters';
 import { SITE_TAGLINE, VOTE_DATE_LABEL } from '../consts';
 
@@ -45,6 +46,8 @@ const letterDateFormatter = new Intl.DateTimeFormat('de-CH', {
 
 <Layout>
 	<link rel="preload" as="image" href={heroBg.src} fetchpriority="high" slot="head" />
+
+	<VoteResult />
 
 	<section class="hero photo" style={`--hero-bg: url(${heroBg.src});`}>
 		<div class="wrap">

@@ -103,6 +103,20 @@ export const RESPONSIBLE_PEOPLE = [
 
 export const VOTE_DATE_LABEL = 'Urnenabstimmung: Sonntag, 29. November 2026';
 
+// Vote result shown at the top of the homepage. Hidden while both values are null.
+// After the vote, enter the vote counts and redeploy (npm run deploy):
+// yes/no outcome, percentage, badge and text are all derived from the numbers.
+// turnoutPercent is optional (e.g. 35.7 for 35,70 %); it is only shown when set.
+export const VOTE_RESULT: {
+	yesVotes: number | null;
+	noVotes: number | null;
+	turnoutPercent: number | null;
+} = {
+	yesVotes: null,
+	noVotes: null,
+	turnoutPercent: null,
+};
+
 export const NAV_LINKS = [
 	{ href: '/', label: 'Start' },
 	{ href: '/argumente/', label: 'Argumente' },

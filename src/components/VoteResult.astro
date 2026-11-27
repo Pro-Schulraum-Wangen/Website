@@ -1,0 +1,175 @@
+---
+// Vote result on the homepage. Only rendered once both vote counts are
+// set in VOTE_RESULT in src/consts.ts.
+import { VOTE_RESULT } from '../consts';
+
+const { yesVotes, noVotes, turnoutPercent } = VOTE_RESULT;
+const hasResult = yesVotes !== null && noVotes !== null && yesVotes + noVotes > 0;
+
+const accepted = hasResult && yesVotes! > noVotes!;
+const total = hasResult ? yesVotes! + noVotes! : 0;
+const percent = hasResult ? ((accepted ? yesVotes! : noVotes!) / total) * 100 : 0;
+
+// Swiss formatting: 1’234 for votes, 54,32 for percentages.
+const formatVotes = (n: number) => new Intl.NumberFormat('de-CH').format(n).replace(/'/g, '’');
+const formatPercent = (n: number) => n.toFixed(2).replace('.', ',');
+---
+
+{hasResult && (
+	<section class={`vote-result ${accepted ? 'is-yes' : 'is-no'}`} aria-labelledby="abstimmungsresultat">
+		<div class="wrap narrow">
+			<p class="vote-result-badge">{accepted ? 'Vorlage angenommen' : 'Vorlage abgelehnt'}</p>
+			<h2 id="abstimmungsresultat">
+				{accepted ? 'Wangen sagt Ja zur Schulanlage «Am Buechberg»' : 'Wangen sagt Nein zur Schulanlage «Am Buechberg»'}
+			</h2>
+			<p class="vote-result-numbers">
+				<strong>{formatPercent(percent)} % {accepted ? 'Ja' : 'Nein'}</strong>
+				<span aria-hidden="true"> · </span>
+				{formatVotes(yesVotes!)} Ja-Stimmen
+				<span aria-hidden="true"> · </span>
+				{formatVotes(noVotes!)} Nein-Stimmen
+				{turnoutPercent !== null && (
+					<>
+						<span aria-hidden="true"> · </span>
+						Stimmbeteiligung {formatPercent(turnoutPercent)} %
+					</>
+				)}
+			</p>
+			<div class="vote-result-bar" aria-hidden="true">
+				<span style={`width: ${percent}%`}></span>
+			</div>
+			{accepted ? (
+				<>
+					<p>
+						Wir freuen uns über das Ja und danken allen, die abgestimmt haben.
+						Ein besonderer Dank gilt den Menschen, die <a href="/unterstuetzer/">mit
+						ihrem Namen öffentlich zum Projekt gestanden</a> sind. Ihr habt dem Projekt ein Gesicht gegeben und gezeigt, was es für
+						die Menschen in Wangen bedeutet. Danke für die vielen guten Gespräche,
+						für die <a href="#eine-minute-fuer-wangen">Videos</a>, die wir mit euch
+						machen durften, für eure <a href="/medien/">Leserbriefe</a> und fürs
+						Verteilen der Flyer. 💛
+					</p>
+					<p>
+						Auch die Anliegen der Menschen, die Nein gestimmt haben, sind uns
+						wichtig. Wir nehmen sie ernst und setzen uns dafür ein, dass sie bei
+						der Umsetzung berücksichtigt werden, wo immer das möglich ist.
+					</p>
+					<p>
+						Wangen ist eine Gemeinde, in der man sich kennt und füreinander
+						einsteht. Wir sind überzeugt, dass wir mit «Am Buechberg» einen
+						schönen Ort zum Lernen, Turnen und Zusammenkommen schaffen, den sich
+						unsere Gemeinde leisten kann. Einen Ort, auf den wir alle stolz sein
+						können und über den sich auch die Generationen nach uns freuen werden.
+					</p>
+					<p class="vote-result-signature">
+						Für das Pro-Komitee: Philipp Bruhin, Julia Cotti, Nicole Ebnöther,
+						Jonas Küttel und Raphael Seunig
+					</p>
+				</>
+			) : (
+				<>
+					<p>
+						Wangen hat Nein gesagt zur neuen Schul- und Sportanlage «Am
+						Buechberg». Wir sind enttäuscht und finden es schade. Wir haben uns
+						mit viel Herzblut für dieses Projekt eingesetzt. Den Entscheid
+						respektieren wir. Den Gegnerinnen und Gegnern der Vorlage gratulieren
+						wir zu ihrem Erfolg.
+					</p>
+					<p>
+						Danke an alle, die abgestimmt haben. Und danke an alle, die diesen Weg
+						mit uns gegangen sind. Euer Engagement hat uns viel bedeutet. 💛
+					</p>
+					<p>
+						Die Probleme sind mit dem Nein nicht verschwunden. Unsere Kinder,
+						Lehrpersonen und Vereine brauchen weiterhin mehr Platz. Wir hoffen
+						sehr, dass jene, die sich für ein Nein eingesetzt haben, nun das
+						Zepter in die Hand nehmen und eine alternative Lösung erarbeiten.
+						Eine Lösung, die den Bedarf deckt und in Wangen eine Mehrheit findet.
+					</p>
+					<p class="vote-result-signature">
+						Für das Pro-Komitee: Philipp Bruhin, Julia Cotti, Nicole Ebnöther,
+						Jonas Küttel und Raphael Seunig
+					</p>
+				</>
+			)}
+		</div>
+	</section>
+)}
+
+<style>
+	/* Yes: several greens (strong light-green background, mid badge/bar, dark text).
+	   No: the same in reds. No black rules. */
+	.vote-result {
+		--vr-bg: #b4e0c0;
+		--vr-accent: #1b7f3e;
+		--vr-ink: #0f3d22;
+		--vr-track: #8ccc9e;
+		padding: 3.5rem 0 3rem;
+		background: var(--vr-bg);
+		color: var(--vr-ink);
+	}
+
+	.vote-result.is-no {
+		--vr-bg: #f2bcbc;
+		--vr-accent: #b3212a;
+		--vr-ink: #4a1013;
+		--vr-track: #e38f94;
+	}
+
+	.vote-result-badge {
+		display: inline-block;
+		margin: 0 0 1rem;
+		padding: 0.4em 0.85em;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #fff;
+		background: var(--vr-accent);
+	}
+
+	.vote-result h2 {
+		margin-top: 0;
+		color: var(--vr-ink);
+	}
+
+	.vote-result-numbers {
+		font-size: 1.1rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.vote-result-numbers strong {
+		font-size: 1.6rem;
+		color: var(--vr-accent);
+	}
+
+	.vote-result-bar {
+		display: flex;
+		height: 0.75rem;
+		margin-bottom: 2rem;
+		background: var(--vr-track);
+	}
+
+	.vote-result-bar span {
+		background: var(--vr-accent);
+	}
+
+	.vote-result a {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	.vote-result a:hover {
+		color: var(--vr-accent);
+	}
+
+	.vote-result-signature {
+		margin-top: 1.5rem;
+		font-weight: 600;
+	}
+
+	.vote-result p:last-child {
+		margin-bottom: 0;
+	}
+</style>
